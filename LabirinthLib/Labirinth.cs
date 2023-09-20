@@ -8,7 +8,7 @@ namespace LabirinthLib
 {
     public class Labirinth
     {
-        Random random;
+        Random random = new Random();
         float countofEmptySpace = 0.4f;
         Size size;
         Point firstIn;
@@ -66,9 +66,10 @@ namespace LabirinthLib
             get => size;
             set
             {
-                if (value.Width < 3 && value.Height < 3)
+                if (value.Width < 4 && value.Height < 4)
                     return;
                 lab = new int[value.Width, value.Height];
+                size = value;
             }
         }
 
@@ -99,7 +100,7 @@ namespace LabirinthLib
             int y = -1;
             if (x == 0 || x == Size.Width - 1)
             {
-                y = random.Next(0, Size.Height - 1);
+                y = random.Next(1, Size.Height - 2);
             }
             else
             {
@@ -107,7 +108,7 @@ namespace LabirinthLib
                 {
                     y = random.Next(0, Size.Height - 1 );
                 }
-                while (y != 0 || y != Size.Height - 1);
+                while (y != 0 && y != Size.Height - 1);
             }
 
             return new Point(x, y);
