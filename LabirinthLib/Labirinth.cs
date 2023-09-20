@@ -106,7 +106,7 @@ namespace LabirinthLib
             {
                 exit = GenerateRandomBorderPoint();
             }
-            while (exit == firstIn && exit == secIn);
+            while (exit == firstIn || exit == secIn);
 
             this[firstIn] = 2;
             this[secIn] = 2;
@@ -145,6 +145,7 @@ namespace LabirinthLib
             }
         }
 
+        //доделать
         private void test()
         {
             int countofEmptySpace = ((int)(percentofEmptySpace * size.Square));
@@ -160,7 +161,7 @@ namespace LabirinthLib
             int whileBreaker = 0;
             while (true)
             {
-                if (whileBreaker == 3000)
+                if (whileBreaker == int.MaxValue)
                     return;
 
                 Direction oldDir = dir;
@@ -183,6 +184,7 @@ namespace LabirinthLib
                         UpdateLab(visitedPoint);
                         break;
                     }
+                    break;
                 }
 
                 whileBreaker++;
