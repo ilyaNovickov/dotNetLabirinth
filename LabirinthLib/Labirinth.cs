@@ -31,6 +31,7 @@ namespace LabirinthLib
             this.Size = size;
             DrawBorder();
             CreateInsAndExit();
+            test();
         }
 
         private int this[Point point]
@@ -179,7 +180,7 @@ namespace LabirinthLib
                     MovePointByDirection(ref exitPoint, GetBorderofPoint(exit));
                     if (visitedPoint.Contains(exitPoint))
                     {
-                        //method
+                        UpdateLab(visitedPoint);
                         break;
                     }
                 }
