@@ -9,7 +9,7 @@ namespace LabirinthLib
     public class Labirinth
     {
         Random random = new Random();
-        float countofEmptySpace = 0.4f;
+        float percentofEmptySpace = 0.4f;
         Size size;
         Point firstIn;
         Point secIn;
@@ -47,16 +47,16 @@ namespace LabirinthLib
 
         public float EmptySpace
         {
-            get => countofEmptySpace;
+            get => percentofEmptySpace;
             set
             {
                 if (0 < value && value < 1f)
                 {
-                    countofEmptySpace = value;
+                    percentofEmptySpace = value;
                 }
                 else
                 {
-                    countofEmptySpace = 0.4f;
+                    percentofEmptySpace = 0.4f;
                 }
             }
         }
@@ -144,5 +144,88 @@ namespace LabirinthLib
             }
         }
 
+        private void test()
+        {
+            int countofEmptySpace = ((int)(percentofEmptySpace * size.Square));
+            int usedSpace = 0;
+            List<Point> visitedPoint = new List<Point>();
+
+            Point currentPoint = firstIn;
+            Direction dir = GetBorderofPoint(firstIn);
+            MovePointByDirection(ref currentPoint, dir);
+            visitedPoint.Add(currentPoint);
+            usedSpace++;
+
+            int whileBreaker = 0;
+            while (true)
+            {
+                if (whileBreaker == 3000)
+                    return;
+
+                Direction oldDir = dir;
+                dir = ((Direction)random.Next(0, 4));
+                if (dir == oldDir)
+                {
+                    dir = oldDir;
+                    continue;
+                }
+                MovePointByDirection(ref currentPoint, dir);
+                visitedPoint.Add(currentPoint);
+                usedSpace++;
+
+                if (usedSpace == countofEmptySpace)
+                {
+                    Point exitPoint = new Point();
+                    MovePointByDirection(ref exitPoint, GetBorderofPoint(exit));
+                    if (visitedPoint.Contains(exitPoint))
+                    {
+                        //method
+                        break;
+                    }
+                }
+
+                whileBreaker++;
+            }
+        }
+
+        private void UpdateLab(List<Point> wayPoints)
+        {
+            foreach (var item in wayPoints)
+            {
+                this[item] = 5;
+            }
+        }
+        private Direction GetBorderofPoint(Point point)
+        {
+            if (point.X == 0 && (1 < point.Y || point.Y < size.Height - 2))
+                return Direction.Left;
+            else if (point.X == size.Width - 1 && (1 < point.Y || point.Y < size.Height - 2))
+                return Direction.Right;
+            else if (point.Y == 0 && (1 < point.X || point.X < size.Width - 2))
+                return Direction.Up;
+            else if (point.Y == size.Height - 1 && (1 < point.X || point.X < size.Width - 2))
+                return Direction.Down;
+            else
+                return Direction.None;
+        }
+
+        private void MovePointByDirection(ref Point point, Direction direction)
+        {
+            switch (direction)
+            {
+                case Direction.Up:
+                    point.Y--;
+                    break;
+                case Direction.Down:
+                    point.Y++;
+                    break;
+                case Direction.Left:
+                    point.X++;
+                    break;
+                case Direction.Right:
+                    point.X++;
+                    break;
+            }
+        }
     }
 }
