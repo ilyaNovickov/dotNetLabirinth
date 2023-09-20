@@ -8,6 +8,7 @@ namespace LabirinthLib
 {
     public class Labirinth
     {
+        Random random;
         float countofEmptySpace = 0.4f;
         Size size;
         Point firstIn;
@@ -28,6 +29,8 @@ namespace LabirinthLib
         public Labirinth(Size size)
         {
             this.Size = size;
+
+            CreateInsAndExit();
         }
 
         private int this[Point point]
@@ -72,5 +75,55 @@ namespace LabirinthLib
         public Point FirstIn => firstIn;
         public Point SecondIn => secIn;
         public Point Exit => exit;
+
+        private void CreateInsAndExit()
+        {
+            firstIn = GenerateRandomBorderPoint();
+
+            do
+            {
+                secIn = GenerateRandomBorderPoint();
+            }
+            while (secIn != firstIn);
+
+            do
+            {
+                exit = GenerateRandomBorderPoint();
+            }
+            while (exit != firstIn && exit != secIn);
+        }
+
+        private Point GenerateRandomBorderPoint()
+        {
+            int x = random.Next(0, Size.Width - 1);
+            int y = -1;
+            if (x == 0 || x == Size.Width - 1)
+            {
+                y = random.Next(0, Size.Height - 1);
+            }
+            else
+            {
+                do
+                {
+                    y = random.Next(0, Size.Height - 1 );
+                }
+                while (y != 0 || y != Size.Height - 1);
+            }
+
+            return new Point(x, y);
+        }
+
+        public void Print()
+        {
+            for (int x =0; x < lab.GetLength(0); x++)
+            {
+                for (int y = 0; y < lab.GetLength(1); y++)
+                {
+                    Console.Write(this[x, y]);
+                }
+                Console.Write("\n");
+            }
+        }
+
     }
 }
