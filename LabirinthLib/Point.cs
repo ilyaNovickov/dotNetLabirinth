@@ -18,5 +18,15 @@ namespace LabirinthLib
 
         public int X { get { return x; } set {  x = value; } }
         public int Y { get { return y; } set { y = value; } }
+
+        public static bool operator ==(Point point1, Point point2)
+        {
+            return (point1.X == point2.X && point1.Y == point2.Y);
+        }
+
+        public static bool operator !=(Point point1, Point point2)
+        {
+            return (point1.X != point2.X || point1.Y != point2.Y);
+        }
     }
 }

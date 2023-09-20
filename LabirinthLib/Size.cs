@@ -1,4 +1,5 @@
 ﻿using System;
+using System.CodeDom;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -35,6 +36,16 @@ namespace LabirinthLib
                     throw new Exception("Отрицательный размер");
                 height = value;
             }
+        }
+
+        public static bool operator ==(Size size1, Size size2)
+        {
+            return (size1.Width == size2.Width && size2.Height == size1.Height);
+        }
+
+        public static bool operator !=(Size size1, Size size2)
+        {
+            return (size1.Width != size2.Width || size2.Height != size1.Height);
         }
     }
 }
