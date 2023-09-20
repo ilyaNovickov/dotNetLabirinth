@@ -38,6 +38,8 @@ namespace LabirinthLib
             }
         }
 
+        public int Square => width * height;
+
         public static bool operator ==(Size size1, Size size2)
         {
             return (size1.Width == size2.Width && size2.Height == size1.Height);
