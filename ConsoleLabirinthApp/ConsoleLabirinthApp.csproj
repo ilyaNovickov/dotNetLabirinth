@@ -49,5 +49,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LabirinthLib\LabirinthLib.csproj">
+      <Project>{816fb27a-ff77-4156-b176-9844aa6633b1}</Project>
+      <Name>LabirinthLib</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

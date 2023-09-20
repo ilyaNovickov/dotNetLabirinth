@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using LabirinthLib;
 
 namespace ConsoleLabirinthApp
 {
@@ -10,6 +11,9 @@ namespace ConsoleLabirinthApp
     {
         static void Main(string[] args)
         {
+            Labirinth lab = new Labirinth();
+            lab.Print();
+            Console.ReadLine();
         }
     }
 }
