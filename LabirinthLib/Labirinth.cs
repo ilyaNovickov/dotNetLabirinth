@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LabirinthLib
 {
-    public class Class1
+    public class Labirinth
     {
     }
 }
