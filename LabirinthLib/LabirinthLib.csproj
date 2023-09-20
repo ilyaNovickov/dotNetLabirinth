@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Size.cs" />
     <Compile Include="Point.cs" />
     <Compile Include="Labirinth.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
