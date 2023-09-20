@@ -29,7 +29,7 @@ namespace LabirinthLib
         public Labirinth(Size size)
         {
             this.Size = size;
-
+            DrawBorder();
             CreateInsAndExit();
         }
 
@@ -77,6 +77,20 @@ namespace LabirinthLib
         public Point SecondIn => secIn;
         public Point Exit => exit;
 
+        private void DrawBorder()
+        {
+            for (int x = 0; x < lab.GetLength(0); x++)
+            {
+                this[x, 0] = 1;
+                this[x, Size.Height - 1] = 1;
+            }
+            for (int y = 0; y < lab.GetLength(1); y++)
+            {
+                this[0, y] = 1;
+                this[Size.Width - 1, y] = 1;
+            }
+        }
+
         private void CreateInsAndExit()
         {
             firstIn = GenerateRandomBorderPoint();
@@ -85,13 +99,17 @@ namespace LabirinthLib
             {
                 secIn = GenerateRandomBorderPoint();
             }
-            while (secIn != firstIn);
+            while (secIn == firstIn);
 
             do
             {
                 exit = GenerateRandomBorderPoint();
             }
-            while (exit != firstIn && exit != secIn);
+            while (exit == firstIn && exit == secIn);
+
+            this[firstIn] = 2;
+            this[secIn] = 2;
+            this[exit] = 3;
         }
 
         private Point GenerateRandomBorderPoint()
