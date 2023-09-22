@@ -14,6 +14,15 @@ namespace ConsoleLabirinthApp
             Labirinth lab = new Labirinth(5);
             lab.Print();
             Console.ReadLine();
+            while (true)
+            {
+                lab.RegenarateLabirinth();
+                lab.Print();
+                string str = Console.ReadLine();
+
+                if (str == "exit")
+                    break;
+            }
         }
     }
 }
