@@ -147,7 +147,7 @@ namespace LabirinthLib
             int x = random.Next(numofLayout, Size.Width - offset);
             int y = random.Next(numofLayout, Size.Height - offset);
 
-            byte doIntZero = (byte)random.Next(0, 3);
+            byte doIntZero = (byte)random.Next(0, 3 + 1);
 
             if (doIntZero == 0)
                 x = numofLayout;
@@ -225,11 +225,14 @@ namespace LabirinthLib
             Point point1 = GetRandomLayoutPoint(1);
 
             visitedPoint.Add(point1);
+
+            //Direction[] dirs = new Direction[4];
+            List<Direction> dirs = new List<Direction>(4);
             
             while (true)
             {
 
-                Direction dir = ((Direction)random.Next(1, 4));
+                Direction dir = ((Direction)random.Next(1, 4 + 1));
 
                 Point oldPoint = point1;
 
@@ -237,6 +240,11 @@ namespace LabirinthLib
 
                 if (IsBorder(point1) || visitedPoint.Contains(point1))
                 {
+                    if (dirs.Count == 4)
+                        return;//Значит некуда идти
+
+                    if (!dirs.Contains(dir))
+                        dirs.Add(dir);
                     point1 = oldPoint;
                     continue;
                 }
