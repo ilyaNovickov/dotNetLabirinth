@@ -200,50 +200,14 @@ namespace LabirinthLib
             }
         }
 
-        //доделать
+        public void RegenarateLabirinth()
+        {
+            FillLabirinth();
+            test();
+        }
+
         private void test()
         {
-            //int countofEmptySpace = ((int)(percentofEmptySpace * size.Square));
-            //int usedSpace = 0;
-            //List<Point> visitedPoint = new List<Point>();
-
-            //Point currentPoint = firstIn;
-            //Direction dir = GetBorderofPoint(firstIn);
-            //MovePointByDirection(ref currentPoint, dir);
-            //visitedPoint.Add(currentPoint);
-            //usedSpace++;
-
-            //int whileBreaker = 0;
-            //while (true)
-            //{
-            //    if (whileBreaker == int.MaxValue)
-            //        return;
-
-            //    Direction oldDir = dir;
-            //    dir = ((Direction)random.Next(0, 4));
-            //    if (dir == oldDir)
-            //    {
-            //        dir = oldDir;
-            //        continue;
-            //    }
-            //    MovePointByDirection(ref currentPoint, dir);
-            //    visitedPoint.Add(currentPoint);
-            //    usedSpace++;
-
-            //    if (usedSpace == countofEmptySpace)
-            //    {
-            //        Point exitPoint = new Point();
-            //        MovePointByDirection(ref exitPoint, GetBorderofPoint(exit));
-            //        if (visitedPoint.Contains(exitPoint))
-            //        {
-            //            UpdateLab(visitedPoint);
-            //            break;
-            //        }
-            //        break;
-            //    }
-
-            //    whileBreaker++;
-            //}
 
             bool IsBorder(Point point)
             {
@@ -293,19 +257,20 @@ namespace LabirinthLib
                 this[item] = 0;
             }
         }
-        private Direction GetBorderofPoint(Point point)
-        {
-            if (point.X == 0 && (1 < point.Y || point.Y < size.Height - 2))
-                return Direction.Left;
-            else if (point.X == size.Width - 1 && (1 < point.Y || point.Y < size.Height - 2))
-                return Direction.Right;
-            else if (point.Y == 0 && (1 < point.X || point.X < size.Width - 2))
-                return Direction.Up;
-            else if (point.Y == size.Height - 1 && (1 < point.X || point.X < size.Width - 2))
-                return Direction.Down;
-            else
-                return Direction.None;
-        }
+
+        //private Direction GetBorderofPoint(Point point)
+        //{
+        //    if (point.X == 0 && (1 < point.Y || point.Y < size.Height - 2))
+        //        return Direction.Left;
+        //    else if (point.X == size.Width - 1 && (1 < point.Y || point.Y < size.Height - 2))
+        //        return Direction.Right;
+        //    else if (point.Y == 0 && (1 < point.X || point.X < size.Width - 2))
+        //        return Direction.Up;
+        //    else if (point.Y == size.Height - 1 && (1 < point.X || point.X < size.Width - 2))
+        //        return Direction.Down;
+        //    else
+        //        return Direction.None;
+        //}
 
         private void MovePointByDirection(ref Point point, Direction direction)
         {
