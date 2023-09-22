@@ -8,6 +8,13 @@ namespace LabirinthLib
 {
     public class Labirinth
     {
+        /*
+         * 0 - empty
+         * 1 - wall
+         * 3 - in
+         * 4 - exit
+         * 5 - in and exit
+         */
         Random random = new Random();
         float percentofEmptySpace = 0.4f;
         Size size;
@@ -35,8 +42,6 @@ namespace LabirinthLib
         {
             this.Size = size;
             //DrawBorder();
-            FillLabirinth();
-            CreateInsAndExit();
             test();
         }
 
@@ -77,8 +82,12 @@ namespace LabirinthLib
                     return;
                 lab = new int[value.Width, value.Height];
                 size = value;
+                FillLabirinth();
             }
         }
+
+        public int Width => size.Width;
+        public int Height => size.Height;
 
         public Point FirstIn => firstIn;
         public Point SecondIn => secIn;
@@ -114,27 +123,6 @@ namespace LabirinthLib
                     this[x, y] = 1;
                 }
             }
-        }
-
-        private void CreateInsAndExit()
-        {
-            firstIn = GetRandomLayoutPoint();
-
-            do
-            {
-                secIn = GetRandomLayoutPoint();
-            }
-            while (secIn == firstIn);
-
-            do
-            {
-                exit = GetRandomLayoutPoint();
-            }
-            while (exit == firstIn || exit == secIn);
-
-            this[firstIn] = 2;
-            this[secIn] = 2;
-            this[exit] = 3;
         }
 
         private Point GetRandomLayoutPoint(int numofLayout = 0)
@@ -202,8 +190,21 @@ namespace LabirinthLib
 
         public void RegenarateLabirinth()
         {
-            FillLabirinth();
             test();
+        }
+
+        public void RegenarateLabirinth(Size newSize)
+        {
+            Size = newSize;
+            RegenarateLabirinth();
+        }
+        public void RegenarateLabirinth(int width, int height)
+        {
+            RegenarateLabirinth(new Size(width, height));
+        }
+        public void RegenarateLabirinth(int size)
+        {
+            RegenarateLabirinth(new Size(size));
         }
 
         private void test()
@@ -216,6 +217,24 @@ namespace LabirinthLib
             bool IsExistInLab(Point point)
             {
                 return (0 <= point.X && 0 <= point.Y && point.X < Size.Width && point.Y < Size.Height);
+            }
+            void MovePointByDirection(ref Point point, Direction direction)
+            {
+                switch (direction)
+                {
+                    case Direction.Up:
+                        point.Y--;
+                        break;
+                    case Direction.Down:
+                        point.Y++;
+                        break;
+                    case Direction.Left:
+                        point.X--;
+                        break;
+                    case Direction.Right:
+                        point.X++;
+                        break;
+                }
             }
 
             int countofEmptySpace = ((int)(percentofEmptySpace * new Size(size.Width - 2, size.Height - 2).Square));
@@ -255,16 +274,46 @@ namespace LabirinthLib
                     break;
             }
 
-            UpdateLab(visitedPoint);
-        }
-
-        private void UpdateLab(List<Point> wayPoints)
-        {
-            foreach (var item in wayPoints)
+            foreach (var item in visitedPoint)
             {
                 this[item] = 0;
             }
+
+            CreateInsAndExit();
         }
+
+        private void CreateInsAndExit()
+        {
+            //List<Point> points = new List<Point>();
+
+            //for (int x = 1; x < Size.Width - 2; x++)
+            //{
+            //    if (this[x, 1] == 1)
+            //        points.Add(new Point(x, 1));
+            //}
+        }
+
+        //private void CreateInsAndExit()
+        //{
+        //    firstIn = GetRandomLayoutPoint();
+
+        //    do
+        //    {
+        //        secIn = GetRandomLayoutPoint();
+        //    }
+        //    while (secIn == firstIn);
+
+        //    do
+        //    {
+        //        exit = GetRandomLayoutPoint();
+        //    }
+        //    while (exit == firstIn || exit == secIn);
+
+        //    this[firstIn] = 2;
+        //    this[secIn] = 2;
+        //    this[exit] = 3;
+        //}
+
 
         //private Direction GetBorderofPoint(Point point)
         //{
@@ -280,23 +329,6 @@ namespace LabirinthLib
         //        return Direction.None;
         //}
 
-        private void MovePointByDirection(ref Point point, Direction direction)
-        {
-            switch (direction)
-            {
-                case Direction.Up:
-                    point.Y--;
-                    break;
-                case Direction.Down:
-                    point.Y++;
-                    break;
-                case Direction.Left:
-                    point.X--;
-                    break;
-                case Direction.Right:
-                    point.X++;
-                    break;
-            }
-        }
+
     }
 }
