@@ -16,6 +16,7 @@ namespace LabirinthLib
             this.y = y;
         }
 
+        public Point(int coord) : this(coord, coord) { }
         public int X { get { return x; } set {  x = value; } }
         public int Y { get { return y; } set { y = value; } }
 

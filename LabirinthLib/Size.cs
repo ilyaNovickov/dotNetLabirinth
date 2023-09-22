@@ -17,6 +17,7 @@ namespace LabirinthLib
             this.width = width;
             this.height = height;
         }
+        public Size(int size) : this(size, size) { }
         public int Width
         {
             get => width;
