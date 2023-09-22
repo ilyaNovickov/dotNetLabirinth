@@ -11,7 +11,7 @@ namespace ConsoleLabirinthApp
     {
         static void Main(string[] args)
         {
-            Labirinth lab = new Labirinth();
+            Labirinth lab = new Labirinth(5);
             lab.Print();
             Console.ReadLine();
         }

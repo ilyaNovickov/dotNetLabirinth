@@ -21,6 +21,11 @@ namespace LabirinthLib
 
         }
 
+        public Labirinth(int size) : this(new Size(size, size))
+        {
+
+        }
+
         public Labirinth(int width, int height) : this(new Size(width, height))
         {
 
@@ -29,7 +34,8 @@ namespace LabirinthLib
         public Labirinth(Size size)
         {
             this.Size = size;
-            DrawBorder();
+            //DrawBorder();
+            FillLabirinth();
             CreateInsAndExit();
             test();
         }
@@ -86,17 +92,27 @@ namespace LabirinthLib
             }
         }
 
-        private void DrawBorder()
+        //private void DrawBorder()
+        //{
+        //    for (int x = 0; x < lab.GetLength(0); x++)
+        //    {
+        //        this[x, 0] = 1;
+        //        this[x, Size.Height - 1] = 1;
+        //    }
+        //    for (int y = 0; y < lab.GetLength(1); y++)
+        //    {
+        //        this[0, y] = 1;
+        //        this[Size.Width - 1, y] = 1;
+        //    }
+        //}
+        private void FillLabirinth()
         {
             for (int x = 0; x < lab.GetLength(0); x++)
             {
-                this[x, 0] = 1;
-                this[x, Size.Height - 1] = 1;
-            }
-            for (int y = 0; y < lab.GetLength(1); y++)
-            {
-                this[0, y] = 1;
-                this[Size.Width - 1, y] = 1;
+                for (int y = 0; y < lab.GetLength(1); y++)
+                {
+                    this[x, y] = 1;
+                }
             }
         }
 
@@ -163,7 +179,7 @@ namespace LabirinthLib
 
         public void Print()
         {
-            for (int x =0; x < lab.GetLength(0); x++)
+            for (int x = 0; x < lab.GetLength(0); x++)
             {
                 for (int y = 0; y < lab.GetLength(1); y++)
                 {
@@ -171,7 +187,10 @@ namespace LabirinthLib
                         Console.BackgroundColor = ConsoleColor.Red;
                     else
                         Console.BackgroundColor = ConsoleColor.Black;
-                    Console.Write(this[x, y]);
+                    if (this[x, y] == 1)
+                        Console.Write("█");
+                    else
+                        Console.Write(this[x, y]);
                 }
                 Console.Write("\n");
             }
@@ -248,15 +267,19 @@ namespace LabirinthLib
 
                 MovePointByDirection(ref point1, dir);
 
-                if (IsBorder(point1) || visitedPoint.Contains(point1))
+                if (IsBorder(point1) )//|| visitedPoint.Contains(point1))
                 {
                     point1 = oldPoint;
                     continue;
                 }
 
+                visitedPoint.Add(point1);
+
                 if (visitedPoint.Count == countofEmptySpace)
                     break;
             }
+
+            UpdateLab(visitedPoint);
         }
 
         private void UpdateLab(List<Point> wayPoints)
