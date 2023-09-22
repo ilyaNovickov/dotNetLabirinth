@@ -222,10 +222,41 @@ namespace LabirinthLib
             //    whileBreaker++;
             //}
 
+            bool IsBorder(Point point)
+            {
+                return (point.X == 0 || point.Y == 0 || point.X == Size.Width - 1 || point.Y == Size.Height - 1);
+            }
+            bool IsExistInLab(Point point)
+            {
+                return (0 <= point.X && 0 <= point.Y && point.X < Size.Width && point.Y < Size.Height);
+            }
+
             int countofEmptySpace = ((int)(percentofEmptySpace * new Size(size.Width - 2, size.Height - 2).Square));
-            int usedSpace = 0;
+
             List<Point> visitedPoint = new List<Point>();
 
+            Point point1 = GenerateRandomLayoutPoint(1);
+
+            visitedPoint.Add(point1);
+            
+            while (true)
+            {
+
+                Direction dir = ((Direction)random.Next(0, 4));
+
+                Point oldPoint = point1;
+
+                MovePointByDirection(ref point1, dir);
+
+                if (IsBorder(point1) || visitedPoint.Contains(point1))
+                {
+                    point1 = oldPoint;
+                    continue;
+                }
+
+                if (visitedPoint.Count == countofEmptySpace)
+                    break;
+            }
         }
 
         private void UpdateLab(List<Point> wayPoints)
