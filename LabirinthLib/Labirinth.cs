@@ -78,6 +78,14 @@ namespace LabirinthLib
         public Point SecondIn => secIn;
         public Point Exit => exit;
 
+        public int CountofLayouts
+        {
+            get
+            {
+                return Math.Min(Size.Width - 1, Size.Height - 1);
+            }
+        }
+
         private void DrawBorder()
         {
             for (int x = 0; x < lab.GetLength(0); x++)
@@ -115,11 +123,10 @@ namespace LabirinthLib
 
         private Point GenerateRandomLayoutPoint(int numofLayout = 0)
         {
-            {
-                int countofRounds = Math.Min(Size.Width - 1, Size.Height - 1);
-                if (numofLayout < 0 || numofLayout >= countofRounds)
-                    throw new Exception("В прямоугольнике нет столько слоёв");
-            }
+
+            if (numofLayout < 0 || numofLayout >= CountofLayouts)
+                throw new Exception("В прямоугольнике нет столько слоёв");
+
             int offset = numofLayout + 1;
             int x = random.Next(numofLayout, Size.Width - offset);
             int y = random.Next(numofLayout, Size.Height - offset);
