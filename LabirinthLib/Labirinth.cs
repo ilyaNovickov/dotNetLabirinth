@@ -190,13 +190,14 @@ namespace LabirinthLib
 
         public void RegenarateLabirinth()
         {
+            FillLabirinth();
             test();
         }
 
         public void RegenarateLabirinth(Size newSize)
         {
             Size = newSize;
-            RegenarateLabirinth();
+            test();
         }
         public void RegenarateLabirinth(int width, int height)
         {
@@ -241,6 +242,8 @@ namespace LabirinthLib
 
             List<Point> visitedPoint = new List<Point>();
 
+            List<Point> firstWay = new List<Point>();
+
             Point point1 = GetRandomLayoutPoint(1);
 
             visitedPoint.Add(point1);
@@ -248,7 +251,7 @@ namespace LabirinthLib
             //Direction[] dirs = new Direction[4];
             List<Direction> dirs = new List<Direction>(4);
             
-            while (true)
+            while (visitedPoint.Count != countofEmptySpace)
             {
 
                 Direction dir = ((Direction)random.Next(1, 4 + 1));
@@ -260,13 +263,24 @@ namespace LabirinthLib
                 if (IsBorder(point1) || visitedPoint.Contains(point1))
                 {
                     if (dirs.Count == 4)
-                        return;//Значит некуда идти
+                    {
+                        firstWay.AddRange(visitedPoint);
+                        do
+                        {
+                            point1 = GetRandomLayoutPoint(1);
+                        }
+                        while (!visitedPoint.Contains(point1));
+                        visitedPoint.Add(point1);
+                        continue;
+                    }
 
                     if (!dirs.Contains(dir))
                         dirs.Add(dir);
                     point1 = oldPoint;
                     continue;
                 }
+
+                dirs.Clear();
 
                 visitedPoint.Add(point1);
 
@@ -277,6 +291,10 @@ namespace LabirinthLib
             foreach (var item in visitedPoint)
             {
                 this[item] = 0;
+            }
+            foreach (var item in firstWay)
+            {
+                this[item] = 5;
             }
 
             CreateInsAndExit();
