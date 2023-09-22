@@ -118,17 +118,17 @@ namespace LabirinthLib
 
         private void CreateInsAndExit()
         {
-            firstIn = GenerateRandomLayoutPoint();
+            firstIn = GetRandomLayoutPoint();
 
             do
             {
-                secIn = GenerateRandomLayoutPoint();
+                secIn = GetRandomLayoutPoint();
             }
             while (secIn == firstIn);
 
             do
             {
-                exit = GenerateRandomLayoutPoint();
+                exit = GetRandomLayoutPoint();
             }
             while (exit == firstIn || exit == secIn);
 
@@ -137,7 +137,7 @@ namespace LabirinthLib
             this[exit] = 3;
         }
 
-        private Point GenerateRandomLayoutPoint(int numofLayout = 0)
+        private Point GetRandomLayoutPoint(int numofLayout = 0)
         {
 
             if (numofLayout < 0 || numofLayout >= CountofLayouts)
@@ -258,7 +258,7 @@ namespace LabirinthLib
 
             List<Point> visitedPoint = new List<Point>();
 
-            Point point1 = GenerateRandomLayoutPoint(1);
+            Point point1 = GetRandomLayoutPoint(1);
 
             visitedPoint.Add(point1);
             
