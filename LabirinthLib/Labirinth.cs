@@ -210,7 +210,8 @@ namespace LabirinthLib
 
         private void test()
         {
-
+            //Подумать о разной длине путей для входов
+            //Можно также проверять соседнии ячейки на стены
             bool IsBorder(Point point)
             {
                 return (point.X == 0 || point.Y == 0 || point.X == Size.Width - 1 || point.Y == Size.Height - 1);
