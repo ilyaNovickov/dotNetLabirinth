@@ -262,16 +262,16 @@ namespace LabirinthLib
 
             visitedPoint.Add(point1);
             
-            while (false)
+            while (true)
             {
 
-                Direction dir = ((Direction)random.Next(0, 4));
+                Direction dir = ((Direction)random.Next(1, 4));
 
                 Point oldPoint = point1;
 
                 MovePointByDirection(ref point1, dir);
 
-                if (IsBorder(point1) )//|| visitedPoint.Contains(point1))
+                if (IsBorder(point1) || visitedPoint.Contains(point1))
                 {
                     point1 = oldPoint;
                     continue;
@@ -318,7 +318,7 @@ namespace LabirinthLib
                     point.Y++;
                     break;
                 case Direction.Left:
-                    point.X++;
+                    point.X--;
                     break;
                 case Direction.Right:
                     point.X++;
