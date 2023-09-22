@@ -147,12 +147,16 @@ namespace LabirinthLib
             int x = random.Next(numofLayout, Size.Width - offset);
             int y = random.Next(numofLayout, Size.Height - offset);
 
-            byte doIntZero = (byte)random.Next(0, 1);
+            byte doIntZero = (byte)random.Next(0, 3);
 
             if (doIntZero == 0)
-                x = 0;
+                x = numofLayout;
+            else if (doIntZero == 1)
+                y = numofLayout;
+            else if (doIntZero == 2)
+                x = Size.Width - offset;
             else
-                y = 0;
+                y = Size.Height - offset;
 
             return new Point(x, y);
         }
@@ -258,7 +262,7 @@ namespace LabirinthLib
 
             visitedPoint.Add(point1);
             
-            while (true)
+            while (false)
             {
 
                 Direction dir = ((Direction)random.Next(0, 4));
@@ -286,7 +290,7 @@ namespace LabirinthLib
         {
             foreach (var item in wayPoints)
             {
-                this[item] = 5;
+                this[item] = 0;
             }
         }
         private Direction GetBorderofPoint(Point point)
