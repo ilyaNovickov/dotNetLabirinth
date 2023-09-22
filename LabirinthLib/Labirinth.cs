@@ -139,6 +139,10 @@ namespace LabirinthLib
             {
                 for (int y = 0; y < lab.GetLength(1); y++)
                 {
+                    if (this[x, y] == 2 || this[x, y] == 3)
+                        Console.BackgroundColor = ConsoleColor.Red;
+                    else
+                        Console.BackgroundColor = ConsoleColor.Black;
                     Console.Write(this[x, y]);
                 }
                 Console.Write("\n");
