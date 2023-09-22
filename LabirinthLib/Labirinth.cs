@@ -94,17 +94,17 @@ namespace LabirinthLib
 
         private void CreateInsAndExit()
         {
-            firstIn = GenerateRandomBorderPoint();
+            firstIn = GenerateRandomLayoutPoint();
 
             do
             {
-                secIn = GenerateRandomBorderPoint();
+                secIn = GenerateRandomLayoutPoint();
             }
             while (secIn == firstIn);
 
             do
             {
-                exit = GenerateRandomBorderPoint();
+                exit = GenerateRandomLayoutPoint();
             }
             while (exit == firstIn || exit == secIn);
 
@@ -113,25 +113,46 @@ namespace LabirinthLib
             this[exit] = 3;
         }
 
-        private Point GenerateRandomBorderPoint()
+        private Point GenerateRandomLayoutPoint(int numofLayout = 0)
         {
-            int x = random.Next(0, Size.Width - 1);
-            int y = -1;
-            if (x == 0 || x == Size.Width - 1)
             {
-                y = random.Next(1, Size.Height - 2);
+                int countofRounds = Math.Min(Size.Width - 1, Size.Height - 1);
+                if (numofLayout < 0 || numofLayout >= countofRounds)
+                    throw new Exception("В прямоугольнике нет столько слоёв");
             }
+            int offset = numofLayout + 1;
+            int x = random.Next(numofLayout, Size.Width - offset);
+            int y = random.Next(numofLayout, Size.Height - offset);
+
+            byte doIntZero = (byte)random.Next(0, 1);
+
+            if (doIntZero == 0)
+                x = 0;
             else
-            {
-                do
-                {
-                    y = random.Next(0, Size.Height - 1 );
-                }
-                while (y != 0 && y != Size.Height - 1);
-            }
+                y = 0;
 
             return new Point(x, y);
         }
+
+        //private Point GenerateRandomInsidePoint()
+        //{
+        //    int x = random.Next(, Size.Width - 1);
+        //    int y = -1;
+        //    if (x == 0 || x == Size.Width - 1)
+        //    {
+        //        y = random.Next(1, Size.Height - 2);
+        //    }
+        //    else
+        //    {
+        //        do
+        //        {
+        //            y = random.Next(0, Size.Height - 1);
+        //        }
+        //        while (y != 0 && y != Size.Height - 1);
+        //    }
+
+        //    return new Point(x, y);
+        //}
 
         public void Print()
         {
@@ -152,47 +173,52 @@ namespace LabirinthLib
         //доделать
         private void test()
         {
-            int countofEmptySpace = ((int)(percentofEmptySpace * size.Square));
+            //int countofEmptySpace = ((int)(percentofEmptySpace * size.Square));
+            //int usedSpace = 0;
+            //List<Point> visitedPoint = new List<Point>();
+
+            //Point currentPoint = firstIn;
+            //Direction dir = GetBorderofPoint(firstIn);
+            //MovePointByDirection(ref currentPoint, dir);
+            //visitedPoint.Add(currentPoint);
+            //usedSpace++;
+
+            //int whileBreaker = 0;
+            //while (true)
+            //{
+            //    if (whileBreaker == int.MaxValue)
+            //        return;
+
+            //    Direction oldDir = dir;
+            //    dir = ((Direction)random.Next(0, 4));
+            //    if (dir == oldDir)
+            //    {
+            //        dir = oldDir;
+            //        continue;
+            //    }
+            //    MovePointByDirection(ref currentPoint, dir);
+            //    visitedPoint.Add(currentPoint);
+            //    usedSpace++;
+
+            //    if (usedSpace == countofEmptySpace)
+            //    {
+            //        Point exitPoint = new Point();
+            //        MovePointByDirection(ref exitPoint, GetBorderofPoint(exit));
+            //        if (visitedPoint.Contains(exitPoint))
+            //        {
+            //            UpdateLab(visitedPoint);
+            //            break;
+            //        }
+            //        break;
+            //    }
+
+            //    whileBreaker++;
+            //}
+
+            int countofEmptySpace = ((int)(percentofEmptySpace * new Size(size.Width - 2, size.Height - 2).Square));
             int usedSpace = 0;
             List<Point> visitedPoint = new List<Point>();
 
-            Point currentPoint = firstIn;
-            Direction dir = GetBorderofPoint(firstIn);
-            MovePointByDirection(ref currentPoint, dir);
-            visitedPoint.Add(currentPoint);
-            usedSpace++;
-
-            int whileBreaker = 0;
-            while (true)
-            {
-                if (whileBreaker == int.MaxValue)
-                    return;
-
-                Direction oldDir = dir;
-                dir = ((Direction)random.Next(0, 4));
-                if (dir == oldDir)
-                {
-                    dir = oldDir;
-                    continue;
-                }
-                MovePointByDirection(ref currentPoint, dir);
-                visitedPoint.Add(currentPoint);
-                usedSpace++;
-
-                if (usedSpace == countofEmptySpace)
-                {
-                    Point exitPoint = new Point();
-                    MovePointByDirection(ref exitPoint, GetBorderofPoint(exit));
-                    if (visitedPoint.Contains(exitPoint))
-                    {
-                        UpdateLab(visitedPoint);
-                        break;
-                    }
-                    break;
-                }
-
-                whileBreaker++;
-            }
         }
 
         private void UpdateLab(List<Point> wayPoints)
