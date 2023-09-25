@@ -11,7 +11,7 @@ namespace LabirinthLib
         None = 0,
         Up = 1,
         Down = -1, 
-        Left = -1, 
-        Right = 1
+        Left = -2, 
+        Right = 2
     }
 }
