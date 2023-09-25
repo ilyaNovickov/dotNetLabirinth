@@ -29,5 +29,45 @@ namespace LabirinthLib
         {
             return (point1.X != point2.X || point1.Y != point2.Y);
         }
+
+        public static Point operator +(Point point1, Point point2)
+        {
+            return new Point(point1.X + point2.X, point1.Y + point2.Y);
+        }
+
+        public static Point operator +(Point point1, int value)
+        {
+            return new Point(point1.X + value, point1.Y + value);
+        }
+
+        public static Point operator - (Point point1, Point point2)
+        {
+            return new Point(point1.X - point2.X, point1.Y - point2.Y);
+        }
+
+        public static Point operator -(Point point1, int value)
+        {
+            return new Point(point1.X - value, point1.Y - value);
+        }
+
+        public static Point operator * (Point point1, Point point2)
+        {
+            return new Point(point1.X * point2.X, point1.Y * point2.Y);
+        }
+
+        public static Point operator * (Point point1, int value)
+        {
+            return new Point(point1.X * value, point1.Y * value);
+        }
+
+        public static Point operator / (Point point1, Point point2)
+        {
+            return new Point(point1.X / point2.X, point1.Y / point2.Y);
+        }
+
+        public static Point operator / (Point point1, int value)
+        {
+            return new Point(point1.X / value, point1.Y / value);
+        }
     }
 }
