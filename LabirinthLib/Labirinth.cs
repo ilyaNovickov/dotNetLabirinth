@@ -225,22 +225,94 @@ namespace LabirinthLib
                 switch (direction)
                 {
                     case Direction.Up:
-                        point.Y--;
-                        break;
                     case Direction.Down:
-                        point.Y++;
+                        point.Y += (int)direction;
                         break;
                     case Direction.Left:
-                        point.X--;
-                        break;
                     case Direction.Right:
-                        point.X++;
+                        point.X += (int)direction / 2;
                         break;
                 }
+            }
+            Direction GetRandomDirection(IEnumerable<Direction> avaibleDirs)
+            {
+                if (avaibleDirs.Count() == 0)
+                    return Direction.None;
+                return avaibleDirs.ElementAt(random.Next(0, avaibleDirs.Count<Direction>()));
+            }
+            IEnumerable<Direction> GetAvaibleDirections(IEnumerable<Point> points)
+            {
+                List<Direction> result = new List<Direction>(); //= new IEnumerable<Direction>();
+
+                bool HasVisitedNeighboors(Point point)
+                {
+                    foreach (Direction dir in new Direction[] { Direction.Left, Direction.Right, Direction.Up, Direction.Down })
+                    {
+                        Point newPoint = point;
+                        MovePointByDirection(ref newPoint, dir);
+                        if (newPoint == points.Last())
+                            continue;
+                        if (points.Contains(newPoint))
+                            return true;
+                    }
+                    return false;
+                }
+
+                foreach (Direction dir in new Direction[] { Direction.Left, Direction.Right, Direction.Up, Direction.Down})
+                {
+                    Point extraPoint = points.Last();
+                    MovePointByDirection(ref extraPoint, dir);
+                    if (IsBorder(extraPoint))
+                        continue;
+                    else if (!IsExistInLab(extraPoint))
+                        continue;
+                    else if (points.Contains(extraPoint))
+                        continue;
+                    else if (HasVisitedNeighboors(extraPoint))
+                        continue;
+                    else
+                        result.Add(dir);
+                }
+
+                return result;
             }
 
             int countofEmptySpace = ((int)(percentofEmptySpace * new Size(size.Width - 2, size.Height - 2).Square));
 
+            List<Point> visitedPoints = new List<Point>(1);
+
+            List<Direction> visitedDirs = new List<Direction>(4);
+
+            //List<Direction> avaibleDirections = new List<Direction>() { Direction.Left, Direction.Right, 
+            //    Direction.Up, Direction.Down };
+
+            Point movingPoint = GetRandomLayoutPoint(1);
+
+            visitedPoints.Add(movingPoint);
+
+            while (visitedPoints.Count != countofEmptySpace)
+            {
+                Direction dir = GetRandomDirection(GetAvaibleDirections(visitedPoints));
+
+                Point oldPoint = movingPoint;
+
+                MovePointByDirection(ref movingPoint, dir);
+
+                if (IsBorder(movingPoint) || visitedPoints.Contains(movingPoint))
+                {
+                    if (!visitedDirs.Contains(dir))
+                        visitedDirs.Add(dir);
+                    else if (visitedDirs.Count == 4 || dir == Direction.None)
+                        break;
+                    movingPoint = oldPoint;
+                    continue;
+                }
+
+                visitedPoints.Add(movingPoint);
+            }
+
+
+            /*
             List<Point> visitedPoint = new List<Point>();
 
             List<Point> firstWay = new List<Point>();
@@ -251,6 +323,7 @@ namespace LabirinthLib
 
             //Direction[] dirs = new Direction[4];
             List<Direction> dirs = new List<Direction>(4);
+            
             
             while (visitedPoint.Count != countofEmptySpace)
             {
@@ -288,15 +361,16 @@ namespace LabirinthLib
                 if (visitedPoint.Count == countofEmptySpace)
                     break;
             }
+            */
 
-            foreach (var item in visitedPoint)
+            foreach (var item in visitedPoints)
             {
                 this[item] = 0;
             }
-            foreach (var item in firstWay)
-            {
-                this[item] = 5;
-            }
+            //foreach (var item in firstWay)
+            //{
+            //    this[item] = 5;
+            //}
 
             CreateInsAndExit();
         }

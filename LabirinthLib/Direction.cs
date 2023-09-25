@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LabirinthLib
 {
-    public enum Direction : sbyte
+    public enum Direction : int//sbyte
     {
         None = 0,
         Up = 1,
