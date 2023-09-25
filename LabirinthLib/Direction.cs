@@ -6,10 +6,12 @@ using System.Threading.Tasks;
 
 namespace LabirinthLib
 {
-    public enum Direction : byte
+    public enum Direction : sbyte
     {
-        None,
-        Up,
-        Down, Left, Right
+        None = 0,
+        Up = 1,
+        Down = -1, 
+        Left = -1, 
+        Right = 1
     }
 }
