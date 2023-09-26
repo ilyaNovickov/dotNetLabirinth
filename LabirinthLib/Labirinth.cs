@@ -210,15 +210,9 @@ namespace LabirinthLib
 
         private void test()
         {
-            //Подумать о разной длине путей для входов
-            //Можно также проверять соседнии ячейки на стены
             bool IsBorder(Point point)
             {
                 return (point.X == 0 || point.Y == 0 || point.X == Size.Width - 1 || point.Y == Size.Height - 1);
-            }
-            bool IsExistInLab(Point point)
-            {
-                return (0 <= point.X && 0 <= point.Y && point.X < Size.Width && point.Y < Size.Height);
             }
             void MovePointByDirection(ref Point point, Direction direction)
             {
@@ -242,8 +236,6 @@ namespace LabirinthLib
             }
             IEnumerable<Direction> GetAvaibleDirections(IEnumerable<Point> points)
             {
-                List<Direction> result = new List<Direction>(); //= new IEnumerable<Direction>();
-
                 bool HasDiagonalNeighboor(Point point, Direction dir)
                 {
                     Direction newDir = dir;
@@ -275,6 +267,12 @@ namespace LabirinthLib
 
                     return false;
                 }
+                bool IsExistInLab(Point point)
+                {
+                    return (0 <= point.X && 0 <= point.Y && point.X < Size.Width && point.Y < Size.Height);
+                }
+
+                List<Direction> result = new List<Direction>();
 
                 foreach (Direction dir in new Direction[] { Direction.Left, Direction.Right, Direction.Up, Direction.Down})
                 {
@@ -302,9 +300,6 @@ namespace LabirinthLib
             List<Point> visitedPoints = new List<Point>(1);
 
             List<Direction> visitedDirs = new List<Direction>(4);
-
-            //List<Direction> avaibleDirections = new List<Direction>() { Direction.Left, Direction.Right, 
-            //    Direction.Up, Direction.Down };
 
             Point movingPoint = GetRandomLayoutPoint(1);
 
