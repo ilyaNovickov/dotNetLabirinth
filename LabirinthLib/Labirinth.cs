@@ -332,8 +332,7 @@ namespace LabirinthLib
                         do
                         {
                             movingPoint = GetRandomPointFromList(GetAvaiblePointsToMove(visitedPoints));
-                            if (movingPoint != Point.Empty || GetAvaibleDirections(movingPoint, visitedPoints).Count() == 0 ||
-                                GetAvaiblePointsToMove(visitedPoints).Count() == 0)
+                            if (movingPoint != Point.Empty)
                                 break;
                         }
                         while (true);
