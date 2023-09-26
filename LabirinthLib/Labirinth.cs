@@ -41,8 +41,6 @@ namespace LabirinthLib
         public Labirinth(Size size)
         {
             this.Size = size;
-            //DrawBorder();
-            test();
         }
 
         private int this[Point point]
@@ -188,9 +186,9 @@ namespace LabirinthLib
 
         public void Print()
         {
-            for (int x = 0; x < lab.GetLength(0); x++)
+            for (int y = 0; y < lab.GetLength(1); y++)     
             {
-                for (int y = 0; y < lab.GetLength(1); y++)
+                for (int x = 0; x < lab.GetLength(0); x++)
                 {
                     if (this[x, y] == 2 || this[x, y] == 3)
                         Console.BackgroundColor = ConsoleColor.Red;
@@ -327,7 +325,6 @@ namespace LabirinthLib
             }
             IEnumerable<Point> GetWallsCells(IEnumerable<Point> emptySpace)
             {
-                //List<Point> walls = new List<Point>();
                 for (int x = 1; x < lab.GetLength(0) - 1; x++)
                 {
                     for (int y = 1; y < lab.GetLength(1) - 1; y++)
@@ -346,8 +343,7 @@ namespace LabirinthLib
 
             visitedPoints.Add(movingPoint);
 
-            while (visitedPoints.Count != countofEmptySpace)//Для генерации лабиринта без ограничений
-            //while (GetAvaiblePointsToMove(visitedPoints).Count() != 0)
+            while (visitedPoints.Count != countofEmptySpace)
             {
                 if (movingPoint == Point.Empty)
                 {
@@ -377,7 +373,7 @@ namespace LabirinthLib
 
                 if (IsBorder(movingPoint) || visitedPoints.Contains(movingPoint))
                 {
-                    if (dir == Direction.None)//=============
+                    if (dir == Direction.None)
                     {
                         do
                         {
@@ -461,13 +457,20 @@ namespace LabirinthLib
 
         private void CreateInsAndExit()
         {
-            //List<Point> points = new List<Point>();
+            IEnumerable<Point> GetEmptyCellsInLayout(int numofLayout)
+            {
+                if (numofLayout < 0 || numofLayout >= CountofLayouts)
+                    throw new Exception("В прямоугольнике нет столько слоёв");
 
-            //for (int x = 1; x < Size.Width - 2; x++)
-            //{
-            //    if (this[x, 1] == 1)
-            //        points.Add(new Point(x, 1));
-            //}
+                for (int x = numofLayout; x < Width - numofLayout; x++)
+                {
+                    //Доделать
+                }
+            }
+
+            List<Point> preborderPoints = GetEmptyCellsInLayout(1).ToList();
+
+
         }
 
         //private void CreateInsAndExit()

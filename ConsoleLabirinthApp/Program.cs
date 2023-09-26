@@ -11,13 +11,17 @@ namespace ConsoleLabirinthApp
     {
         static void Main(string[] args)
         {
-            Labirinth lab = new Labirinth(10);
+            Labirinth lab = new Labirinth(5, 5);
+            lab.EmptySpace = 0.6f;
+            lab.RegenarateLabirinth();
             lab.Print();
+            Console.WriteLine(lab.CountofEmptyCells);
             Console.ReadLine();
             while (true)
             {
                 lab.RegenarateLabirinth();
                 lab.Print();
+                Console.WriteLine(lab.CountofEmptyCells);
                 string str = Console.ReadLine();
 
                 if (str == "exit")
