@@ -2,6 +2,7 @@
 using System.CodeDom;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -49,6 +50,46 @@ namespace LabirinthLib
         public static bool operator !=(Size size1, Size size2)
         {
             return (size1.Width != size2.Width || size2.Height != size1.Height);
+        }
+
+        public static Size operator +(Size size1, Size size2)
+        {
+            return new Size(size1.Width + size2.Width, size1.Height + size2.Height);
+        }
+
+        public static Size operator +(Size size1, int value)
+        {
+            return new Size(size1.Width + value, size1.Height + value);
+        }
+
+        public static Size operator -(Size size1, Size size2)
+        {
+            return new Size(size1.Width - size2.Width, size1.Height - size2.Height);
+        }
+
+        public static Size operator -(Size size1, int value)
+        {
+            return new Size(size1.Width - value, size1.Height - value);
+        }
+
+        public static Size operator *(Size size1, Size size2)
+        {
+            return new Size(size1.Width * size2.Width, size1.Height * size2.Height);
+        }
+
+        public static Size operator *(Size size1, int value)
+        {
+            return new Size(size1.Width * value, size1.Height * value);
+        }
+
+        public static Size operator /(Size size1, Size size2)
+        {
+            return new Size(size1.Width / size2.Width, size1.Height / size2.Height);
+        }
+
+        public static Size operator /(Size size1, int value)
+        {
+            return new Size(size1.Width / value, size1.Height / value);
         }
     }
 }
