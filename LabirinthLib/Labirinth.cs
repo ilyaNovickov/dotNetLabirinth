@@ -299,7 +299,6 @@ namespace LabirinthLib
 
             List<Point> visitedPoints = new List<Point>(1);
 
-            List<Direction> visitedDirs = new List<Direction>(4);
 
             Point movingPoint = GetRandomLayoutPoint(1);
 
@@ -315,9 +314,7 @@ namespace LabirinthLib
 
                 if (IsBorder(movingPoint) || visitedPoints.Contains(movingPoint))
                 {
-                    if (!visitedDirs.Contains(dir) && dir != Direction.None)
-                        visitedDirs.Add(dir);
-                    else if (visitedDirs.Count == 4 || dir == Direction.None)
+                    if(dir == Direction.None)
                         break;
                     movingPoint = oldPoint;
                     continue;
