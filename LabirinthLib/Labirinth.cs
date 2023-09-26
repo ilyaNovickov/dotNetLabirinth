@@ -62,7 +62,7 @@ namespace LabirinthLib
             get => percentofEmptySpace;
             set
             {
-                if (0 < value && value < 1f)
+                if (0.12 <= value && value < 1f)
                 {
                     percentofEmptySpace = value;
                 }
@@ -70,6 +70,7 @@ namespace LabirinthLib
                 {
                     percentofEmptySpace = 0.4f;
                 }
+                FillLabirinth();
             }
         }
 
@@ -92,6 +93,22 @@ namespace LabirinthLib
         public Point FirstIn => firstIn;
         public Point SecondIn => secIn;
         public Point Exit => exit;
+
+        public int CountofEmptyCells
+        {
+            get
+            {
+                int count = 0;
+                for (int x = 1; x < lab.GetLength(0) - 1; x++)
+                {
+                    for (int y = 1; y < lab.GetLength(1) - 1; y++)
+                    {
+                        count += this[x, y] == 0 ? 1 : 0;
+                    }
+                }
+                return count;
+            }
+        }
 
         public int CountofLayouts
         {
@@ -308,6 +325,18 @@ namespace LabirinthLib
                     return Point.Empty;
                 return list.ElementAt(random.Next(0, list.Count()));
             }
+            IEnumerable<Point> GetWallsCells(IEnumerable<Point> emptySpace)
+            {
+                //List<Point> walls = new List<Point>();
+                for (int x = 1; x < lab.GetLength(0) - 1; x++)
+                {
+                    for (int y = 1; y < lab.GetLength(1) - 1; y++)
+                    {
+                        if (!emptySpace.Contains(new Point(x, y)))
+                            yield return new Point(x, y);
+                    }
+                }
+            }
 
             int countofEmptySpace = ((int)(percentofEmptySpace * new Size(size.Width - 2, size.Height - 2).Square));
 
@@ -317,9 +346,29 @@ namespace LabirinthLib
 
             visitedPoints.Add(movingPoint);
 
-            //while (visitedPoints.Count != countofEmptySpace)//Для генерации лабиринта без ограничений
-            while (GetAvaiblePointsToMove(visitedPoints).Count() != 0)
+            while (visitedPoints.Count != countofEmptySpace)//Для генерации лабиринта без ограничений
+            //while (GetAvaiblePointsToMove(visitedPoints).Count() != 0)
             {
+                if (movingPoint == Point.Empty)
+                {
+                    if (visitedPoints.Count != countofEmptySpace)
+                    {
+                        IEnumerable<Point> walls = GetWallsCells(visitedPoints);
+
+                        if (walls.Count() == 0)
+                            break;
+                        else
+                        {
+                            visitedPoints.Add(GetRandomPointFromList(walls));
+                            continue;
+                        }
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+
                 Direction dir = GetRandomDirection(GetAvaibleDirections(movingPoint, visitedPoints));
 
                 Point oldPoint = movingPoint;
@@ -333,10 +382,10 @@ namespace LabirinthLib
                         do
                         {
                             movingPoint = GetRandomPointFromList(GetAvaiblePointsToMove(visitedPoints));
-                            if (movingPoint != Point.Empty)
+                            if (movingPoint == Point.Empty)
                                 break;
                         }
-                        while (true);
+                        while (movingPoint == Point.Empty);
                         continue;
                     }
                     movingPoint = oldPoint;
