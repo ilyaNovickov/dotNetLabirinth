@@ -317,7 +317,8 @@ namespace LabirinthLib
 
             visitedPoints.Add(movingPoint);
 
-            while (visitedPoints.Count != countofEmptySpace)
+            //while (visitedPoints.Count != countofEmptySpace)//Для генерации лабиринта без ограничений
+            while (GetAvaiblePointsToMove(visitedPoints).Count() != 0)
             {
                 Direction dir = GetRandomDirection(GetAvaibleDirections(movingPoint, visitedPoints));
 
