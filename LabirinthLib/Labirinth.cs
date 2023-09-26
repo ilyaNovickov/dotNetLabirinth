@@ -234,7 +234,7 @@ namespace LabirinthLib
                     return Direction.None;
                 return avaibleDirs.ElementAt(random.Next(0, avaibleDirs.Count<Direction>()));
             }
-            IEnumerable<Direction> GetAvaibleDirections(IEnumerable<Point> points)
+            IEnumerable<Direction> GetAvaibleDirections(Point checkingPoint, IEnumerable<Point> points)
             {
                 bool HasDiagonalNeighboor(Point point, Direction dir)
                 {
@@ -253,13 +253,13 @@ namespace LabirinthLib
                     return false;
 
                 }
-                bool HasVisitedNeighboors(Point point)
+                bool HasVisitedNeighboors(Point point, Point lastPoint)
                 {
                     foreach (Direction dir in new Direction[] { Direction.Left, Direction.Right, Direction.Up, Direction.Down })
                     {
                         Point newPoint = point;
                         MovePointByDirection(ref newPoint, dir);
-                        if (newPoint == points.Last())
+                        if (newPoint == lastPoint)
                             continue;
                         if (points.Contains(newPoint))
                             return true;
@@ -276,7 +276,7 @@ namespace LabirinthLib
 
                 foreach (Direction dir in new Direction[] { Direction.Left, Direction.Right, Direction.Up, Direction.Down})
                 {
-                    Point extraPoint = points.Last();
+                    Point extraPoint = checkingPoint;//points.Last();
                     MovePointByDirection(ref extraPoint, dir);
                     if (IsBorder(extraPoint))
                         continue;
@@ -284,7 +284,7 @@ namespace LabirinthLib
                         continue;
                     else if (points.Contains(extraPoint))
                         continue;
-                    else if (HasVisitedNeighboors(extraPoint))
+                    else if (HasVisitedNeighboors(extraPoint, checkingPoint))
                         continue;
                     else if (HasDiagonalNeighboor(extraPoint, dir))
                         continue;
@@ -294,11 +294,24 @@ namespace LabirinthLib
 
                 return result;
             }
+            IEnumerable<Point> GetAvaiblePointsToMove(IEnumerable<Point> checkingPoints)
+            {
+                foreach (Point point in checkingPoints)
+                {
+                    if (GetAvaibleDirections(point, checkingPoints).Count() != 0)
+                        yield return point;
+                }
+            }
+            Point GetRandomPointFromList(IEnumerable<Point> list)
+            {
+                if (list.Count() == 0)
+                    return Point.Empty;
+                return list.ElementAt(random.Next(0, list.Count()));
+            }
 
             int countofEmptySpace = ((int)(percentofEmptySpace * new Size(size.Width - 2, size.Height - 2).Square));
 
             List<Point> visitedPoints = new List<Point>(1);
-
 
             Point movingPoint = GetRandomLayoutPoint(1);
 
@@ -306,7 +319,7 @@ namespace LabirinthLib
 
             while (visitedPoints.Count != countofEmptySpace)
             {
-                Direction dir = GetRandomDirection(GetAvaibleDirections(visitedPoints));
+                Direction dir = GetRandomDirection(GetAvaibleDirections(movingPoint, visitedPoints));
 
                 Point oldPoint = movingPoint;
 
@@ -314,8 +327,18 @@ namespace LabirinthLib
 
                 if (IsBorder(movingPoint) || visitedPoints.Contains(movingPoint))
                 {
-                    if(dir == Direction.None)
-                        break;
+                    if (dir == Direction.None)//=============
+                    {
+                        do
+                        {
+                            movingPoint = GetRandomPointFromList(GetAvaiblePointsToMove(visitedPoints));
+                            if (movingPoint != Point.Empty || GetAvaibleDirections(movingPoint, visitedPoints).Count() == 0 ||
+                                GetAvaiblePointsToMove(visitedPoints).Count() == 0)
+                                break;
+                        }
+                        while (true);
+                        continue;
+                    }
                     movingPoint = oldPoint;
                     continue;
                 }
