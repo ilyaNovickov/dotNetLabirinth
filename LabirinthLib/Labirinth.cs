@@ -244,6 +244,23 @@ namespace LabirinthLib
             {
                 List<Direction> result = new List<Direction>(); //= new IEnumerable<Direction>();
 
+                bool HasDiagonalNeighboor(Point point, Direction dir)
+                {
+                    Direction newDir = dir;
+                    Point newPoint1 = point;
+                    Point newPoint2 = point;
+
+                    MovePointByDirection(ref newPoint1, dir);
+                    MovePointByDirection(ref newPoint2, dir);
+
+                    MovePointByDirection(ref newPoint1, (Direction)((int)dir == 1 || (int)dir == -1 ? 2 : 1));
+                    MovePointByDirection(ref newPoint2, (Direction)((int)dir == 1 || (int)dir == -1 ? -2 : -1));
+
+                    if (points.Contains(newPoint1) || points.Contains(newPoint2))
+                        return true;
+                    return false;
+
+                }
                 bool HasVisitedNeighboors(Point point)
                 {
                     foreach (Direction dir in new Direction[] { Direction.Left, Direction.Right, Direction.Up, Direction.Down })
@@ -255,6 +272,7 @@ namespace LabirinthLib
                         if (points.Contains(newPoint))
                             return true;
                     }
+
                     return false;
                 }
 
@@ -269,6 +287,8 @@ namespace LabirinthLib
                     else if (points.Contains(extraPoint))
                         continue;
                     else if (HasVisitedNeighboors(extraPoint))
+                        continue;
+                    else if (HasDiagonalNeighboor(extraPoint, dir))
                         continue;
                     else
                         result.Add(dir);
@@ -300,7 +320,7 @@ namespace LabirinthLib
 
                 if (IsBorder(movingPoint) || visitedPoints.Contains(movingPoint))
                 {
-                    if (!visitedDirs.Contains(dir))
+                    if (!visitedDirs.Contains(dir) && dir != Direction.None)
                         visitedDirs.Add(dir);
                     else if (visitedDirs.Count == 4 || dir == Direction.None)
                         break;
