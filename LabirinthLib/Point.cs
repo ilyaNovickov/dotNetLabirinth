@@ -20,6 +20,19 @@ namespace LabirinthLib
         public int X { get { return x; } set {  x = value; } }
         public int Y { get { return y; } set { y = value; } }
 
+        public void Offset(int dx, int dy)
+        {
+            this.x += dx;
+            this.y += dy;
+        }
+
+        public Point GetOffsetedPoint(int dx, int dy)
+        {
+            Point newPoint = this;
+            newPoint.Offset(dx, dy);
+            return newPoint;
+        }
+
         public static bool operator ==(Point point1, Point point2)
         {
             return (point1.X == point2.X && point1.Y == point2.Y);
