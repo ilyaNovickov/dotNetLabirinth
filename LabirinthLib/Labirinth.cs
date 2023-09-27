@@ -349,6 +349,7 @@ namespace LabirinthLib
             {
                 Point oldPoint = movingPoint;
 
+
                 if (movingPoint == Point.Empty)
                 {
                     if (visitedPoints.Count != countofEmptySpace)
