@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -335,33 +336,52 @@ namespace LabirinthLib
                 }
             }
 
+            void UpdateLab(IEnumerable<Point> points)
+            {
+                foreach (Point point in points)
+                {
+                    this[point] = 0;
+                }
+            }
+
             //bool secWay = false;
             int secWay = 0;
+            int secWayEnd = 0;
 
             int countofEmptySpace = ((int)(percentofEmptySpace * new Size(size.Width - 2, size.Height - 2).Square));
 
-            List<Point> visitedPoints = new List<Point>(1);
+            List<Point> firstWay = new List<Point>(1);
+
+            List<Point> secondWay = new List<Point>();
+
+            List<Point> workingList = firstWay;
 
             Point movingPoint = GetRandomLayoutPoint(1);
 
-            visitedPoints.Add(movingPoint);
+            workingList.AddUnique(movingPoint);
 
-            while (visitedPoints.Count != countofEmptySpace)
+            List<Point> visitedList = new List<Point>();
+
+            while (firstWay.Count + secondWay.Count != countofEmptySpace)//(visitedPoints.Count != countofEmptySpace)
             {
                 Point oldPoint = movingPoint;
 
-
                 if (movingPoint == Point.Empty)
                 {
-                    if (visitedPoints.Count != countofEmptySpace)
+                    if (workingList.Count != countofEmptySpace)
                     {
-                        IEnumerable<Point> walls = GetWallsCells(visitedPoints);
+                        IEnumerable<Point> walls = GetWallsCells(ListUnique.UniteUnique(firstWay, secondWay));
 
                         if (walls.Count() == 0)
                             break;
                         else
                         {
-                            visitedPoints.Add(GetRandomPointFromList(walls));
+                            Point newPoint = GetRandomPointFromList(walls);
+                            if (firstWay.Contains(newPoint))
+                                workingList = firstWay;
+                            else if (secondWay.Contains(newPoint))
+                                workingList = secondWay;
+                            workingList.AddUnique(newPoint);
                             continue;
                         }
                     }
@@ -371,54 +391,69 @@ namespace LabirinthLib
                     }
                 }
 
-                if (secWay == 0 && visitedPoints.Count < countofEmptySpace / 2 && visitedPoints.Count > countofEmptySpace  / 3 && countofEmptySpace >= 4)
+                if (secondWay.Count == 0 && workingList.Count < countofEmptySpace / 2 && workingList.Count > countofEmptySpace  / 3 && countofEmptySpace >= 4)
                 {
                     int doSecWay = random.Next(0, 101);
                     if (doSecWay > 75)
                     {
+
                         do
                         {
                             movingPoint = GetRandomLayoutPoint(1);
+                            bool f = firstWay.Contains(movingPoint);
+                            bool b = GetAvaiblePointsToMove(firstWay).Contains(movingPoint);
                         } 
-                        while (visitedPoints.Contains(movingPoint));
-                        visitedPoints.Add(movingPoint);
-                        secWay = visitedPoints.Count - 1;
+                        while (firstWay.Contains(movingPoint) || GetAvaiblePointsToMove(firstWay).Contains(movingPoint));
+
+                        //firstWay.AddRange(visitedPoints);
+                        workingList = secondWay;
+                        workingList.AddUnique(movingPoint);
+                        //secWay = visitedPoints.Count - 1;
                         continue;
                     }
                 }
 
-                Direction dir = GetRandomDirection(GetAvaibleDirections(movingPoint, visitedPoints));  
+                Direction dir = GetRandomDirection(GetAvaibleDirections(movingPoint, ListUnique.UniteUnique(firstWay, secondWay)));  
 
                 MovePointByDirection(ref movingPoint, dir);
 
-                if (IsBorder(movingPoint) || visitedPoints.Contains(movingPoint))
+                if (IsBorder(movingPoint) || ListUnique.UniteUnique(firstWay, secondWay).Contains(movingPoint))
                 {
                     if (dir == Direction.None)
                     {
                         do
                         {
-                            movingPoint = GetRandomPointFromList(GetAvaiblePointsToMove(visitedPoints));
+                            movingPoint = GetRandomPointFromList(GetAvaiblePointsToMove(ListUnique.UniteUnique(firstWay, secondWay)));
                             if (movingPoint == Point.Empty)
                                 break;
                         }
                         while (movingPoint == Point.Empty);
+                        if (firstWay.Contains(movingPoint))
+                            workingList = firstWay;
+                        else if (secondWay.Contains(movingPoint))
+                            workingList = secondWay;
+                        
                         continue;
                     }
                     movingPoint = oldPoint;
                     continue;
                 }
 
-                visitedPoints.Add(movingPoint);
+                workingList.AddUnique(movingPoint);
             }
 
-            foreach (var item in visitedPoints)
+            //foreach (var item in visitedPoints)
+            //{
+            //    this[item] = 0;
+            //}
+            foreach (var item in firstWay)
             {
                 this[item] = 0;
             }
-            if (secWay != 0)
-                for (int i = secWay; i < visitedPoints.Count; i++)
+            if (secondWay.Count != 0)
+                foreach (var item in secondWay)
                 {
-                   this[visitedPoints[i]] = 5;
+                    this[item] = 5;
                 }
 
             CreateInsAndExit();
