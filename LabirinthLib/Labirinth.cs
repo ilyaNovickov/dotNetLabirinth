@@ -249,7 +249,7 @@ namespace LabirinthLib
                     return Direction.None;
                 return avaibleDirs.ElementAt(random.Next(0, avaibleDirs.Count<Direction>()));
             }
-            IEnumerable<Direction> GetAvaibleDirections(Point checkingPoint, IEnumerable<Point> points, bool secondWay)
+            IEnumerable<Direction> GetAvaibleDirections(Point checkingPoint, IEnumerable<Point> points)
             {
                 bool HasDiagonalNeighboor(Point point, Direction dir)
                 {
@@ -299,7 +299,7 @@ namespace LabirinthLib
                         continue;
                     else if (points.Contains(extraPoint))
                         continue;
-                    else if (HasVisitedNeighboors(extraPoint, checkingPoint) )//&& !secondWay)
+                    else if (HasVisitedNeighboors(extraPoint, checkingPoint) )
                         continue;
                     else if (HasDiagonalNeighboor(extraPoint, dir))
                         continue;
@@ -309,11 +309,11 @@ namespace LabirinthLib
 
                 return result;
             }
-            IEnumerable<Point> GetAvaiblePointsToMove(IEnumerable<Point> checkingPoints, bool secondWay)
+            IEnumerable<Point> GetAvaiblePointsToMove(IEnumerable<Point> checkingPoints)
             {
                 foreach (Point point in checkingPoints)
                 {
-                    if (GetAvaibleDirections(point, checkingPoints, secondWay).Count() != 0)
+                    if (GetAvaibleDirections(point, checkingPoints).Count() != 0)
                         yield return point;
                 }
             }
@@ -335,7 +335,8 @@ namespace LabirinthLib
                 }
             }
 
-            bool secWay = false;
+            //bool secWay = false;
+            int secWay = 0;
 
             int countofEmptySpace = ((int)(percentofEmptySpace * new Size(size.Width - 2, size.Height - 2).Square));
 
@@ -370,7 +371,7 @@ namespace LabirinthLib
                     }
                 }
 
-                if (!secWay && visitedPoints.Count < countofEmptySpace / 2 && visitedPoints.Count > countofEmptySpace  / 3 && countofEmptySpace >= 4)
+                if (secWay == 0 && visitedPoints.Count < countofEmptySpace / 2 && visitedPoints.Count > countofEmptySpace  / 3 && countofEmptySpace >= 4)
                 {
                     int doSecWay = random.Next(0, 101);
                     if (doSecWay > 75)
@@ -380,12 +381,13 @@ namespace LabirinthLib
                             movingPoint = GetRandomLayoutPoint(1);
                         } 
                         while (visitedPoints.Contains(movingPoint));
-                        secWay = true;
+                        visitedPoints.Add(movingPoint);
+                        secWay = visitedPoints.Count - 1;
                         continue;
                     }
                 }
 
-                Direction dir = GetRandomDirection(GetAvaibleDirections(movingPoint, visitedPoints, secWay));  
+                Direction dir = GetRandomDirection(GetAvaibleDirections(movingPoint, visitedPoints));  
 
                 MovePointByDirection(ref movingPoint, dir);
 
@@ -395,7 +397,7 @@ namespace LabirinthLib
                     {
                         do
                         {
-                            movingPoint = GetRandomPointFromList(GetAvaiblePointsToMove(visitedPoints, secWay));
+                            movingPoint = GetRandomPointFromList(GetAvaiblePointsToMove(visitedPoints));
                             if (movingPoint == Point.Empty)
                                 break;
                         }
@@ -409,66 +411,15 @@ namespace LabirinthLib
                 visitedPoints.Add(movingPoint);
             }
 
-
-            /*
-            List<Point> visitedPoint = new List<Point>();
-
-            List<Point> firstWay = new List<Point>();
-
-            Point point1 = GetRandomLayoutPoint(1);
-
-            visitedPoint.Add(point1);
-
-            //Direction[] dirs = new Direction[4];
-            List<Direction> dirs = new List<Direction>(4);
-            
-            
-            while (visitedPoint.Count != countofEmptySpace)
-            {
-
-                Direction dir = ((Direction)random.Next(1, 4 + 1));
-
-                Point oldPoint = point1;
-
-                MovePointByDirection(ref point1, dir);
-
-                if (IsBorder(point1) || visitedPoint.Contains(point1))
-                {
-                    if (dirs.Count == 4)
-                    {
-                        firstWay.AddRange(visitedPoint);
-                        do
-                        {
-                            point1 = GetRandomLayoutPoint(1);
-                        }
-                        while (!visitedPoint.Contains(point1));
-                        visitedPoint.Add(point1);
-                        continue;
-                    }
-
-                    if (!dirs.Contains(dir))
-                        dirs.Add(dir);
-                    point1 = oldPoint;
-                    continue;
-                }
-
-                dirs.Clear();
-
-                visitedPoint.Add(point1);
-
-                if (visitedPoint.Count == countofEmptySpace)
-                    break;
-            }
-            */
-
             foreach (var item in visitedPoints)
             {
                 this[item] = 0;
             }
-            //foreach (var item in firstWay)
-            //{
-            //    this[item] = 5;
-            //}
+            if (secWay != 0)
+                for (int i = secWay; i < visitedPoints.Count; i++)
+                {
+                   this[visitedPoints[i]] = 5;
+                }
 
             CreateInsAndExit();
         }
