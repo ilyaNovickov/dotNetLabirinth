@@ -16,6 +16,7 @@ namespace LabirinthLib
          * 4 - exit
          * 5 - in and exit
          */
+        #region Vars
         Random random = new Random();
         float percentofEmptySpace = 0.4f;
         Size size;
@@ -23,7 +24,8 @@ namespace LabirinthLib
         Point secIn;
         Point exit;
         int[,] lab;
-
+        #endregion
+        #region Constr
         public Labirinth() : this(new Size(10, 10))
         {
 
@@ -43,7 +45,8 @@ namespace LabirinthLib
         {
             this.Size = size;
         }
-
+        #endregion
+        #region Props
         private int this[Point point]
         {
             get => lab[point.X, point.Y];
@@ -116,20 +119,8 @@ namespace LabirinthLib
                 return Math.Min(Size.Width - 1, Size.Height - 1);
             }
         }
+        #endregion
 
-        //private void DrawBorder()
-        //{
-        //    for (int x = 0; x < lab.GetLength(0); x++)
-        //    {
-        //        this[x, 0] = 1;
-        //        this[x, Size.Height - 1] = 1;
-        //    }
-        //    for (int y = 0; y < lab.GetLength(1); y++)
-        //    {
-        //        this[0, y] = 1;
-        //        this[Size.Width - 1, y] = 1;
-        //    }
-        //}
         private void FillLabirinth()
         {
             for (int x = 0; x < lab.GetLength(0); x++)
@@ -164,26 +155,6 @@ namespace LabirinthLib
 
             return new Point(x, y);
         }
-
-        //private Point GenerateRandomInsidePoint()
-        //{
-        //    int x = random.Next(, Size.Width - 1);
-        //    int y = -1;
-        //    if (x == 0 || x == Size.Width - 1)
-        //    {
-        //        y = random.Next(1, Size.Height - 2);
-        //    }
-        //    else
-        //    {
-        //        do
-        //        {
-        //            y = random.Next(0, Size.Height - 1);
-        //        }
-        //        while (y != 0 && y != Size.Height - 1);
-        //    }
-
-        //    return new Point(x, y);
-        //}
 
         public void Print()
         {
@@ -336,18 +307,6 @@ namespace LabirinthLib
                 }
             }
 
-            void UpdateLab(IEnumerable<Point> points)
-            {
-                foreach (Point point in points)
-                {
-                    this[point] = 0;
-                }
-            }
-
-            //bool secWay = false;
-            int secWay = 0;
-            int secWayEnd = 0;
-
             int countofEmptySpace = ((int)(percentofEmptySpace * new Size(size.Width - 2, size.Height - 2).Square));
 
             List<Point> firstWay = new List<Point>(1);
@@ -442,10 +401,6 @@ namespace LabirinthLib
                 workingList.AddUnique(movingPoint);
             }
 
-            //foreach (var item in visitedPoints)
-            //{
-            //    this[item] = 0;
-            //}
             foreach (var item in firstWay)
             {
                 this[item] = 0;
@@ -482,43 +437,5 @@ namespace LabirinthLib
 
 
         }
-
-        //private void CreateInsAndExit()
-        //{
-        //    firstIn = GetRandomLayoutPoint();
-
-        //    do
-        //    {
-        //        secIn = GetRandomLayoutPoint();
-        //    }
-        //    while (secIn == firstIn);
-
-        //    do
-        //    {
-        //        exit = GetRandomLayoutPoint();
-        //    }
-        //    while (exit == firstIn || exit == secIn);
-
-        //    this[firstIn] = 2;
-        //    this[secIn] = 2;
-        //    this[exit] = 3;
-        //}
-
-
-        //private Direction GetBorderofPoint(Point point)
-        //{
-        //    if (point.X == 0 && (1 < point.Y || point.Y < size.Height - 2))
-        //        return Direction.Left;
-        //    else if (point.X == size.Width - 1 && (1 < point.Y || point.Y < size.Height - 2))
-        //        return Direction.Right;
-        //    else if (point.Y == 0 && (1 < point.X || point.X < size.Width - 2))
-        //        return Direction.Up;
-        //    else if (point.Y == size.Height - 1 && (1 < point.X || point.X < size.Width - 2))
-        //        return Direction.Down;
-        //    else
-        //        return Direction.None;
-        //}
-
-
     }
 }
