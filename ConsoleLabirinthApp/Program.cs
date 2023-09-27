@@ -11,8 +11,8 @@ namespace ConsoleLabirinthApp
     {
         static void Main(string[] args)
         {
-            Labirinth lab = new Labirinth(5, 5);
-            lab.EmptySpace = 0.6f;
+            Labirinth lab = new Labirinth(10, 10);
+            lab.EmptySpace = 0.4f;
             lab.RegenarateLabirinth();
             lab.Print();
             Console.WriteLine(lab.CountofEmptyCells);
