@@ -370,12 +370,16 @@ namespace LabirinthLib
                     }
                 }
 
-                if (!secWay && visitedPoints.Count + 2 < countofEmptySpace)
+                if (!secWay && visitedPoints.Count < countofEmptySpace / 2 && visitedPoints.Count > countofEmptySpace  / 3 && countofEmptySpace >= 4)
                 {
                     int doSecWay = random.Next(0, 101);
                     if (doSecWay > 75)
                     {
-                        movingPoint = GetRandomLayoutPoint(1);
+                        do
+                        {
+                            movingPoint = GetRandomLayoutPoint(1);
+                        } 
+                        while (visitedPoints.Contains(movingPoint));
                         secWay = true;
                         continue;
                     }
