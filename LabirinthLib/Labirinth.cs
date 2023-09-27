@@ -97,11 +97,11 @@ namespace LabirinthLib
             get
             {
                 int count = 0;
-                for (int x = 1; x < lab.GetLength(0) - 1; x++)
+                for (int x = 1; x < lab.GetLength(0); x++)
                 {
-                    for (int y = 1; y < lab.GetLength(1) - 1; y++)
+                    for (int y = 1; y < lab.GetLength(1); y++)
                     {
-                        count += this[x, y] == 0 ? 1 : 0;
+                        count += this[x, y] == 0 || this[x, y] == 5 ? 1 : 0;
                     }
                 }
                 return count;
