@@ -102,7 +102,7 @@ namespace LabirinthLib
                 {
                     for (int y = 1; y < lab.GetLength(1); y++)
                     {
-                        count += this[x, y] == 0 || this[x, y] == 5 ? 1 : 0;
+                        count += this[x, y] == 1 ? 0 : 1;
                     }
                 }
                 return count;
