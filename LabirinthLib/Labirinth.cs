@@ -464,7 +464,13 @@ namespace LabirinthLib
 
                 for (int x = numofLayout; x < Width - numofLayout; x++)
                 {
-                    //Доделать
+                    for (int y = numofLayout; y < Height - numofLayout; y++)
+                    {
+                        if (x != numofLayout && x != Width - numofLayout - 1 && y != numofLayout && y != Height - numofLayout - 1)
+                            continue;
+                        else if (this[x, y] == 0)
+                            yield return new Point(x, y);
+                    }
                 }
             }
 
