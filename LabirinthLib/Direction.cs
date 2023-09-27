@@ -34,30 +34,5 @@ namespace LabirinthLib
                 }
             }
         }
-    }
-
-    public static class ListUnique
-    {
-        public static bool AddUnique(this List<Point> list, Point value)
-        {
-            if (list.Contains(value))
-                return false;
-            list.Add(value);
-            return true;
-        }
-
-        public static List<Point> UniteUnique(this List<Point> originList, List<Point> list)
-        {
-            List<Point> result = new List<Point>();
-            result.AddRange(originList);
-            foreach (Point point in list)
-            {
-                if (originList.Contains(point))
-                    continue;
-                else
-                    result.Add(point);
-            }
-            return result;
-        }
-    }
+    }    
 }

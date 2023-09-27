@@ -47,16 +47,16 @@ namespace LabirinthLib
         }
         #endregion
         #region Props
-        private int this[Point point]
+        public int this[Point point]
         {
             get => lab[point.X, point.Y];
-            set => lab[point.X, point.Y] = value;
+            private set => lab[point.X, point.Y] = value;
         }
 
-        private int this[int x, int y]
+        public int this[int x, int y]
         {
             get => lab[x, y];
-            set => lab[x, y] = value;
+            private set => lab[x, y] = value;
         }
 
         public float EmptySpace
@@ -156,24 +156,7 @@ namespace LabirinthLib
             return new Point(x, y);
         }
 
-        public void Print()
-        {
-            for (int y = 0; y < lab.GetLength(1); y++)     
-            {
-                for (int x = 0; x < lab.GetLength(0); x++)
-                {
-                    if (this[x, y] == 2 || this[x, y] == 3)
-                        Console.BackgroundColor = ConsoleColor.Red;
-                    else
-                        Console.BackgroundColor = ConsoleColor.Black;
-                    if (this[x, y] == 1)
-                        Console.Write("█");
-                    else
-                        Console.Write(this[x, y]);
-                }
-                Console.Write("\n");
-            }
-        }
+        
 
         public void RegenarateLabirinth()
         {

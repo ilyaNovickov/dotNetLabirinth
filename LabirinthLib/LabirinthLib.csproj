@@ -41,6 +41,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ListUnique.cs" />
+    <Compile Include="ConsolePrinter.cs" />
     <Compile Include="Direction.cs" />
     <Compile Include="Size.cs" />
     <Compile Include="Point.cs" />
