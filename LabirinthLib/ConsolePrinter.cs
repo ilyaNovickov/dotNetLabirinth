@@ -14,8 +14,10 @@ namespace LabirinthLib
             {
                 for (int x = 0; x < labirinth.Width; x++)
                 {
-                    if (labirinth[x, y] == 2 || labirinth[x, y] == 3)
+                    if (labirinth[x, y] == 2)
                         Console.BackgroundColor = ConsoleColor.Red;
+                    else if (labirinth[x, y] == 3)
+                        Console.BackgroundColor = ConsoleColor.Blue;
                     else if (labirinth[x, y] == 6)
                         Console.BackgroundColor = ConsoleColor.Yellow;
                     else

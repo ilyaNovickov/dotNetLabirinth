@@ -34,6 +34,11 @@ namespace LabirinthLib
             return newPoint;
         }
 
+        public bool IsZero()
+        {
+            return this == Point.Empty;
+        }
+
         public static bool operator ==(Point point1, Point point2)
         {
             return (point1.X == point2.X && point1.Y == point2.Y);
