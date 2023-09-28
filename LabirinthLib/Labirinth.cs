@@ -163,36 +163,38 @@ namespace LabirinthLib
                 y = Size.Height - offset;
 
             return new Point(x, y);
-        }
+        }        
 
-        
-
-        public void RegenarateLabirinth()
+        public void GenerateLabirinth()
         {
             FillLabirinth();
-            test();
+            GenerationLabirinth();
         }
 
-        public void RegenarateLabirinth(Size newSize)
+        public void GenerateLabirinth(Size newSize)
         {
             Size = newSize;
-            test();
+            GenerationLabirinth();
         }
-        public void RegenarateLabirinth(int width, int height)
+
+        public void GenerateLabirinth(int width, int height)
         {
-            RegenarateLabirinth(new Size(width, height));
+            GenerateLabirinth(new Size(width, height));
         }
-        public void RegenarateLabirinth(int size)
+
+        public void GenerateLabirinth(int size)
         {
-            RegenarateLabirinth(new Size(size));
+            GenerateLabirinth(new Size(size));
         }
+
         Point GetRandomPointFromList(IEnumerable<Point> list)
         {
             if (list.Count() == 0)
                 return Point.Empty;
             return list.ElementAt(random.Next(0, list.Count()));
         }
-        private void test()
+
+        private void GenerationLabirinth()
         {
             bool IsBorder(Point point)
             {

@@ -13,13 +13,13 @@ namespace ConsoleLabirinthApp
         {
             Labirinth lab = new Labirinth(10, 10);
             lab.EmptySpace = 0.4f;
-            lab.RegenarateLabirinth();
+            lab.GenerateLabirinth();
             lab.Print();
             Console.WriteLine(lab.CountofEmptyCells);
             Console.ReadLine();
             while (true)
             {
-                lab.RegenarateLabirinth();
+                lab.GenerateLabirinth();
                 lab.Print();
                 Console.WriteLine(lab.CountofEmptyCells);
                 string str = Console.ReadLine();
