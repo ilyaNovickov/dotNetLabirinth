@@ -60,12 +60,16 @@ namespace LabirinthLib
             private set => lab[x, y] = value;
         }
 
+        public float MinEmptySpace
+        {
+            get => (1 / (new Size(Width - 2, Height - 2).Square));
+        }
         public float EmptySpace
         {
             get => percentofEmptySpace;
             set
             {
-                if (0.12 <= value && value < 1f)
+                if (MinEmptySpace <= value && value <= 1f)
                 {
                     percentofEmptySpace = value;
                 }
