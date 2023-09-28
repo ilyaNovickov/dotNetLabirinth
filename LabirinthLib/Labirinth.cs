@@ -449,7 +449,7 @@ namespace LabirinthLib
                     this[exitPointOne] = 2;
                     secIn = exitPointOne;
                 }
-                if (firstIn == exit && firstWay.Count != 1 && firstIn != Point.Empty)
+                if (firstIn == exit && preborderPoints.Count != 1 && firstIn != Point.Empty)
                 {
                     exit = Point.Empty;
                     continue;
