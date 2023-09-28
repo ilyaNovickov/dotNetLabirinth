@@ -12,8 +12,8 @@ namespace LabirinthLib
         /*
          * 0 - empty
          * 1 - wall
-         * 3 - in
-         * 4 - exit
+         * 2 - in
+         * 3 - exit
          * 5 - in and exit
          */
         #region Vars
@@ -177,7 +177,12 @@ namespace LabirinthLib
         {
             RegenarateLabirinth(new Size(size));
         }
-
+        Point GetRandomPointFromList(IEnumerable<Point> list)
+        {
+            if (list.Count() == 0)
+                return Point.Empty;
+            return list.ElementAt(random.Next(0, list.Count()));
+        }
         private void test()
         {
             bool IsBorder(Point point)
@@ -272,12 +277,7 @@ namespace LabirinthLib
                         yield return point;
                 }
             }
-            Point GetRandomPointFromList(IEnumerable<Point> list)
-            {
-                if (list.Count() == 0)
-                    return Point.Empty;
-                return list.ElementAt(random.Next(0, list.Count()));
-            }
+            
             IEnumerable<Point> GetWallsCells(IEnumerable<Point> emptySpace)
             {
                 for (int x = 1; x < lab.GetLength(0) - 1; x++)
@@ -394,10 +394,10 @@ namespace LabirinthLib
                     this[item] = 5;
                 }
 
-            CreateInsAndExit();
+            CreateInsAndExit(firstWay, secondWay);
         }
 
-        private void CreateInsAndExit()
+        private void CreateInsAndExit(List<Point> firstWay, List<Point> secondWay)
         {
             IEnumerable<Point> GetEmptyCellsInLayout(int numofLayout)
             {
@@ -410,7 +410,7 @@ namespace LabirinthLib
                     {
                         if (x != numofLayout && x != Width - numofLayout - 1 && y != numofLayout && y != Height - numofLayout - 1)
                             continue;
-                        else if (this[x, y] == 0)
+                        else if (this[x, y] == 0 || this[x, y] == 5)
                             yield return new Point(x, y);
                     }
                 }
@@ -418,7 +418,30 @@ namespace LabirinthLib
 
             List<Point> preborderPoints = GetEmptyCellsInLayout(1).ToList();
 
+            do
+            {
+                Point exitPointOne = GetRandomPointFromList(preborderPoints);
 
+                if (firstWay.Contains(exitPointOne))
+                {
+                    if (firstIn == Point.Empty)
+                    {
+                        this[exitPointOne] = 2;
+                        firstIn = exitPointOne;
+                    }
+                    else if (exit == Point.Empty)
+                    {
+                        this[exitPointOne] = 3;
+                        exit = exitPointOne;
+                    }
+                }
+                if (secondWay.Contains(exitPointOne))
+                {
+                    this[exitPointOne] = 2;
+                    secIn = exitPointOne;
+                }
+            }
+            while (firstIn == Point.Empty || (secIn == Point.Empty && secondWay.Count != 0) || exit == Point.Empty);
         }
     }
 }
