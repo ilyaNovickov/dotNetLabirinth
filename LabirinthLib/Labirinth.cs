@@ -123,6 +123,10 @@ namespace LabirinthLib
 
         private void FillLabirinth()
         {
+            exit = Point.Empty;
+            firstIn = Point.Empty;
+            secIn = Point.Empty;
+
             for (int x = 0; x < lab.GetLength(0); x++)
             {
                 for (int y = 0; y < lab.GetLength(1); y++)
@@ -435,7 +439,7 @@ namespace LabirinthLib
                         exit = exitPointOne;
                     }
                 }
-                if (secondWay.Contains(exitPointOne))
+                if (secondWay.Contains(exitPointOne) && firstIn == Point.Empty)
                 {
                     this[exitPointOne] = 2;
                     secIn = exitPointOne;
