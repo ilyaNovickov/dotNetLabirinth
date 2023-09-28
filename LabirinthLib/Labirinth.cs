@@ -317,7 +317,7 @@ namespace LabirinthLib
             {
                 Point oldPoint = movingPoint;
 
-                if (movingPoint == Point.Empty)
+                if (movingPoint.IsZero())
                 {
                     if (workingList.Count != countofEmptySpace)
                     {
@@ -375,10 +375,10 @@ namespace LabirinthLib
                         do
                         {
                             movingPoint = GetRandomPointFromList(GetAvaiblePointsToMove(ListUnique.UniteUnique(firstWay, secondWay)));
-                            if (movingPoint == Point.Empty)
+                            if (movingPoint.IsZero())
                                 break;
                         }
-                        while (movingPoint == Point.Empty);
+                        while (movingPoint.IsZero());
                         if (firstWay.Contains(movingPoint))
                             workingList = firstWay;
                         else if (secondWay.Contains(movingPoint))
@@ -425,6 +425,8 @@ namespace LabirinthLib
                 }
             }
 
+            
+
             List<Point> preborderPoints = GetEmptyCellsInLayout(1).ToList();
 
             do
@@ -433,29 +435,29 @@ namespace LabirinthLib
 
                 if (firstWay.Contains(exitPointOne))
                 {
-                    if (firstIn == Point.Empty)
+                    if (firstIn.IsZero())
                     {
                         this[exitPointOne] = 2;
                         firstIn = exitPointOne;
                     }
-                    else if (exit == Point.Empty)
+                    else if (exit.IsZero())
                     {
                         this[exitPointOne] = 3;
                         exit = exitPointOne;
                     }
                 }
-                else if (secondWay.Contains(exitPointOne) && secIn == Point.Empty)
+                else if (secondWay.Contains(exitPointOne) && secIn.IsZero())
                 {
                     this[exitPointOne] = 2;
                     secIn = exitPointOne;
                 }
-                if (firstIn == exit && preborderPoints.Count != 1 && firstIn != Point.Empty)
+                if (firstIn == exit && preborderPoints.Count != 1 && !firstIn.IsZero())
                 {
                     exit = Point.Empty;
                     continue;
                 }
             }
-            while (firstIn == Point.Empty || (secIn == Point.Empty && secondWay.Count != 0) || exit == Point.Empty);
+            while (firstIn.IsZero() || (secIn.IsZero() && secondWay.Count != 0) || exit.IsZero());
 
             if (firstIn == exit || secIn == exit)
                 this[firstIn] = 6;
