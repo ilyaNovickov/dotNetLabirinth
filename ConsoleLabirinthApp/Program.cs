@@ -26,7 +26,7 @@ namespace ConsoleLabirinthApp
 
                 if (str == "exit")
                     break;
-                else if (float.TryParse(str, out float space) && 0.12f < space && space < 0.99f)
+                else if (float.TryParse(str, out float space))
                     lab.EmptySpace = space;
                 else if (str.StartsWith("size"))
                 {
