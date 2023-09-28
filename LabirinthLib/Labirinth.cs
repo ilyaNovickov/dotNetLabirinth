@@ -444,10 +444,15 @@ namespace LabirinthLib
                         exit = exitPointOne;
                     }
                 }
-                if (secondWay.Contains(exitPointOne) && secIn == Point.Empty)
+                else if (secondWay.Contains(exitPointOne) && secIn == Point.Empty)
                 {
                     this[exitPointOne] = 2;
                     secIn = exitPointOne;
+                }
+                if (firstIn == exit && firstWay.Count != 1 && firstIn != Point.Empty)
+                {
+                    exit = Point.Empty;
+                    continue;
                 }
             }
             while (firstIn == Point.Empty || (secIn == Point.Empty && secondWay.Count != 0) || exit == Point.Empty);
