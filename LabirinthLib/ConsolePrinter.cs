@@ -23,7 +23,7 @@ namespace LabirinthLib
                     if (labirinth[x, y] == 1)
                         Console.Write("█");
                     else
-                        Console.Write(labirinth[x, y]);
+                        Console.Write(" ");//(labirinth[x, y]);
                 }
                 Console.Write("\n");
             }
