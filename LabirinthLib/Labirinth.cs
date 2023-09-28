@@ -14,7 +14,8 @@ namespace LabirinthLib
          * 1 - wall
          * 2 - in
          * 3 - exit
-         * 5 - in and exit
+         * 5 - secondWay 
+         * 6 - in and exit
          */
         #region Vars
         Random random = new Random();
@@ -439,13 +440,16 @@ namespace LabirinthLib
                         exit = exitPointOne;
                     }
                 }
-                if (secondWay.Contains(exitPointOne) && firstIn == Point.Empty)
+                if (secondWay.Contains(exitPointOne) && secIn == Point.Empty)
                 {
                     this[exitPointOne] = 2;
                     secIn = exitPointOne;
                 }
             }
             while (firstIn == Point.Empty || (secIn == Point.Empty && secondWay.Count != 0) || exit == Point.Empty);
+
+            if (firstIn == exit || secIn == exit)
+                this[firstIn] = 6;
         }
     }
 }
