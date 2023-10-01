@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace LabirinthLib
 {
@@ -58,6 +59,13 @@ namespace LabirinthLib
                 result.Add(list[i]);
             }
             return result;
+        }
+
+        public static List<T> GetShortestList<T>(this List<T> first, List<T> second)
+        {
+            int minSize = Math.Min(first.Count, second.Count);
+
+            return first.Count == minSize ? first : second;
         }
     }
 }
