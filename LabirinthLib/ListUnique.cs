@@ -44,8 +44,20 @@ namespace LabirinthLib
         public static List<Point> CutList(this List<Point> list, int startIndex, int endIndex = -1)
         {
             List<Point> result = new List<Point>();
-            int lastIndex = endIndex == -1 ? list.Count : endIndex;
-            for (int i = 0; i < lastIndex; i++)
+            int lastIndex = endIndex == -1 ? list.Count - 1 : endIndex;
+            for (int i = 0; i <= lastIndex; i++)
+            {
+                result.Add(list[i]);
+            }
+            list.RemoveSinceUnique(startIndex, endIndex == -1 ? list.Count - startIndex : list.Count - endIndex);
+            return result;
+        }
+
+        public static List<Point> CopyList(this List<Point> list, int startIndex, int endIndex = -1)
+        {
+            List<Point> result = new List<Point>();
+            int lastIndex = endIndex == -1 ? list.Count - 1 : endIndex;
+            for (int i = 0; i <= lastIndex; i++)
             {
                 result.Add(list[i]);
             }
