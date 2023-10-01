@@ -301,21 +301,6 @@ namespace LabirinthLib
     
         private void GenerationLabirinth()
         {
-            
-            void MovePointByDirection(ref Point point, Direction direction)
-            {
-                switch (direction)
-                {
-                    case Direction.Up:
-                    case Direction.Down:
-                        point.Y += (int)direction;
-                        break;
-                    case Direction.Left:
-                    case Direction.Right:
-                        point.X += (int)direction / 2;
-                        break;
-                }
-            }
             IEnumerable<Direction> GetAvaibleDirections(Point checkingPoint, IEnumerable<Point> points)
             {
                 bool HasDiagonalNeighboor(Point point, Direction dir)
@@ -324,23 +309,20 @@ namespace LabirinthLib
                     Point newPoint1 = point;
                     Point newPoint2 = point;
 
-                    MovePointByDirection(ref newPoint1, dir);
-                    MovePointByDirection(ref newPoint2, dir);
+                    newPoint1.OffsetPoint(dir);
+                    newPoint2.OffsetPoint(dir);
 
-                    MovePointByDirection(ref newPoint1, (Direction)((int)dir == 1 || (int)dir == -1 ? 2 : 1));
-                    MovePointByDirection(ref newPoint2, (Direction)((int)dir == 1 || (int)dir == -1 ? -2 : -1));
+                    newPoint1.OffsetPoint((Direction)((int)dir == 1 || (int)dir == -1 ? 2 : 1));
+                    newPoint2.OffsetPoint((Direction)((int)dir == 1 || (int)dir == -1 ? -2 : -1));
 
-                    if (points.Contains(newPoint1) || points.Contains(newPoint2))
-                        return true;
-                    return false;
-
+                    return (points.Contains(newPoint1) || points.Contains(newPoint2));
                 }
                 bool HasVisitedNeighboors(Point point, Point lastPoint)
                 {
                     foreach (Direction dir in new Direction[] { Direction.Left, Direction.Right, Direction.Up, Direction.Down })
                     {
                         Point newPoint = point;
-                        MovePointByDirection(ref newPoint, dir);
+                        newPoint.OffsetPoint(dir);
                         if (newPoint == lastPoint)
                             continue;
                         if (points.Contains(newPoint))
@@ -359,7 +341,7 @@ namespace LabirinthLib
                 foreach (Direction dir in new Direction[] { Direction.Left, Direction.Right, Direction.Up, Direction.Down})
                 {
                     Point extraPoint = checkingPoint;//points.Last();
-                    MovePointByDirection(ref extraPoint, dir);
+                    extraPoint.OffsetPoint(dir);
                     if (IsBorder(extraPoint))
                         continue;
                     else if (!IsExistInLab(extraPoint))
@@ -464,7 +446,7 @@ namespace LabirinthLib
 
                 Direction dir = GetRandomDirectionFromList(GetAvaibleDirections(movingPoint, ListUnique.UniteUnique(firstWay, secondWay)));  
 
-                MovePointByDirection(ref movingPoint, dir);
+                movingPoint.OffsetPoint(dir);
 
                 if (IsBorder(movingPoint) || ListUnique.UniteUnique(firstWay, secondWay).Contains(movingPoint))
                 {
