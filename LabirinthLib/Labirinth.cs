@@ -464,5 +464,10 @@ namespace LabirinthLib
             if (firstIn == exit || secIn == exit)
                 this[firstIn] = 6;
         }
+
+        public async void GenerateLabirinthAsync()
+        {
+            await Task.Run(() => this.GenerateLabirinth());
+        }
     }
 }
