@@ -126,7 +126,7 @@ namespace LabirinthLib
             }
         }
         #endregion
-
+        #region Methods
         private void FillLabirinth()
         {
             exit = Point.Empty;
@@ -166,8 +166,33 @@ namespace LabirinthLib
                 y = Size.Height - offset;
 
             return new Point(x, y);
-        }        
+        }
 
+        private Point GetRandomPointFromList(IEnumerable<Point> list)
+        {
+            if (list.Count() == 0)
+                return Point.Empty;
+            return list.ElementAt(random.Next(0, list.Count()));
+        }
+
+        private Direction GetRandomDirectionFromList(IEnumerable<Direction> avaibleDirs)
+        {
+            if (avaibleDirs.Count() == 0)
+                return Direction.None;
+            return avaibleDirs.ElementAt(random.Next(0, avaibleDirs.Count<Direction>()));
+        }
+
+        private bool IsBorder(Point point)
+        {
+            return (point.X == 0 || point.Y == 0 || point.X == Size.Width - 1 || point.Y == Size.Height - 1);
+        }
+        #region Generation
+        #region AsyncGeneration
+        public async void GenerateLabirinthAsync()
+        {
+            await Task.Run(() => this.GenerateLabirinth());
+        }
+        #endregion
         public void GenerateLabirinth()
         {
             FillLabirinth();
@@ -189,31 +214,7 @@ namespace LabirinthLib
         {
             GenerateLabirinth(new Size(size));
         }
-
-        public void RegenerateInsAndExit()
-        {
-            GenerateInsAndExit();
-        }
-
-        private Point GetRandomPointFromList(IEnumerable<Point> list)
-        {
-            if (list.Count() == 0)
-                return Point.Empty;
-            return list.ElementAt(random.Next(0, list.Count()));
-        }
-
-        private Direction GetRandomDirectionFromList(IEnumerable<Direction> avaibleDirs)
-        {
-            if (avaibleDirs.Count() == 0)
-                return Direction.None;
-            return avaibleDirs.ElementAt(random.Next(0, avaibleDirs.Count<Direction>()));
-        }
-
-        private bool IsBorder(Point point)
-        {
-            return (point.X == 0 || point.Y == 0 || point.X == Size.Width - 1 || point.Y == Size.Height - 1);
-        }
-
+    
         private void GenerationLabirinth()
         {
             
@@ -414,6 +415,11 @@ namespace LabirinthLib
             GenerateInsAndExit();
         }
 
+        public void RegenerateInsAndExit()
+        {
+            GenerateInsAndExit();
+        }
+
         private void GenerateInsAndExit()
         {
             IEnumerable<Point> GetEmptyCellsInLayout(int numofLayout)
@@ -490,7 +496,8 @@ namespace LabirinthLib
                     this[item] = 0;
                 }
         }
-
+        #endregion
+        #region GetWays
         private List<Point> GetWay(Point starstPoint)
         {
             IEnumerable<Direction> GetAvaibleDirectionsToMove(Point checkingPoint, IEnumerable<Point> exceptionPoints = null)
@@ -602,10 +609,7 @@ namespace LabirinthLib
                 return GetWay(secIn);
             return new List<Point>();
         }
-
-        public async void GenerateLabirinthAsync()
-        {
-            await Task.Run(() => this.GenerateLabirinth());
-        }
+        #endregion
+        #endregion
     }
 }
