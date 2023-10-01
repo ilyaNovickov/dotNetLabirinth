@@ -29,5 +29,12 @@ namespace LabirinthLib
             }
             return result;
         }
+
+        public static void RemoveSinceUnique(this List<Point> list, Point point)
+        {
+            int index = list.IndexOf(point);
+            int countToDelete = list.Count - index;
+            list.RemoveRange(index, countToDelete);
+        }
     }
 }
