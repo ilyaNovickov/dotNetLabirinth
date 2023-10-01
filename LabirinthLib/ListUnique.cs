@@ -40,5 +40,16 @@ namespace LabirinthLib
         {
             list.RemoveRange(index, count);
         }
+
+        public static List<Point> CutList(this List<Point> list, int startIndex, int endIndex = -1)
+        {
+            List<Point> result = new List<Point>();
+            int lastIndex = endIndex == -1 ? list.Count : endIndex;
+            for (int i = 0; i < lastIndex; i++)
+            {
+                result.Add(list[i]);
+            }
+            return result;
+        }
     }
 }
