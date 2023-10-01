@@ -190,6 +190,11 @@ namespace LabirinthLib
             GenerateLabirinth(new Size(size));
         }
 
+        public void RegenerateInsAndExit()
+        {
+            GenerateInsAndExit();
+        }
+
         private Point GetRandomPointFromList(IEnumerable<Point> list)
         {
             if (list.Count() == 0)
@@ -406,10 +411,10 @@ namespace LabirinthLib
 
             UpdateLabirinth();
 
-            CreateInsAndExit();
+            GenerateInsAndExit();
         }
 
-        private void CreateInsAndExit()
+        private void GenerateInsAndExit()
         {
             IEnumerable<Point> GetEmptyCellsInLayout(int numofLayout)
             {
