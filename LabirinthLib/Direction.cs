@@ -21,7 +21,6 @@ namespace LabirinthLib
         {
             int dx = 0;
             int dy = 0;
-            //Point newPoint = point;
             foreach (Direction direction in dirs)
             {
                 switch (direction)
@@ -37,8 +36,6 @@ namespace LabirinthLib
                 }
             }
             point.Offset(dx, dy);
-            //newPoint.Offset(dx, dy);
-            //point = newPoint;
         }
     }    
 }

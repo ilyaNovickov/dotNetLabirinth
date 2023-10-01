@@ -5,7 +5,7 @@ namespace LabirinthLib
 {
     public static class ListUnique
     {
-        public static bool AddUnique(this List<Point> list, Point value)
+        public static bool AddUnique<T>(this List<T> list, T value)
         {
             if (list.Contains(value))
                 return false;
@@ -13,34 +13,34 @@ namespace LabirinthLib
             return true;
         }
 
-        public static List<Point> UniteUnique(this List<Point> originList, List<Point> list)
+        public static List<T> UniteUnique<T>(this List<T> originList, List<T> list)
         {
-            List<Point> result = new List<Point>();
+            List<T> result = new List<T>();
             result.AddRange(originList);
-            foreach (Point point in list)
+            foreach (T valueT in list)
             {
-                if (originList.Contains(point))
+                if (originList.Contains(valueT))
                     continue;
                 else
-                    result.Add(point);
+                    result.Add(valueT);
             }
             return result;
         }
 
-        public static void RemoveSinceUnique(this List<Point> list, int index)
+        public static void RemoveSinceUnique<T>(this List<T> list, int index)
         {
             int countToDelete = list.Count - index;
             list.RemoveRange(index, countToDelete);
         }
 
-        public static void RemoveSinceUnique(this List<Point> list, int index, int count)
+        public static void RemoveSinceUnique<T>(this List<T> list, int index, int count)
         {
             list.RemoveRange(index, count);
         }
 
-        public static List<Point> CutList(this List<Point> list, int startIndex, int endIndex = -1)
+        public static List<T> CutList<T>(this List<T> list, int startIndex, int endIndex = -1)
         {
-            List<Point> result = new List<Point>();
+            List<T> result = new List<T>();
             int lastIndex = endIndex == -1 ? list.Count - 1 : endIndex;
             for (int i = 0; i <= lastIndex; i++)
             {
@@ -50,11 +50,11 @@ namespace LabirinthLib
             return result;
         }
 
-        public static List<Point> CopyList(this List<Point> list, int startIndex, int endIndex = -1)
+        public static List<T> CopyList<T>(this List<T> list, int startIndex, int endIndex = -1)
         {
-            List<Point> result = new List<Point>();
+            List<T> result = new List<T>();
             int lastIndex = endIndex == -1 ? list.Count - 1 : endIndex;
-            for (int i = 0; i <= lastIndex; i++)
+            for (int i = startIndex; i <= lastIndex; i++)
             {
                 result.Add(list[i]);
             }

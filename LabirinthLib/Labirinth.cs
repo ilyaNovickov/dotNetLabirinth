@@ -65,6 +65,7 @@ namespace LabirinthLib
         {
             get => (1 / (new Size(Width - 2, Height - 2).Square));
         }
+
         public float EmptySpace
         {
             get => percentofEmptySpace;
@@ -96,11 +97,75 @@ namespace LabirinthLib
         }
 
         public int Width => size.Width;
+
         public int Height => size.Height;
 
-        public Point FirstIn => firstIn;
-        public Point SecondIn => secIn;
-        public Point Exit => exit;
+        public Point FirstIn
+        {
+            get => firstIn;
+            set
+            {
+                IEnumerable<Point> avaiblePoints = GetEmptyCellsInLayout(1);
+                if (avaiblePoints.Contains(value))
+                {
+                    //if (secondWay.Contains(value))
+                    //{
+                    //    List<Point> extra = secondWay;
+                    //    secondWay = firstWay;
+                    //    firstWay = secondWay;
+                    //}
+                    firstIn = value;
+                }
+                else
+                    return;
+            }
+        }
+
+        public Point SecondIn
+        {
+            get => secIn;
+            set
+            {
+                IEnumerable<Point> avaiblePoints = GetEmptyCellsInLayout(1);
+                if (avaiblePoints.Contains(value))
+                {
+                    //if (secondWay.Contains(value))
+                    //{
+                    //    List<Point> extra = secondWay;
+                    //    secondWay = firstWay;
+                    //    firstWay = secondWay;
+                    //}
+                    secIn = value;
+                }
+                else
+                    return;
+            }
+        }
+
+        public Point Exit
+        {
+            get => exit;
+            set
+            {
+                IEnumerable<Point> avaiblePoints = GetEmptyCellsInLayout(1);
+                if (avaiblePoints.Contains(value))
+                {
+                    if (secondWay.Contains(value))
+                    {
+                        List<Point> extra = secondWay;
+                        secondWay = firstWay;
+                        firstWay = secondWay;
+
+                        Point extraPoint = secIn;
+                        secIn = firstIn;
+                        firstIn = extraPoint;
+                    }
+                    firstIn = value;
+                }
+                else
+                    return;
+            }
+        }
 
         public int CountofEmptyCells
         {
@@ -127,6 +192,7 @@ namespace LabirinthLib
         }
         #endregion
         #region Methods
+        #region ExtraMethods
         private void FillLabirinth()
         {
             exit = Point.Empty;
@@ -186,6 +252,24 @@ namespace LabirinthLib
         {
             return (point.X == 0 || point.Y == 0 || point.X == Size.Width - 1 || point.Y == Size.Height - 1);
         }
+
+        private IEnumerable<Point> GetEmptyCellsInLayout(int numofLayout)
+        {
+            if (numofLayout < 0 || numofLayout >= CountofLayouts)
+                throw new Exception("В прямоугольнике нет столько слоёв");
+
+            for (int x = numofLayout; x < Width - numofLayout; x++)
+            {
+                for (int y = numofLayout; y < Height - numofLayout; y++)
+                {
+                    if (x != numofLayout && x != Width - numofLayout - 1 && y != numofLayout && y != Height - numofLayout - 1)
+                        continue;
+                    else if (this[x, y] == 0)
+                        yield return new Point(x, y);
+                }
+            }
+        }
+        #endregion
         #region Generation
         #region AsyncGeneration
         public async void GenerateLabirinthAsync()
@@ -422,23 +506,6 @@ namespace LabirinthLib
 
         private void GenerateInsAndExit()
         {
-            IEnumerable<Point> GetEmptyCellsInLayout(int numofLayout)
-            {
-                if (numofLayout < 0 || numofLayout >= CountofLayouts)
-                    throw new Exception("В прямоугольнике нет столько слоёв");
-
-                for (int x = numofLayout; x < Width - numofLayout; x++)
-                {
-                    for (int y = numofLayout; y < Height - numofLayout; y++)
-                    {
-                        if (x != numofLayout && x != Width - numofLayout - 1 && y != numofLayout && y != Height - numofLayout - 1)
-                            continue;
-                        else if (this[x, y] == 0)
-                            yield return new Point(x, y);
-                    }
-                }
-            }        
-
             List<Point> preborderPoints = GetEmptyCellsInLayout(1).ToList();
 
             do
