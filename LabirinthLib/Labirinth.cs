@@ -443,18 +443,18 @@ namespace LabirinthLib
                 {
                     if (firstIn.IsZero())
                     {
-                        this[exitPointOne] = 2;
+                        //this[exitPointOne] = 2;
                         firstIn = exitPointOne;
                     }
                     else if (exit.IsZero())
                     {
-                        this[exitPointOne] = 3;
+                        //this[exitPointOne] = 3;
                         exit = exitPointOne;
                     }
                 }
                 else if (secondWay.Contains(exitPointOne) && secIn.IsZero())
                 {
-                    this[exitPointOne] = 2;
+                    //this[exitPointOne] = 2;
                     secIn = exitPointOne;
                 }
                 //if (firstIn == exit && preborderPoints.Count != 1 && !firstIn.IsZero())
@@ -469,6 +469,13 @@ namespace LabirinthLib
 
             if (firstIn == exit || secIn == exit)
                 this[firstIn] = 4;
+            else
+            {
+                this[firstIn] = 2;
+                this[exit] = 3;
+                if (!secIn.IsZero())
+                    this[secIn] = 2;
+            }
         }
 
         private void UpdateLabirinth()
@@ -484,7 +491,7 @@ namespace LabirinthLib
                 }
         }
 
-        public List<Point> GetWay()
+        private List<Point> GetWay(Point starstPoint)
         {
             IEnumerable<Direction> GetAvaibleDirectionsToMove(Point checkingPoint, IEnumerable<Point> exceptionPoints = null)
             {
@@ -514,13 +521,13 @@ namespace LabirinthLib
             }
 
             List<Point> way = new List<Point>();
-            way.Add(firstIn);
+            way.Add(starstPoint);
 
             Stack<Point> fork = new Stack<Point>();
 
-            List<Point> visitedPoints = new List<Point>();            
+            List<Point> visitedPoints = new List<Point>();
 
-            Point walker = firstIn;
+            Point walker = starstPoint;
 
             while (true)
             {
@@ -558,7 +565,42 @@ namespace LabirinthLib
                 }
             }
             return way;
+        }
 
+        public List<Point> GetWay()
+        {
+            if (firstIn.IsZero())
+                return new List<Point>();
+            return GetWay(firstIn);
+        }
+
+        public List<Point> GetFirstWay()
+        {
+            return GetWay();
+        }
+
+        public List<Point> GetSecondWay()
+        {
+            bool IsSecAndFirstWaysConnected()
+            {
+                if (secondWay.Count == 0 || secIn.IsZero())
+                    return false;
+                foreach (Point point in secondWay)
+                {
+                    foreach (Direction direction in new Direction[4] { Direction.Up, Direction.Down, Direction.Left, Direction.Right })
+                    {
+                        Point newPoint = point;
+                        newPoint.OffsetPoint(direction);
+                        if (firstWay.Contains(newPoint))
+                            return true;
+                    }
+                }
+                return false;
+            }
+
+            if (IsSecAndFirstWaysConnected())
+                return GetWay(secIn);
+            return new List<Point>();
         }
 
         public async void GenerateLabirinthAsync()

@@ -40,6 +40,11 @@ namespace ConsoleLabirinthApp
                     lab.PrintWithWay();
                     Console.ReadLine();
                 }
+                else if (str == "secway")
+                {
+                    lab.PrintWithWay(true);
+                    Console.ReadLine();
+                }
             }
         }
     }

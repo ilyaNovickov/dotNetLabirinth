@@ -14,11 +14,11 @@ namespace LabirinthLib
             {
                 for (int x = 0; x < labirinth.Width; x++)
                 {
-                    if (labirinth[x, y] == 2)
+                    if (new Point(x, y) == labirinth.FirstIn || new Point(x, y) == labirinth.SecondIn)
                         Console.BackgroundColor = ConsoleColor.Red;
-                    else if (labirinth[x, y] == 3)
+                    else if (new Point(x, y) == labirinth.Exit)
                         Console.BackgroundColor = ConsoleColor.Blue;
-                    else if (labirinth[x, y] == 6)
+                    else if (new Point(x, y) == labirinth.Exit && new Point(x, y) == labirinth.FirstIn)
                         Console.BackgroundColor = ConsoleColor.Yellow;
                     else
                         Console.BackgroundColor = ConsoleColor.Black;
@@ -31,19 +31,23 @@ namespace LabirinthLib
             }
         }
 
-        public static void PrintWithWay(this Labirinth labirinth)
+        public static void PrintWithWay(this Labirinth labirinth, bool secWay = false)
         {
-            List<Point> way = labirinth.GetWay();
+            List<Point> way;
+            if (!secWay)
+                way = labirinth.GetWay();
+            else
+                way = labirinth.GetSecondWay();
 
             for (int y = 0; y < labirinth.Height; y++)
             {
                 for (int x = 0; x < labirinth.Width; x++)
                 {
-                    if (labirinth[x, y] == 2)
+                    if (new Point(x, y) == labirinth.FirstIn || new Point(x, y) == labirinth.SecondIn)
                         Console.BackgroundColor = ConsoleColor.Red;
-                    else if (labirinth[x, y] == 3)
+                    else if (new Point(x, y) == labirinth.Exit)
                         Console.BackgroundColor = ConsoleColor.Blue;
-                    else if (labirinth[x, y] == 4)
+                    else if (new Point(x, y) == labirinth.Exit && new Point(x, y) == labirinth.FirstIn)
                         Console.BackgroundColor = ConsoleColor.Yellow;
                     else
                         Console.BackgroundColor = ConsoleColor.Black;
