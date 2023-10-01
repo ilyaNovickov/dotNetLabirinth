@@ -35,6 +35,11 @@ namespace ConsoleLabirinthApp
                         lab.Size = new Size(size, size);
                     }
                 }
+                else if (str == "way")
+                {
+                    lab.PrintWithWay();
+                   
+                }
             }
         }
     }

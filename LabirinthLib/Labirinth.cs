@@ -187,19 +187,28 @@ namespace LabirinthLib
             GenerateLabirinth(new Size(size));
         }
 
-        Point GetRandomPointFromList(IEnumerable<Point> list)
+        private Point GetRandomPointFromList(IEnumerable<Point> list)
         {
             if (list.Count() == 0)
                 return Point.Empty;
             return list.ElementAt(random.Next(0, list.Count()));
         }
 
+        private Direction GetRandomDirectionFromList(IEnumerable<Direction> avaibleDirs)
+        {
+            if (avaibleDirs.Count() == 0)
+                return Direction.None;
+            return avaibleDirs.ElementAt(random.Next(0, avaibleDirs.Count<Direction>()));
+        }
+
+        private bool IsBorder(Point point)
+        {
+            return (point.X == 0 || point.Y == 0 || point.X == Size.Width - 1 || point.Y == Size.Height - 1);
+        }
+
         private void GenerationLabirinth()
         {
-            bool IsBorder(Point point)
-            {
-                return (point.X == 0 || point.Y == 0 || point.X == Size.Width - 1 || point.Y == Size.Height - 1);
-            }
+            
             void MovePointByDirection(ref Point point, Direction direction)
             {
                 switch (direction)
@@ -213,12 +222,6 @@ namespace LabirinthLib
                         point.X += (int)direction / 2;
                         break;
                 }
-            }
-            Direction GetRandomDirection(IEnumerable<Direction> avaibleDirs)
-            {
-                if (avaibleDirs.Count() == 0)
-                    return Direction.None;
-                return avaibleDirs.ElementAt(random.Next(0, avaibleDirs.Count<Direction>()));
             }
             IEnumerable<Direction> GetAvaibleDirections(Point checkingPoint, IEnumerable<Point> points)
             {
@@ -366,7 +369,7 @@ namespace LabirinthLib
                     }
                 }
 
-                Direction dir = GetRandomDirection(GetAvaibleDirections(movingPoint, ListUnique.UniteUnique(firstWay, secondWay)));  
+                Direction dir = GetRandomDirectionFromList(GetAvaibleDirections(movingPoint, ListUnique.UniteUnique(firstWay, secondWay)));  
 
                 MovePointByDirection(ref movingPoint, dir);
 
@@ -421,7 +424,7 @@ namespace LabirinthLib
                     {
                         if (x != numofLayout && x != Width - numofLayout - 1 && y != numofLayout && y != Height - numofLayout - 1)
                             continue;
-                        else if (this[x, y] == 0 || this[x, y] == 5)
+                        else if (this[x, y] <= 0)
                             yield return new Point(x, y);
                     }
                 }
@@ -463,6 +466,83 @@ namespace LabirinthLib
 
             if (firstIn == exit || secIn == exit)
                 this[firstIn] = 6;
+        }
+
+        public List<Point> GetWay()
+        {
+            IEnumerable<Direction> GetAvaibleDirectionsToMove(Point checkingPoint, IEnumerable<Point> exceptionPoints = null)
+            {
+                bool IsExistInLab(Point point)
+                {
+                    return (0 <= point.X && 0 <= point.Y && point.X < Size.Width && point.Y < Size.Height);
+                }
+
+                List<Direction> result = new List<Direction>();
+
+                foreach (Direction dir in new Direction[] { Direction.Left, Direction.Right, Direction.Up, Direction.Down })
+                {
+                    Point extraPoint = checkingPoint;
+                    extraPoint.OffsetPoint(dir);
+                    if (IsBorder(extraPoint))
+                        continue;
+                    else if (!IsExistInLab(extraPoint))
+                        continue;
+                    else if (exceptionPoints != null && exceptionPoints.Contains(extraPoint))
+                        continue;
+                    else if (this[extraPoint] == 1)
+                        continue;
+                    else
+                        result.Add(dir);
+                }
+                return result;
+            }
+
+            List<Point> way = new List<Point>();
+            way.Add(firstIn);
+
+            Stack<Point> fork = new Stack<Point>();
+
+            List<Point> visitedPoints = new List<Point>();            
+
+            Point walker = firstIn;
+
+            while (true)
+            {
+                if (walker == exit)
+                {
+                    break;
+                }
+
+                IEnumerable<Direction> avaibleDirs = GetAvaibleDirectionsToMove(walker, visitedPoints);
+
+                if (avaibleDirs.Count() == 1)
+                {
+                    visitedPoints.Add(walker);
+                    walker.OffsetPoint(avaibleDirs.ElementAt(0));
+                    way.Add(walker);
+                }
+                else if (avaibleDirs.Count() == 0)
+                {
+                    if (fork.Count == 0)
+                        break;
+                    else
+                    {
+                        walker = fork.Pop();
+                        visitedPoints.Add(way[way.IndexOf(walker) + 1]);
+                        way.RemoveSinceUnique(way.IndexOf(walker) + 1);
+                        continue;
+                    }
+                }
+                else
+                {
+                    fork.Push(walker);
+                    visitedPoints.Add(walker);
+                    walker.OffsetPoint(GetRandomDirectionFromList(avaibleDirs));
+                    way.Add(walker);
+                }
+            }
+            return way;
+
         }
 
         public async void GenerateLabirinthAsync()

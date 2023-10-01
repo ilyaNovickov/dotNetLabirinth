@@ -17,22 +17,28 @@ namespace LabirinthLib
 
     public static class DirectionExtandentClass
     {
-        public static void OffsetPoint(this Point point, params Direction[] dirs)
+        public static void OffsetPoint(this ref Point point, params Direction[] dirs)
         {
+            int dx = 0;
+            int dy = 0;
+            //Point newPoint = point;
             foreach (Direction direction in dirs)
             {
                 switch (direction)
                 {
                     case Direction.Up:
                     case Direction.Down:
-                        point.Y += (int)direction;
+                        dy += (int)direction;
                         break;
                     case Direction.Left:
                     case Direction.Right:
-                        point.X += (int)direction / 2;
+                        dx += (int)direction / 2;
                         break;
                 }
             }
+            point.Offset(dx, dy);
+            //newPoint.Offset(dx, dy);
+            //point = newPoint;
         }
     }    
 }
