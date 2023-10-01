@@ -30,11 +30,15 @@ namespace LabirinthLib
             return result;
         }
 
-        public static void RemoveSinceUnique(this List<Point> list, Point point)
+        public static void RemoveSinceUnique(this List<Point> list, int index)
         {
-            int index = list.IndexOf(point);
             int countToDelete = list.Count - index;
             list.RemoveRange(index, countToDelete);
+        }
+
+        public static void RemoveSinceUnique(this List<Point> list, int index, int count)
+        {
+            list.RemoveRange(index, count);
         }
     }
 }
