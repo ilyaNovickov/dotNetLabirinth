@@ -10,11 +10,11 @@ namespace LabirinthLib
     public class Labirinth
     {
         /*
+         * -1 - secEmpty
          * 0 - empty
          * 1 - wall
          * 2 - in
          * 3 - exit
-         * 5 - secondWay 
          * 6 - in and exit
          */
         #region Vars
@@ -402,7 +402,7 @@ namespace LabirinthLib
             if (secondWay.Count != 0)
                 foreach (var item in secondWay)
                 {
-                    this[item] = 5;
+                    this[item] = -1;
                 }
 
             CreateInsAndExit(firstWay, secondWay);
