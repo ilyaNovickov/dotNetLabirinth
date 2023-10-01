@@ -10,12 +10,11 @@ namespace LabirinthLib
     public class Labirinth
     {
         /*
-         * -1 - secEmpty
          * 0 - empty
          * 1 - wall
          * 2 - in
          * 3 - exit
-         * 6 - in and exit
+         * 4 - in and exit
          */
         #region Vars
         Random random = new Random();
@@ -25,6 +24,8 @@ namespace LabirinthLib
         Point secIn;
         Point exit;
         int[,] lab;
+        List<Point> firstWay = new List<Point>();
+        List<Point> secondWay = new List<Point>();
         #endregion
         #region Constr
         public Labirinth() : this(new Size(10, 10))
@@ -131,6 +132,8 @@ namespace LabirinthLib
             exit = Point.Empty;
             firstIn = Point.Empty;
             secIn = Point.Empty;
+            firstWay.Clear();
+            secondWay.Clear();
 
             for (int x = 0; x < lab.GetLength(0); x++)
             {
@@ -398,20 +401,15 @@ namespace LabirinthLib
                 workingList.AddUnique(movingPoint);
             }
 
-            foreach (var item in firstWay)
-            {
-                this[item] = 0;
-            }
-            if (secondWay.Count != 0)
-                foreach (var item in secondWay)
-                {
-                    this[item] = -1;
-                }
+            this.firstWay.AddRange(firstWay);
+            this.secondWay.AddRange(secondWay);
 
-            CreateInsAndExit(firstWay, secondWay);
+            UpdateLabirinth();
+
+            CreateInsAndExit();
         }
 
-        private void CreateInsAndExit(List<Point> firstWay, List<Point> secondWay)
+        private void CreateInsAndExit()
         {
             IEnumerable<Point> GetEmptyCellsInLayout(int numofLayout)
             {
@@ -424,13 +422,11 @@ namespace LabirinthLib
                     {
                         if (x != numofLayout && x != Width - numofLayout - 1 && y != numofLayout && y != Height - numofLayout - 1)
                             continue;
-                        else if (this[x, y] <= 0)
+                        else if (this[x, y] == 0)
                             yield return new Point(x, y);
                     }
                 }
-            }
-
-            
+            }        
 
             List<Point> preborderPoints = GetEmptyCellsInLayout(1).ToList();
 
@@ -456,8 +452,10 @@ namespace LabirinthLib
                     this[exitPointOne] = 2;
                     secIn = exitPointOne;
                 }
-                if (firstIn == exit && preborderPoints.Count != 1 && !firstIn.IsZero())
+                //if (firstIn == exit && preborderPoints.Count != 1 && !firstIn.IsZero())
+                if (firstIn == exit && preborderPoints.Intersect(firstWay).Count() != 1 && !firstIn.IsZero())
                 {
+                    this[exit] = 0;
                     exit = Point.Empty;
                     continue;
                 }
@@ -465,7 +463,20 @@ namespace LabirinthLib
             while (firstIn.IsZero() || (secIn.IsZero() && secondWay.Count != 0) || exit.IsZero());
 
             if (firstIn == exit || secIn == exit)
-                this[firstIn] = 6;
+                this[firstIn] = 4;
+        }
+
+        private void UpdateLabirinth()
+        {
+            foreach (var item in firstWay)
+            {
+                this[item] = 0;
+            }
+            if (secondWay.Count != 0)
+                foreach (var item in secondWay)
+                {
+                    this[item] = 0;
+                }
         }
 
         public List<Point> GetWay()

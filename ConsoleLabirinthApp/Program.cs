@@ -38,7 +38,7 @@ namespace ConsoleLabirinthApp
                 else if (str == "way")
                 {
                     lab.PrintWithWay();
-                   
+                    Console.ReadLine();
                 }
             }
         }
