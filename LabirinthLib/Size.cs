@@ -10,7 +10,10 @@ namespace LabirinthLib
 {
     public struct Size
     {
+        #region Vars
         int width, height;
+        #endregion
+        #region Constr
         public Size(int width, int height)
         {
             if (width < 0 || height < 0)
@@ -19,6 +22,8 @@ namespace LabirinthLib
             this.height = height;
         }
         public Size(int size) : this(size, size) { }
+        #endregion
+        #region Props
         public int Width
         {
             get => width;
@@ -41,7 +46,10 @@ namespace LabirinthLib
         }
 
         public int Square => width * height;
+        #endregion
+        #region Methods
 
+        #region Operators
         public static bool operator ==(Size size1, Size size2)
         {
             return (size1.Width == size2.Width && size2.Height == size1.Height);
@@ -91,5 +99,7 @@ namespace LabirinthLib
         {
             return new Size(size1.Width / value, size1.Height / value);
         }
+        #endregion
+        #endregion
     }
 }

@@ -8,8 +8,10 @@ namespace LabirinthLib
 {
     public struct Point
     {
+        #region Vars
         private int x, y;
-
+        #endregion
+        #region Constr
         public Point(int x, int y)
         {
             this.x = x;
@@ -17,10 +19,13 @@ namespace LabirinthLib
         }
 
         public Point(int coord) : this(coord, coord) { }
+        #endregion
+        #region Props
         public int X { get { return x; } set {  x = value; } }
         public int Y { get { return y; } set { y = value; } }
         public static Point Empty => new Point(0, 0);
-
+        #endregion
+        #region Methods
         public void Offset(int dx, int dy)
         {
             this.x += dx;
@@ -38,7 +43,7 @@ namespace LabirinthLib
         {
             return this == Point.Empty;
         }
-
+        #region Operators
         public static bool operator ==(Point point1, Point point2)
         {
             return (point1.X == point2.X && point1.Y == point2.Y);
@@ -88,5 +93,7 @@ namespace LabirinthLib
         {
             return new Point(point1.X / value, point1.Y / value);
         }
+        #endregion
+        #endregion
     }
 }
