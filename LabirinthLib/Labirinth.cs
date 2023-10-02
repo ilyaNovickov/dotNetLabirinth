@@ -52,18 +52,20 @@ namespace LabirinthLib
         #region Props
         public int this[Point point]
         {
-            //get => lab[point.X, point.Y];
-            //private set => lab[point.X, point.Y] = value;
             get
             {
-                return firstWay.Contains(point) || secondWay.Contains(point) ? 1 : 0;
+                if (firstIn == exit)
+                    return 4;
+                else if (firstIn == point || secIn == point)
+                    return 2;
+                else if (exit == point)
+                    return 3;
+                return firstWay.Contains(point) || secondWay.Contains(point) ? 0 : 1;
             }
         }
 
         public int this[int x, int y]
         {
-            //get => lab[x, y];
-            //private set => lab[x, y] = value;
             get
             {
                 return this[new Point(x, y)];
@@ -99,7 +101,6 @@ namespace LabirinthLib
             {
                 if (value.Width < 4 && value.Height < 4)
                     return;
-                //lab = new int[value.Width, value.Height];
                 FillLabirinth();
                 size = value;
                 FillLabirinth();
@@ -118,12 +119,6 @@ namespace LabirinthLib
                 IEnumerable<Point> avaiblePoints = GetEmptyCellsInLayout(1);
                 if (avaiblePoints.Contains(value))
                 {
-                    //if (secondWay.Contains(value))
-                    //{
-                    //    List<Point> extra = secondWay;
-                    //    secondWay = firstWay;
-                    //    firstWay = secondWay;
-                    //}
                     firstIn = value;
                 }
                 else
@@ -139,12 +134,6 @@ namespace LabirinthLib
                 IEnumerable<Point> avaiblePoints = GetEmptyCellsInLayout(1);
                 if (avaiblePoints.Contains(value))
                 {
-                    //if (secondWay.Contains(value))
-                    //{
-                    //    List<Point> extra = secondWay;
-                    //    secondWay = firstWay;
-                    //    firstWay = secondWay;
-                    //}
                     secIn = value;
                 }
                 else
@@ -210,14 +199,6 @@ namespace LabirinthLib
             secIn = Point.Empty;
             firstWay.Clear();
             secondWay.Clear();
-
-            //for (int x = 0; x < Width; x++)
-            //{
-            //    for (int y = 0; y < Height; y++)
-            //    {
-            //        this[x, y] = 1;
-            //    }
-            //}
         }
 
         private Point GetRandomLayoutPoint(int numofLayout = 0)
@@ -444,11 +425,8 @@ namespace LabirinthLib
                             bool b = GetAvaiblePointsToMove(firstWay).Contains(movingPoint);
                         } 
                         while (firstWay.Contains(movingPoint) || GetAvaiblePointsToMove(firstWay).Contains(movingPoint));
-
-                        //firstWay.AddRange(visitedPoints);
                         workingList = secondWay;
                         workingList.AddUnique(movingPoint);
-                        //secWay = visitedPoints.Count - 1;
                         continue;
                     }
                 }
@@ -485,8 +463,6 @@ namespace LabirinthLib
             this.firstWay.AddRange(firstWay);
             this.secondWay.AddRange(secondWay);
 
-            //UpdateLabirinth();
-
             GenerateInsAndExit();
         }
 
@@ -507,53 +483,26 @@ namespace LabirinthLib
                 {
                     if (firstIn.IsZero())
                     {
-                        //this[exitPointOne] = 2;
                         firstIn = exitPointOne;
                     }
                     else if (exit.IsZero())
                     {
-                        //this[exitPointOne] = 3;
                         exit = exitPointOne;
                     }
                 }
                 else if (secondWay.Contains(exitPointOne) && secIn.IsZero())
                 {
-                    //this[exitPointOne] = 2;
                     secIn = exitPointOne;
                 }
                 //if (firstIn == exit && preborderPoints.Count != 1 && !firstIn.IsZero())
                 if (firstIn == exit && preborderPoints.Intersect(firstWay).Count() != 1 && !firstIn.IsZero())
                 {
-                    //this[exit] = 0;
                     exit = Point.Empty;
                     continue;
                 }
             }
             while (firstIn.IsZero() || (secIn.IsZero() && secondWay.Count != 0) || exit.IsZero());
-
-            //if (firstIn == exit || secIn == exit)
-            //    this[firstIn] = 4;
-            //else
-            //{
-            //    this[firstIn] = 2;
-            //    this[exit] = 3;
-            //    if (!secIn.IsZero())
-            //        this[secIn] = 2;
-            //}
         }
-
-        //private void UpdateLabirinth()
-        //{
-        //    foreach (var item in firstWay)
-        //    {
-        //        this[item] = 0;
-        //    }
-        //    if (secondWay.Count != 0)
-        //        foreach (var item in secondWay)
-        //        {
-        //            this[item] = 0;
-        //        }
-        //}
         #endregion
         #region GetWays
         private List<Point> GetWay(Point starstPoint)
