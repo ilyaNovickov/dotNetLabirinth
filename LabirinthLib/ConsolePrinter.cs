@@ -54,7 +54,7 @@ namespace LabirinthLib
                     if (labirinth[x, y] == 1)
                         Console.Write("█");
                     else if (way.Contains(new Point(x, y)))
-                        Console.Write("8");
+                        Console.Write("=");
                     else
                         Console.Write(" ");//(labirinth[x, y]);
                 }
