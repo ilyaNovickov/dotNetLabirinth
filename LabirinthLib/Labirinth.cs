@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Net;
 using System.Text;
@@ -271,12 +272,11 @@ namespace LabirinthLib
         }
         #endregion
         #region Generation
-        #region AsyncGeneration
         public async void GenerateLabirinthAsync()
         {
             await Task.Run(() => this.GenerateLabirinth());
         }
-        #endregion
+
         public void GenerateLabirinth()
         {
             FillLabirinth();
