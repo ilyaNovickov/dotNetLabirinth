@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -42,6 +43,19 @@ namespace LabirinthLib
         public bool IsZero()
         {
             return this == Point.Empty;
+        }
+
+        public override int GetHashCode()
+        {
+            return x.GetHashCode() ^ y.GetHashCode();
+        }
+        public override bool Equals(object obj)
+        {
+            if (obj is Point point)
+            {
+                return (this.X == point.X && this.Y == point.Y);
+            }
+            return false;
         }
         #region Operators
         public static bool operator ==(Point point1, Point point2)

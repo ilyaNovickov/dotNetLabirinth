@@ -11,7 +11,7 @@ namespace LabirinthLib
     public struct Size
     {
         #region Vars
-        int width, height;
+        private int width, height;
         #endregion
         #region Constr
         public Size(int width, int height)
@@ -48,7 +48,18 @@ namespace LabirinthLib
         public int Square => width * height;
         #endregion
         #region Methods
-
+        public override int GetHashCode()
+        {
+            return width.GetHashCode() ^ height.GetHashCode();
+        }
+        public override bool Equals(object obj)
+        {
+            if (obj is Size size)
+            {
+                return (this.width == size.width && this.height == size.height);
+            }
+            return false;
+        }
         #region Operators
         public static bool operator ==(Size size1, Size size2)
         {
