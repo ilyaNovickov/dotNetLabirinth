@@ -14,12 +14,12 @@ namespace LabirinthLib
             {
                 for (int x = 0; x < labirinth.Width; x++)
                 {
-                    if (new Point(x, y) == labirinth.FirstIn || new Point(x, y) == labirinth.SecondIn)
+                    if (new Point(x, y) == labirinth.Exit && new Point(x, y) == labirinth.FirstIn)
+                        Console.BackgroundColor = ConsoleColor.Yellow;
+                    else if (new Point(x, y) == labirinth.FirstIn || new Point(x, y) == labirinth.SecondIn)
                         Console.BackgroundColor = ConsoleColor.Red;
                     else if (new Point(x, y) == labirinth.Exit)
                         Console.BackgroundColor = ConsoleColor.Blue;
-                    else if (new Point(x, y) == labirinth.Exit && new Point(x, y) == labirinth.FirstIn)
-                        Console.BackgroundColor = ConsoleColor.Yellow;
                     else
                         Console.BackgroundColor = ConsoleColor.Black;
                     if (labirinth[x, y] == 1)
@@ -45,10 +45,10 @@ namespace LabirinthLib
                 {
                     if (new Point(x, y) == labirinth.FirstIn || new Point(x, y) == labirinth.SecondIn)
                         Console.BackgroundColor = ConsoleColor.Red;
-                    else if (new Point(x, y) == labirinth.Exit)
-                        Console.BackgroundColor = ConsoleColor.Blue;
                     else if (new Point(x, y) == labirinth.Exit && new Point(x, y) == labirinth.FirstIn)
                         Console.BackgroundColor = ConsoleColor.Yellow;
+                    else if (new Point(x, y) == labirinth.Exit)
+                        Console.BackgroundColor = ConsoleColor.Blue;
                     else
                         Console.BackgroundColor = ConsoleColor.Black;
                     if (labirinth[x, y] == 1)

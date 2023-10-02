@@ -21,10 +21,9 @@ namespace LabirinthLib
         Random random = new Random();
         float percentofEmptySpace = 0.4f;
         Size size;
-        Point firstIn;
-        Point secIn;
-        Point exit;
-        //int[,] lab;
+        Point firstIn = new Point(-1, -1);
+        Point secIn = new Point(-1, -1);
+        Point exit = new Point(-1, -1);
         List<Point> firstWay = new List<Point>();
         List<Point> secondWay = new List<Point>();
         #endregion
@@ -54,9 +53,12 @@ namespace LabirinthLib
         {
             get
             {
-                if (firstIn == exit)
+                if (point.X < 0 || point.Y < 0)
+                    throw new Exception("Для обращения к лабиринту необходимо использовать " +
+                        "только положительные координаты");
+                if (firstIn == exit && firstIn == point && !firstIn.IsZero() && !exit.IsZero())
                     return 4;
-                else if (firstIn == point || secIn == point)
+                else if ((firstIn == point && !firstIn.IsZero()) || (secIn == point && !secIn.IsZero()))
                     return 2;
                 else if (exit == point)
                     return 3;
@@ -82,7 +84,7 @@ namespace LabirinthLib
             get => percentofEmptySpace;
             set
             {
-                if (MinEmptySpace <= value && value <= 1f)
+                if (MinEmptySpace + 0.01f <= value && value <= 1f)
                 {
                     percentofEmptySpace = value;
                 }
@@ -421,8 +423,6 @@ namespace LabirinthLib
                         do
                         {
                             movingPoint = GetRandomLayoutPoint(1);
-                            bool f = firstWay.Contains(movingPoint);
-                            bool b = GetAvaiblePointsToMove(firstWay).Contains(movingPoint);
                         } 
                         while (firstWay.Contains(movingPoint) || GetAvaiblePointsToMove(firstWay).Contains(movingPoint));
                         workingList = secondWay;
