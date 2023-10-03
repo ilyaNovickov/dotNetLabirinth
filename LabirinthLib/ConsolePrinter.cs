@@ -14,18 +14,20 @@ namespace LabirinthLib
             {
                 for (int x = 0; x < labirinth.Width; x++)
                 {
-                    if (new Point(x, y) == labirinth.Exit && new Point(x, y) == labirinth.FirstIn)
+                    Point point = new Point(x, y);
+                    if (point == labirinth.FirstIn && point == labirinth.Exit)
                         Console.BackgroundColor = ConsoleColor.Yellow;
-                    else if (new Point(x, y) == labirinth.FirstIn || new Point(x, y) == labirinth.SecondIn)
+                    else if (point == labirinth.FirstIn || point == labirinth.SecondIn)
                         Console.BackgroundColor = ConsoleColor.Red;
-                    else if (new Point(x, y) == labirinth.Exit)
+                    else if (point == labirinth.Exit)
                         Console.BackgroundColor = ConsoleColor.Blue;
                     else
                         Console.BackgroundColor = ConsoleColor.Black;
-                    if (labirinth[x, y] == 1)
+
+                    if (labirinth[point] == 1)
                         Console.Write("█");
                     else
-                        Console.Write(" ");//(labirinth[x, y]);
+                        Console.Write(" ");
                 }
                 Console.Write("\n");
             }
@@ -43,20 +45,22 @@ namespace LabirinthLib
             {
                 for (int x = 0; x < labirinth.Width; x++)
                 {
-                    if (new Point(x, y) == labirinth.FirstIn || new Point(x, y) == labirinth.SecondIn)
-                        Console.BackgroundColor = ConsoleColor.Red;
-                    else if (new Point(x, y) == labirinth.Exit && new Point(x, y) == labirinth.FirstIn)
+                    Point point = new Point(x, y);
+                    if (point == labirinth.FirstIn && point == labirinth.Exit)
                         Console.BackgroundColor = ConsoleColor.Yellow;
-                    else if (new Point(x, y) == labirinth.Exit)
+                    else if (point == labirinth.FirstIn || point == labirinth.SecondIn)
+                        Console.BackgroundColor = ConsoleColor.Red;
+                    else if (point == labirinth.Exit)
                         Console.BackgroundColor = ConsoleColor.Blue;
                     else
                         Console.BackgroundColor = ConsoleColor.Black;
-                    if (labirinth[x, y] == 1)
+
+                    if (labirinth[point] == 1)
                         Console.Write("█");
                     else if (way.Contains(new Point(x, y)))
                         Console.Write("8");
                     else
-                        Console.Write(" ");//(labirinth[x, y]);
+                        Console.Write(" ");
                 }
                 Console.Write("\n");
             }

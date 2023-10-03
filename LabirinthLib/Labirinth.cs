@@ -53,15 +53,16 @@ namespace LabirinthLib
         {
             get
             {
-                if (point.X < 0 || point.Y < 0)
+                if (!IsExistInLab(point))
+                //if (point.X < 0 || point.Y < 0)
                     throw new Exception("Для обращения к лабиринту необходимо использовать " +
                         "только положительные координаты");
-                if (firstIn == exit && firstIn == point && !firstIn.IsZero() && !exit.IsZero())
-                    return 4;
-                else if ((firstIn == point && !firstIn.IsZero()) || (secIn == point && !secIn.IsZero()))
-                    return 2;
-                else if (exit == point)
-                    return 3;
+                //if (firstIn == exit && firstIn == point && !firstIn.IsZero() && !exit.IsZero())
+                //    return 4;
+                //else if ((firstIn == point && !firstIn.IsZero()) || (secIn == point && !secIn.IsZero()))
+                //    return 2;
+                //else if (exit == point)
+                //    return 3;
                 return firstWay.Contains(point) || secondWay.Contains(point) ? 0 : 1;
             }
         }
@@ -262,6 +263,11 @@ namespace LabirinthLib
                 }
             }
         }
+
+        public bool IsExistInLab(Point point)
+        {
+            return (0 <= point.X && 0 <= point.Y && point.X < Size.Width && point.Y < Size.Height);
+        }
         #endregion
         #region Generation
         public async void GenerateLabirinthAsync()
@@ -323,10 +329,7 @@ namespace LabirinthLib
 
                     return false;
                 }
-                bool IsExistInLab(Point point)
-                {
-                    return (0 <= point.X && 0 <= point.Y && point.X < Size.Width && point.Y < Size.Height);
-                }
+                
 
                 List<Direction> result = new List<Direction>();
 
