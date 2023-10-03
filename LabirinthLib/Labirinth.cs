@@ -175,6 +175,26 @@ namespace LabirinthLib
                 return Math.Min(Size.Width - 1, Size.Height - 1);
             }
         }
+
+        public List<Point> FirstWay
+        {
+            get
+            {
+                List<Point> newList = new List<Point>();
+                newList.AddRange(firstWay);
+                return newList;
+            }
+        }
+
+        public List<Point> SecondWay
+        {
+            get
+            {
+                List<Point> newList = new List<Point>();
+                newList.AddRange(secondWay);
+                return newList;
+            }
+        }
         #endregion
         #region Methods
         #region ExtraMethods
