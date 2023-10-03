@@ -343,8 +343,7 @@ namespace LabirinthLib
                     if (GetAvaibleDirections(point, checkingPoints).Count() != 0)
                         yield return point;
                 }
-            }
-            
+            }  
             IEnumerable<Point> GetWallsCells(IEnumerable<Point> emptySpace)
             {
                 for (int x = 1; x < Width - 1; x++)
@@ -369,7 +368,12 @@ namespace LabirinthLib
 
             workingList.AddUnique(movingPoint);
 
-            List<Point> visitedList = new List<Point>();
+            /*
+             * Для генерации лабиринта без ограничений 
+             * (но предёться избавиться от списков firstWay и secondWay)
+             * List<Point> visitedList = new List<Point>();
+             * while (visitedPoints.Count != countofEmptySpace)
+             */
 
             while (firstWay.Count + secondWay.Count != countofEmptySpace)//(visitedPoints.Count != countofEmptySpace)
             {
@@ -520,8 +524,10 @@ namespace LabirinthLib
                 return result;
             }
 
-            List<Point> way = new List<Point>();
-            way.Add(starstPoint);
+            List<Point> way = new List<Point>()
+            {
+                starstPoint
+            };
 
             Stack<Point> fork = new Stack<Point>();
 
