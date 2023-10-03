@@ -6,17 +6,28 @@ using System.Threading.Tasks;
 
 namespace LabirinthLib
 {
+    /// <summary>
+    /// Перечесление, обозначающие направление
+    /// </summary>
     public enum Direction : int//sbyte
     {
-        None = 0,
-        Up = -1,
-        Down = 1, 
-        Left = -2, 
-        Right = 2
+        None = 0,//Никуда
+        Up = -1,//Вверх
+        Down = 1, //Вниз
+        Left = -2, //Влево
+        Right = 2//Вправо
     }
 
+    /// <summary>
+    /// Статический класс для работы с структурой Point и перечеслением Direction
+    /// </summary>
     public static class DirectionExtandentClass
     {
+        /// <summary>
+        /// Перемещение точки на одно значение по определнному направлению
+        /// </summary>
+        /// <param name="point">Перемещаемая точк</param>
+        /// <param name="dirs">Напраления</param>
         public static void OffsetPoint(this ref Point point, params Direction[] dirs)
         {
             int dx = 0;
