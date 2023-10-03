@@ -54,15 +54,8 @@ namespace LabirinthLib
             get
             {
                 if (!IsExistInLab(point))
-                //if (point.X < 0 || point.Y < 0)
                     throw new Exception("Для обращения к лабиринту необходимо использовать " +
                         "только положительные координаты");
-                //if (firstIn == exit && firstIn == point && !firstIn.IsZero() && !exit.IsZero())
-                //    return 4;
-                //else if ((firstIn == point && !firstIn.IsZero()) || (secIn == point && !secIn.IsZero()))
-                //    return 2;
-                //else if (exit == point)
-                //    return 3;
                 return firstWay.Contains(point) || secondWay.Contains(point) ? 0 : 1;
             }
         }
