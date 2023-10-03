@@ -13,9 +13,6 @@ namespace LabirinthLib
         /*
          * 0 - empty
          * 1 - wall
-         * 2 - in
-         * 3 - exit
-         * 4 - in and exit
          */
         #region Vars
         Random random = new Random();
@@ -109,14 +106,11 @@ namespace LabirinthLib
 
         public Point FirstIn
         {
-            get => firstIn;
+            get => !firstIn.IsZero() ? firstIn : new Point(-1, -1);
             set
             {
-                IEnumerable<Point> avaiblePoints = GetEmptyCellsInLayout(1);
-                if (avaiblePoints.Contains(value))
-                {
+                if (firstWay.Contains(value))
                     firstIn = value;
-                }
                 else
                     return;
             }
@@ -124,14 +118,11 @@ namespace LabirinthLib
 
         public Point SecondIn
         {
-            get => secIn;
+            get => !secIn.IsZero() ? secIn : new Point(-1, -1);
             set
             {
-                IEnumerable<Point> avaiblePoints = GetEmptyCellsInLayout(1);
-                if (avaiblePoints.Contains(value))
-                {
+                if (secondWay.Contains(value))
                     secIn = value;
-                }
                 else
                     return;
             }
@@ -139,23 +130,22 @@ namespace LabirinthLib
 
         public Point Exit
         {
-            get => exit;
+            get => !exit.IsZero() ? exit : new Point(-1, -1);
             set
             {
-                IEnumerable<Point> avaiblePoints = GetEmptyCellsInLayout(1);
-                if (avaiblePoints.Contains(value))
+                if (firstWay.Contains(value))
                 {
-                    if (secondWay.Contains(value))
-                    {
-                        List<Point> extra = secondWay;
-                        secondWay = firstWay;
-                        firstWay = secondWay;
-
-                        Point extraPoint = secIn;
-                        secIn = firstIn;
-                        firstIn = extraPoint;
-                    }
                     firstIn = value;
+                }
+                else if (secondWay.Contains(value))
+                {
+                    List<Point> extra = secondWay;
+                    secondWay = firstWay;
+                    firstWay = secondWay;
+
+                    Point extraPoint = secIn;
+                    secIn = firstIn;
+                    firstIn = extraPoint;
                 }
                 else
                     return;
