@@ -45,6 +45,14 @@ namespace ConsoleLabirinthApp
                     lab.PrintWithWay(true);
                     Console.ReadLine();
                 }
+                else if (str == "show1")
+                {
+                    lab.PrintWithAllWay(1);
+                }
+                else if (str == "show2")
+                {
+                    lab.PrintWithAllWay(2);
+                }
             }
         }
     }
