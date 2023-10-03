@@ -7,44 +7,78 @@ using System.Threading.Tasks;
 
 namespace LabirinthLib
 {
+    /// <summary>
+    /// Структура координат в 2D пространстве
+    /// </summary>
     public struct Point
     {
         #region Vars
         private int x, y;
         #endregion
         #region Constr
+        /// <summary>
+        /// Инициализирует структруру согласно параметрам
+        /// </summary>
+        /// <param name="x">Координата X</param>
+        /// <param name="y">Координата Y</param>
         public Point(int x, int y)
         {
             this.x = x;
             this.y = y;
         }
-
+        /// <summary>
+        /// Инициализирует структруру согласно параметру
+        /// </summary>
+        /// <param name="coord">Координата X и Y</param>
         public Point(int coord) : this(coord, coord) { }
         #endregion
         #region Props
+        /// <summary>
+        /// Значение X
+        /// </summary>
         public int X { get { return x; } set {  x = value; } }
+        /// <summary>
+        /// Значение Y
+        /// </summary>
         public int Y { get { return y; } set { y = value; } }
+        /// <summary>
+        /// Нулевая точка
+        /// </summary>
         public static Point Empty => new Point(0, 0);
         #endregion
         #region Methods
+        /// <summary>
+        /// Смещение координаты на определённое значение
+        /// </summary>
+        /// <param name="dx">Смещение по оси X</param>
+        /// <param name="dy">Смещение по оси Y</param>
         public void Offset(int dx, int dy)
         {
             this.x += dx;
             this.y += dy;
         }
-
+        /// <summary>
+        /// Смещение координаты на определённое значение 
+        /// и возврат копии структуры
+        /// </summary>
+        /// <param name="dx">Смещение по оси X</param>
+        /// <param name="dy">Смещение по оси Y</param>
+        /// <returns>Копия структуры, смещённая на определённые значения</returns>
         public Point GetOffsetedPoint(int dx, int dy)
         {
             Point newPoint = this;
             newPoint.Offset(dx, dy);
             return newPoint;
         }
-
+        /// <summary>
+        /// Проверка координаты на равенство нулю
+        /// </summary>
+        /// <returns></returns>
         public bool IsZero()
         {
             return this == Point.Empty;
         }
-
+        //Переопределения методов базового класса object
         public override int GetHashCode()
         {
             return x.GetHashCode() ^ y.GetHashCode();
@@ -58,6 +92,7 @@ namespace LabirinthLib
             return false;
         }
         #region Operators
+        //Переопределения операторов проверки на равенство и мат операторы
         public static bool operator ==(Point point1, Point point2)
         {
             return (point1.X == point2.X && point1.Y == point2.Y);
