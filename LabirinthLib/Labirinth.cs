@@ -599,6 +599,36 @@ namespace LabirinthLib
         {
             List<Point> preborderPoints = GetEmptyCellsInLayout(1).ToList();
 
+            Point GetNearBorderPoint(Point checkingPoint)
+            {
+                if (!preborderPoints.Contains(checkingPoint) || checkingPoint.IsZero())
+                    return Point.Empty;
+                else
+                {
+                    Point[] borderPoints = new Point[2];
+                    int currentIndex = 0;
+                    foreach (Direction direction in new Direction[4] { Direction.Down, Direction.Left, Direction.Right, Direction.Up })
+                    {
+                        Point extraPoint = checkingPoint;
+                        extraPoint.OffsetPoint(direction);
+                        if (this.IsBorder(extraPoint))
+                        {
+                            borderPoints[currentIndex] = extraPoint;
+                            currentIndex++;
+                        }
+                    }
+
+                    if (currentIndex == 1)
+                        return borderPoints[0];
+                    else if (currentIndex == 2)
+                    {
+                        return GetRandomPointFromList(borderPoints);
+                    }
+                    else
+                        return Point.Empty;
+                }
+            }
+
             do
             {
                 Point exitPointOne = GetRandomPointFromList(preborderPoints);
@@ -625,6 +655,10 @@ namespace LabirinthLib
                 }
             }
             while (firstIn.IsZero() || (secIn.IsZero() && secondWay.Count != 0) || exit.IsZero());
+
+            firstIn = GetNearBorderPoint(firstIn);
+            secIn = GetNearBorderPoint(secIn);
+            exit = GetNearBorderPoint(exit);
         }
         #endregion
         #region GetWays
