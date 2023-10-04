@@ -53,6 +53,10 @@ namespace ConsoleLabirinthApp
                 {
                     lab.PrintWithAllWay(2);
                 }
+                else if (str == "bot")
+                {
+                    lab.PrintWithBotWay(1);
+                }
             }
         }
     }
