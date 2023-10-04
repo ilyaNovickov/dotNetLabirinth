@@ -75,7 +75,8 @@ namespace LabirinthLib
             {
                 if (!IsExistInLab(point))
                     throw new Exception("Координаты не существует в лабиринте");
-                return firstWay.Contains(point) || secondWay.Contains(point) ? 0 : 1;
+                return firstWay.Contains(point) || secondWay.Contains(point) || point == firstIn 
+                    || point == secIn || point == exit  ? 0 : 1;
             }
         }
         /// <summary>
@@ -657,7 +658,8 @@ namespace LabirinthLib
             while (firstIn.IsZero() || (secIn.IsZero() && secondWay.Count != 0) || exit.IsZero());
 
             firstIn = GetNearBorderPoint(firstIn);
-            secIn = GetNearBorderPoint(secIn);
+            if (secondWay.Count != 0)
+                secIn = GetNearBorderPoint(secIn);
             exit = GetNearBorderPoint(exit);
         }
         #endregion
@@ -682,7 +684,7 @@ namespace LabirinthLib
                 {
                     Point extraPoint = checkingPoint;
                     extraPoint.OffsetPoint(dir);
-                    if (IsBorder(extraPoint))
+                    if (IsBorder(extraPoint) && extraPoint != exit)
                         continue;
                     else if (!IsExistInLab(extraPoint))
                         continue;
