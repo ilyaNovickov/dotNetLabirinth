@@ -130,7 +130,7 @@ namespace LabirinthLib
                         Console.Write("█");
                     else if (way.Contains(new Point(x, y)))
                     {
-                        Console.Write((char)way.IndexOf(new Point(x, y)));
+                        Console.Write((char)way.IndexOf(new Point(x, y)) + 65);
                     }
                     else
                         Console.Write(" ");
