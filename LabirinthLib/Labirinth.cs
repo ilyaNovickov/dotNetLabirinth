@@ -302,7 +302,7 @@ namespace LabirinthLib
         /// </summary>
         /// <param name="list">Спикок точек</param>
         /// <returns>Случайная точка</returns>
-        private Point GetRandomPointFromList(IEnumerable<Point> list)
+        internal Point GetRandomPointFromList(IEnumerable<Point> list)
         {
             if (list.Count() == 0)
                 return Point.Empty;
@@ -313,7 +313,7 @@ namespace LabirinthLib
         /// </summary>
         /// <param name="avaibleDirs">Список доступных путей</param>
         /// <returns>Случайный путь</returns>
-        private Direction GetRandomDirectionFromList(IEnumerable<Direction> avaibleDirs)
+        internal Direction GetRandomDirectionFromList(IEnumerable<Direction> avaibleDirs)
         {
             if (avaibleDirs.Count() == 0)
                 return Direction.None;
@@ -324,7 +324,7 @@ namespace LabirinthLib
         /// </summary>
         /// <param name="point">Координаты ячейки</param>
         /// <returns>Возвращает true если ячейка - граница лабиринта, иначе false</returns>
-        private bool IsBorder(Point point)
+        internal bool IsBorder(Point point)
         {
             return (point.X == 0 || point.Y == 0 || point.X == Size.Width - 1 || point.Y == Size.Height - 1);
         }
@@ -355,7 +355,7 @@ namespace LabirinthLib
         /// </summary>
         /// <param name="point">Проверяемые координаты</param>
         /// <returns>Возвращает true если ячейка существует в лабиринте, иначе false</returns>
-        public bool IsExistInLab(Point point)
+        internal bool IsExistInLab(Point point)
         {
             return (0 <= point.X && 0 <= point.Y && point.X < Size.Width && point.Y < Size.Height);
         }
