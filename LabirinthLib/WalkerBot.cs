@@ -8,7 +8,33 @@ namespace LabirinthLib
 {
     public static class WalkerBot
     {
-        public static List<Point> GetWayFromLaborinth(Labirinth labirinth, int numofIn)
+        public static bool HasExit(Labirinth labirinth, IEnumerable<Point> wayPoints)
+        {
+            return (wayPoints.Contains(labirinth.FirstIn) || wayPoints.Contains(labirinth.SecondIn)) 
+                && wayPoints.Contains(labirinth.Exit);
+        }
+
+        public static Queue<Point> GetWayFromLaborinth(Labirinth labirinth)
+        {
+            return GetWayFromLaborinth(labirinth, 1);
+        }
+
+        public static Queue<Point> GetWayFromLaborinth(Labirinth labirinth, int numofIn)
+        {
+            return new Queue<Point>(WalkerBot.CreateWay(labirinth, numofIn, false));
+        }
+
+        public static List<Point> GetAllWayFromLaborinth(Labirinth labirinth)
+        {
+            return WalkerBot.GetAllWayFromLaborinth(labirinth, 1);
+        }
+
+        public static List<Point> GetAllWayFromLaborinth(Labirinth labirinth, int numofIn)
+        {
+            return WalkerBot.CreateWay(labirinth, numofIn, true).ToList();
+        }
+
+        private static IEnumerable<Point> CreateWay(Labirinth labirinth, int numofIn, bool wayWithDeadEnds = false)
         {
             Point starstPoint;
             switch (numofIn)
@@ -23,16 +49,8 @@ namespace LabirinthLib
                     return new List<Point>(); ;
             }
 
-            bool IsBorder(Point point)
-            {
-                return (point.X == 0 || point.Y == 0 || point.X == labirinth.Width - 1 || point.Y == labirinth.Height - 1);
-            }
             IEnumerable<Direction> GetAvaibleDirectionsToMove(Point checkingPoint, IEnumerable<Point> exceptionPoints = null)
             {
-                bool IsExistInLab(Point point)
-                {
-                    return (0 <= point.X && 0 <= point.Y && point.X < labirinth.Width && point.Y < labirinth.Height);
-                }
 
                 List<Direction> result = new List<Direction>();
 
@@ -40,25 +58,16 @@ namespace LabirinthLib
                 {
                     Point extraPoint = checkingPoint;
                     extraPoint.OffsetPoint(dir);
-                    if (IsBorder(extraPoint) && extraPoint != labirinth.Exit)
-                        continue;
-                    else if (!IsExistInLab(extraPoint))
+                    if (!labirinth.IsExistInLab(extraPoint))
                         continue;
                     else if (exceptionPoints != null && exceptionPoints.Contains(extraPoint))
                         continue;
-                    else if (labirinth[extraPoint] == 1)
+                    else if (labirinth[extraPoint] == 1 && extraPoint != labirinth.Exit)
                         continue;
                     else
                         result.Add(dir);
                 }
                 return result;
-            }
-            Direction GetRandomDirectionFromList(IEnumerable<Direction> avaibleDirs)
-            {
-                Random random = new Random();
-                if (avaibleDirs.Count() == 0)
-                    return Direction.None;
-                return avaibleDirs.ElementAt(random.Next(0, avaibleDirs.Count<Direction>()));
             }
 
             //Список путя выхода из лабиринта
@@ -73,12 +82,8 @@ namespace LabirinthLib
             //Передвигаемая точка
             Point walker = starstPoint;
 
-            while (true)
+            while (walker != labirinth.Exit)
             {
-                if (walker == labirinth.Exit)
-                {
-                    break;
-                }
 
                 IEnumerable<Direction> avaibleDirs = GetAvaibleDirectionsToMove(walker, visitedPoints);
 
@@ -97,7 +102,8 @@ namespace LabirinthLib
                     {
                         walker = fork.Pop();
                         visitedPoints.Add(way[way.IndexOf(walker) + 1]);
-                        //way.RemoveSinceUnique(way.IndexOf(walker) + 1);
+                        if (!wayWithDeadEnds)
+                            way.RemoveSinceUnique(way.IndexOf(walker) + 1);
                         continue;
                     }
                 }
@@ -105,7 +111,7 @@ namespace LabirinthLib
                 {
                     fork.Push(walker);
                     visitedPoints.Add(walker);
-                    walker.OffsetPoint(GetRandomDirectionFromList(avaibleDirs));
+                    walker.OffsetPoint(labirinth.GetRandomDirectionFromList(avaibleDirs));
                     way.Add(walker);
                 }
             }
