@@ -664,6 +664,7 @@ namespace LabirinthLib
         }
         #endregion
         #region GetWays
+        /*
         /// <summary>
         /// Получение путя из точки начала в точку выхода (exit)
         /// </summary>
@@ -796,6 +797,7 @@ namespace LabirinthLib
             //Иначе вернуть пустой список
             return new List<Point>();
         }
+        */
         #endregion
         #endregion
     }
