@@ -106,7 +106,7 @@ namespace LabirinthLib
 
         public static void PrintWithBotWay(this Labirinth labirinth, int numofWay)
         {
-            List<Point> way = WalkerBot.GetWayFromLaborinth(labirinth, numofWay);
+            List<Point> way = WalkerBot.GetWayFromLaborinth(labirinth, numofWay).ToList();
 
             if (way.Count == 0)
                 return;
@@ -130,7 +130,7 @@ namespace LabirinthLib
                         Console.Write("█");
                     else if (way.Contains(new Point(x, y)))
                     {
-                        Console.Write((char)way.IndexOf(new Point(x, y)) + 65);
+                        Console.Write((char)(way.IndexOf(point) + 65));
                     }
                     else
                         Console.Write(" ");
