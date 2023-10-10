@@ -75,8 +75,8 @@ namespace LabirinthLib
             {
                 if (!IsExistInLab(point))
                     throw new Exception("Координаты не существует в лабиринте");
-                return firstWay.Contains(point) || secondWay.Contains(point) || point == FirstIn 
-                    || point == SecondIn || point == Exit  ? 0 : 1;
+                return (firstWay.Contains(point) || secondWay.Contains(point)) && (point == FirstIn 
+                    || point == SecondIn || point == Exit)  ? 0 : 1;
             }
         }
         /// <summary>
@@ -208,9 +208,9 @@ namespace LabirinthLib
             get
             {
                 int count = 0;
-                for (int x = 1; x < Width; x++)
+                for (int x = 1; x < Width - 1; x++)
                 {
-                    for (int y = 1; y < Height; y++)
+                    for (int y = 1; y < Height - 1; y++)
                     {
                         count += this[x, y] == 1 ? 0 : 1;
                     }
