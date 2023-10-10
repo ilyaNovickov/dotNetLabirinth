@@ -90,7 +90,7 @@ namespace LabirinthLib
                 return result;
             }
 
-            Point walker;//Точка, которая будет перемещаться
+            Point walker = new Point();//Точка, которая будет перемещаться
             //Определения начальной точки
             switch (numofIn)
             {
@@ -99,10 +99,11 @@ namespace LabirinthLib
                     break;
                 case 2:
                     walker = labirinth.SecondIn;
-                    break;
-                default:
-                    return new List<Point>(); ;
+                    break;;
             }
+            //Если нет входа (т. е. точка входа равна (0, 0) )
+            if (walker.IsZero())
+                return new List<Point>();
 
             List<Point> way = new List<Point>()
             {
