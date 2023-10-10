@@ -36,18 +36,24 @@ namespace LabirinthLib
 
         private static IEnumerable<Point> CreateWay(Labirinth labirinth, int numofIn, bool wayWithDeadEnds = false)
         {
-            Point starstPoint;
+            Point walker;
+
             switch (numofIn)
             {
                 case 1:
-                    starstPoint = labirinth.FirstIn;
+                    walker = labirinth.FirstIn;
                     break;
                 case 2:
-                    starstPoint = labirinth.SecondIn;
+                    walker = labirinth.SecondIn;
                     break;
                 default:
                     return new List<Point>(); ;
             }
+
+            List<Point> way = new List<Point>()
+            {
+                walker
+            };
 
             IEnumerable<Direction> GetAvaibleDirectionsToMove(Point checkingPoint, IEnumerable<Point> exceptionPoints = null)
             {
@@ -70,17 +76,10 @@ namespace LabirinthLib
                 return result;
             }
 
-            //Список путя выхода из лабиринта
-            List<Point> way = new List<Point>()
-            {
-                starstPoint
-            };
             //Стэк развилок
             Stack<Point> fork = new Stack<Point>();
             //Список посещённых точек
-            List<Point> visitedPoints = new List<Point>();
-            //Передвигаемая точка
-            Point walker = starstPoint;
+            List<Point> visitedPoints = new List<Point>();             
 
             while (walker != labirinth.Exit)
             {
