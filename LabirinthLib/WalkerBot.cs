@@ -14,7 +14,7 @@ namespace LabirinthLib
         /// <param name="labirinth">Лабиринт</param>
         /// <param name="wayPoints">Проверяемый путь</param>
         /// <returns>Возвращает true, если путь имеет выход, иначе false</returns>
-        public static bool HasExit(Labirinth labirinth, IEnumerable<Point> wayPoints)
+        public static bool HasExit(this Labirinth labirinth, IEnumerable<Point> wayPoints)
         {
             return (wayPoints.Contains(labirinth.FirstIn) || wayPoints.Contains(labirinth.SecondIn)) 
                 && wayPoints.Contains(labirinth.Exit);
@@ -24,7 +24,7 @@ namespace LabirinthLib
         /// </summary>
         /// <param name="labirinth">Лабиринт</param>
         /// <returns>Очередь точек, ведущий из входа на выход</returns>
-        public static Queue<Point> GetWayFromLaborinth(Labirinth labirinth)
+        public static Queue<Point> GetWayFromLaborinth(this Labirinth labirinth)
         {
             return GetWayFromLaborinth(labirinth, 1);
         }
@@ -34,7 +34,7 @@ namespace LabirinthLib
         /// <param name="labirinth">Лабиринт</param>
         /// <param name="numofIn">Номер входа в лабиринт</param>
         /// <returns>Очередь точек, ведущий из входа на выход</returns>
-        public static Queue<Point> GetWayFromLaborinth(Labirinth labirinth, int numofIn)
+        public static Queue<Point> GetWayFromLaborinth(this Labirinth labirinth, int numofIn)
         {
             return new Queue<Point>(WalkerBot.CreateWay(labirinth, numofIn, false));
         }
@@ -43,7 +43,7 @@ namespace LabirinthLib
         /// </summary>
         /// <param name="labirinth">Лабиринт</param>
         /// <returns>Список точек, пройденный ботом</returns>
-        public static List<Point> GetAllWayFromLaborinth(Labirinth labirinth)
+        public static List<Point> GetAllWayFromLaborinth(this Labirinth labirinth)
         {
             return WalkerBot.GetAllWayFromLaborinth(labirinth, 1);
         }
@@ -53,7 +53,7 @@ namespace LabirinthLib
         /// <param name="labirinth">Лабиринт</param>
         /// <param name="numofIn">Номер входа в лабиринт</param>
         /// <returns>Список точек, пройденный ботом</returns>
-        public static List<Point> GetAllWayFromLaborinth(Labirinth labirinth, int numofIn)
+        public static List<Point> GetAllWayFromLaborinth(this Labirinth labirinth, int numofIn)
         {
             return WalkerBot.CreateWay(labirinth, numofIn, true).ToList();
         }
