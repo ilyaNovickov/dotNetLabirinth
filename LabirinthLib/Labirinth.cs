@@ -255,6 +255,48 @@ namespace LabirinthLib
         #endregion
         #region Methods
         #region ExtraMethods
+        #region Internal Methods
+        /// <summary>
+        /// Получение рандомной точки в списке точек
+        /// </summary>
+        /// <param name="list">Спикок точек</param>
+        /// <returns>Случайная точка</returns>
+        internal Point GetRandomPointFromList(IEnumerable<Point> list)
+        {
+            if (list.Count() == 0)
+                return Point.Empty;
+            return list.ElementAt(random.Next(0, list.Count()));
+        }
+        /// <summary>
+        /// Получение рандомноого направления в списке направлений
+        /// </summary>
+        /// <param name="avaibleDirs">Список доступных путей</param>
+        /// <returns>Случайный путь</returns>
+        internal Direction GetRandomDirectionFromList(IEnumerable<Direction> avaibleDirs)
+        {
+            if (avaibleDirs.Count() == 0)
+                return Direction.None;
+            return avaibleDirs.ElementAt(random.Next(0, avaibleDirs.Count<Direction>()));
+        }
+        /// <summary>
+        /// Проверка на то, является ли ячейка - границей лабиринта
+        /// </summary>
+        /// <param name="point">Координаты ячейки</param>
+        /// <returns>Возвращает true если ячейка - граница лабиринта, иначе false</returns>
+        internal bool IsBorder(Point point)
+        {
+            return (point.X == 0 || point.Y == 0 || point.X == Size.Width - 1 || point.Y == Size.Height - 1);
+        }
+        /// <summary>
+        /// Существует ли точка в лабиринте
+        /// </summary>
+        /// <param name="point">Проверяемые координаты</param>
+        /// <returns>Возвращает true если ячейка существует в лабиринте, иначе false</returns>
+        internal bool IsExistInLab(Point point)
+        {
+            return (0 <= point.X && 0 <= point.Y && point.X < Size.Width && point.Y < Size.Height);
+        }
+        #endregion
         /// <summary>
         /// Заполнения лабиринта пустым пространством
         /// </summary>
@@ -297,37 +339,7 @@ namespace LabirinthLib
 
             return new Point(x, y);
         }
-        /// <summary>
-        /// Получение рандомной точки в списке точек
-        /// </summary>
-        /// <param name="list">Спикок точек</param>
-        /// <returns>Случайная точка</returns>
-        internal Point GetRandomPointFromList(IEnumerable<Point> list)
-        {
-            if (list.Count() == 0)
-                return Point.Empty;
-            return list.ElementAt(random.Next(0, list.Count()));
-        }
-        /// <summary>
-        /// Получение рандомноого направления в списке направлений
-        /// </summary>
-        /// <param name="avaibleDirs">Список доступных путей</param>
-        /// <returns>Случайный путь</returns>
-        internal Direction GetRandomDirectionFromList(IEnumerable<Direction> avaibleDirs)
-        {
-            if (avaibleDirs.Count() == 0)
-                return Direction.None;
-            return avaibleDirs.ElementAt(random.Next(0, avaibleDirs.Count<Direction>()));
-        }
-        /// <summary>
-        /// Проверка на то, является ли ячейка - границей лабиринта
-        /// </summary>
-        /// <param name="point">Координаты ячейки</param>
-        /// <returns>Возвращает true если ячейка - граница лабиринта, иначе false</returns>
-        internal bool IsBorder(Point point)
-        {
-            return (point.X == 0 || point.Y == 0 || point.X == Size.Width - 1 || point.Y == Size.Height - 1);
-        }
+        
         /// <summary>
         /// Получение пустых ячеек лабиринта в определённом слое
         /// </summary>
@@ -350,15 +362,7 @@ namespace LabirinthLib
                 }
             }
         }
-        /// <summary>
-        /// Существует ли точка в лабиринте
-        /// </summary>
-        /// <param name="point">Проверяемые координаты</param>
-        /// <returns>Возвращает true если ячейка существует в лабиринте, иначе false</returns>
-        internal bool IsExistInLab(Point point)
-        {
-            return (0 <= point.X && 0 <= point.Y && point.X < Size.Width && point.Y < Size.Height);
-        }
+        
         #endregion
         #region Generation
         /// <summary>
