@@ -5,7 +5,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LabirinthLib
+namespace LabirinthLib.Structs
 {
     /// <summary>
     /// Структура координат в 2D пространстве

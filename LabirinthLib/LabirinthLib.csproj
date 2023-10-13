@@ -45,8 +45,8 @@
     <Compile Include="ListUnique.cs" />
     <Compile Include="ConsolePrinter.cs" />
     <Compile Include="Direction.cs" />
-    <Compile Include="Size.cs" />
-    <Compile Include="Point.cs" />
+    <Compile Include="Structs\Size.cs" />
+    <Compile Include="Structs\Point.cs" />
     <Compile Include="Labirinth.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

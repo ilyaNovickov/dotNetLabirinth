@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using LabirinthLib;
+using LabirinthLib.Structs;
 
 namespace ConsoleLabirinthApp
 {
