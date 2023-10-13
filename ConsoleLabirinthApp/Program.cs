@@ -35,27 +35,15 @@ namespace ConsoleLabirinthApp
                         lab.Size = new Size(size, size);
                     }
                 }
-                else if (str == "way")
-                {
-                    lab.PrintWithWay();
-                    Console.ReadLine();
-                }
-                else if (str == "secway")
-                {
-                    lab.PrintWithWay(true);
-                    Console.ReadLine();
-                }
-                else if (str == "show1")
-                {
-                    lab.PrintWithAllWay(1);
-                }
-                else if (str == "show2")
-                {
-                    lab.PrintWithAllWay(2);
-                }
                 else if (str == "bot")
                 {
-                    lab.PrintWithBotWay(1);
+                    lab.PrintWithBotWay();
+                    Console.ReadLine();
+                }
+                else if (str == "bot2")
+                {
+                    lab.PrintWithBotWay(2);
+                    Console.ReadLine();
                 }
             }
         }
