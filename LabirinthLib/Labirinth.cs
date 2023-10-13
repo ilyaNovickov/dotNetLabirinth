@@ -75,7 +75,7 @@ namespace LabirinthLib
             {
                 if (!IsExistInLab(point))
                     throw new Exception("Координаты не существует в лабиринте");
-                return (firstWay.Contains(point) || secondWay.Contains(point)) && (point == FirstIn 
+                return (firstWay.Contains(point) || secondWay.Contains(point)) || (point == FirstIn 
                     || point == SecondIn || point == Exit)  ? 0 : 1;
             }
         }
