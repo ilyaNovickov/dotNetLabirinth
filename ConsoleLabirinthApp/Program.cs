@@ -45,6 +45,16 @@ namespace ConsoleLabirinthApp
                     lab.PrintWithBotWay(2);
                     Console.ReadLine();
                 }
+                else if (str == "botall")
+                {
+                    lab.PrintWithBotAllWay();
+                    Console.ReadLine();
+                }
+                else if (str == "botall2")
+                {
+                    lab.PrintWithBotAllWay(2);
+                    Console.ReadLine();
+                }
             }
         }
     }
