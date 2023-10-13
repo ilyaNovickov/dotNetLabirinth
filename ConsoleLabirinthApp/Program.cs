@@ -17,7 +17,8 @@ namespace ConsoleLabirinthApp
                                 "sizeN - изменить размер лабиринта на квадратный со сторонами N\n" + 
                                 "1,0 = % пустого процента (любоу дробное число)\n" +
                                 "bot|bot2 - вывод пути выхода из лабиринта БЕЗ тупиков\n" +
-                                "botall|botall2 - вывод пути выхода из лабиринта С тупиками\n");
+                                "botall|botall2 - вывод пути выхода из лабиринта С тупиками\n" +
+                                "-------------");
             Labirinth lab = new Labirinth(10, 10);
             lab.EmptySpace = 0.4f;
             lab.GenerateLabirinth();
