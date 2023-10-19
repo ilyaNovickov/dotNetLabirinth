@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LabirinthLib
+namespace LabirinthLib.Printers
 {
     public static class StringPrinter
     {
