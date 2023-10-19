@@ -32,7 +32,7 @@ namespace LabirinthLib
         #endregion
         #region Constr
         /// <summary>
-        /// Инициализирует лабиринт
+        /// Инициализирует заполненный лабиринт
         /// </summary>
         public Labirinth() : this(new Size(10, 10))
         {
@@ -46,7 +46,7 @@ namespace LabirinthLib
 
         }
         /// <summary>
-        /// Инициализирует лабиринт
+        /// Инициализирует заполненный лабиринт
         /// </summary>
         /// <param name="width">Ширина лабиринта</param>
         /// <param name="height">Высота лабиринта</param>
@@ -55,7 +55,7 @@ namespace LabirinthLib
 
         }
         /// <summary>
-        /// Инициализирует лабиринт
+        /// Инициализирует заполненный лабиринт
         /// </summary>
         /// <param name="size">Размер лабиринта</param>
         public Labirinth(Size size)
