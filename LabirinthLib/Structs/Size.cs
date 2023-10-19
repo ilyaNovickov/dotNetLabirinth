@@ -86,6 +86,17 @@ namespace LabirinthLib.Structs
             }
             return false;
         }
+        #region Convertion operation
+        public static implicit operator System.Drawing.Size(Size size)
+        {
+            return new System.Drawing.Size(size.Width, size.Height);
+        }
+
+        public static explicit operator Size(System.Drawing.Size size)
+        {
+            return new Size(size.Width, size.Height);
+        }
+        #endregion
         #region Operators
         //Переопределения операторов проверки на равенства и мат операторы
         public static bool operator ==(Size size1, Size size2)
