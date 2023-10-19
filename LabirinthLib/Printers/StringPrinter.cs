@@ -18,9 +18,9 @@ namespace LabirinthLib.Printers
             const string exit = "4";
             const string exitAndEnter = "5";
 
-            for (int x = 0; x < lab.Width; x++)
+            for (int y = 0; y < lab.Height; y++)
             {
-                for (int y = 0; y < lab.Height; y++)
+                for (int x = 0; x < lab.Width; x++)
                 {
                     LabirinthLib.Structs.Point point = new LabirinthLib.Structs.Point(x, y);
                     if ((point == lab.FirstIn || point == lab.SecondIn) && point == lab.Exit)
