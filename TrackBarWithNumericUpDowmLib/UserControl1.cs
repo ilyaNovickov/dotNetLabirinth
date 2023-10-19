@@ -16,5 +16,28 @@ namespace TrackBarWithNumericUpDowmLib
         {
             InitializeComponent();
         }
+
+        private void trackBar1_ValueChanged(object sender, EventArgs e)
+        {
+            if (sender is TrackBar trackBar)
+            {
+                this.numericUpDown1.Value = this.trackBar1.Value;
+            }
+            else if (sender is NumericUpDown numeric)
+            {
+                this.trackBar1.Value = ((int)this.numericUpDown1.Value);
+            }
+            numericUpDown1.Scroll += numericUpDown1_Scroll;
+        }
+
+        private void trackBar1_Scroll(object sender, EventArgs e)
+        {
+
+        }
+
+        private void numericUpDown1_Scroll(object sender, ScrollEventArgs e)
+        {
+
+        }
     }
 }

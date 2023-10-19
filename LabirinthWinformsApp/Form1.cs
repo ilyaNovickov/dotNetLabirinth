@@ -34,9 +34,9 @@ namespace LabirinthWinformsApp
             matrix.Scale(10f, 10f);
             g.Transform = matrix;
             lab.DrawLabirinth(g);
-            pictureBox1.Image = bitmap;
+            labirinthPictureBox.Image = bitmap;
 
-            label1.Text = lab.GetStringLabirinth();
+            //label1.Text = lab.GetStringLabirinth();
         }
     }
 }
