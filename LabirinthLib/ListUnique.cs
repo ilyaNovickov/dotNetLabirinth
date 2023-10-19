@@ -3,8 +3,18 @@ using System.Collections.Generic;
 
 namespace LabirinthLib
 {
+    /// <summary>
+    /// Статический класс для методов расширения для обобщённых списков
+    /// </summary>
     public static class ListUnique
     {
+        /// <summary>
+        /// Добавление уникального значения в список
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="list">Рабочий список</param>
+        /// <param name="value">Добавляемое значение</param>
+        /// <returns>Возвращает true, если значение было успешно добавлено в список, иначе false</returns>
         public static bool AddUnique<T>(this List<T> list, T value)
         {
             if (list.Contains(value))
@@ -12,7 +22,13 @@ namespace LabirinthLib
             list.Add(value);
             return true;
         }
-
+        /// <summary>
+        /// Объеденение двух списков в один с уникальными значенями
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="originList">Список №1</param>
+        /// <param name="list">Список №2</param>
+        /// <returns>Список с уникальными значениями</returns>
         public static List<T> UniteUnique<T>(this List<T> originList, List<T> list)
         {
             List<T> result = new List<T>();
@@ -26,18 +42,37 @@ namespace LabirinthLib
             }
             return result;
         }
-
+        /// <summary>
+        /// Удаление элементов, начиная с индекса и до конца списка
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="list">Список</param>
+        /// <param name="index">Индекс, с которого начинается удаление</param>
         public static void RemoveSinceUnique<T>(this List<T> list, int index)
         {
             int countToDelete = list.Count - index;
             list.RemoveRange(index, countToDelete);
         }
-
+        /// <summary>
+        /// Удаление n-ого кол-во элементов, начиная с индекса
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="list">Список</param>
+        /// <param name="index">Индекс, с которого начинается удаление</param>
+        /// <param name="count">Кол-во элементов на удаление</param>
         public static void RemoveSinceUnique<T>(this List<T> list, int index, int count)
         {
             list.RemoveRange(index, count);
         }
 
+        /// <summary>
+        /// Вырезать из списка определённый диапазон
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="list">Обрабатываемый список</param>
+        /// <param name="startIndex">Индекс начала диапазона</param>
+        /// <param name="endIndex">Индекс конца диапазона. Если он равень -1 ,то до конца списка</param>
+        /// <returns>Выходной список</returns>
         public static List<T> CutList<T>(this List<T> list, int startIndex, int endIndex = -1)
         {
             List<T> result = new List<T>();
@@ -49,7 +84,14 @@ namespace LabirinthLib
             list.RemoveSinceUnique(startIndex, endIndex == -1 ? list.Count - startIndex : list.Count - endIndex);
             return result;
         }
-
+        /// <summary>
+        /// Скопировать из списка определённый диапазон
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="list">Обрабатываемый список</param>
+        /// <param name="startIndex">Индекс начала диапазона</param>
+        /// <param name="endIndex">Индекс конца диапазона. Если он равень -1 ,то до конца списка</param>
+        /// <returns>Выходной список</returns>
         public static List<T> CopyList<T>(this List<T> list, int startIndex, int endIndex = -1)
         {
             List<T> result = new List<T>();
@@ -60,7 +102,13 @@ namespace LabirinthLib
             }
             return result;
         }
-
+        /// <summary>
+        /// Получение самого короткого списка
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="first">Список №1</param>
+        /// <param name="second">Список №2</param>
+        /// <returns>Ссылка на самый которкий список</returns>
         public static List<T> GetShortestList<T>(this List<T> first, List<T> second)
         {
             int minSize = Math.Min(first.Count, second.Count);

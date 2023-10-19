@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using LabirinthLib;
+using LabirinthLib.Structs;
 
 namespace ConsoleLabirinthApp
 {
@@ -11,6 +12,13 @@ namespace ConsoleLabirinthApp
     {
         static void Main(string[] args)
         {
+            Console.WriteLine("---Команды---\n" + 
+                                "exit - выход из программы\n" +
+                                "sizeN - изменить размер лабиринта на квадратный со сторонами N\n" + 
+                                "1,0 = % пустого процента (любоу дробное число)\n" +
+                                "bot|bot2 - вывод пути выхода из лабиринта БЕЗ тупиков\n" +
+                                "botall|botall2 - вывод пути выхода из лабиринта С тупиками\n" +
+                                "-------------");
             Labirinth lab = new Labirinth(10, 10);
             lab.EmptySpace = 0.4f;
             lab.GenerateLabirinth();
@@ -35,14 +43,24 @@ namespace ConsoleLabirinthApp
                         lab.Size = new Size(size, size);
                     }
                 }
-                else if (str == "way")
+                else if (str == "bot")
                 {
-                    lab.PrintWithWay();
+                    lab.PrintWithBotWay();
                     Console.ReadLine();
                 }
-                else if (str == "secway")
+                else if (str == "bot2")
                 {
-                    lab.PrintWithWay(true);
+                    lab.PrintWithBotWay(2);
+                    Console.ReadLine();
+                }
+                else if (str == "botall")
+                {
+                    lab.PrintWithBotAllWay();
+                    Console.ReadLine();
+                }
+                else if (str == "botall2")
+                {
+                    lab.PrintWithBotAllWay(2);
                     Console.ReadLine();
                 }
             }

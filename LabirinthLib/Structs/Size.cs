@@ -6,14 +6,23 @@ using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LabirinthLib
+namespace LabirinthLib.Structs
 {
+    /// <summary>
+    /// Структура размера
+    /// </summary>
     public struct Size
     {
         #region Vars
         private int width, height;
         #endregion
         #region Constr
+        /// <summary>
+        /// Инициализирует структуру размера согласно параметрам
+        /// </summary>
+        /// <param name="width">Ширина</param>
+        /// <param name="height">Высота</param>
+        /// <exception cref="Exception"></exception>
         public Size(int width, int height)
         {
             if (width < 0 || height < 0)
@@ -21,9 +30,16 @@ namespace LabirinthLib
             this.width = width;
             this.height = height;
         }
+        /// <summary>
+        /// Инициализирует структуру размера согласно параметру
+        /// </summary>
+        /// <param name="size">Значение ширины и высоты</param>
         public Size(int size) : this(size, size) { }
         #endregion
         #region Props
+        /// <summary>
+        /// Ширина размера
+        /// </summary>
         public int Width
         {
             get => width;
@@ -34,6 +50,9 @@ namespace LabirinthLib
                 width = value;
             }
         }
+        /// <summary>
+        /// Высота размера
+        /// </summary>
         public int Height
         {
             get => height;
@@ -44,10 +63,17 @@ namespace LabirinthLib
                 height = value;
             }
         }
-
+        /// <summary>
+        /// Площадь размера
+        /// </summary>
         public int Square => width * height;
+        /// <summary>
+        /// Нулевой размер
+        /// </summary>
+        public static Size Empty => new Size(0, 0);
         #endregion
         #region Methods
+        //Переопределения методов базового класса object (просто так)
         public override int GetHashCode()
         {
             return width.GetHashCode() ^ height.GetHashCode();
@@ -61,6 +87,7 @@ namespace LabirinthLib
             return false;
         }
         #region Operators
+        //Переопределения операторов проверки на равенства и мат операторы
         public static bool operator ==(Size size1, Size size2)
         {
             return (size1.Width == size2.Width && size2.Height == size1.Height);
