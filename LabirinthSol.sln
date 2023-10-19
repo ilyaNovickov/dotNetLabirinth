@@ -9,8 +9,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LabirinthLib", "LabirinthLi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LabirinthWinformsApp", "LabirinthWinformsApp\LabirinthWinformsApp.csproj", "{7740C066-0633-4949-AE26-37B3BBB01D38}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrackBarWithNumericUpDowmLib", "TrackBarWithNumericUpDowmLib\TrackBarWithNumericUpDowmLib.csproj", "{07D919EC-3055-4428-87F9-4E3E068DA2C5}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,10 +27,6 @@ Global
 		{7740C066-0633-4949-AE26-37B3BBB01D38}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7740C066-0633-4949-AE26-37B3BBB01D38}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7740C066-0633-4949-AE26-37B3BBB01D38}.Release|Any CPU.Build.0 = Release|Any CPU
-		{07D919EC-3055-4428-87F9-4E3E068DA2C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{07D919EC-3055-4428-87F9-4E3E068DA2C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{07D919EC-3055-4428-87F9-4E3E068DA2C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{07D919EC-3055-4428-87F9-4E3E068DA2C5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

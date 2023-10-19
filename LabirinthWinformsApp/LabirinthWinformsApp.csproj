@@ -85,10 +85,6 @@
       <Project>{816fb27a-ff77-4156-b176-9844aa6633b1}</Project>
       <Name>LabirinthLib</Name>
     </ProjectReference>
-    <ProjectReference Include="..\TrackBarWithNumericUpDowmLib\TrackBarWithNumericUpDowmLib.csproj">
-      <Project>{07d919ec-3055-4428-87f9-4e3e068da2c5}</Project>
-      <Name>TrackBarWithNumericUpDowmLib</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
