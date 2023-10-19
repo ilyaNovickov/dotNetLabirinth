@@ -17,6 +17,7 @@ namespace LabirinthWinformsApp
 {
     public partial class Form1 : Form
     {
+        private float zoom = 1f;
         Labirinth lab = new Labirinth(10); 
 
         public Form1()
@@ -33,12 +34,12 @@ namespace LabirinthWinformsApp
         private void button1_Click(object sender, EventArgs e)
         {
             lab.GenerateLabirinth();
-            Bitmap bitmap = new Bitmap(lab.Width * 10, lab.Height * 10);
+            Bitmap bitmap = new Bitmap((int)(lab.Width * zoom), (int)(lab.Height * zoom));
             Graphics g = Graphics.FromImage(bitmap);
             g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.None;
             g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
             Matrix matrix = new Matrix();
-            matrix.Scale(10f, 10f);
+            matrix.Scale(zoom, zoom);
             g.Transform = matrix;
             lab.DrawLabirinth(g);
             labirinthPictureBox.Image = bitmap;
@@ -55,6 +56,9 @@ namespace LabirinthWinformsApp
         {
             if (this.zoomTrackBar.Value != ((int)this.zoomNumericUpDown.Value))
                 this.zoomTrackBar.Value = ((int)this.zoomNumericUpDown.Value);
+
+            zoom = zoomTrackBar.Value;
+
         }
     }
 }
