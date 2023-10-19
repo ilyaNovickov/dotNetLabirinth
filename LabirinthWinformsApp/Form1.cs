@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.Drawing.Drawing2D;
 using LabirinthLib;
 using LabirinthLib.Structs;
+using LabirinthLib.Printers;
 
 namespace LabirinthWinformsApp
 {
@@ -34,6 +35,8 @@ namespace LabirinthWinformsApp
             g.Transform = matrix;
             lab.DrawLabirinth(g);
             pictureBox1.Image = bitmap;
+
+            label1.Text = lab.GetStringLabirinth();
         }
     }
 }
