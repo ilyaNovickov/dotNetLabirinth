@@ -20,24 +20,21 @@ namespace LabirinthWinformsApp
             SolidBrush exit = new SolidBrush(Color.Blue);
             SolidBrush exitAndEnter = new SolidBrush(Color.Yellow);
 
-            g.FillRectangle(empty, 0, 0, lab.Width, lab.Height);
-            g.DrawRectangle(new Pen(Color.Black, 1), 0, 0, lab.Width, lab.Height);
-
-            for (int x = 1; x < lab.Width - 1; x++)
+            for (int x = 0; x < lab.Width; x++)
             {
-                for (int y = 0; y < lab.Height - 1; y++)
+                for (int y = 0; y < lab.Height; y++)
                 {
                     LabirinthLib.Structs.Point point = new LabirinthLib.Structs.Point(x, y);
                     if ((point == lab.FirstIn || point == lab.SecondIn) && point == lab.Exit)
-                        g.FillRectangle(exitAndEnter, point.X, point.Y, 0.5f, 0.5f);
+                        g.FillRectangle(exitAndEnter, point.X, point.Y, 1, 1);
                     else if (point == lab.FirstIn || point == lab.SecondIn)
-                        g.FillRectangle(enter, point.X, point.Y, 0.5f, 0.5f);
+                        g.FillRectangle(enter, point.X, point.Y, 1, 1);
                     else if (point == lab.Exit)
-                        g.FillRectangle(exit, point.X, point.Y, 0.5f, 0.5f);
+                        g.FillRectangle(exit, point.X, point.Y, 1, 1);
                     else if (lab[point] == 1)
-                        g.FillRectangle(wall, point.X, point.Y, 0.5f, 0.5f);
+                        g.FillRectangle(wall, point.X, point.Y, 1, 1);
                     else if (lab[point] == 0)
-                        g.FillRectangle(empty, point.X, point.Y, 0.5f, 0.5f);
+                        g.FillRectangle(empty, point.X, point.Y, 1, 1);
                 }
             }
         }

@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="StringPrinter.cs" />
     <Compile Include="WalkerBot.cs" />
     <Compile Include="ListUnique.cs" />
     <Compile Include="ConsolePrinter.cs" />
