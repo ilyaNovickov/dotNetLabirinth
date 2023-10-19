@@ -40,18 +40,23 @@ namespace LabirinthWinformsApp
             this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
             this.mainTableLayout = new System.Windows.Forms.TableLayoutPanel();
             this.labirinthTableLayout = new System.Windows.Forms.TableLayoutPanel();
-            this.userControl11 = new TrackBarWithNumericUpDowmLib.UserControl1();
+            this.zoomTableLayout = new System.Windows.Forms.TableLayoutPanel();
+            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.trackBar1 = new System.Windows.Forms.TrackBar();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.labirinthPictureBox)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.mainTableLayout.SuspendLayout();
             this.labirinthTableLayout.SuspendLayout();
+            this.zoomTableLayout.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             this.SuspendLayout();
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(4, 4);
+            this.button1.Location = new System.Drawing.Point(5, 5);
             this.button1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(115, 70);
@@ -66,10 +71,10 @@ namespace LabirinthWinformsApp
             this.panel1.BackColor = System.Drawing.SystemColors.ControlDark;
             this.panel1.Controls.Add(this.labirinthPictureBox);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(4, 4);
+            this.panel1.Location = new System.Drawing.Point(6, 6);
             this.panel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(519, 362);
+            this.panel1.Size = new System.Drawing.Size(513, 405);
             this.panel1.TabIndex = 2;
             // 
             // labirinthPictureBox
@@ -98,13 +103,13 @@ namespace LabirinthWinformsApp
             // test1ToolStripMenuItem
             // 
             this.test1ToolStripMenuItem.Name = "test1ToolStripMenuItem";
-            this.test1ToolStripMenuItem.Size = new System.Drawing.Size(55, 26);
+            this.test1ToolStripMenuItem.Size = new System.Drawing.Size(55, 24);
             this.test1ToolStripMenuItem.Text = "test1";
             // 
             // test2ToolStripMenuItem
             // 
             this.test2ToolStripMenuItem.Name = "test2ToolStripMenuItem";
-            this.test2ToolStripMenuItem.Size = new System.Drawing.Size(55, 26);
+            this.test2ToolStripMenuItem.Size = new System.Drawing.Size(55, 24);
             this.test2ToolStripMenuItem.Text = "test2";
             // 
             // statusStrip1
@@ -133,6 +138,7 @@ namespace LabirinthWinformsApp
             // 
             // mainTableLayout
             // 
+            this.mainTableLayout.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
             this.mainTableLayout.ColumnCount = 3;
             this.mainTableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.mainTableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
@@ -149,27 +155,54 @@ namespace LabirinthWinformsApp
             // 
             // labirinthTableLayout
             // 
+            this.labirinthTableLayout.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Inset;
             this.labirinthTableLayout.ColumnCount = 1;
             this.labirinthTableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.labirinthTableLayout.Controls.Add(this.panel1, 0, 0);
-            this.labirinthTableLayout.Controls.Add(this.userControl11, 0, 1);
+            this.labirinthTableLayout.Controls.Add(this.zoomTableLayout, 0, 1);
             this.labirinthTableLayout.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.labirinthTableLayout.Location = new System.Drawing.Point(269, 3);
+            this.labirinthTableLayout.Location = new System.Drawing.Point(270, 4);
             this.labirinthTableLayout.Name = "labirinthTableLayout";
             this.labirinthTableLayout.RowCount = 2;
-            this.labirinthTableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 75F));
-            this.labirinthTableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.labirinthTableLayout.Size = new System.Drawing.Size(527, 494);
+            this.labirinthTableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 85F));
+            this.labirinthTableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15F));
+            this.labirinthTableLayout.Size = new System.Drawing.Size(525, 492);
             this.labirinthTableLayout.TabIndex = 3;
             // 
-            // userControl11
+            // zoomTableLayout
             // 
-            this.userControl11.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.userControl11.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.userControl11.Location = new System.Drawing.Point(3, 373);
-            this.userControl11.Name = "userControl11";
-            this.userControl11.Size = new System.Drawing.Size(521, 118);
-            this.userControl11.TabIndex = 3;
+            this.zoomTableLayout.AutoScroll = true;
+            this.zoomTableLayout.ColumnCount = 2;
+            this.zoomTableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.zoomTableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.zoomTableLayout.Controls.Add(this.numericUpDown1, 1, 0);
+            this.zoomTableLayout.Controls.Add(this.trackBar1, 0, 0);
+            this.zoomTableLayout.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.zoomTableLayout.Location = new System.Drawing.Point(5, 420);
+            this.zoomTableLayout.MinimumSize = new System.Drawing.Size(30, 30);
+            this.zoomTableLayout.Name = "zoomTableLayout";
+            this.zoomTableLayout.RowCount = 1;
+            this.zoomTableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.zoomTableLayout.Size = new System.Drawing.Size(515, 67);
+            this.zoomTableLayout.TabIndex = 3;
+            // 
+            // numericUpDown1
+            // 
+            this.numericUpDown1.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.numericUpDown1.AutoSize = true;
+            this.numericUpDown1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.numericUpDown1.Location = new System.Drawing.Point(447, 18);
+            this.numericUpDown1.Name = "numericUpDown1";
+            this.numericUpDown1.Size = new System.Drawing.Size(65, 30);
+            this.numericUpDown1.TabIndex = 0;
+            // 
+            // trackBar1
+            // 
+            this.trackBar1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.trackBar1.Location = new System.Drawing.Point(3, 5);
+            this.trackBar1.Name = "trackBar1";
+            this.trackBar1.Size = new System.Drawing.Size(438, 56);
+            this.trackBar1.TabIndex = 1;
             // 
             // Form1
             // 
@@ -192,6 +225,10 @@ namespace LabirinthWinformsApp
             this.statusStrip1.PerformLayout();
             this.mainTableLayout.ResumeLayout(false);
             this.labirinthTableLayout.ResumeLayout(false);
+            this.zoomTableLayout.ResumeLayout(false);
+            this.zoomTableLayout.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -209,7 +246,9 @@ namespace LabirinthWinformsApp
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
         private System.Windows.Forms.TableLayoutPanel mainTableLayout;
         private System.Windows.Forms.TableLayoutPanel labirinthTableLayout;
-        private TrackBarWithNumericUpDowmLib.UserControl1 userControl11;
+        private System.Windows.Forms.TableLayoutPanel zoomTableLayout;
+        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.TrackBar trackBar1;
     }
 }
 
