@@ -106,7 +106,7 @@ namespace LabirinthWinformsApp
             // test1ToolStripMenuItem
             // 
             this.test1ToolStripMenuItem.Name = "test1ToolStripMenuItem";
-            this.test1ToolStripMenuItem.Size = new System.Drawing.Size(55, 26);
+            this.test1ToolStripMenuItem.Size = new System.Drawing.Size(55, 24);
             this.test1ToolStripMenuItem.Text = "test1";
             // 
             // test2ToolStripMenuItem
