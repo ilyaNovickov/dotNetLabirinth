@@ -24,8 +24,8 @@ namespace LabirinthWinformsApp
         {
             InitializeComponent();
 
-            this.zoomNumericUpDown.Minimum = 0;
-            this.zoomTrackBar.Minimum = 0;
+            this.zoomNumericUpDown.Minimum = 1;
+            this.zoomTrackBar.Minimum = 1;
 
             this.zoomNumericUpDown.Maximum = 100;
             this.zoomTrackBar.Maximum = 100;
@@ -34,6 +34,12 @@ namespace LabirinthWinformsApp
         private void button1_Click(object sender, EventArgs e)
         {
             lab.GenerateLabirinth();
+            DrawLabirinth();
+            //label1.Text = lab.GetStringLabirinth();
+        }
+
+        private void DrawLabirinth()
+        {
             Bitmap bitmap = new Bitmap((int)(lab.Width * zoom), (int)(lab.Height * zoom));
             Graphics g = Graphics.FromImage(bitmap);
             g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.None;
@@ -43,8 +49,6 @@ namespace LabirinthWinformsApp
             g.Transform = matrix;
             lab.DrawLabirinth(g);
             labirinthPictureBox.Image = bitmap;
-
-            //label1.Text = lab.GetStringLabirinth();
         }
 
         private void zoomTrackBar_Scroll(object sender, EventArgs e)
@@ -58,7 +62,7 @@ namespace LabirinthWinformsApp
                 this.zoomTrackBar.Value = ((int)this.zoomNumericUpDown.Value);
 
             zoom = zoomTrackBar.Value;
-
+            DrawLabirinth();
         }
     }
 }
