@@ -11,6 +11,7 @@ using System.Drawing.Drawing2D;
 using LabirinthLib;
 using LabirinthLib.Structs;
 using LabirinthLib.Printers;
+using System.Reflection;
 
 namespace LabirinthWinformsApp
 {
@@ -21,6 +22,12 @@ namespace LabirinthWinformsApp
         public Form1()
         {
             InitializeComponent();
+
+            this.zoomNumericUpDown.Minimum = 0;
+            this.zoomTrackBar.Minimum = 0;
+
+            this.zoomNumericUpDown.Maximum = 100;
+            this.zoomTrackBar.Maximum = 100;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -37,6 +44,17 @@ namespace LabirinthWinformsApp
             labirinthPictureBox.Image = bitmap;
 
             //label1.Text = lab.GetStringLabirinth();
+        }
+
+        private void zoomTrackBar_Scroll(object sender, EventArgs e)
+        {
+            this.zoomNumericUpDown.Value = this.zoomTrackBar.Value;
+        }
+
+        private void zoomNumericUpDown1_ValueChanged(object sender, EventArgs e)
+        {
+            if (this.zoomTrackBar.Value != ((int)this.zoomNumericUpDown.Value))
+                this.zoomTrackBar.Value = ((int)this.zoomNumericUpDown.Value);
         }
     }
 }
