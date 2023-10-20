@@ -12,6 +12,7 @@ using LabirinthLib;
 using LabirinthLib.Structs;
 using LabirinthLib.Printers;
 using System.Reflection;
+using System.Diagnostics;
 
 namespace LabirinthWinformsApp
 {
@@ -88,12 +89,50 @@ namespace LabirinthWinformsApp
 
         private void generateButton_Click(object sender, EventArgs e)
         {
+            if (backgroundWorker.IsBusy)
+                return;
+
             lab.Size = new LabirinthLib.Structs.Size(((int)widthNumericUpDown.Value), 
                 ((int)heightNumericUpDowm.Value));
-            lab.EmptySpace = ((int)emptySpaceNumericUpDown.Value);
+            lab.EmptySpace = ((float)emptySpaceNumericUpDown.Value) / 100f;
 
-            lab.GenerateLabirinthAsync();
+            backgroundWorker.RunWorkerAsync(lab);
+        }
 
+        private void backgroundWorker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            if (e.Argument is Labirinth lab)
+            {
+                Stopwatch sw = new Stopwatch();
+                sw.Start();
+                lab.GenerateLabirinth();
+                sw.Stop();
+                e.Result = sw.Elapsed;
+            }
+        }
+
+        private void backgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            if (e.Result is TimeSpan time)
+            {
+                string units = "мс";
+                double value = time.TotalMilliseconds;
+                if (time.TotalMilliseconds > 1000)
+                {
+                    units = "с";
+                    value = time.TotalSeconds;
+                }
+                else if (time.TotalSeconds > 60)
+                {
+                    units = "мин";
+                    value = time.TotalMinutes;
+                }
+                this.generationTimeLabel.Text =
+                    $"Время генерации : {Math.Round(value, 2)}" + " " + units;
+            }
+            this.sizeLabel.Text = $"Размер : {lab.Size.ToString()}";
+            this.emptySpaceLabel.Text = $"Пустое пространство : {lab.EmptySpace * 100} %";
+            
             DrawLabirinth();
         }
     }
