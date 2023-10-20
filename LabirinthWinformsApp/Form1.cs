@@ -27,8 +27,8 @@ namespace LabirinthWinformsApp
 
             lab = new Labirinth();
 
-            this.zoomNumericUpDown.Minimum = 1;
-            this.zoomTrackBar.Minimum = 1;
+            this.zoomNumericUpDown.Minimum = 10;
+            this.zoomTrackBar.Minimum = 10;
 
             this.zoomNumericUpDown.Maximum = 100;
             this.zoomTrackBar.Maximum = 100;
