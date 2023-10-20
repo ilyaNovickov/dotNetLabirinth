@@ -75,6 +75,7 @@ namespace LabirinthWinformsApp
             this.timer = new System.Windows.Forms.Timer(this.components);
             this.экспортСМаштабомToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.импортToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.standartZoomComboBox = new System.Windows.Forms.ToolStripComboBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.labirinthPictureBox)).BeginInit();
             this.menuStrip1.SuspendLayout();
@@ -130,7 +131,8 @@ namespace LabirinthWinformsApp
             this.test1ToolStripMenuItem,
             this.test2ToolStripMenuItem,
             this.standartSizeComboBox,
-            this.standartEmptySpaccceComboBox});
+            this.standartEmptySpaccceComboBox,
+            this.standartZoomComboBox});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1047, 32);
@@ -150,7 +152,7 @@ namespace LabirinthWinformsApp
             // экспортToolStripMenuItem
             // 
             this.экспортToolStripMenuItem.Name = "экспортToolStripMenuItem";
-            this.экспортToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.экспортToolStripMenuItem.Size = new System.Drawing.Size(237, 26);
             this.экспортToolStripMenuItem.Text = "Экспорт";
             this.экспортToolStripMenuItem.Click += new System.EventHandler(this.экспортToolStripMenuItem_Click);
             // 
@@ -632,6 +634,25 @@ namespace LabirinthWinformsApp
             this.импортToolStripMenuItem.Text = "Импорт";
             this.импортToolStripMenuItem.Click += new System.EventHandler(this.импортToolStripMenuItem_Click);
             // 
+            // standartZoomComboBox
+            // 
+            this.standartZoomComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.standartZoomComboBox.Items.AddRange(new object[] {
+            "",
+            "10%",
+            "25%",
+            "30%",
+            "40%",
+            "50%",
+            "60%",
+            "80%",
+            "90%",
+            "100%"});
+            this.standartZoomComboBox.Name = "standartZoomComboBox";
+            this.standartZoomComboBox.Size = new System.Drawing.Size(121, 28);
+            this.standartZoomComboBox.ToolTipText = "Стандарное пустое пространство";
+            this.standartZoomComboBox.SelectedIndexChanged += new System.EventHandler(this.standartSizeComboBox_SelectedIndexChanged);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -725,6 +746,7 @@ namespace LabirinthWinformsApp
         private System.Windows.Forms.Timer timer;
         private System.Windows.Forms.ToolStripMenuItem экспортСМаштабомToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem импортToolStripMenuItem;
+        private System.Windows.Forms.ToolStripComboBox standartZoomComboBox;
     }
 }
 

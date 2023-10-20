@@ -216,6 +216,41 @@ namespace LabirinthWinformsApp
                         break;
                 }
             }
+            else if (sender == standartZoomComboBox)
+            {
+                switch (standartZoomComboBox.Text)
+                {
+                    case "":
+                        break;
+                    case "10%":
+                        zoomNumericUpDown.Value = 10;
+                        break;
+                    case "25%":
+                        zoomNumericUpDown.Value = 25;
+                        break;
+                    case "30%":
+                        zoomNumericUpDown.Value = 30;
+                        break;
+                    case "40%":
+                        zoomNumericUpDown.Value = 40;
+                        break;
+                    case "50%":
+                        zoomNumericUpDown.Value = 50;
+                        break;
+                    case "60%":
+                        zoomNumericUpDown.Value = 60;
+                        break;
+                    case "80%":
+                        zoomNumericUpDown.Value = 80;
+                        break;
+                    case "90%":
+                        zoomNumericUpDown.Value = 90;
+                        break;
+                    case "100%":
+                        zoomNumericUpDown.Value = 100;
+                        break;
+                }
+            }
         }
 
         private void убратьботаToolStripMenuItem_Click(object sender, EventArgs e)
