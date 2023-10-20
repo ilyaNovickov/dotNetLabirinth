@@ -299,14 +299,21 @@ namespace LabirinthLib
         }
         #endregion
         /// <summary>
+        /// Сбросить точки входа и выходов
+        /// </summary>
+        private void ResetExitAndEnters()
+        {
+            exit = Point.Empty;
+            firstIn = Point.Empty;
+            secIn = Point.Empty;
+        }
+        /// <summary>
         /// Заполнения лабиринта пустым пространством
         /// </summary>
         private void FillLabirinth()
         {
             //Обнуление входов/выходов
-            exit = Point.Empty;
-            firstIn = Point.Empty;
-            secIn = Point.Empty;
+            ResetExitAndEnters();
             //Очистка списков путей
             firstWay.Clear();
             secondWay.Clear();
@@ -596,6 +603,7 @@ namespace LabirinthLib
         /// </summary>
         public async void GenerateInsAndExitAsync()
         {
+            ResetExitAndEnters();
             await Task.Run(() => GenerationInsAndExit());
         }
         /// <summary>
@@ -603,6 +611,7 @@ namespace LabirinthLib
         /// </summary>
         public void GenerateInsAndExit()
         {
+            ResetExitAndEnters();
             GenerationInsAndExit();
         }
         /// <summary>
