@@ -18,11 +18,13 @@ namespace LabirinthWinformsApp
     public partial class MainForm : Form
     {
         private float zoom = 1f;
-        Labirinth lab = new Labirinth(10); 
+        Labirinth lab; 
 
         public MainForm()
         {
             InitializeComponent();
+
+            lab = new Labirinth();
 
             this.zoomNumericUpDown.Minimum = 1;
             this.zoomTrackBar.Minimum = 1;
@@ -53,31 +55,29 @@ namespace LabirinthWinformsApp
 
         private void zoomTrackBar_Scroll(object sender, EventArgs e)
         {
-            this.zoomNumericUpDown.Value = this.zoomTrackBar.Value;
+            if (sender == zoomTrackBar)
+                this.zoomNumericUpDown.Value = this.zoomTrackBar.Value;
+            else if (sender == botSpeedTrackBar)
+                botSpeedNumericUpDown.Value = botSpeedTrackBar.Value;
         }
 
         private void zoomNumericUpDown1_ValueChanged(object sender, EventArgs e)
         {
-            if (this.zoomTrackBar.Value != ((int)this.zoomNumericUpDown.Value))
-                this.zoomTrackBar.Value = ((int)this.zoomNumericUpDown.Value);
+            if (sender == zoomNumericUpDown)
+            {
+                if (this.zoomTrackBar.Value != ((int)this.zoomNumericUpDown.Value))
+                    this.zoomTrackBar.Value = ((int)this.zoomNumericUpDown.Value);
 
-            zoom = zoomTrackBar.Value;
+                zoom = zoomTrackBar.Value;
+            }
+            else if (sender == botSpeedNumericUpDown)
+            {
+                if (this.botSpeedTrackBar.Value != ((int)this.botSpeedNumericUpDown.Value))
+                    this.botSpeedTrackBar.Value = ((int)this.botSpeedNumericUpDown.Value);
+
+                //zoom = zoomTrackBar.Value;
+            }
             DrawLabirinth();
-        }
-
-        private void botSpeedTrackBar_Scroll(object sender, EventArgs e)
-        {
-
-        }
-
-        private void botSpeedNumericUpDown_ValueChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void фывфывToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

@@ -33,41 +33,41 @@ namespace LabirinthWinformsApp
             this.labirinthPictureBox = new System.Windows.Forms.PictureBox();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.test1ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.экспортToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.test2ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.фывфывToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.standartSizeComboBox = new System.Windows.Forms.ToolStripComboBox();
+            this.standartEmptySpaccceComboBox = new System.Windows.Forms.ToolStripComboBox();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.sizeLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.emptySpaceLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.generationTimeLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.mainTableLayout = new System.Windows.Forms.TableLayoutPanel();
             this.labirinthTableLayout = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.label3 = new System.Windows.Forms.Label();
+            this.emptySpaceNumericUpDown = new System.Windows.Forms.NumericUpDown();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.zoomTableLayout = new System.Windows.Forms.TableLayoutPanel();
+            this.zoomNumericUpDown = new System.Windows.Forms.NumericUpDown();
+            this.zoomTrackBar = new System.Windows.Forms.TrackBar();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.heightNumericUpDowm = new System.Windows.Forms.NumericUpDown();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.widthNumericUpDown = new System.Windows.Forms.NumericUpDown();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.zoomTableLayout = new System.Windows.Forms.TableLayoutPanel();
-            this.zoomNumericUpDown = new System.Windows.Forms.NumericUpDown();
-            this.zoomTrackBar = new System.Windows.Forms.TrackBar();
             this.generateButton = new System.Windows.Forms.Button();
             this.exitAndEnterButton = new System.Windows.Forms.Button();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.panel4 = new System.Windows.Forms.Panel();
-            this.label3 = new System.Windows.Forms.Label();
-            this.emptySpaceNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.botTableLayout = new System.Windows.Forms.TableLayoutPanel();
+            this.botButton = new System.Windows.Forms.Button();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.botSpeedNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.botSpeedTrackBar = new System.Windows.Forms.TrackBar();
             this.botLogRichTextBox = new System.Windows.Forms.RichTextBox();
-            this.botButton = new System.Windows.Forms.Button();
-            this.экспортToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.standartSizeComboBox = new System.Windows.Forms.ToolStripComboBox();
-            this.standartEmptySpaccceComboBox = new System.Windows.Forms.ToolStripComboBox();
-            this.generationTimeLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.labirinthPictureBox)).BeginInit();
             this.menuStrip1.SuspendLayout();
@@ -75,17 +75,17 @@ namespace LabirinthWinformsApp
             this.mainTableLayout.SuspendLayout();
             this.labirinthTableLayout.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
-            this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.heightNumericUpDowm)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.widthNumericUpDown)).BeginInit();
+            this.groupBox3.SuspendLayout();
+            this.panel4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.emptySpaceNumericUpDown)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.zoomTableLayout.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.zoomNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.zoomTrackBar)).BeginInit();
-            this.groupBox3.SuspendLayout();
-            this.panel4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.emptySpaceNumericUpDown)).BeginInit();
+            this.groupBox2.SuspendLayout();
+            this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.heightNumericUpDowm)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.widthNumericUpDown)).BeginInit();
             this.botTableLayout.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -138,6 +138,12 @@ namespace LabirinthWinformsApp
             this.test1ToolStripMenuItem.Size = new System.Drawing.Size(74, 28);
             this.test1ToolStripMenuItem.Text = "Правка";
             // 
+            // экспортToolStripMenuItem
+            // 
+            this.экспортToolStripMenuItem.Name = "экспортToolStripMenuItem";
+            this.экспортToolStripMenuItem.Size = new System.Drawing.Size(148, 26);
+            this.экспортToolStripMenuItem.Text = "Экспорт";
+            // 
             // test2ToolStripMenuItem
             // 
             this.test2ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -149,9 +155,37 @@ namespace LabirinthWinformsApp
             // фывфывToolStripMenuItem
             // 
             this.фывфывToolStripMenuItem.Name = "фывфывToolStripMenuItem";
-            this.фывфывToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.фывфывToolStripMenuItem.Size = new System.Drawing.Size(177, 26);
             this.фывфывToolStripMenuItem.Text = "Убрать бота";
-            this.фывфывToolStripMenuItem.Click += new System.EventHandler(this.фывфывToolStripMenuItem_Click);
+            // 
+            // standartSizeComboBox
+            // 
+            this.standartSizeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.standartSizeComboBox.Items.AddRange(new object[] {
+            "",
+            "5x5",
+            "10x10",
+            "20x20",
+            "30x30",
+            "40x40",
+            "50x50"});
+            this.standartSizeComboBox.Name = "standartSizeComboBox";
+            this.standartSizeComboBox.Size = new System.Drawing.Size(121, 28);
+            this.standartSizeComboBox.ToolTipText = "Стандартные размеры";
+            // 
+            // standartEmptySpaccceComboBox
+            // 
+            this.standartEmptySpaccceComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.standartEmptySpaccceComboBox.Items.AddRange(new object[] {
+            "",
+            "40%",
+            "60%",
+            "80%",
+            "90%",
+            "100%"});
+            this.standartEmptySpaccceComboBox.Name = "standartEmptySpaccceComboBox";
+            this.standartEmptySpaccceComboBox.Size = new System.Drawing.Size(121, 28);
+            this.standartEmptySpaccceComboBox.ToolTipText = "Стандарное пустое пространство";
             // 
             // statusStrip1
             // 
@@ -169,12 +203,17 @@ namespace LabirinthWinformsApp
             // sizeLabel
             // 
             this.sizeLabel.Name = "sizeLabel";
-            this.sizeLabel.Size = new System.Drawing.Size(0, 18);
+            this.sizeLabel.Size = new System.Drawing.Size(0, 16);
             // 
             // emptySpaceLabel
             // 
             this.emptySpaceLabel.Name = "emptySpaceLabel";
-            this.emptySpaceLabel.Size = new System.Drawing.Size(0, 18);
+            this.emptySpaceLabel.Size = new System.Drawing.Size(0, 16);
+            // 
+            // generationTimeLabel
+            // 
+            this.generationTimeLabel.Name = "generationTimeLabel";
+            this.generationTimeLabel.Size = new System.Drawing.Size(0, 16);
             // 
             // mainTableLayout
             // 
@@ -230,6 +269,99 @@ namespace LabirinthWinformsApp
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(202, 504);
             this.tableLayoutPanel1.TabIndex = 9;
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.panel4);
+            this.groupBox3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox3.Location = new System.Drawing.Point(3, 103);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(196, 94);
+            this.groupBox3.TabIndex = 18;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Пустое пространство";
+            // 
+            // panel4
+            // 
+            this.panel4.AutoScroll = true;
+            this.panel4.Controls.Add(this.label3);
+            this.panel4.Controls.Add(this.emptySpaceNumericUpDown);
+            this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel4.Location = new System.Drawing.Point(3, 18);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(190, 73);
+            this.panel4.TabIndex = 0;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label3.Location = new System.Drawing.Point(174, 42);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(24, 20);
+            this.label3.TabIndex = 9;
+            this.label3.Text = "%";
+            // 
+            // emptySpaceNumericUpDown
+            // 
+            this.emptySpaceNumericUpDown.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.emptySpaceNumericUpDown.Location = new System.Drawing.Point(11, 40);
+            this.emptySpaceNumericUpDown.Name = "emptySpaceNumericUpDown";
+            this.emptySpaceNumericUpDown.Size = new System.Drawing.Size(157, 26);
+            this.emptySpaceNumericUpDown.TabIndex = 8;
+            this.emptySpaceNumericUpDown.Value = new decimal(new int[] {
+            40,
+            0,
+            0,
+            0});
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.zoomTableLayout);
+            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox1.Location = new System.Drawing.Point(3, 403);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(196, 98);
+            this.groupBox1.TabIndex = 12;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Маштаб";
+            // 
+            // zoomTableLayout
+            // 
+            this.zoomTableLayout.AutoScroll = true;
+            this.zoomTableLayout.ColumnCount = 2;
+            this.zoomTableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.zoomTableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.zoomTableLayout.Controls.Add(this.zoomNumericUpDown, 1, 0);
+            this.zoomTableLayout.Controls.Add(this.zoomTrackBar, 0, 0);
+            this.zoomTableLayout.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.zoomTableLayout.Location = new System.Drawing.Point(3, 18);
+            this.zoomTableLayout.MinimumSize = new System.Drawing.Size(30, 30);
+            this.zoomTableLayout.Name = "zoomTableLayout";
+            this.zoomTableLayout.RowCount = 1;
+            this.zoomTableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.zoomTableLayout.Size = new System.Drawing.Size(190, 77);
+            this.zoomTableLayout.TabIndex = 3;
+            // 
+            // zoomNumericUpDown
+            // 
+            this.zoomNumericUpDown.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.zoomNumericUpDown.AutoSize = true;
+            this.zoomNumericUpDown.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.zoomNumericUpDown.Location = new System.Drawing.Point(122, 23);
+            this.zoomNumericUpDown.Name = "zoomNumericUpDown";
+            this.zoomNumericUpDown.Size = new System.Drawing.Size(65, 30);
+            this.zoomNumericUpDown.TabIndex = 0;
+            this.zoomNumericUpDown.ValueChanged += new System.EventHandler(this.zoomNumericUpDown1_ValueChanged);
+            // 
+            // zoomTrackBar
+            // 
+            this.zoomTrackBar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.zoomTrackBar.Location = new System.Drawing.Point(3, 10);
+            this.zoomTrackBar.Name = "zoomTrackBar";
+            this.zoomTrackBar.Size = new System.Drawing.Size(113, 56);
+            this.zoomTrackBar.TabIndex = 1;
+            this.zoomTrackBar.Scroll += new System.EventHandler(this.zoomTrackBar_Scroll);
             // 
             // groupBox2
             // 
@@ -321,54 +453,6 @@ namespace LabirinthWinformsApp
             0,
             0});
             // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.zoomTableLayout);
-            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox1.Location = new System.Drawing.Point(3, 403);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(196, 98);
-            this.groupBox1.TabIndex = 12;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Маштаб";
-            // 
-            // zoomTableLayout
-            // 
-            this.zoomTableLayout.AutoScroll = true;
-            this.zoomTableLayout.ColumnCount = 2;
-            this.zoomTableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.zoomTableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.zoomTableLayout.Controls.Add(this.zoomNumericUpDown, 1, 0);
-            this.zoomTableLayout.Controls.Add(this.zoomTrackBar, 0, 0);
-            this.zoomTableLayout.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.zoomTableLayout.Location = new System.Drawing.Point(3, 18);
-            this.zoomTableLayout.MinimumSize = new System.Drawing.Size(30, 30);
-            this.zoomTableLayout.Name = "zoomTableLayout";
-            this.zoomTableLayout.RowCount = 1;
-            this.zoomTableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.zoomTableLayout.Size = new System.Drawing.Size(190, 77);
-            this.zoomTableLayout.TabIndex = 3;
-            // 
-            // zoomNumericUpDown
-            // 
-            this.zoomNumericUpDown.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.zoomNumericUpDown.AutoSize = true;
-            this.zoomNumericUpDown.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.zoomNumericUpDown.Location = new System.Drawing.Point(122, 23);
-            this.zoomNumericUpDown.Name = "zoomNumericUpDown";
-            this.zoomNumericUpDown.Size = new System.Drawing.Size(65, 30);
-            this.zoomNumericUpDown.TabIndex = 0;
-            this.zoomNumericUpDown.ValueChanged += new System.EventHandler(this.zoomNumericUpDown1_ValueChanged);
-            // 
-            // zoomTrackBar
-            // 
-            this.zoomTrackBar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.zoomTrackBar.Location = new System.Drawing.Point(3, 10);
-            this.zoomTrackBar.Name = "zoomTrackBar";
-            this.zoomTrackBar.Size = new System.Drawing.Size(113, 56);
-            this.zoomTrackBar.TabIndex = 1;
-            this.zoomTrackBar.Scroll += new System.EventHandler(this.zoomTrackBar_Scroll);
-            // 
             // generateButton
             // 
             this.generateButton.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -397,51 +481,6 @@ namespace LabirinthWinformsApp
             this.exitAndEnterButton.Text = "Регенирировать вход/выход";
             this.exitAndEnterButton.UseVisualStyleBackColor = true;
             // 
-            // groupBox3
-            // 
-            this.groupBox3.Controls.Add(this.panel4);
-            this.groupBox3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox3.Location = new System.Drawing.Point(3, 103);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(196, 94);
-            this.groupBox3.TabIndex = 18;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Пустое пространство";
-            // 
-            // panel4
-            // 
-            this.panel4.AutoScroll = true;
-            this.panel4.Controls.Add(this.label3);
-            this.panel4.Controls.Add(this.emptySpaceNumericUpDown);
-            this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel4.Location = new System.Drawing.Point(3, 18);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(190, 73);
-            this.panel4.TabIndex = 0;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label3.Location = new System.Drawing.Point(174, 42);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(24, 20);
-            this.label3.TabIndex = 9;
-            this.label3.Text = "%";
-            // 
-            // emptySpaceNumericUpDown
-            // 
-            this.emptySpaceNumericUpDown.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.emptySpaceNumericUpDown.Location = new System.Drawing.Point(11, 40);
-            this.emptySpaceNumericUpDown.Name = "emptySpaceNumericUpDown";
-            this.emptySpaceNumericUpDown.Size = new System.Drawing.Size(157, 26);
-            this.emptySpaceNumericUpDown.TabIndex = 8;
-            this.emptySpaceNumericUpDown.Value = new decimal(new int[] {
-            40,
-            0,
-            0,
-            0});
-            // 
             // botTableLayout
             // 
             this.botTableLayout.ColumnCount = 1;
@@ -458,6 +497,20 @@ namespace LabirinthWinformsApp
             this.botTableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.botTableLayout.Size = new System.Drawing.Size(256, 504);
             this.botTableLayout.TabIndex = 10;
+            // 
+            // botButton
+            // 
+            this.botButton.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.botButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.botButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.botButton.Location = new System.Drawing.Point(3, 3);
+            this.botButton.Name = "botButton";
+            this.botButton.Size = new System.Drawing.Size(250, 162);
+            this.botButton.TabIndex = 15;
+            this.botButton.Text = "Пустить бота";
+            this.botButton.UseVisualStyleBackColor = true;
             // 
             // groupBox4
             // 
@@ -496,7 +549,7 @@ namespace LabirinthWinformsApp
             this.botSpeedNumericUpDown.Name = "botSpeedNumericUpDown";
             this.botSpeedNumericUpDown.Size = new System.Drawing.Size(65, 30);
             this.botSpeedNumericUpDown.TabIndex = 0;
-            this.botSpeedNumericUpDown.ValueChanged += new System.EventHandler(this.botSpeedNumericUpDown_ValueChanged);
+            this.botSpeedNumericUpDown.ValueChanged += new System.EventHandler(this.zoomNumericUpDown1_ValueChanged);
             // 
             // botSpeedTrackBar
             // 
@@ -505,7 +558,7 @@ namespace LabirinthWinformsApp
             this.botSpeedTrackBar.Name = "botSpeedTrackBar";
             this.botSpeedTrackBar.Size = new System.Drawing.Size(167, 56);
             this.botSpeedTrackBar.TabIndex = 1;
-            this.botSpeedTrackBar.Scroll += new System.EventHandler(this.botSpeedTrackBar_Scroll);
+            this.botSpeedTrackBar.Scroll += new System.EventHandler(this.zoomTrackBar_Scroll);
             // 
             // botLogRichTextBox
             // 
@@ -518,61 +571,7 @@ namespace LabirinthWinformsApp
             this.botLogRichTextBox.TabIndex = 14;
             this.botLogRichTextBox.Text = "";
             // 
-            // botButton
-            // 
-            this.botButton.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.botButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.botButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.botButton.Location = new System.Drawing.Point(3, 3);
-            this.botButton.Name = "botButton";
-            this.botButton.Size = new System.Drawing.Size(250, 162);
-            this.botButton.TabIndex = 15;
-            this.botButton.Text = "Пустить бота";
-            this.botButton.UseVisualStyleBackColor = true;
-            // 
-            // экспортToolStripMenuItem
-            // 
-            this.экспортToolStripMenuItem.Name = "экспортToolStripMenuItem";
-            this.экспортToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
-            this.экспортToolStripMenuItem.Text = "Экспорт";
-            // 
-            // standartSizeComboBox
-            // 
-            this.standartSizeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.standartSizeComboBox.Items.AddRange(new object[] {
-            "",
-            "5x5",
-            "10x10",
-            "20x20",
-            "30x30",
-            "40x40",
-            "50x50"});
-            this.standartSizeComboBox.Name = "standartSizeComboBox";
-            this.standartSizeComboBox.Size = new System.Drawing.Size(121, 28);
-            this.standartSizeComboBox.ToolTipText = "Стандартные размеры";
-            // 
-            // standartEmptySpaccceComboBox
-            // 
-            this.standartEmptySpaccceComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.standartEmptySpaccceComboBox.Items.AddRange(new object[] {
-            "",
-            "40%",
-            "60%",
-            "80%",
-            "90%",
-            "100%"});
-            this.standartEmptySpaccceComboBox.Name = "standartEmptySpaccceComboBox";
-            this.standartEmptySpaccceComboBox.Size = new System.Drawing.Size(121, 28);
-            this.standartEmptySpaccceComboBox.ToolTipText = "Стандарное пустое пространство";
-            // 
-            // generationTimeLabel
-            // 
-            this.generationTimeLabel.Name = "generationTimeLabel";
-            this.generationTimeLabel.Size = new System.Drawing.Size(0, 18);
-            // 
-            // Form1
+            // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -582,7 +581,7 @@ namespace LabirinthWinformsApp
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Margin = new System.Windows.Forms.Padding(4);
-            this.Name = "Form1";
+            this.Name = "MainForm";
             this.Text = ".Net Labirinth";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
@@ -594,20 +593,20 @@ namespace LabirinthWinformsApp
             this.mainTableLayout.ResumeLayout(false);
             this.labirinthTableLayout.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
-            this.groupBox2.ResumeLayout(false);
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.heightNumericUpDowm)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.widthNumericUpDown)).EndInit();
+            this.groupBox3.ResumeLayout(false);
+            this.panel4.ResumeLayout(false);
+            this.panel4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.emptySpaceNumericUpDown)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.zoomTableLayout.ResumeLayout(false);
             this.zoomTableLayout.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.zoomNumericUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.zoomTrackBar)).EndInit();
-            this.groupBox3.ResumeLayout(false);
-            this.panel4.ResumeLayout(false);
-            this.panel4.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.emptySpaceNumericUpDown)).EndInit();
+            this.groupBox2.ResumeLayout(false);
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.heightNumericUpDowm)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.widthNumericUpDown)).EndInit();
             this.botTableLayout.ResumeLayout(false);
             this.groupBox4.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
