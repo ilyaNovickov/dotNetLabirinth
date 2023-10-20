@@ -32,7 +32,7 @@ namespace LabirinthLib
         #endregion
         #region Constr
         /// <summary>
-        /// Инициализирует лабиринт
+        /// Инициализирует заполненный лабиринт
         /// </summary>
         public Labirinth() : this(new Size(10, 10))
         {
@@ -46,7 +46,7 @@ namespace LabirinthLib
 
         }
         /// <summary>
-        /// Инициализирует лабиринт
+        /// Инициализирует заполненный лабиринт
         /// </summary>
         /// <param name="width">Ширина лабиринта</param>
         /// <param name="height">Высота лабиринта</param>
@@ -55,7 +55,7 @@ namespace LabirinthLib
 
         }
         /// <summary>
-        /// Инициализирует лабиринт
+        /// Инициализирует заполненный лабиринт
         /// </summary>
         /// <param name="size">Размер лабиринта</param>
         public Labirinth(Size size)
@@ -589,19 +589,26 @@ namespace LabirinthLib
             this.firstWay.AddRange(firstWay);
             this.secondWay.AddRange(secondWay);
             //Генерация входов и выходов
-            GenerateInsAndExit();
+            GenerationInsAndExit();
+        }
+        /// <summary>
+        /// Асинхронная генерация входов/выходов
+        /// </summary>
+        public async void GenerateInsAndExitAsync()
+        {
+            await Task.Run(() => GenerationInsAndExit());
         }
         /// <summary>
         /// Перегенирация входов и выходов
         /// </summary>
-        public void RegenerateInsAndExit()
+        public void GenerateInsAndExit()
         {
-            GenerateInsAndExit();
+            GenerationInsAndExit();
         }
         /// <summary>
         /// Генерация входов и выходов (около границы)
         /// </summary>
-        private void GenerateInsAndExit()
+        private void GenerationInsAndExit()
         {
             List<Point> preborderPoints = GetEmptyCellsInLayout(1).ToList();
 

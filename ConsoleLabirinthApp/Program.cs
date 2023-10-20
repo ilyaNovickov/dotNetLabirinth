@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using LabirinthLib;
 using LabirinthLib.Structs;
+using LabirinthLib.Printers;
 
 namespace ConsoleLabirinthApp
 {

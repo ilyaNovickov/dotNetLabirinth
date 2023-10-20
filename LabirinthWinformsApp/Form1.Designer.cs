@@ -1,7 +1,7 @@
 ﻿
 namespace LabirinthWinformsApp
 {
-    partial class Form1
+    partial class MainForm
     {
         /// <summary>
         /// Required designer variable.
@@ -29,66 +29,636 @@ namespace LabirinthWinformsApp
         /// </summary>
         private void InitializeComponent()
         {
-            this.button1 = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.labirinthPictureBox = new System.Windows.Forms.PictureBox();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.test1ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.test2ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.фывфывToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.sizeLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.emptySpaceLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.mainTableLayout = new System.Windows.Forms.TableLayoutPanel();
+            this.labirinthTableLayout = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.heightNumericUpDowm = new System.Windows.Forms.NumericUpDown();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.widthNumericUpDown = new System.Windows.Forms.NumericUpDown();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.zoomTableLayout = new System.Windows.Forms.TableLayoutPanel();
+            this.zoomNumericUpDown = new System.Windows.Forms.NumericUpDown();
+            this.zoomTrackBar = new System.Windows.Forms.TrackBar();
+            this.generateButton = new System.Windows.Forms.Button();
+            this.exitAndEnterButton = new System.Windows.Forms.Button();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.label3 = new System.Windows.Forms.Label();
+            this.emptySpaceNumericUpDown = new System.Windows.Forms.NumericUpDown();
+            this.botTableLayout = new System.Windows.Forms.TableLayoutPanel();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.botSpeedNumericUpDown = new System.Windows.Forms.NumericUpDown();
+            this.botSpeedTrackBar = new System.Windows.Forms.TrackBar();
+            this.botLogRichTextBox = new System.Windows.Forms.RichTextBox();
+            this.botButton = new System.Windows.Forms.Button();
+            this.экспортToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.standartSizeComboBox = new System.Windows.Forms.ToolStripComboBox();
+            this.standartEmptySpaccceComboBox = new System.Windows.Forms.ToolStripComboBox();
+            this.generationTimeLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.labirinthPictureBox)).BeginInit();
+            this.menuStrip1.SuspendLayout();
+            this.statusStrip1.SuspendLayout();
+            this.mainTableLayout.SuspendLayout();
+            this.labirinthTableLayout.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
+            this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.heightNumericUpDowm)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.widthNumericUpDown)).BeginInit();
+            this.groupBox1.SuspendLayout();
+            this.zoomTableLayout.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.zoomNumericUpDown)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.zoomTrackBar)).BeginInit();
+            this.groupBox3.SuspendLayout();
+            this.panel4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.emptySpaceNumericUpDown)).BeginInit();
+            this.botTableLayout.SuspendLayout();
+            this.groupBox4.SuspendLayout();
+            this.tableLayoutPanel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.botSpeedNumericUpDown)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.botSpeedTrackBar)).BeginInit();
             this.SuspendLayout();
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(43, 24);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(86, 57);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // panel1
             // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.AutoScroll = true;
             this.panel1.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.panel1.Controls.Add(this.pictureBox1);
-            this.panel1.Location = new System.Drawing.Point(169, 24);
+            this.panel1.Controls.Add(this.labirinthPictureBox);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.Location = new System.Drawing.Point(6, 6);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(509, 414);
+            this.panel1.Size = new System.Drawing.Size(555, 415);
             this.panel1.TabIndex = 2;
             // 
-            // pictureBox1
+            // labirinthPictureBox
             // 
-            this.pictureBox1.BackColor = System.Drawing.SystemColors.Control;
-            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(136, 148);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
+            this.labirinthPictureBox.BackColor = System.Drawing.SystemColors.Control;
+            this.labirinthPictureBox.Location = new System.Drawing.Point(0, 0);
+            this.labirinthPictureBox.Margin = new System.Windows.Forms.Padding(4);
+            this.labirinthPictureBox.Name = "labirinthPictureBox";
+            this.labirinthPictureBox.Size = new System.Drawing.Size(136, 148);
+            this.labirinthPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.labirinthPictureBox.TabIndex = 0;
+            this.labirinthPictureBox.TabStop = false;
+            // 
+            // menuStrip1
+            // 
+            this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.test1ToolStripMenuItem,
+            this.test2ToolStripMenuItem,
+            this.standartSizeComboBox,
+            this.standartEmptySpaccceComboBox});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(1047, 32);
+            this.menuStrip1.TabIndex = 3;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // test1ToolStripMenuItem
+            // 
+            this.test1ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.экспортToolStripMenuItem});
+            this.test1ToolStripMenuItem.Name = "test1ToolStripMenuItem";
+            this.test1ToolStripMenuItem.Size = new System.Drawing.Size(74, 28);
+            this.test1ToolStripMenuItem.Text = "Правка";
+            // 
+            // test2ToolStripMenuItem
+            // 
+            this.test2ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.фывфывToolStripMenuItem});
+            this.test2ToolStripMenuItem.Name = "test2ToolStripMenuItem";
+            this.test2ToolStripMenuItem.Size = new System.Drawing.Size(100, 28);
+            this.test2ToolStripMenuItem.Text = "Интерфейс";
+            // 
+            // фывфывToolStripMenuItem
+            // 
+            this.фывфывToolStripMenuItem.Name = "фывфывToolStripMenuItem";
+            this.фывфывToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.фывфывToolStripMenuItem.Text = "Убрать бота";
+            this.фывфывToolStripMenuItem.Click += new System.EventHandler(this.фывфывToolStripMenuItem_Click);
+            // 
+            // statusStrip1
+            // 
+            this.statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.sizeLabel,
+            this.emptySpaceLabel,
+            this.generationTimeLabel});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 544);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(1047, 22);
+            this.statusStrip1.TabIndex = 4;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // sizeLabel
+            // 
+            this.sizeLabel.Name = "sizeLabel";
+            this.sizeLabel.Size = new System.Drawing.Size(0, 18);
+            // 
+            // emptySpaceLabel
+            // 
+            this.emptySpaceLabel.Name = "emptySpaceLabel";
+            this.emptySpaceLabel.Size = new System.Drawing.Size(0, 18);
+            // 
+            // mainTableLayout
+            // 
+            this.mainTableLayout.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
+            this.mainTableLayout.ColumnCount = 3;
+            this.mainTableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.mainTableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 55F));
+            this.mainTableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.mainTableLayout.Controls.Add(this.labirinthTableLayout, 1, 0);
+            this.mainTableLayout.Controls.Add(this.tableLayoutPanel1, 0, 0);
+            this.mainTableLayout.Controls.Add(this.botTableLayout, 2, 0);
+            this.mainTableLayout.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.mainTableLayout.Location = new System.Drawing.Point(0, 32);
+            this.mainTableLayout.Name = "mainTableLayout";
+            this.mainTableLayout.RowCount = 1;
+            this.mainTableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.mainTableLayout.Size = new System.Drawing.Size(1047, 512);
+            this.mainTableLayout.TabIndex = 5;
+            // 
+            // labirinthTableLayout
+            // 
+            this.labirinthTableLayout.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Inset;
+            this.labirinthTableLayout.ColumnCount = 1;
+            this.labirinthTableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.labirinthTableLayout.Controls.Add(this.panel1, 0, 0);
+            this.labirinthTableLayout.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.labirinthTableLayout.Location = new System.Drawing.Point(213, 4);
+            this.labirinthTableLayout.Name = "labirinthTableLayout";
+            this.labirinthTableLayout.RowCount = 2;
+            this.labirinthTableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 85F));
+            this.labirinthTableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15F));
+            this.labirinthTableLayout.Size = new System.Drawing.Size(567, 504);
+            this.labirinthTableLayout.TabIndex = 3;
+            // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.ColumnCount = 1;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.Controls.Add(this.groupBox3, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.groupBox1, 0, 4);
+            this.tableLayoutPanel1.Controls.Add(this.groupBox2, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.generateButton, 0, 2);
+            this.tableLayoutPanel1.Controls.Add(this.exitAndEnterButton, 0, 3);
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(4, 4);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 5;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(202, 504);
+            this.tableLayoutPanel1.TabIndex = 9;
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.panel2);
+            this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox2.Location = new System.Drawing.Point(3, 3);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(196, 94);
+            this.groupBox2.TabIndex = 11;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Размеры";
+            // 
+            // panel2
+            // 
+            this.panel2.AutoScroll = true;
+            this.panel2.Controls.Add(this.heightNumericUpDowm);
+            this.panel2.Controls.Add(this.label5);
+            this.panel2.Controls.Add(this.label4);
+            this.panel2.Controls.Add(this.widthNumericUpDown);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel2.Location = new System.Drawing.Point(3, 18);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(190, 73);
+            this.panel2.TabIndex = 0;
+            // 
+            // heightNumericUpDowm
+            // 
+            this.heightNumericUpDowm.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.heightNumericUpDowm.Location = new System.Drawing.Point(94, 64);
+            this.heightNumericUpDowm.Maximum = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
+            this.heightNumericUpDowm.Minimum = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            this.heightNumericUpDowm.Name = "heightNumericUpDowm";
+            this.heightNumericUpDowm.Size = new System.Drawing.Size(84, 26);
+            this.heightNumericUpDowm.TabIndex = 14;
+            this.heightNumericUpDowm.Value = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label5.Location = new System.Drawing.Point(14, 64);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(72, 20);
+            this.label5.TabIndex = 13;
+            this.label5.Text = "Высота";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label4.Location = new System.Drawing.Point(13, 20);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(73, 20);
+            this.label4.TabIndex = 12;
+            this.label4.Text = "Ширина";
+            // 
+            // widthNumericUpDown
+            // 
+            this.widthNumericUpDown.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.widthNumericUpDown.Location = new System.Drawing.Point(92, 20);
+            this.widthNumericUpDown.Maximum = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
+            this.widthNumericUpDown.Minimum = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            this.widthNumericUpDown.Name = "widthNumericUpDown";
+            this.widthNumericUpDown.Size = new System.Drawing.Size(84, 26);
+            this.widthNumericUpDown.TabIndex = 11;
+            this.widthNumericUpDown.Value = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.zoomTableLayout);
+            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox1.Location = new System.Drawing.Point(3, 403);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(196, 98);
+            this.groupBox1.TabIndex = 12;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Маштаб";
+            // 
+            // zoomTableLayout
+            // 
+            this.zoomTableLayout.AutoScroll = true;
+            this.zoomTableLayout.ColumnCount = 2;
+            this.zoomTableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.zoomTableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.zoomTableLayout.Controls.Add(this.zoomNumericUpDown, 1, 0);
+            this.zoomTableLayout.Controls.Add(this.zoomTrackBar, 0, 0);
+            this.zoomTableLayout.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.zoomTableLayout.Location = new System.Drawing.Point(3, 18);
+            this.zoomTableLayout.MinimumSize = new System.Drawing.Size(30, 30);
+            this.zoomTableLayout.Name = "zoomTableLayout";
+            this.zoomTableLayout.RowCount = 1;
+            this.zoomTableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.zoomTableLayout.Size = new System.Drawing.Size(190, 77);
+            this.zoomTableLayout.TabIndex = 3;
+            // 
+            // zoomNumericUpDown
+            // 
+            this.zoomNumericUpDown.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.zoomNumericUpDown.AutoSize = true;
+            this.zoomNumericUpDown.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.zoomNumericUpDown.Location = new System.Drawing.Point(122, 23);
+            this.zoomNumericUpDown.Name = "zoomNumericUpDown";
+            this.zoomNumericUpDown.Size = new System.Drawing.Size(65, 30);
+            this.zoomNumericUpDown.TabIndex = 0;
+            this.zoomNumericUpDown.ValueChanged += new System.EventHandler(this.zoomNumericUpDown1_ValueChanged);
+            // 
+            // zoomTrackBar
+            // 
+            this.zoomTrackBar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.zoomTrackBar.Location = new System.Drawing.Point(3, 10);
+            this.zoomTrackBar.Name = "zoomTrackBar";
+            this.zoomTrackBar.Size = new System.Drawing.Size(113, 56);
+            this.zoomTrackBar.TabIndex = 1;
+            this.zoomTrackBar.Scroll += new System.EventHandler(this.zoomTrackBar_Scroll);
+            // 
+            // generateButton
+            // 
+            this.generateButton.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.generateButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.generateButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.generateButton.Location = new System.Drawing.Point(3, 203);
+            this.generateButton.Name = "generateButton";
+            this.generateButton.Size = new System.Drawing.Size(196, 94);
+            this.generateButton.TabIndex = 13;
+            this.generateButton.Text = "Генерировать";
+            this.generateButton.UseVisualStyleBackColor = true;
+            // 
+            // exitAndEnterButton
+            // 
+            this.exitAndEnterButton.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.exitAndEnterButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.exitAndEnterButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.exitAndEnterButton.Location = new System.Drawing.Point(3, 303);
+            this.exitAndEnterButton.Name = "exitAndEnterButton";
+            this.exitAndEnterButton.Size = new System.Drawing.Size(196, 94);
+            this.exitAndEnterButton.TabIndex = 14;
+            this.exitAndEnterButton.Text = "Регенирировать вход/выход";
+            this.exitAndEnterButton.UseVisualStyleBackColor = true;
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.panel4);
+            this.groupBox3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox3.Location = new System.Drawing.Point(3, 103);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(196, 94);
+            this.groupBox3.TabIndex = 18;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Пустое пространство";
+            // 
+            // panel4
+            // 
+            this.panel4.AutoScroll = true;
+            this.panel4.Controls.Add(this.label3);
+            this.panel4.Controls.Add(this.emptySpaceNumericUpDown);
+            this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel4.Location = new System.Drawing.Point(3, 18);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(190, 73);
+            this.panel4.TabIndex = 0;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label3.Location = new System.Drawing.Point(174, 42);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(24, 20);
+            this.label3.TabIndex = 9;
+            this.label3.Text = "%";
+            // 
+            // emptySpaceNumericUpDown
+            // 
+            this.emptySpaceNumericUpDown.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.emptySpaceNumericUpDown.Location = new System.Drawing.Point(11, 40);
+            this.emptySpaceNumericUpDown.Name = "emptySpaceNumericUpDown";
+            this.emptySpaceNumericUpDown.Size = new System.Drawing.Size(157, 26);
+            this.emptySpaceNumericUpDown.TabIndex = 8;
+            this.emptySpaceNumericUpDown.Value = new decimal(new int[] {
+            40,
+            0,
+            0,
+            0});
+            // 
+            // botTableLayout
+            // 
+            this.botTableLayout.ColumnCount = 1;
+            this.botTableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.botTableLayout.Controls.Add(this.botButton, 0, 0);
+            this.botTableLayout.Controls.Add(this.groupBox4, 0, 1);
+            this.botTableLayout.Controls.Add(this.botLogRichTextBox, 0, 2);
+            this.botTableLayout.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.botTableLayout.Location = new System.Drawing.Point(787, 4);
+            this.botTableLayout.Name = "botTableLayout";
+            this.botTableLayout.RowCount = 3;
+            this.botTableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.botTableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.botTableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.botTableLayout.Size = new System.Drawing.Size(256, 504);
+            this.botTableLayout.TabIndex = 10;
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.tableLayoutPanel2);
+            this.groupBox4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox4.Location = new System.Drawing.Point(3, 171);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(250, 162);
+            this.groupBox4.TabIndex = 13;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Скорость бота";
+            // 
+            // tableLayoutPanel2
+            // 
+            this.tableLayoutPanel2.AutoScroll = true;
+            this.tableLayoutPanel2.ColumnCount = 2;
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel2.Controls.Add(this.botSpeedNumericUpDown, 1, 0);
+            this.tableLayoutPanel2.Controls.Add(this.botSpeedTrackBar, 0, 0);
+            this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 18);
+            this.tableLayoutPanel2.MinimumSize = new System.Drawing.Size(30, 30);
+            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
+            this.tableLayoutPanel2.RowCount = 1;
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(244, 141);
+            this.tableLayoutPanel2.TabIndex = 3;
+            // 
+            // botSpeedNumericUpDown
+            // 
+            this.botSpeedNumericUpDown.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.botSpeedNumericUpDown.AutoSize = true;
+            this.botSpeedNumericUpDown.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.botSpeedNumericUpDown.Location = new System.Drawing.Point(176, 55);
+            this.botSpeedNumericUpDown.Name = "botSpeedNumericUpDown";
+            this.botSpeedNumericUpDown.Size = new System.Drawing.Size(65, 30);
+            this.botSpeedNumericUpDown.TabIndex = 0;
+            this.botSpeedNumericUpDown.ValueChanged += new System.EventHandler(this.botSpeedNumericUpDown_ValueChanged);
+            // 
+            // botSpeedTrackBar
+            // 
+            this.botSpeedTrackBar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.botSpeedTrackBar.Location = new System.Drawing.Point(3, 42);
+            this.botSpeedTrackBar.Name = "botSpeedTrackBar";
+            this.botSpeedTrackBar.Size = new System.Drawing.Size(167, 56);
+            this.botSpeedTrackBar.TabIndex = 1;
+            this.botSpeedTrackBar.Scroll += new System.EventHandler(this.botSpeedTrackBar_Scroll);
+            // 
+            // botLogRichTextBox
+            // 
+            this.botLogRichTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.botLogRichTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.botLogRichTextBox.Location = new System.Drawing.Point(3, 339);
+            this.botLogRichTextBox.Name = "botLogRichTextBox";
+            this.botLogRichTextBox.ReadOnly = true;
+            this.botLogRichTextBox.Size = new System.Drawing.Size(250, 162);
+            this.botLogRichTextBox.TabIndex = 14;
+            this.botLogRichTextBox.Text = "";
+            // 
+            // botButton
+            // 
+            this.botButton.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.botButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.botButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.botButton.Location = new System.Drawing.Point(3, 3);
+            this.botButton.Name = "botButton";
+            this.botButton.Size = new System.Drawing.Size(250, 162);
+            this.botButton.TabIndex = 15;
+            this.botButton.Text = "Пустить бота";
+            this.botButton.UseVisualStyleBackColor = true;
+            // 
+            // экспортToolStripMenuItem
+            // 
+            this.экспортToolStripMenuItem.Name = "экспортToolStripMenuItem";
+            this.экспортToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.экспортToolStripMenuItem.Text = "Экспорт";
+            // 
+            // standartSizeComboBox
+            // 
+            this.standartSizeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.standartSizeComboBox.Items.AddRange(new object[] {
+            "",
+            "5x5",
+            "10x10",
+            "20x20",
+            "30x30",
+            "40x40",
+            "50x50"});
+            this.standartSizeComboBox.Name = "standartSizeComboBox";
+            this.standartSizeComboBox.Size = new System.Drawing.Size(121, 28);
+            this.standartSizeComboBox.ToolTipText = "Стандартные размеры";
+            // 
+            // standartEmptySpaccceComboBox
+            // 
+            this.standartEmptySpaccceComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.standartEmptySpaccceComboBox.Items.AddRange(new object[] {
+            "",
+            "40%",
+            "60%",
+            "80%",
+            "90%",
+            "100%"});
+            this.standartEmptySpaccceComboBox.Name = "standartEmptySpaccceComboBox";
+            this.standartEmptySpaccceComboBox.Size = new System.Drawing.Size(121, 28);
+            this.standartEmptySpaccceComboBox.ToolTipText = "Стандарное пустое пространство";
+            // 
+            // generationTimeLabel
+            // 
+            this.generationTimeLabel.Name = "generationTimeLabel";
+            this.generationTimeLabel.Size = new System.Drawing.Size(0, 18);
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.panel1);
-            this.Controls.Add(this.button1);
+            this.ClientSize = new System.Drawing.Size(1047, 566);
+            this.Controls.Add(this.mainTableLayout);
+            this.Controls.Add(this.statusStrip1);
+            this.Controls.Add(this.menuStrip1);
+            this.MainMenuStrip = this.menuStrip1;
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = ".Net Labirinth";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.labirinthPictureBox)).EndInit();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
+            this.mainTableLayout.ResumeLayout(false);
+            this.labirinthTableLayout.ResumeLayout(false);
+            this.tableLayoutPanel1.ResumeLayout(false);
+            this.groupBox2.ResumeLayout(false);
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.heightNumericUpDowm)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.widthNumericUpDown)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            this.zoomTableLayout.ResumeLayout(false);
+            this.zoomTableLayout.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.zoomNumericUpDown)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.zoomTrackBar)).EndInit();
+            this.groupBox3.ResumeLayout(false);
+            this.panel4.ResumeLayout(false);
+            this.panel4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.emptySpaceNumericUpDown)).EndInit();
+            this.botTableLayout.ResumeLayout(false);
+            this.groupBox4.ResumeLayout(false);
+            this.tableLayoutPanel2.ResumeLayout(false);
+            this.tableLayoutPanel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.botSpeedNumericUpDown)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.botSpeedTrackBar)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox labirinthPictureBox;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem test1ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem test2ToolStripMenuItem;
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.ToolStripStatusLabel sizeLabel;
+        private System.Windows.Forms.ToolStripStatusLabel emptySpaceLabel;
+        private System.Windows.Forms.TableLayoutPanel mainTableLayout;
+        private System.Windows.Forms.TableLayoutPanel labirinthTableLayout;
+        private System.Windows.Forms.ToolStripMenuItem фывфывToolStripMenuItem;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.NumericUpDown emptySpaceNumericUpDown;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.TableLayoutPanel zoomTableLayout;
+        private System.Windows.Forms.NumericUpDown zoomNumericUpDown;
+        private System.Windows.Forms.TrackBar zoomTrackBar;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.NumericUpDown heightNumericUpDowm;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.NumericUpDown widthNumericUpDown;
+        private System.Windows.Forms.Button generateButton;
+        private System.Windows.Forms.Button exitAndEnterButton;
+        private System.Windows.Forms.TableLayoutPanel botTableLayout;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
+        private System.Windows.Forms.NumericUpDown botSpeedNumericUpDown;
+        private System.Windows.Forms.TrackBar botSpeedTrackBar;
+        private System.Windows.Forms.RichTextBox botLogRichTextBox;
+        private System.Windows.Forms.Button botButton;
+        private System.Windows.Forms.ToolStripMenuItem экспортToolStripMenuItem;
+        private System.Windows.Forms.ToolStripComboBox standartSizeComboBox;
+        private System.Windows.Forms.ToolStripComboBox standartEmptySpaccceComboBox;
+        private System.Windows.Forms.ToolStripStatusLabel generationTimeLabel;
     }
 }
 
