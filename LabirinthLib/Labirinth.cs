@@ -589,19 +589,26 @@ namespace LabirinthLib
             this.firstWay.AddRange(firstWay);
             this.secondWay.AddRange(secondWay);
             //Генерация входов и выходов
-            GenerateInsAndExit();
+            GenerationInsAndExit();
+        }
+        /// <summary>
+        /// Асинхронная генерация входов/выходов
+        /// </summary>
+        public async void GenerateInsAndExitAsync()
+        {
+            await Task.Run(() => GenerationInsAndExit());
         }
         /// <summary>
         /// Перегенирация входов и выходов
         /// </summary>
-        public void RegenerateInsAndExit()
+        public void GenerateInsAndExit()
         {
-            GenerateInsAndExit();
+            GenerationInsAndExit();
         }
         /// <summary>
         /// Генерация входов и выходов (около границы)
         /// </summary>
-        private void GenerateInsAndExit()
+        private void GenerationInsAndExit()
         {
             List<Point> preborderPoints = GetEmptyCellsInLayout(1).ToList();
 
