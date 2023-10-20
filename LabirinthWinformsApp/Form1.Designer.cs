@@ -466,6 +466,7 @@ namespace LabirinthWinformsApp
             this.generateButton.TabIndex = 13;
             this.generateButton.Text = "Генерировать";
             this.generateButton.UseVisualStyleBackColor = true;
+            this.generateButton.Click += new System.EventHandler(this.generateButton_Click);
             // 
             // exitAndEnterButton
             // 

@@ -18,7 +18,7 @@ namespace LabirinthWinformsApp
     public partial class MainForm : Form
     {
         private float zoom = 1f;
-        Labirinth lab; 
+        private Labirinth lab; 
 
         public MainForm()
         {
@@ -31,6 +31,12 @@ namespace LabirinthWinformsApp
 
             this.zoomNumericUpDown.Maximum = 100;
             this.zoomTrackBar.Maximum = 100;
+
+            this.botSpeedNumericUpDown.Minimum = 0;
+            this.botSpeedTrackBar.Minimum = 0;
+
+            this.botSpeedTrackBar.Maximum = 100;
+            this.botSpeedNumericUpDown.Maximum = 100;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -44,8 +50,8 @@ namespace LabirinthWinformsApp
         {
             Bitmap bitmap = new Bitmap((int)(lab.Width * zoom), (int)(lab.Height * zoom));
             Graphics g = Graphics.FromImage(bitmap);
-            g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.None;
-            g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
+            //g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.None;
+            //g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
             Matrix matrix = new Matrix();
             matrix.Scale(zoom, zoom);
             g.Transform = matrix;
@@ -77,6 +83,17 @@ namespace LabirinthWinformsApp
 
                 //zoom = zoomTrackBar.Value;
             }
+            DrawLabirinth();
+        }
+
+        private void generateButton_Click(object sender, EventArgs e)
+        {
+            lab.Size = new LabirinthLib.Structs.Size(((int)widthNumericUpDown.Value), 
+                ((int)heightNumericUpDowm.Value));
+            lab.EmptySpace = ((int)emptySpaceNumericUpDown.Value);
+
+            lab.GenerateLabirinthAsync();
+
             DrawLabirinth();
         }
     }
