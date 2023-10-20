@@ -199,5 +199,12 @@ namespace LabirinthWinformsApp
             }
         }
 
+        private void убратьботаToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            bool value = убратьботаToolStripMenuItem.Checked;
+            botTableLayout.Enabled = value;
+            botTableLayout.Visible = value;
+            mainTableLayout.ColumnStyles[2].Width = value ? 0 : 25;
+        }
     }
 }
