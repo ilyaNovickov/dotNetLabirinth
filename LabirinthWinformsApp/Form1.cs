@@ -74,5 +74,10 @@ namespace LabirinthWinformsApp
         {
 
         }
+
+        private void фывфывToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
