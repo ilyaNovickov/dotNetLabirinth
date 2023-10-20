@@ -146,8 +146,9 @@ namespace LabirinthWinformsApp
             // экспортToolStripMenuItem
             // 
             this.экспортToolStripMenuItem.Name = "экспортToolStripMenuItem";
-            this.экспортToolStripMenuItem.Size = new System.Drawing.Size(148, 26);
+            this.экспортToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.экспортToolStripMenuItem.Text = "Экспорт";
+            this.экспортToolStripMenuItem.Click += new System.EventHandler(this.экспортToolStripMenuItem_Click);
             // 
             // test2ToolStripMenuItem
             // 

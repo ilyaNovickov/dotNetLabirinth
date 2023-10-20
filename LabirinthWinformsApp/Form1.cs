@@ -13,6 +13,9 @@ using LabirinthLib.Structs;
 using LabirinthLib.Printers;
 using System.Reflection;
 using System.Diagnostics;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.Xml.Serialization;
 
 namespace LabirinthWinformsApp
 {
@@ -227,6 +230,56 @@ namespace LabirinthWinformsApp
             string[] vars = new string[] { "-", "/", "\\", "|"};
             Random random = new Random();
             this.Text = ".Net Labirinth | Думаем " + vars[random.Next(0, vars.Length)];
+        }
+
+        private void экспортToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            void SaveImageFile(string path)
+            {
+                Bitmap bitmap = new Bitmap(lab.Width, lab.Height);
+
+                Graphics g = Graphics.FromImage(bitmap);
+
+                lab.DrawLabirinth(g);
+
+                bitmap.Save(path);
+
+                bitmap.Dispose();
+            }
+            void SaveImageSerializeBin(string path)
+            {
+                BinaryFormatter formatter = new BinaryFormatter();
+                using (FileStream stream = new FileStream(path, FileMode.Create))
+                    formatter.Serialize(stream, lab);
+            }
+
+            using (SaveFileDialog sfd = new SaveFileDialog())
+            {
+                sfd.Filter = "PNG (*.png)|*.png|JPEG (*.jpeg)|*.jpeg;*.jpg|BMP (*.bmp)|*.bmp|BIN (*.bin)|*.bin";
+
+                if (sfd.ShowDialog() == DialogResult.OK)
+                {
+                    string path = sfd.FileName;
+
+                    if (path == "" || path == null)
+                        return;
+
+                    switch (Path.GetExtension(path))
+                    {
+                        case ".png":
+                        case ".jpeg":
+                        case ".jpg":
+                        case ".bmp":
+                            SaveImageFile(path);
+                            break;
+                        case ".bin":
+                            SaveImageSerializeBin(path);
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
         }
     }
 }
