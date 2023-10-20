@@ -65,7 +65,7 @@ namespace LabirinthWinformsApp
                 botSpeedNumericUpDown.Value = botSpeedTrackBar.Value;
         }
 
-        private void NumericUpDown_ValueChanged(object sender, EventArgs e)
+        private void numericUpDown_ValueChanged(object sender, EventArgs e)
         {
             if (sender == zoomNumericUpDown)
             {
@@ -198,5 +198,6 @@ namespace LabirinthWinformsApp
                 }
             }
         }
+
     }
 }

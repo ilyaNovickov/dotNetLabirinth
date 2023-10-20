@@ -310,7 +310,7 @@ namespace LabirinthWinformsApp
             this.emptySpaceNumericUpDown.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.emptySpaceNumericUpDown.Location = new System.Drawing.Point(11, 40);
             this.emptySpaceNumericUpDown.Name = "emptySpaceNumericUpDown";
-            this.emptySpaceNumericUpDown.Size = new System.Drawing.Size(157, 26);
+            this.emptySpaceNumericUpDown.Size = new System.Drawing.Size(150, 26);
             this.emptySpaceNumericUpDown.TabIndex = 8;
             this.emptySpaceNumericUpDown.Value = new decimal(new int[] {
             40,
@@ -360,7 +360,7 @@ namespace LabirinthWinformsApp
             0,
             0,
             0});
-            this.zoomNumericUpDown.ValueChanged += new System.EventHandler(this.NumericUpDown_ValueChanged);
+            this.zoomNumericUpDown.ValueChanged += new System.EventHandler(this.numericUpDown_ValueChanged);
             // 
             // zoomTrackBar
             // 
@@ -560,7 +560,7 @@ namespace LabirinthWinformsApp
             this.botSpeedNumericUpDown.Name = "botSpeedNumericUpDown";
             this.botSpeedNumericUpDown.Size = new System.Drawing.Size(65, 30);
             this.botSpeedNumericUpDown.TabIndex = 0;
-            this.botSpeedNumericUpDown.ValueChanged += new System.EventHandler(this.NumericUpDown_ValueChanged);
+            this.botSpeedNumericUpDown.ValueChanged += new System.EventHandler(this.numericUpDown_ValueChanged);
             // 
             // botSpeedTrackBar
             // 
