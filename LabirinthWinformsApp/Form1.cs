@@ -64,5 +64,15 @@ namespace LabirinthWinformsApp
             zoom = zoomTrackBar.Value;
             DrawLabirinth();
         }
+
+        private void botSpeedTrackBar_Scroll(object sender, EventArgs e)
+        {
+
+        }
+
+        private void botSpeedNumericUpDown_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
