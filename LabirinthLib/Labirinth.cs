@@ -12,6 +12,7 @@ namespace LabirinthLib
     /// <summary>
     /// Класс лабиринта
     /// </summary>
+    [Serializable]
     public class Labirinth
     {
         /*
@@ -19,7 +20,7 @@ namespace LabirinthLib
          * 1 - wall
          */
         #region Vars
-        Random random = new Random();//Экземпляр класса рандомайзера
+        //Random random = new Random();//Экземпляр класса рандомайзера
         float percentofEmptySpace = 0.4f;//Кол-во пустого пространства в процентах
         Size size;//Размер лабиринта
         //Координаты входов №1 и №2 и выхода
@@ -264,6 +265,7 @@ namespace LabirinthLib
         /// <returns>Случайная точка</returns>
         internal Point GetRandomPointFromList(IEnumerable<Point> list)
         {
+            Random random = new Random();
             if (list.Count() == 0)
                 return Point.Empty;
             return list.ElementAt(random.Next(0, list.Count()));
@@ -275,6 +277,7 @@ namespace LabirinthLib
         /// <returns>Случайный путь</returns>
         internal Direction GetRandomDirectionFromList(IEnumerable<Direction> avaibleDirs)
         {
+            Random random = new Random();
             if (avaibleDirs.Count() == 0)
                 return Direction.None;
             return avaibleDirs.ElementAt(random.Next(0, avaibleDirs.Count<Direction>()));
@@ -326,6 +329,7 @@ namespace LabirinthLib
         /// <exception cref="Exception">В лабиринте нет столько слоёв</exception>
         private Point GetRandomLayoutPoint(int numofLayout = 0)
         {
+            Random random = new Random();
 
             if (numofLayout < 0 || numofLayout >= CountofLayouts)
                 throw new Exception("В прямоугольнике нет столько слоёв");
@@ -497,6 +501,8 @@ namespace LabirinthLib
                     }
                 }
             }
+
+            Random random = new Random();
 
             int countofEmptySpace = ((int)(percentofEmptySpace * new Size(size.Width - 2, size.Height - 2).Square));
 
