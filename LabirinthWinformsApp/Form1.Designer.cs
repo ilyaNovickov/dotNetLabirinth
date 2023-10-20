@@ -36,8 +36,8 @@ namespace LabirinthWinformsApp
             this.test2ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.фывфывToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.sizeLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.emptySpaceLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.mainTableLayout = new System.Windows.Forms.TableLayoutPanel();
             this.labirinthTableLayout = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
@@ -67,6 +67,7 @@ namespace LabirinthWinformsApp
             this.экспортToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.standartSizeComboBox = new System.Windows.Forms.ToolStripComboBox();
             this.standartEmptySpaccceComboBox = new System.Windows.Forms.ToolStripComboBox();
+            this.generationTimeLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.labirinthPictureBox)).BeginInit();
             this.menuStrip1.SuspendLayout();
@@ -101,7 +102,7 @@ namespace LabirinthWinformsApp
             this.panel1.Location = new System.Drawing.Point(6, 6);
             this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(555, 411);
+            this.panel1.Size = new System.Drawing.Size(555, 413);
             this.panel1.TabIndex = 2;
             // 
             // labirinthPictureBox
@@ -156,25 +157,24 @@ namespace LabirinthWinformsApp
             // 
             this.statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripStatusLabel1,
-            this.toolStripStatusLabel2});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 540);
+            this.sizeLabel,
+            this.emptySpaceLabel,
+            this.generationTimeLabel});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 542);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(1047, 26);
+            this.statusStrip1.Size = new System.Drawing.Size(1047, 24);
             this.statusStrip1.TabIndex = 4;
             this.statusStrip1.Text = "statusStrip1";
             // 
-            // toolStripStatusLabel1
+            // sizeLabel
             // 
-            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(151, 20);
-            this.toolStripStatusLabel1.Text = "toolStripStatusLabel1";
+            this.sizeLabel.Name = "sizeLabel";
+            this.sizeLabel.Size = new System.Drawing.Size(0, 18);
             // 
-            // toolStripStatusLabel2
+            // emptySpaceLabel
             // 
-            this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
-            this.toolStripStatusLabel2.Size = new System.Drawing.Size(151, 20);
-            this.toolStripStatusLabel2.Text = "toolStripStatusLabel2";
+            this.emptySpaceLabel.Name = "emptySpaceLabel";
+            this.emptySpaceLabel.Size = new System.Drawing.Size(0, 18);
             // 
             // mainTableLayout
             // 
@@ -191,7 +191,7 @@ namespace LabirinthWinformsApp
             this.mainTableLayout.Name = "mainTableLayout";
             this.mainTableLayout.RowCount = 1;
             this.mainTableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.mainTableLayout.Size = new System.Drawing.Size(1047, 508);
+            this.mainTableLayout.Size = new System.Drawing.Size(1047, 510);
             this.mainTableLayout.TabIndex = 5;
             // 
             // labirinthTableLayout
@@ -206,7 +206,7 @@ namespace LabirinthWinformsApp
             this.labirinthTableLayout.RowCount = 2;
             this.labirinthTableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 85F));
             this.labirinthTableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15F));
-            this.labirinthTableLayout.Size = new System.Drawing.Size(567, 500);
+            this.labirinthTableLayout.Size = new System.Drawing.Size(567, 502);
             this.labirinthTableLayout.TabIndex = 3;
             // 
             // tableLayoutPanel1
@@ -228,7 +228,7 @@ namespace LabirinthWinformsApp
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(202, 500);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(202, 502);
             this.tableLayoutPanel1.TabIndex = 9;
             // 
             // groupBox2
@@ -327,7 +327,7 @@ namespace LabirinthWinformsApp
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox1.Location = new System.Drawing.Point(3, 403);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(196, 94);
+            this.groupBox1.Size = new System.Drawing.Size(196, 96);
             this.groupBox1.TabIndex = 12;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Маштаб";
@@ -346,7 +346,7 @@ namespace LabirinthWinformsApp
             this.zoomTableLayout.Name = "zoomTableLayout";
             this.zoomTableLayout.RowCount = 1;
             this.zoomTableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.zoomTableLayout.Size = new System.Drawing.Size(190, 73);
+            this.zoomTableLayout.Size = new System.Drawing.Size(190, 75);
             this.zoomTableLayout.TabIndex = 3;
             // 
             // zoomNumericUpDown
@@ -354,7 +354,7 @@ namespace LabirinthWinformsApp
             this.zoomNumericUpDown.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.zoomNumericUpDown.AutoSize = true;
             this.zoomNumericUpDown.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.zoomNumericUpDown.Location = new System.Drawing.Point(122, 21);
+            this.zoomNumericUpDown.Location = new System.Drawing.Point(122, 22);
             this.zoomNumericUpDown.Name = "zoomNumericUpDown";
             this.zoomNumericUpDown.Size = new System.Drawing.Size(65, 30);
             this.zoomNumericUpDown.TabIndex = 0;
@@ -363,7 +363,7 @@ namespace LabirinthWinformsApp
             // zoomTrackBar
             // 
             this.zoomTrackBar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.zoomTrackBar.Location = new System.Drawing.Point(3, 8);
+            this.zoomTrackBar.Location = new System.Drawing.Point(3, 9);
             this.zoomTrackBar.Name = "zoomTrackBar";
             this.zoomTrackBar.Size = new System.Drawing.Size(113, 56);
             this.zoomTrackBar.TabIndex = 1;
@@ -456,16 +456,16 @@ namespace LabirinthWinformsApp
             this.botTableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.botTableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.botTableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.botTableLayout.Size = new System.Drawing.Size(256, 500);
+            this.botTableLayout.Size = new System.Drawing.Size(256, 502);
             this.botTableLayout.TabIndex = 10;
             // 
             // groupBox4
             // 
             this.groupBox4.Controls.Add(this.tableLayoutPanel2);
             this.groupBox4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox4.Location = new System.Drawing.Point(3, 169);
+            this.groupBox4.Location = new System.Drawing.Point(3, 170);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(250, 160);
+            this.groupBox4.Size = new System.Drawing.Size(250, 161);
             this.groupBox4.TabIndex = 13;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Скорость бота";
@@ -484,7 +484,7 @@ namespace LabirinthWinformsApp
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(244, 139);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(244, 140);
             this.tableLayoutPanel2.TabIndex = 3;
             // 
             // botSpeedNumericUpDown
@@ -492,7 +492,7 @@ namespace LabirinthWinformsApp
             this.botSpeedNumericUpDown.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.botSpeedNumericUpDown.AutoSize = true;
             this.botSpeedNumericUpDown.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.botSpeedNumericUpDown.Location = new System.Drawing.Point(176, 54);
+            this.botSpeedNumericUpDown.Location = new System.Drawing.Point(176, 55);
             this.botSpeedNumericUpDown.Name = "botSpeedNumericUpDown";
             this.botSpeedNumericUpDown.Size = new System.Drawing.Size(65, 30);
             this.botSpeedNumericUpDown.TabIndex = 0;
@@ -501,7 +501,7 @@ namespace LabirinthWinformsApp
             // botSpeedTrackBar
             // 
             this.botSpeedTrackBar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.botSpeedTrackBar.Location = new System.Drawing.Point(3, 41);
+            this.botSpeedTrackBar.Location = new System.Drawing.Point(3, 42);
             this.botSpeedTrackBar.Name = "botSpeedTrackBar";
             this.botSpeedTrackBar.Size = new System.Drawing.Size(167, 56);
             this.botSpeedTrackBar.TabIndex = 1;
@@ -511,7 +511,7 @@ namespace LabirinthWinformsApp
             // 
             this.botLogRichTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.botLogRichTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.botLogRichTextBox.Location = new System.Drawing.Point(3, 335);
+            this.botLogRichTextBox.Location = new System.Drawing.Point(3, 337);
             this.botLogRichTextBox.Name = "botLogRichTextBox";
             this.botLogRichTextBox.ReadOnly = true;
             this.botLogRichTextBox.Size = new System.Drawing.Size(250, 162);
@@ -527,7 +527,7 @@ namespace LabirinthWinformsApp
             this.botButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.botButton.Location = new System.Drawing.Point(3, 3);
             this.botButton.Name = "botButton";
-            this.botButton.Size = new System.Drawing.Size(250, 160);
+            this.botButton.Size = new System.Drawing.Size(250, 161);
             this.botButton.TabIndex = 15;
             this.botButton.Text = "Пустить бота";
             this.botButton.UseVisualStyleBackColor = true;
@@ -566,6 +566,11 @@ namespace LabirinthWinformsApp
             this.standartEmptySpaccceComboBox.Name = "standartEmptySpaccceComboBox";
             this.standartEmptySpaccceComboBox.Size = new System.Drawing.Size(121, 28);
             this.standartEmptySpaccceComboBox.ToolTipText = "Стандарное пустое пространство";
+            // 
+            // generationTimeLabel
+            // 
+            this.generationTimeLabel.Name = "generationTimeLabel";
+            this.generationTimeLabel.Size = new System.Drawing.Size(0, 18);
             // 
             // Form1
             // 
@@ -621,8 +626,8 @@ namespace LabirinthWinformsApp
         private System.Windows.Forms.ToolStripMenuItem test1ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem test2ToolStripMenuItem;
         private System.Windows.Forms.StatusStrip statusStrip1;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
+        private System.Windows.Forms.ToolStripStatusLabel sizeLabel;
+        private System.Windows.Forms.ToolStripStatusLabel emptySpaceLabel;
         private System.Windows.Forms.TableLayoutPanel mainTableLayout;
         private System.Windows.Forms.TableLayoutPanel labirinthTableLayout;
         private System.Windows.Forms.ToolStripMenuItem фывфывToolStripMenuItem;
@@ -653,6 +658,7 @@ namespace LabirinthWinformsApp
         private System.Windows.Forms.ToolStripMenuItem экспортToolStripMenuItem;
         private System.Windows.Forms.ToolStripComboBox standartSizeComboBox;
         private System.Windows.Forms.ToolStripComboBox standartEmptySpaccceComboBox;
+        private System.Windows.Forms.ToolStripStatusLabel generationTimeLabel;
     }
 }
 
