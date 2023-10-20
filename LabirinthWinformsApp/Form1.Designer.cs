@@ -68,6 +68,7 @@ namespace LabirinthWinformsApp
             this.botSpeedNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.botSpeedTrackBar = new System.Windows.Forms.TrackBar();
             this.botLogRichTextBox = new System.Windows.Forms.RichTextBox();
+            this.backgroundWorker = new System.ComponentModel.BackgroundWorker();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.labirinthPictureBox)).BeginInit();
             this.menuStrip1.SuspendLayout();
@@ -659,6 +660,7 @@ namespace LabirinthWinformsApp
         private System.Windows.Forms.ToolStripComboBox standartSizeComboBox;
         private System.Windows.Forms.ToolStripComboBox standartEmptySpaccceComboBox;
         private System.Windows.Forms.ToolStripStatusLabel generationTimeLabel;
+        private System.ComponentModel.BackgroundWorker backgroundWorker;
     }
 }
 
