@@ -144,11 +144,18 @@ namespace LabirinthWinformsApp
                 this.generationTimeLabel.Text =
                     $"Время генерации : {Math.Round(value, 2)}" + " " + units;
             }
-            this.sizeLabel.Text = $"Размер : {lab.Size.ToString()}";
-            this.emptySpaceLabel.Text = $"Пустое пространство : {lab.EmptySpace * 100} %";
             this.Text = ".Net Labirinth";
             botTableLayout.Enabled = true;
             timer.Stop();
+
+            UpdateLabirinthData();
+        }
+
+        private void UpdateLabirinthData()
+        {
+            this.sizeLabel.Text = $"Размер : {lab.Size.ToString()}";
+            this.emptySpaceLabel.Text = $"Пустое пространство : {lab.EmptySpace * 100} %";
+
             DrawLabirinth();
         }
 
@@ -234,11 +241,30 @@ namespace LabirinthWinformsApp
 
         private void экспортToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            bool withScale = sender == экспортСМаштабомToolStripMenuItem;
+
             void SaveImageFile(string path)
             {
-                Bitmap bitmap = new Bitmap(lab.Width, lab.Height);
+                Bitmap bitmap;
+                Graphics g;
+                if (!withScale)
+                {
+                    bitmap = new Bitmap(lab.Width, lab.Height);
 
-                Graphics g = Graphics.FromImage(bitmap);
+                    g = Graphics.FromImage(bitmap);
+                }
+                else
+                {
+                    bitmap = new Bitmap((int)(lab.Width * zoom), (int)(lab.Height * zoom));
+
+                    g = Graphics.FromImage(bitmap);
+
+                    Matrix matrix = new Matrix();
+
+                    matrix.Scale(zoom, zoom);
+
+                    g.Transform = matrix;
+                }
 
                 lab.DrawLabirinth(g);
 
@@ -255,7 +281,10 @@ namespace LabirinthWinformsApp
 
             using (SaveFileDialog sfd = new SaveFileDialog())
             {
-                sfd.Filter = "PNG (*.png)|*.png|JPEG (*.jpeg)|*.jpeg;*.jpg|BMP (*.bmp)|*.bmp|BIN (*.bin)|*.bin";
+                sfd.Filter = "PNG (*.png)|*.png|JPEG (*.jpeg)|*.jpeg;*.jpg|BMP (*.bmp)|*.bmp;";
+
+                if (!withScale)
+                    sfd.Filter += "|BIN (*.bin)|*.bin";
 
                 if (sfd.ShowDialog() == DialogResult.OK)
                 {
@@ -277,6 +306,37 @@ namespace LabirinthWinformsApp
                             break;
                         default:
                             break;
+                    }
+                }
+            }
+        }
+
+        private void импортToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (OpenFileDialog ofd = new OpenFileDialog())
+            {
+                ofd.Filter = "BIN (*.bin)|*.bin";
+
+                if (ofd.ShowDialog() == DialogResult.OK)
+                {
+                    string path = ofd.FileName;
+
+                    if (path == null || path == "")
+                        return;
+
+                    BinaryFormatter formatter = new BinaryFormatter();
+
+                    object result = null;
+
+                    using (FileStream stream = new FileStream(path, FileMode.Open))
+                    {
+                        result = formatter.Deserialize(stream);
+                    }
+
+                    if (result is Labirinth lab)
+                    {
+                        this.lab = lab;
+                        UpdateLabirinthData();
                     }
                 }
             }

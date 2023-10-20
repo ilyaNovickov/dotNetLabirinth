@@ -73,6 +73,8 @@ namespace LabirinthWinformsApp
             this.botLogRichTextBox = new System.Windows.Forms.RichTextBox();
             this.backgroundWorker = new System.ComponentModel.BackgroundWorker();
             this.timer = new System.Windows.Forms.Timer(this.components);
+            this.экспортСМаштабомToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.импортToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.labirinthPictureBox)).BeginInit();
             this.menuStrip1.SuspendLayout();
@@ -138,10 +140,12 @@ namespace LabirinthWinformsApp
             // test1ToolStripMenuItem
             // 
             this.test1ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.экспортToolStripMenuItem});
+            this.экспортToolStripMenuItem,
+            this.экспортСМаштабомToolStripMenuItem,
+            this.импортToolStripMenuItem});
             this.test1ToolStripMenuItem.Name = "test1ToolStripMenuItem";
-            this.test1ToolStripMenuItem.Size = new System.Drawing.Size(74, 28);
-            this.test1ToolStripMenuItem.Text = "Правка";
+            this.test1ToolStripMenuItem.Size = new System.Drawing.Size(92, 28);
+            this.test1ToolStripMenuItem.Text = "Лабиринт";
             // 
             // экспортToolStripMenuItem
             // 
@@ -614,6 +618,20 @@ namespace LabirinthWinformsApp
             // 
             this.timer.Tick += new System.EventHandler(this.timer_Tick);
             // 
+            // экспортСМаштабомToolStripMenuItem
+            // 
+            this.экспортСМаштабомToolStripMenuItem.Name = "экспортСМаштабомToolStripMenuItem";
+            this.экспортСМаштабомToolStripMenuItem.Size = new System.Drawing.Size(237, 26);
+            this.экспортСМаштабомToolStripMenuItem.Text = "Экспорт с маштабом";
+            this.экспортСМаштабомToolStripMenuItem.Click += new System.EventHandler(this.экспортToolStripMenuItem_Click);
+            // 
+            // импортToolStripMenuItem
+            // 
+            this.импортToolStripMenuItem.Name = "импортToolStripMenuItem";
+            this.импортToolStripMenuItem.Size = new System.Drawing.Size(237, 26);
+            this.импортToolStripMenuItem.Text = "Импорт";
+            this.импортToolStripMenuItem.Click += new System.EventHandler(this.импортToolStripMenuItem_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -705,6 +723,8 @@ namespace LabirinthWinformsApp
         private System.Windows.Forms.ToolStripMenuItem генерироватьToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem регенирироватьВходвыходToolStripMenuItem;
         private System.Windows.Forms.Timer timer;
+        private System.Windows.Forms.ToolStripMenuItem экспортСМаштабомToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem импортToolStripMenuItem;
     }
 }
 
