@@ -85,7 +85,8 @@ namespace LabirinthWinformsApp
 
                 //zoom = zoomTrackBar.Value;
             }
-            DrawLabirinth();
+            if (!backgroundWorker.IsBusy)
+                DrawLabirinth();
         }
 
         private void generateButton_Click(object sender, EventArgs e)
@@ -98,6 +99,12 @@ namespace LabirinthWinformsApp
             lab.EmptySpace = ((float)emptySpaceNumericUpDown.Value) / 100f;
 
             backgroundWorker.RunWorkerAsync(lab);
+        }
+
+        private void exitAndEnterButton_Click(object sender, EventArgs e)
+        {
+            lab.GenerateInsAndExit();
+            DrawLabirinth();
         }
 
         private void backgroundWorker_DoWork(object sender, DoWorkEventArgs e)
@@ -136,5 +143,6 @@ namespace LabirinthWinformsApp
             
             DrawLabirinth();
         }
+
     }
 }

@@ -488,6 +488,7 @@ namespace LabirinthWinformsApp
             this.exitAndEnterButton.TabIndex = 14;
             this.exitAndEnterButton.Text = "Регенирировать вход/выход";
             this.exitAndEnterButton.UseVisualStyleBackColor = true;
+            this.exitAndEnterButton.Click += new System.EventHandler(this.exitAndEnterButton_Click);
             // 
             // botTableLayout
             // 
