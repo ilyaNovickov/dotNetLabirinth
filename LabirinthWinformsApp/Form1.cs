@@ -9,13 +9,13 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Drawing.Drawing2D;
 using LabirinthLib;
-using LabirinthLib.Structs;
 using LabirinthLib.Printers;
 using System.Reflection;
 using System.Diagnostics;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Xml.Serialization;
+using System.Security.Cryptography.X509Certificates;
 
 namespace LabirinthWinformsApp
 {
@@ -24,6 +24,8 @@ namespace LabirinthWinformsApp
         private float zoom;
         private Labirinth lab;
         private Action timerAction;
+        private Queue<Point> way;
+        private Queue<Point> allWay;
 
         public MainForm()
         {
@@ -375,6 +377,31 @@ namespace LabirinthWinformsApp
                     }
                 }
             }
+        }
+
+        private void botButton_Click(object sender, EventArgs e)
+        {
+            int numofEnter = 1;
+            if (enterComboBox.Text == "№2")
+                numofEnter = 2;
+
+            Stopwatch sw = new Stopwatch();
+            sw.Start();
+            Dictionary<string, IEnumerable<LabirinthLib.Structs.Point>> dict = lab.GetAllWays(numofEnter);
+            sw.Stop();
+
+            botLogRichTextBox.Text += sw.Elapsed.TotalSeconds;
+
+            if (dict.TryGetValue("Way", out IEnumerable<LabirinthLib.Structs.Point> value))
+            {
+                this.way = new Queue<Point>();
+            }
+
+        }
+
+        private void ReportBotProgress()
+        {
+
         }
     }
 }
