@@ -19,7 +19,8 @@ namespace LabirinthWinformsApp
     public partial class MainForm : Form
     {
         private float zoom;
-        private Labirinth lab; 
+        private Labirinth lab;
+        private Action timerAction;
 
         public MainForm()
         {
@@ -90,9 +91,15 @@ namespace LabirinthWinformsApp
             if (backgroundWorker.IsBusy)
                 return;
 
+            botTableLayout.Enabled = false;
+
             lab.Size = new LabirinthLib.Structs.Size(((int)widthNumericUpDown.Value), 
                 ((int)heightNumericUpDowm.Value));
             lab.EmptySpace = ((float)emptySpaceNumericUpDown.Value) / 100f;
+
+            timerAction = this.ReportThatWorking;
+            timer.Interval = 1000;
+            timer.Start();
 
             backgroundWorker.RunWorkerAsync(lab);
         }
@@ -136,7 +143,9 @@ namespace LabirinthWinformsApp
             }
             this.sizeLabel.Text = $"Размер : {lab.Size.ToString()}";
             this.emptySpaceLabel.Text = $"Пустое пространство : {lab.EmptySpace * 100} %";
-            
+            this.Text = ".Net Labirinth";
+            botTableLayout.Enabled = true;
+            timer.Stop();
             DrawLabirinth();
         }
 
@@ -205,6 +214,19 @@ namespace LabirinthWinformsApp
             botTableLayout.Enabled = value;
             botTableLayout.Visible = value;
             mainTableLayout.ColumnStyles[2].Width = value ? 0 : 25;
+        }
+
+        private void timer_Tick(object sender, EventArgs e)
+        {
+            if (timerAction != null)
+                timerAction();
+        }
+
+        private void ReportThatWorking()
+        {
+            string[] vars = new string[] { "-", "/", "\\", "|"};
+            Random random = new Random();
+            this.Text = ".Net Labirinth | Думаем " + vars[random.Next(0, vars.Length)];
         }
     }
 }

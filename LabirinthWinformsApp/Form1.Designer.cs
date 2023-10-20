@@ -29,6 +29,7 @@ namespace LabirinthWinformsApp
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.panel1 = new System.Windows.Forms.Panel();
             this.labirinthPictureBox = new System.Windows.Forms.PictureBox();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
@@ -71,6 +72,7 @@ namespace LabirinthWinformsApp
             this.botSpeedTrackBar = new System.Windows.Forms.TrackBar();
             this.botLogRichTextBox = new System.Windows.Forms.RichTextBox();
             this.backgroundWorker = new System.ComponentModel.BackgroundWorker();
+            this.timer = new System.Windows.Forms.Timer(this.components);
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.labirinthPictureBox)).BeginInit();
             this.menuStrip1.SuspendLayout();
@@ -607,6 +609,10 @@ namespace LabirinthWinformsApp
             this.backgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker_DoWork);
             this.backgroundWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker_RunWorkerCompleted);
             // 
+            // timer
+            // 
+            this.timer.Tick += new System.EventHandler(this.timer_Tick);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -697,6 +703,7 @@ namespace LabirinthWinformsApp
         private System.ComponentModel.BackgroundWorker backgroundWorker;
         private System.Windows.Forms.ToolStripMenuItem генерироватьToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem регенирироватьВходвыходToolStripMenuItem;
+        private System.Windows.Forms.Timer timer;
     }
 }
 
