@@ -27,6 +27,9 @@ namespace LabirinthWinformsApp
 
             lab = new Labirinth();
 
+            this.standartEmptySpaccceComboBox.SelectedIndex = 0;
+            this.standartSizeComboBox.SelectedIndex = 0;
+
             this.zoomNumericUpDown.Minimum = 10;
             this.zoomTrackBar.Minimum = 10;
             zoom = 10f;
@@ -39,13 +42,6 @@ namespace LabirinthWinformsApp
 
             this.botSpeedTrackBar.Maximum = 100;
             this.botSpeedNumericUpDown.Maximum = 100;
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            lab.GenerateLabirinth();
-            DrawLabirinth();
-            //label1.Text = lab.GetStringLabirinth();
         }
 
         private void DrawLabirinth()
@@ -61,7 +57,7 @@ namespace LabirinthWinformsApp
             labirinthPictureBox.Image = bitmap;
         }
 
-        private void zoomTrackBar_Scroll(object sender, EventArgs e)
+        private void trackBar_Scroll(object sender, EventArgs e)
         {
             if (sender == zoomTrackBar)
                 this.zoomNumericUpDown.Value = this.zoomTrackBar.Value;
@@ -69,7 +65,7 @@ namespace LabirinthWinformsApp
                 botSpeedNumericUpDown.Value = botSpeedTrackBar.Value;
         }
 
-        private void zoomNumericUpDown1_ValueChanged(object sender, EventArgs e)
+        private void NumericUpDown_ValueChanged(object sender, EventArgs e)
         {
             if (sender == zoomNumericUpDown)
             {
@@ -144,5 +140,63 @@ namespace LabirinthWinformsApp
             DrawLabirinth();
         }
 
+        private void standartSizeComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (sender == standartEmptySpaccceComboBox)
+            {
+                switch (standartEmptySpaccceComboBox.Text)
+                {
+                    case "":
+                        break;
+                    case "40%":
+                        emptySpaceNumericUpDown.Value = 40;
+                        break;
+                    case "60%":
+                        emptySpaceNumericUpDown.Value = 60;
+                        break;
+                    case "80%":
+                        emptySpaceNumericUpDown.Value = 80;
+                        break;
+                    case "90%":
+                        emptySpaceNumericUpDown.Value = 90;
+                        break;
+                    case "100%":
+                        emptySpaceNumericUpDown.Value = 100;
+                        break;
+                }
+            }
+            else if (sender == standartSizeComboBox)
+            {
+                switch (standartSizeComboBox.Text)
+                {
+                    case "":
+                        break;
+                    case "5x5":
+                        widthNumericUpDown.Value = 5;
+                        heightNumericUpDowm.Value = 5;
+                        break;
+                    case "10x10":
+                        widthNumericUpDown.Value = 10;
+                        heightNumericUpDowm.Value = 10;
+                        break;
+                    case "20x20":
+                        widthNumericUpDown.Value = 20;
+                        heightNumericUpDowm.Value = 20;
+                        break;
+                    case "30x30":
+                        widthNumericUpDown.Value = 30;
+                        heightNumericUpDowm.Value = 30;
+                        break;
+                    case "40x40":
+                        widthNumericUpDown.Value = 40;
+                        heightNumericUpDowm.Value = 40;
+                        break;
+                    case "50x50":
+                        widthNumericUpDown.Value = 50;
+                        heightNumericUpDowm.Value = 50;
+                        break;
+                }
+            }
+        }
     }
 }

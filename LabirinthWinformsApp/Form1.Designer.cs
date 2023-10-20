@@ -173,6 +173,7 @@ namespace LabirinthWinformsApp
             this.standartSizeComboBox.Name = "standartSizeComboBox";
             this.standartSizeComboBox.Size = new System.Drawing.Size(121, 28);
             this.standartSizeComboBox.ToolTipText = "Стандартные размеры";
+            this.standartSizeComboBox.SelectedIndexChanged += new System.EventHandler(this.standartSizeComboBox_SelectedIndexChanged);
             // 
             // standartEmptySpaccceComboBox
             // 
@@ -187,6 +188,7 @@ namespace LabirinthWinformsApp
             this.standartEmptySpaccceComboBox.Name = "standartEmptySpaccceComboBox";
             this.standartEmptySpaccceComboBox.Size = new System.Drawing.Size(121, 28);
             this.standartEmptySpaccceComboBox.ToolTipText = "Стандарное пустое пространство";
+            this.standartEmptySpaccceComboBox.SelectedIndexChanged += new System.EventHandler(this.standartSizeComboBox_SelectedIndexChanged);
             // 
             // statusStrip1
             // 
@@ -358,7 +360,7 @@ namespace LabirinthWinformsApp
             0,
             0,
             0});
-            this.zoomNumericUpDown.ValueChanged += new System.EventHandler(this.zoomNumericUpDown1_ValueChanged);
+            this.zoomNumericUpDown.ValueChanged += new System.EventHandler(this.NumericUpDown_ValueChanged);
             // 
             // zoomTrackBar
             // 
@@ -368,7 +370,7 @@ namespace LabirinthWinformsApp
             this.zoomTrackBar.Size = new System.Drawing.Size(113, 56);
             this.zoomTrackBar.TabIndex = 1;
             this.zoomTrackBar.Value = 10;
-            this.zoomTrackBar.Scroll += new System.EventHandler(this.zoomTrackBar_Scroll);
+            this.zoomTrackBar.Scroll += new System.EventHandler(this.trackBar_Scroll);
             // 
             // groupBox2
             // 
@@ -558,7 +560,7 @@ namespace LabirinthWinformsApp
             this.botSpeedNumericUpDown.Name = "botSpeedNumericUpDown";
             this.botSpeedNumericUpDown.Size = new System.Drawing.Size(65, 30);
             this.botSpeedNumericUpDown.TabIndex = 0;
-            this.botSpeedNumericUpDown.ValueChanged += new System.EventHandler(this.zoomNumericUpDown1_ValueChanged);
+            this.botSpeedNumericUpDown.ValueChanged += new System.EventHandler(this.NumericUpDown_ValueChanged);
             // 
             // botSpeedTrackBar
             // 
@@ -567,7 +569,7 @@ namespace LabirinthWinformsApp
             this.botSpeedTrackBar.Name = "botSpeedTrackBar";
             this.botSpeedTrackBar.Size = new System.Drawing.Size(167, 56);
             this.botSpeedTrackBar.TabIndex = 1;
-            this.botSpeedTrackBar.Scroll += new System.EventHandler(this.zoomTrackBar_Scroll);
+            this.botSpeedTrackBar.Scroll += new System.EventHandler(this.trackBar_Scroll);
             // 
             // botLogRichTextBox
             // 
