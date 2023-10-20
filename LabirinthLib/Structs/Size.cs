@@ -86,6 +86,10 @@ namespace LabirinthLib.Structs
             }
             return false;
         }
+        public override string ToString()
+        {
+            return this.width + "x" + this.height;
+        }
         #region Convertion operation
         public static implicit operator System.Drawing.Size(Size size)
         {
