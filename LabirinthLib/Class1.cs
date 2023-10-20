@@ -29,6 +29,14 @@ namespace LabirinthLib
             }
         }
 
+        public Queue<Point> WayQueue => way;
+
+        public List<Point> WayList => way.ToList();
+
+        public event EventHandler<DeadEndFindEventArgs> DeadEndFintEvent;
+
+        
+
         public bool FindExit(int numofEnter = 1)
         {
             //Метод получения доступных направлений для перемещения точек, исключая указанные
@@ -42,11 +50,11 @@ namespace LabirinthLib
                     extraPoint.OffsetPoint(dir);
                     //Пропускаем те точки, которых нет в лабиринте и те, которые являются исключающими
                     //а также, те которые - стена и невыход
-                    if (!labirinth.IsExistInLab(extraPoint))
+                    if (!lab.IsExistInLab(extraPoint))
                         continue;
                     else if (exceptionPoints != null && exceptionPoints.Contains(extraPoint))
                         continue;
-                    else if (labirinth[extraPoint] == 1 && extraPoint != labirinth.Exit)
+                    else if (lab[extraPoint] == 1 && extraPoint != lab.Exit)
                         continue;
                     else
                         result.Add(dir);
@@ -71,6 +79,8 @@ namespace LabirinthLib
             if (walker.IsZero())
                 return false;
 
+            List<Point> way = new List<Point>();
+            way.Add(walker);
             //Стэк развилок
             Stack<Point> fork = new Stack<Point>();
             //Список посещённых точек
@@ -86,7 +96,7 @@ namespace LabirinthLib
                 {
                     visitedPoints.Add(walker);
                     walker.OffsetPoint(avaibleDirs.ElementAt(0));
-                    way.Enqueue(walker);
+                    way.Add(walker);
                 }
                 //Если нет доступных путей (т. е. тупик)
                 else if (avaibleDirs.Count() == 0)
@@ -97,8 +107,12 @@ namespace LabirinthLib
                     else
                     {
                         walker = fork.Pop();//Воврат до развилки
-                        visitedPoints.Add(way[way.IndexOf(walker) + 1]);
-                        way.RemoveSinceUnique(way.IndexOf(walker) + 1);
+
+                        List<Point> deadEndWay = way.CopyList(way.IndexOf(walker));
+                        if (DeadEndFintEvent != null)
+                            DeadEndFintEvent(this, new DeadEndFindEventArgs(deadEndWay));
+
+                        way.Add(walker);
                         continue;
                     }
                 }
@@ -108,9 +122,11 @@ namespace LabirinthLib
                     visitedPoints.Add(walker);
                     //Переместиться в рандомное направление
                     walker.OffsetPoint(lab.GetRandomDirectionFromList(avaibleDirs));
-                    way.Enqueue(walker);
+                    way.Add(walker);
                 }
             }
+            this.way = new Queue<Point>(way);
+            return true;
         }
     }
 }
