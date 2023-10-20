@@ -10,6 +10,7 @@ namespace LabirinthLib.Structs
     /// <summary>
     /// Структура координат в 2D пространстве
     /// </summary>
+    [Serializable]
     public struct Point
     {
         #region Vars

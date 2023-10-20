@@ -11,6 +11,7 @@ namespace LabirinthLib.Structs
     /// <summary>
     /// Структура размера
     /// </summary>
+    [Serializable]
     public struct Size
     {
         #region Vars
