@@ -18,7 +18,7 @@ namespace LabirinthWinformsApp
 {
     public partial class MainForm : Form
     {
-        private float zoom = 1f;
+        private float zoom;
         private Labirinth lab; 
 
         public MainForm()
@@ -29,6 +29,7 @@ namespace LabirinthWinformsApp
 
             this.zoomNumericUpDown.Minimum = 10;
             this.zoomTrackBar.Minimum = 10;
+            zoom = 10f;
 
             this.zoomNumericUpDown.Maximum = 100;
             this.zoomTrackBar.Maximum = 100;

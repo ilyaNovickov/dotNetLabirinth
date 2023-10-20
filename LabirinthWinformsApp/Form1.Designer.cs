@@ -353,6 +353,11 @@ namespace LabirinthWinformsApp
             this.zoomNumericUpDown.Name = "zoomNumericUpDown";
             this.zoomNumericUpDown.Size = new System.Drawing.Size(65, 30);
             this.zoomNumericUpDown.TabIndex = 0;
+            this.zoomNumericUpDown.Value = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
             this.zoomNumericUpDown.ValueChanged += new System.EventHandler(this.zoomNumericUpDown1_ValueChanged);
             // 
             // zoomTrackBar
@@ -362,6 +367,7 @@ namespace LabirinthWinformsApp
             this.zoomTrackBar.Name = "zoomTrackBar";
             this.zoomTrackBar.Size = new System.Drawing.Size(113, 56);
             this.zoomTrackBar.TabIndex = 1;
+            this.zoomTrackBar.Value = 10;
             this.zoomTrackBar.Scroll += new System.EventHandler(this.zoomTrackBar_Scroll);
             // 
             // groupBox2
