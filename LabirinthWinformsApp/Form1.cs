@@ -15,12 +15,12 @@ using System.Reflection;
 
 namespace LabirinthWinformsApp
 {
-    public partial class Form1 : Form
+    public partial class MainForm : Form
     {
         private float zoom = 1f;
         Labirinth lab = new Labirinth(10); 
 
-        public Form1()
+        public MainForm()
         {
             InitializeComponent();
 

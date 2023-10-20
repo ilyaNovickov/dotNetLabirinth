@@ -1,7 +1,7 @@
 ﻿
 namespace LabirinthWinformsApp
 {
-    partial class Form1
+    partial class MainForm
     {
         /// <summary>
         /// Required designer variable.
@@ -102,7 +102,7 @@ namespace LabirinthWinformsApp
             this.panel1.Location = new System.Drawing.Point(6, 6);
             this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(555, 413);
+            this.panel1.Size = new System.Drawing.Size(555, 415);
             this.panel1.TabIndex = 2;
             // 
             // labirinthPictureBox
@@ -160,9 +160,9 @@ namespace LabirinthWinformsApp
             this.sizeLabel,
             this.emptySpaceLabel,
             this.generationTimeLabel});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 542);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 544);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(1047, 24);
+            this.statusStrip1.Size = new System.Drawing.Size(1047, 22);
             this.statusStrip1.TabIndex = 4;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -191,7 +191,7 @@ namespace LabirinthWinformsApp
             this.mainTableLayout.Name = "mainTableLayout";
             this.mainTableLayout.RowCount = 1;
             this.mainTableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.mainTableLayout.Size = new System.Drawing.Size(1047, 510);
+            this.mainTableLayout.Size = new System.Drawing.Size(1047, 512);
             this.mainTableLayout.TabIndex = 5;
             // 
             // labirinthTableLayout
@@ -206,7 +206,7 @@ namespace LabirinthWinformsApp
             this.labirinthTableLayout.RowCount = 2;
             this.labirinthTableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 85F));
             this.labirinthTableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15F));
-            this.labirinthTableLayout.Size = new System.Drawing.Size(567, 502);
+            this.labirinthTableLayout.Size = new System.Drawing.Size(567, 504);
             this.labirinthTableLayout.TabIndex = 3;
             // 
             // tableLayoutPanel1
@@ -228,7 +228,7 @@ namespace LabirinthWinformsApp
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(202, 502);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(202, 504);
             this.tableLayoutPanel1.TabIndex = 9;
             // 
             // groupBox2
@@ -327,7 +327,7 @@ namespace LabirinthWinformsApp
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox1.Location = new System.Drawing.Point(3, 403);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(196, 96);
+            this.groupBox1.Size = new System.Drawing.Size(196, 98);
             this.groupBox1.TabIndex = 12;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Маштаб";
@@ -346,7 +346,7 @@ namespace LabirinthWinformsApp
             this.zoomTableLayout.Name = "zoomTableLayout";
             this.zoomTableLayout.RowCount = 1;
             this.zoomTableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.zoomTableLayout.Size = new System.Drawing.Size(190, 75);
+            this.zoomTableLayout.Size = new System.Drawing.Size(190, 77);
             this.zoomTableLayout.TabIndex = 3;
             // 
             // zoomNumericUpDown
@@ -354,7 +354,7 @@ namespace LabirinthWinformsApp
             this.zoomNumericUpDown.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.zoomNumericUpDown.AutoSize = true;
             this.zoomNumericUpDown.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.zoomNumericUpDown.Location = new System.Drawing.Point(122, 22);
+            this.zoomNumericUpDown.Location = new System.Drawing.Point(122, 23);
             this.zoomNumericUpDown.Name = "zoomNumericUpDown";
             this.zoomNumericUpDown.Size = new System.Drawing.Size(65, 30);
             this.zoomNumericUpDown.TabIndex = 0;
@@ -363,7 +363,7 @@ namespace LabirinthWinformsApp
             // zoomTrackBar
             // 
             this.zoomTrackBar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.zoomTrackBar.Location = new System.Drawing.Point(3, 9);
+            this.zoomTrackBar.Location = new System.Drawing.Point(3, 10);
             this.zoomTrackBar.Name = "zoomTrackBar";
             this.zoomTrackBar.Size = new System.Drawing.Size(113, 56);
             this.zoomTrackBar.TabIndex = 1;
@@ -456,16 +456,16 @@ namespace LabirinthWinformsApp
             this.botTableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.botTableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.botTableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.botTableLayout.Size = new System.Drawing.Size(256, 502);
+            this.botTableLayout.Size = new System.Drawing.Size(256, 504);
             this.botTableLayout.TabIndex = 10;
             // 
             // groupBox4
             // 
             this.groupBox4.Controls.Add(this.tableLayoutPanel2);
             this.groupBox4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox4.Location = new System.Drawing.Point(3, 170);
+            this.groupBox4.Location = new System.Drawing.Point(3, 171);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(250, 161);
+            this.groupBox4.Size = new System.Drawing.Size(250, 162);
             this.groupBox4.TabIndex = 13;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Скорость бота";
@@ -484,7 +484,7 @@ namespace LabirinthWinformsApp
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(244, 140);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(244, 141);
             this.tableLayoutPanel2.TabIndex = 3;
             // 
             // botSpeedNumericUpDown
@@ -511,7 +511,7 @@ namespace LabirinthWinformsApp
             // 
             this.botLogRichTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.botLogRichTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.botLogRichTextBox.Location = new System.Drawing.Point(3, 337);
+            this.botLogRichTextBox.Location = new System.Drawing.Point(3, 339);
             this.botLogRichTextBox.Name = "botLogRichTextBox";
             this.botLogRichTextBox.ReadOnly = true;
             this.botLogRichTextBox.Size = new System.Drawing.Size(250, 162);
@@ -527,7 +527,7 @@ namespace LabirinthWinformsApp
             this.botButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.botButton.Location = new System.Drawing.Point(3, 3);
             this.botButton.Name = "botButton";
-            this.botButton.Size = new System.Drawing.Size(250, 161);
+            this.botButton.Size = new System.Drawing.Size(250, 162);
             this.botButton.TabIndex = 15;
             this.botButton.Text = "Пустить бота";
             this.botButton.UseVisualStyleBackColor = true;
@@ -583,7 +583,7 @@ namespace LabirinthWinformsApp
             this.MainMenuStrip = this.menuStrip1;
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = ".Net Labirinth";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.labirinthPictureBox)).EndInit();
