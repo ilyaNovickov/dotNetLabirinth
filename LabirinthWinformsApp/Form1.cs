@@ -15,8 +15,6 @@ using System.Diagnostics;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Xml.Serialization;
-using System.Security.Cryptography.X509Certificates;
-using LabirinthLib.Structs;
 
 namespace LabirinthWinformsApp
 {
@@ -50,19 +48,30 @@ namespace LabirinthWinformsApp
             this.botSpeedNumericUpDown.Minimum = 1;
             this.botSpeedTrackBar.Minimum = 1;
 
-            this.botSpeedTrackBar.Maximum = 30;
-            this.botSpeedNumericUpDown.Maximum = 30;
+            this.botSpeedTrackBar.Maximum = 20;
+            this.botSpeedNumericUpDown.Maximum = 20;
             botSpeed = 1 * 100;
         }
 
-        private void DrawLabirinth()
+        private void RedrawLabirinth()
         {
             Bitmap bitmap = new Bitmap((int)(lab.Width * zoom), (int)(lab.Height * zoom));
-            Graphics g = Graphics.FromImage(bitmap);
-            Matrix matrix = new Matrix();
-            matrix.Scale(zoom, zoom);
-            g.Transform = matrix;
+            Graphics g = GetCustomizedGraphicsFromImage(bitmap);
             lab.DrawLabirinth(g);
+            labirinthPictureBox.Image = bitmap;
+        }
+
+        private void UpdateLabirinth()
+        {
+            Bitmap bitmap = new Bitmap((int)(lab.Width * zoom), (int)(lab.Height * zoom));
+            Graphics g = Graphics.FromImage(bitmap);//GetCustomizedGraphicsFromImage(bitmap);//
+            g.SmoothingMode = SmoothingMode.HighSpeed;
+            g.InterpolationMode = InterpolationMode.NearestNeighbor;
+            g.Clear(Color.White);
+            Rectangle rect = new Rectangle(0, 0, bitmap.Width, bitmap.Height);
+            g.DrawImage(labirinthPictureBox.Image, rect);
+            //g.DrawImage(labirinthPictureBox.Image, 0, 0);
+            //g.DrawImageUnscaled(labirinthPictureBox.Image, 0, 0);
             labirinthPictureBox.Image = bitmap;
         }
 
@@ -91,7 +100,8 @@ namespace LabirinthWinformsApp
                 botSpeed = botSpeedTrackBar.Value * 100;
             }
             if (!backgroundWorker.IsBusy)
-                DrawLabirinth();
+                UpdateLabirinth();
+                //RedrawLabirinth();
         }
 
         private void generateButton_Click(object sender, EventArgs e)
@@ -115,7 +125,7 @@ namespace LabirinthWinformsApp
         private void exitAndEnterButton_Click(object sender, EventArgs e)
         {
             lab.GenerateInsAndExit();
-            DrawLabirinth();
+            RedrawLabirinth();
         }
 
         private void backgroundWorker_DoWork(object sender, DoWorkEventArgs e)
@@ -161,7 +171,7 @@ namespace LabirinthWinformsApp
             this.sizeLabel.Text = $"Размер : {lab.Size.ToString()}";
             this.emptySpaceLabel.Text = $"Пустое пространство : {lab.EmptySpace * 100} %";
 
-            DrawLabirinth();
+            RedrawLabirinth();
         }
 
         private void standartSizeComboBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -388,18 +398,6 @@ namespace LabirinthWinformsApp
             if (enterComboBox.Text == "№2")
                 numofEnter = 2;
 
-            //Stopwatch sw = new Stopwatch();
-            //sw.Start();
-            //Dictionary<string, IEnumerable<LabirinthLib.Structs.Point>> dict = lab.GetAllWays(numofEnter);
-            //sw.Stop();
-
-            //botLogRichTextBox.Text += sw.Elapsed.TotalSeconds;
-
-            //if (dict.TryGetValue("Way", out IEnumerable<LabirinthLib.Structs.Point> value))
-            //{
-            //    this.way = new Queue<Point>();
-            //}
-
             prevPoint = LabirinthLib.Structs.Point.Empty;
 
             new_WalkerBot bot = new new_WalkerBot(lab);
@@ -428,20 +426,10 @@ namespace LabirinthWinformsApp
             if (labirinthPictureBox.Image == null)
                 return;
 
-            Graphics Get_GraphicsFromImage(Image image)
-            {
-                Graphics gLocal = Graphics.FromImage(image);
+            Bitmap newBitmap = new Bitmap((int)(lab.Width * zoom), (int)(lab.Height * zoom));
 
-                Matrix matrix = new Matrix();
-
-                matrix.Scale(zoom, zoom);
-
-                gLocal.Transform = matrix;
-
-                return gLocal;
-            }
-
-            Graphics g = Get_GraphicsFromImage(labirinthPictureBox.Image);
+            Graphics g = GetCustomizedGraphicsFromImage(labirinthPictureBox.Image);
+            //Graphics g = GetCustomizedGraphicsFromImage(newBitmap);
 
             if (!prevPoint.IsZero())
             {
@@ -456,15 +444,29 @@ namespace LabirinthWinformsApp
             }
             else if (this.way.Count != 0)
             {
+                Point point = way.Dequeue();
                 //DrawWay(labirinthPictureBox.Image, way.Dequeue(), true);
                 using (SolidBrush way = new SolidBrush(Color.Green))
-                    g.FillRectangle(way, prevPoint.X, prevPoint.Y, 1, 1);
+                    g.FillRectangle(way, point.X, point.Y, 1, 1);
             }
             labirinthPictureBox.Invalidate();
 
 
             if (allWay.Count == 0 && this.way.Count == 0)
                 timer.Stop();
+        }
+
+        private Graphics GetCustomizedGraphicsFromImage(Image image)
+        {
+            Graphics gLocal = Graphics.FromImage(image);
+
+            Matrix matrix = new Matrix();
+
+            matrix.Scale(zoom, zoom);
+
+            gLocal.Transform = matrix;
+
+            return gLocal;
         }
     }
 }
