@@ -18,6 +18,9 @@ namespace LabirinthLib
         public new_WalkerBot(Labirinth lab)
         {
             this.lab = lab;
+
+            //this.way = new Queue<Point>();
+            //wayToExit = new Queue<Point>();
         }
 
         public Labirinth Labirinth
@@ -27,7 +30,10 @@ namespace LabirinthLib
             {
                 lab = value;
 
-                way.Clear();
+                if (way != null)
+                    way.Clear();
+                if (wayToExit != null)
+                    wayToExit.Clear();
             }
         }
 
