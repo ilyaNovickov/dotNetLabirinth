@@ -44,6 +44,9 @@ namespace LabirinthWinformsApp
             this.убратьботаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.пуститьБотаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.enterComboBocMenu = new System.Windows.Forms.ToolStripComboBox();
+            this.остановитьБотаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.продолжитьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.botSpeedComboBoxMenu = new System.Windows.Forms.ToolStripComboBox();
             this.standartSizeComboBox = new System.Windows.Forms.ToolStripComboBox();
             this.standartEmptySpaccceComboBox = new System.Windows.Forms.ToolStripComboBox();
             this.standartZoomComboBox = new System.Windows.Forms.ToolStripComboBox();
@@ -85,9 +88,6 @@ namespace LabirinthWinformsApp
             this.stopBotButton = new System.Windows.Forms.Button();
             this.backgroundWorker = new System.ComponentModel.BackgroundWorker();
             this.timer = new System.Windows.Forms.Timer(this.components);
-            this.остановитьБотаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.продолжитьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.botSpeedComboBoxMenu = new System.Windows.Forms.ToolStripComboBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.labirinthPictureBox)).BeginInit();
             this.menuStrip1.SuspendLayout();
@@ -124,7 +124,7 @@ namespace LabirinthWinformsApp
             this.panel1.Location = new System.Drawing.Point(6, 6);
             this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(555, 415);
+            this.panel1.Size = new System.Drawing.Size(555, 492);
             this.panel1.TabIndex = 2;
             // 
             // labirinthPictureBox
@@ -246,6 +246,34 @@ namespace LabirinthWinformsApp
             this.enterComboBocMenu.Size = new System.Drawing.Size(121, 28);
             this.enterComboBocMenu.SelectedIndexChanged += new System.EventHandler(this.enterComboBoxMenu_SelectedIndexChanged);
             // 
+            // остановитьБотаToolStripMenuItem
+            // 
+            this.остановитьБотаToolStripMenuItem.Name = "остановитьБотаToolStripMenuItem";
+            this.остановитьБотаToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.остановитьБотаToolStripMenuItem.Text = "Остановить бота";
+            this.остановитьБотаToolStripMenuItem.Click += new System.EventHandler(this.doingSomethingBotButton_Click);
+            // 
+            // продолжитьToolStripMenuItem
+            // 
+            this.продолжитьToolStripMenuItem.Name = "продолжитьToolStripMenuItem";
+            this.продолжитьToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.продолжитьToolStripMenuItem.Text = "Продолжить";
+            this.продолжитьToolStripMenuItem.Click += new System.EventHandler(this.doingSomethingBotButton_Click);
+            // 
+            // botSpeedComboBoxMenu
+            // 
+            this.botSpeedComboBoxMenu.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.botSpeedComboBoxMenu.Items.AddRange(new object[] {
+            "",
+            "1",
+            "3",
+            "10",
+            "15",
+            "20"});
+            this.botSpeedComboBoxMenu.Name = "botSpeedComboBoxMenu";
+            this.botSpeedComboBoxMenu.Size = new System.Drawing.Size(121, 28);
+            this.botSpeedComboBoxMenu.SelectedIndexChanged += new System.EventHandler(this.botSpeedComboBoxMenu_SelectedIndexChanged);
+            // 
             // standartSizeComboBox
             // 
             this.standartSizeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -351,9 +379,9 @@ namespace LabirinthWinformsApp
             this.labirinthTableLayout.Dock = System.Windows.Forms.DockStyle.Fill;
             this.labirinthTableLayout.Location = new System.Drawing.Point(213, 4);
             this.labirinthTableLayout.Name = "labirinthTableLayout";
-            this.labirinthTableLayout.RowCount = 2;
-            this.labirinthTableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 85F));
-            this.labirinthTableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15F));
+            this.labirinthTableLayout.RowCount = 1;
+            this.labirinthTableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.labirinthTableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.labirinthTableLayout.Size = new System.Drawing.Size(567, 504);
             this.labirinthTableLayout.TabIndex = 3;
             // 
@@ -799,34 +827,6 @@ namespace LabirinthWinformsApp
             // timer
             // 
             this.timer.Tick += new System.EventHandler(this.timer_Tick);
-            // 
-            // остановитьБотаToolStripMenuItem
-            // 
-            this.остановитьБотаToolStripMenuItem.Name = "остановитьБотаToolStripMenuItem";
-            this.остановитьБотаToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
-            this.остановитьБотаToolStripMenuItem.Text = "Остановить бота";
-            this.остановитьБотаToolStripMenuItem.Click += new System.EventHandler(this.doingSomethingBotButton_Click);
-            // 
-            // продолжитьToolStripMenuItem
-            // 
-            this.продолжитьToolStripMenuItem.Name = "продолжитьToolStripMenuItem";
-            this.продолжитьToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
-            this.продолжитьToolStripMenuItem.Text = "Продолжить";
-            this.продолжитьToolStripMenuItem.Click += new System.EventHandler(this.doingSomethingBotButton_Click);
-            // 
-            // botSpeedComboBoxMenu
-            // 
-            this.botSpeedComboBoxMenu.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.botSpeedComboBoxMenu.Items.AddRange(new object[] {
-            "",
-            "1",
-            "3",
-            "10",
-            "15",
-            "20"});
-            this.botSpeedComboBoxMenu.Name = "botSpeedComboBoxMenu";
-            this.botSpeedComboBoxMenu.Size = new System.Drawing.Size(121, 28);
-            this.botSpeedComboBoxMenu.SelectedIndexChanged += new System.EventHandler(this.botSpeedComboBoxMenu_SelectedIndexChanged);
             // 
             // MainForm
             // 
