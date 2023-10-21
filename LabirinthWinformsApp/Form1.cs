@@ -466,5 +466,10 @@ namespace LabirinthWinformsApp
 
             return gLocal;
         }
+
+        private void enterComboBoxMenu_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            this.enterComboBox.SelectedIndex = enterComboBocMenu.SelectedIndex;
+        }
     }
 }
