@@ -50,7 +50,7 @@ namespace LabirinthLib.Structs
         #region Methods
         public override string ToString()
         {
-            return $"({this.x}, {this.y}";
+            return $"({this.x}, {this.y})";
         }
         /// <summary>
         /// Смещение координаты на определённое значение
