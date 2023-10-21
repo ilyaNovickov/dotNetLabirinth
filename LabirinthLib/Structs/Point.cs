@@ -48,6 +48,10 @@ namespace LabirinthLib.Structs
         public static Point Empty => new Point(0, 0);
         #endregion
         #region Methods
+        public override string ToString()
+        {
+            return $"({this.x}, {this.y}";
+        }
         /// <summary>
         /// Смещение координаты на определённое значение
         /// </summary>
