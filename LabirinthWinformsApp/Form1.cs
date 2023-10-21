@@ -430,10 +430,7 @@ namespace LabirinthWinformsApp
             if (labirinthPictureBox.Image == null)
                 return;
 
-            Bitmap newBitmap = new Bitmap((int)(lab.Width * zoom), (int)(lab.Height * zoom));
-
             Graphics g = GetCustomizedGraphicsFromImage(labirinthPictureBox.Image);
-            //Graphics g = GetCustomizedGraphicsFromImage(newBitmap);
 
             if (!prevPoint.IsZero())
             {
@@ -449,7 +446,6 @@ namespace LabirinthWinformsApp
             else if (this.way != null && this.way.Count != 0)
             {
                 Point point = way.Dequeue();
-                //DrawWay(labirinthPictureBox.Image, way.Dequeue(), true);
                 using (SolidBrush way = new SolidBrush(Color.Green))
                     g.FillRectangle(way, point.X, point.Y, 1, 1);
             }

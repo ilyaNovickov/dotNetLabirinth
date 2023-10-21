@@ -15,12 +15,11 @@ namespace LabirinthLib
 
         private Queue<Point> wayToExit;
 
+        private Queue<Direction> directions;
+
         public new_WalkerBot(Labirinth lab)
         {
             this.lab = lab;
-
-            //this.way = new Queue<Point>();
-            //wayToExit = new Queue<Point>();
         }
 
         public Labirinth Labirinth
@@ -34,6 +33,8 @@ namespace LabirinthLib
                     way.Clear();
                 if (wayToExit != null)
                     wayToExit.Clear();
+                if (directions != null)
+                    directions.Clear();
             }
         }
 
@@ -44,6 +45,10 @@ namespace LabirinthLib
         public Queue<Point> WayToExitQueue => wayToExit;
 
         public List<Point> WayToExitList => wayToExit != null ? wayToExit.ToList() : null;
+
+        public Queue<Direction> Directions => directions;
+
+        public List<Direction> DirectionsList => directions != null ? directions.ToList() : null;
 
         public event EventHandler<DeadEndFindEventArgs> DeadEndFintEvent;
 
@@ -105,19 +110,19 @@ namespace LabirinthLib
             //Стэк развилок
             Stack<Point> fork = new Stack<Point>();
             ////Список посещённых точек
-            //List<Point> visitedPoints = new List<Point>();
+            List<Point> visitedPoints = new List<Point>();
             List<Point> wayToExit = new List<Point>();
             wayToExit.Add(walker);
 
             //Пока бот не достиг выхода
             while (walker != lab.Exit)
             {
-                IEnumerable<Direction> avaibleDirs = GetAvaibleDirectionsToMove(walker, way);
+                IEnumerable<Direction> avaibleDirs = GetAvaibleDirectionsToMove(walker, visitedPoints);
 
                 //Если один доступный путь
                 if (avaibleDirs.Count() == 1)
                 {
-                    //visitedPoints.Add(walker);
+                    visitedPoints.Add(walker);
                     BotOffsetPoint(avaibleDirs.ElementAt(0));
                     //walker.OffsetPoint(avaibleDirs.ElementAt(0));
                     wayToExit.Add(walker);
@@ -152,7 +157,7 @@ namespace LabirinthLib
                 else//Если есть много путей, куда идти
                 {
                     fork.Push(walker);//Запомнить точку развилки
-                    //visitedPoints.Add(walker);
+                    visitedPoints.Add(walker);
                     //Переместиться в рандомное направление
                     BotOffsetPoint(lab.GetRandomDirectionFromList(avaibleDirs));
                     //walker.OffsetPoint(lab.GetRandomDirectionFromList(avaibleDirs));
