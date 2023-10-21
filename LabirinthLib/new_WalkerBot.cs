@@ -121,54 +121,54 @@ namespace LabirinthLib
             while (walker != lab.Exit)
             {
                 IEnumerable<Direction> avaibleDirs = GetAvaibleDirectionsToMove(walker, visitedPoints);
-                //IEnumerable<Direction> avaibleDirs = GetAvaibleDirectionsToMove(walker, way);
 
-                //Если один доступный путь
                 if (avaibleDirs.Count() == 1)
                 {
-                    directions.Add(avaibleDirs.ElementAt(0));
-                    BotOffsetPoint(avaibleDirs.ElementAt(0));
+                    directions.Add(avaibleDirs.First());
+                    BotOffsetPoint(avaibleDirs.First());
                     visitedPoints.AddUnique(walker);
-                    wayToExit.Add(walker);
                     way.Add(walker);
+                    wayToExit.Add(walker);
                 }
-                //Если нет доступных путей (т. е. тупик)
-                else if (avaibleDirs.Count() == 0)
+                else if (avaibleDirs.Count() > 1)
                 {
-                    //Если некуда больше идти - выход из метода
+                    fork.Push(walker);
+
+                    Direction dir = lab.GetRandomDirectionFromList(avaibleDirs);
+
+                    directions.Add(dir);
+                    BotOffsetPoint(dir);
+                    visitedPoints.AddUnique(walker);
+                    way.Add(walker);
+                    wayToExit.Add(walker);
+                }
+                else
+                {
                     if (fork.Count == 0)
                     {
+                        this.directions = new Queue<Direction>(directions);
                         this.way = new Queue<Point>(way);
                         return false;
                     }
                     else
                     {
-                        visitedPoints.AddUnique(walker);
-
-                        walker = fork.Pop();//Воврат до развилки
-
-                        visitedPoints.AddUnique(walker);
+                        walker = fork.Pop();
 
                         wayToExit.RemoveSinceUnique(wayToExit.IndexOf(walker) + 1);
-                        List<Point> deadEndWay = way.CopyList(way.IndexOf(walker));
+
+                        way.Reverse();
+                        int i = way.Count - 1 - way.IndexOf(walker);
+                        way.Reverse();
+
+                        List<Point> deadEndWay = way.CopyList(i);
                         deadEndWay.Reverse();
+                        deadEndWay.RemoveAt(0);
                         way.AddRange(deadEndWay);
                         way.Add(walker);
                         continue;
                     }
                 }
-                else//Если есть много путей, куда идти
-                {
-                    fork.Push(walker);//Запомнить точку развилки
-                    
-                    //Переместиться в рандомное направление
-                    Direction dir = lab.GetRandomDirectionFromList(avaibleDirs);
-                    directions.Add(dir);
-                    BotOffsetPoint(dir);
-                    visitedPoints.AddUnique(walker);
-                    wayToExit.Add(walker);
-                    way.Add(walker);
-                }
+
             }
             way.Add(walker);
             wayToExit.Add(walker);
