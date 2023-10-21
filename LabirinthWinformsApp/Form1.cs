@@ -16,6 +16,7 @@ using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Xml.Serialization;
 using System.Security.Cryptography.X509Certificates;
+using LabirinthLib.Structs;
 
 namespace LabirinthWinformsApp
 {
@@ -24,8 +25,10 @@ namespace LabirinthWinformsApp
         private float zoom;
         private Labirinth lab;
         private Action timerAction;
-        private Queue<Point> way;
-        private Queue<Point> allWay;
+        private Queue<LabirinthLib.Structs.Point> way = new Queue<LabirinthLib.Structs.Point>();
+        private Queue<LabirinthLib.Structs.Point> allWay= new Queue<LabirinthLib.Structs.Point>();
+        private Queue<Direction> directions = new Queue<Direction>();
+        private LabirinthLib.Structs.Point prevPoint;
 
         public MainForm()
         {
@@ -385,23 +388,83 @@ namespace LabirinthWinformsApp
             if (enterComboBox.Text == "№2")
                 numofEnter = 2;
 
-            Stopwatch sw = new Stopwatch();
-            sw.Start();
-            Dictionary<string, IEnumerable<LabirinthLib.Structs.Point>> dict = lab.GetAllWays(numofEnter);
-            sw.Stop();
+            //Stopwatch sw = new Stopwatch();
+            //sw.Start();
+            //Dictionary<string, IEnumerable<LabirinthLib.Structs.Point>> dict = lab.GetAllWays(numofEnter);
+            //sw.Stop();
 
-            botLogRichTextBox.Text += sw.Elapsed.TotalSeconds;
+            //botLogRichTextBox.Text += sw.Elapsed.TotalSeconds;
 
-            if (dict.TryGetValue("Way", out IEnumerable<LabirinthLib.Structs.Point> value))
-            {
-                this.way = new Queue<Point>();
-            }
+            //if (dict.TryGetValue("Way", out IEnumerable<LabirinthLib.Structs.Point> value))
+            //{
+            //    this.way = new Queue<Point>();
+            //}
 
+            prevPoint = LabirinthLib.Structs.Point.Empty;
+
+            new_WalkerBot bot = new new_WalkerBot(lab);
+
+            bot.BotMoveEvent += bot_BotMove;
+            bot.FindExit(numofEnter);
+
+            this.way = bot.WayToExitQueue;
+
+            this.allWay = bot.WayQueue;
+
+            this.timerAction = this.ReportBotProgress;
+
+            timer.Interval = 100;
+            timer.Start();
+
+        }
+
+        private void bot_BotMove(object sender, BotMoveEventArgs e)
+        {
+            this.directions.Enqueue(e.Direction);
         }
 
         private void ReportBotProgress()
         {
+            if (labirinthPictureBox.Image == null)
+                return;
 
+            Graphics Get_GraphicsFromImage(Image image)
+            {
+                Graphics gLocal = Graphics.FromImage(image);
+
+                Matrix matrix = new Matrix();
+
+                matrix.Scale(zoom, zoom);
+
+                gLocal.Transform = matrix;
+
+                return gLocal;
+            }
+
+            Graphics g = Get_GraphicsFromImage(labirinthPictureBox.Image);
+
+            if (!prevPoint.IsZero())
+            {
+                using (SolidBrush way = new SolidBrush(Color.Chartreuse))
+                    g.FillRectangle(way, prevPoint.X, prevPoint.Y, 1, 1);
+            }
+            if (allWay.Count != 0)
+            {
+                prevPoint = allWay.Dequeue();
+                using (SolidBrush way = new SolidBrush(Color.DarkGreen))
+                    g.FillRectangle(way, prevPoint.X, prevPoint.Y, 1, 1);
+            }
+            else if (this.way.Count != 0)
+            {
+                //DrawWay(labirinthPictureBox.Image, way.Dequeue(), true);
+                using (SolidBrush way = new SolidBrush(Color.Green))
+                    g.FillRectangle(way, prevPoint.X, prevPoint.Y, 1, 1);
+            }
+            labirinthPictureBox.Invalidate();
+
+
+            if (allWay.Count == 0 && this.way.Count == 0)
+                timer.Stop();
         }
     }
 }
