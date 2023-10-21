@@ -13,6 +13,8 @@ namespace LabirinthLib
 
         private Queue<Point> way;
 
+        private Queue<Point> wayToExit;
+
         public new_WalkerBot(Labirinth lab)
         {
             this.lab = lab;
@@ -32,6 +34,10 @@ namespace LabirinthLib
         public Queue<Point> WayQueue => way;
 
         public List<Point> WayList => way.ToList();
+
+        public Queue<Point> WayToExitQueue => wayToExit;
+
+        public List<Point> WayToExitList => wayToExit.ToList();
 
         public event EventHandler<DeadEndFindEventArgs> DeadEndFintEvent;
 
@@ -83,18 +89,21 @@ namespace LabirinthLib
             way.Add(walker);
             //Стэк развилок
             Stack<Point> fork = new Stack<Point>();
-            //Список посещённых точек
-            List<Point> visitedPoints = new List<Point>();
+            ////Список посещённых точек
+            //List<Point> visitedPoints = new List<Point>();
+            List<Point> wayToExit = new List<Point>();
+            wayToExit.Add(walker);
 
             //Пока бот не достиг выхода
             while (walker != lab.Exit)
             {
-                IEnumerable<Direction> avaibleDirs = GetAvaibleDirectionsToMove(walker, visitedPoints);
+                IEnumerable<Direction> avaibleDirs = GetAvaibleDirectionsToMove(walker, way);
 
                 //Если один доступный путь
                 if (avaibleDirs.Count() == 1)
                 {
-                    visitedPoints.Add(walker);
+                    //visitedPoints.Add(walker);
+                    wayToExit.Add(walker);
                     walker.OffsetPoint(avaibleDirs.ElementAt(0));
                     way.Add(walker);
                 }
@@ -103,15 +112,23 @@ namespace LabirinthLib
                 {
                     //Если некуда больше идти - выход из метода
                     if (fork.Count == 0)
+                    {
+                        this.way = new Queue<Point>(way);
                         return false;
+                    }
                     else
                     {
                         walker = fork.Pop();//Воврат до развилки
 
-                        List<Point> deadEndWay = way.CopyList(way.IndexOf(walker));
-                        if (DeadEndFintEvent != null)
-                            DeadEndFintEvent(this, new DeadEndFindEventArgs(deadEndWay));
+                        
+                        //if (DeadEndFintEvent != null)
+                        //    DeadEndFintEvent(this, new DeadEndFindEventArgs(deadEndWay));
+                        
+                        wayToExit.RemoveSinceUnique(way.IndexOf(walker) + 1);
 
+                        List<Point> deadEndWay = way.CopyList(way.IndexOf(walker));
+                        deadEndWay.Reverse();
+                        way.AddRange(deadEndWay);
                         way.Add(walker);
                         continue;
                     }
@@ -119,13 +136,14 @@ namespace LabirinthLib
                 else//Если есть много путей, куда идти
                 {
                     fork.Push(walker);//Запомнить точку развилки
-                    visitedPoints.Add(walker);
+                    //visitedPoints.Add(walker);
                     //Переместиться в рандомное направление
                     walker.OffsetPoint(lab.GetRandomDirectionFromList(avaibleDirs));
                     way.Add(walker);
                 }
             }
             this.way = new Queue<Point>(way);
+
             return true;
         }
     }
