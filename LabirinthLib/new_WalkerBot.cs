@@ -117,6 +117,11 @@ namespace LabirinthLib
             List<Point> wayToExit = new List<Point>();
             wayToExit.Add(walker);
             List<Direction> directions = new List<Direction>();
+            directions.Add(Direction.None);
+
+            Point prevFork = new Point();
+            List<Point> visitedDeadEnds = new List<Point>();
+
             //Пока бот не достиг выхода
             while (walker != lab.Exit)
             {
@@ -157,21 +162,29 @@ namespace LabirinthLib
                         wayToExit.RemoveSinceUnique(wayToExit.IndexOf(walker) + 1);
 
                         way.Reverse();
+                        //int i = way.Count - 1 - way.IndexOf(prevFork.IsZero() ? walker : prevFork);
                         int i = way.Count - 1 - way.IndexOf(walker);
                         way.Reverse();
 
                         List<Point> deadEndWay = way.CopyList(i);
                         deadEndWay.Reverse();
                         deadEndWay.RemoveAt(0);
+
+                        List<Direction> deadEndDirection = directions.CopyList(i);
+                        deadEndDirection.Reverse();
+                        deadEndDirection.RemoveAt(0);
+
+                        directions.AddRange(deadEndDirection);
                         way.AddRange(deadEndWay);
-                        way.Add(walker);
+
+                        prevFork = walker;
                         continue;
                     }
                 }
 
             }
-            way.Add(walker);
-            wayToExit.Add(walker);
+            //way.Add(walker);
+            //wayToExit.Add(walker);
             this.directions = new Queue<Direction>(directions);
             this.way = new Queue<Point>(way);
             this.wayToExit = new Queue<Point>(wayToExit);
