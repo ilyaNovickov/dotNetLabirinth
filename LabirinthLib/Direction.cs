@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,10 +13,15 @@ namespace LabirinthLib
     /// </summary>
     public enum Direction : int//sbyte
     {
+        [Description("Нет направления")]
         None = 0,//Никуда
+        [Description("Вверх")]
         Up = -1,//Вверх
+        [Description("Вниз")]
         Down = 1, //Вниз
+        [Description("Влево")]
         Left = -2, //Влево
+        [Description("Вправо")]
         Right = 2//Вправо
     }
 
