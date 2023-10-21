@@ -64,14 +64,11 @@ namespace LabirinthWinformsApp
         private void UpdateLabirinth()
         {
             Bitmap bitmap = new Bitmap((int)(lab.Width * zoom), (int)(lab.Height * zoom));
-            Graphics g = Graphics.FromImage(bitmap);//GetCustomizedGraphicsFromImage(bitmap);//
+            Graphics g = Graphics.FromImage(bitmap);
             g.SmoothingMode = SmoothingMode.HighSpeed;
             g.InterpolationMode = InterpolationMode.NearestNeighbor;
-            g.Clear(Color.White);
             Rectangle rect = new Rectangle(0, 0, bitmap.Width, bitmap.Height);
             g.DrawImage(labirinthPictureBox.Image, rect);
-            //g.DrawImage(labirinthPictureBox.Image, 0, 0);
-            //g.DrawImageUnscaled(labirinthPictureBox.Image, 0, 0);
             labirinthPictureBox.Image = bitmap;
         }
 
@@ -115,6 +112,9 @@ namespace LabirinthWinformsApp
                 ((int)heightNumericUpDowm.Value));
             lab.EmptySpace = ((float)emptySpaceNumericUpDown.Value) / 100f;
 
+            if (timer.Enabled)
+                timer.Stop();
+
             timerAction = this.ReportThatWorking;
             timer.Interval = 1000;
             timer.Start();
@@ -124,6 +124,8 @@ namespace LabirinthWinformsApp
 
         private void exitAndEnterButton_Click(object sender, EventArgs e)
         {
+            if (timer.Enabled)
+                timer.Stop();
             lab.GenerateInsAndExit();
             RedrawLabirinth();
         }
@@ -394,6 +396,8 @@ namespace LabirinthWinformsApp
 
         private void botButton_Click(object sender, EventArgs e)
         {
+            this.RedrawLabirinth();
+
             int numofEnter = 1;
             if (enterComboBox.Text == "№2")
                 numofEnter = 2;
@@ -442,7 +446,7 @@ namespace LabirinthWinformsApp
                 using (SolidBrush way = new SolidBrush(Color.DarkGreen))
                     g.FillRectangle(way, prevPoint.X, prevPoint.Y, 1, 1);
             }
-            else if (this.way.Count != 0)
+            else if (this.way != null && this.way.Count != 0)
             {
                 Point point = way.Dequeue();
                 //DrawWay(labirinthPictureBox.Image, way.Dequeue(), true);
@@ -452,8 +456,11 @@ namespace LabirinthWinformsApp
             labirinthPictureBox.Invalidate();
 
 
-            if (allWay.Count == 0 && this.way.Count == 0)
+            if (allWay.Count == 0 && (this.way != null && this.way.Count == 0))
+            {
+                prevPoint = LabirinthLib.Structs.Point.Empty;
                 timer.Stop();
+            }
         }
 
         private Graphics GetCustomizedGraphicsFromImage(Image image)
