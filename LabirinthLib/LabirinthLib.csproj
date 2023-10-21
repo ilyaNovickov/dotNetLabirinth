@@ -43,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
+    <Compile Include="BotMoveEventArgs.cs" />
     <Compile Include="DeadEndFindEventArgs.cs" />
     <Compile Include="Printers\StringPrinter.cs" />
     <Compile Include="WalkerBot.cs" />

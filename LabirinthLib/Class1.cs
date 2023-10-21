@@ -41,7 +41,7 @@ namespace LabirinthLib
 
         public event EventHandler<DeadEndFindEventArgs> DeadEndFintEvent;
 
-        
+        public event EventHandler<BotMoveEventArgs> BotMoveEvent;
 
         public bool FindExit(int numofEnter = 1)
         {
@@ -67,8 +67,17 @@ namespace LabirinthLib
                 }
                 return result;
             }
+            
 
             Point walker;
+
+            void BotOffsetPoint(Direction direction)
+            {
+                Point prevPoint = walker;
+                walker.OffsetPoint(direction);
+                if (BotMoveEvent != null)
+                    BotMoveEvent(this, new BotMoveEventArgs(walker, prevPoint, direction));
+            }
 
             switch (numofEnter)
             {
@@ -103,7 +112,8 @@ namespace LabirinthLib
                 if (avaibleDirs.Count() == 1)
                 {
                     //visitedPoints.Add(walker);
-                    walker.OffsetPoint(avaibleDirs.ElementAt(0));
+                    BotOffsetPoint(avaibleDirs.ElementAt(0));
+                    //walker.OffsetPoint(avaibleDirs.ElementAt(0));
                     wayToExit.Add(walker);
                     way.Add(walker);
                 }
@@ -138,7 +148,8 @@ namespace LabirinthLib
                     fork.Push(walker);//Запомнить точку развилки
                     //visitedPoints.Add(walker);
                     //Переместиться в рандомное направление
-                    walker.OffsetPoint(lab.GetRandomDirectionFromList(avaibleDirs));
+                    BotOffsetPoint(lab.GetRandomDirectionFromList(avaibleDirs));
+                    //walker.OffsetPoint(lab.GetRandomDirectionFromList(avaibleDirs));
                     wayToExit.Add(walker);
                     way.Add(walker);
                 }
