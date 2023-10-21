@@ -37,7 +37,7 @@ namespace LabirinthLib
 
         public Queue<Point> WayToExitQueue => wayToExit;
 
-        public List<Point> WayToExitList => wayToExit.ToList();
+        public List<Point> WayToExitList => wayToExit != null ? wayToExit.ToList() : null;
 
         public event EventHandler<DeadEndFindEventArgs> DeadEndFintEvent;
 
