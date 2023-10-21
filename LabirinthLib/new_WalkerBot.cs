@@ -46,7 +46,7 @@ namespace LabirinthLib
 
         public List<Point> WayToExitList => wayToExit != null ? wayToExit.ToList() : null;
 
-        public Queue<Direction> Directions => directions;
+        public Queue<Direction> DirectionsQueue => directions;
 
         public List<Direction> DirectionsList => directions != null ? directions.ToList() : null;
 

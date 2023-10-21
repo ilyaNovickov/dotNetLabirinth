@@ -1,20 +1,13 @@
-﻿using System;
+﻿using LabirinthLib;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.Drawing.Drawing2D;
-using LabirinthLib;
-using LabirinthLib.Printers;
-using System.Reflection;
 using System.Diagnostics;
+using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
-using System.Xml.Serialization;
+using System.Windows.Forms;
 
 namespace LabirinthWinformsApp
 {
@@ -406,23 +399,22 @@ namespace LabirinthWinformsApp
 
             new_WalkerBot bot = new new_WalkerBot(lab);
 
-            bot.BotMoveEvent += bot_BotMove;
             bot.FindExit(numofEnter);
 
             this.way = bot.WayToExitQueue;
 
             this.allWay = bot.WayQueue;
 
+            this.directions = bot.DirectionsQueue;
+
             this.timerAction = this.ReportBotProgress;
+
+            botLogRichTextBox.Clear();
+            botLogRichTextBox.Text += "Запущен бот\n";
 
             timer.Interval = botSpeed;
             timer.Start();
 
-        }
-
-        private void bot_BotMove(object sender, BotMoveEventArgs e)
-        {
-            this.directions.Enqueue(e.Direction);
         }
 
         private void ReportBotProgress()
@@ -442,6 +434,7 @@ namespace LabirinthWinformsApp
                 prevPoint = allWay.Dequeue();
                 using (SolidBrush way = new SolidBrush(Color.DarkGreen))
                     g.FillRectangle(way, prevPoint.X, prevPoint.Y, 1, 1);
+                botLogRichTextBox.Text += $"Бот пеермещён в точку : {prevPoint} | Направление : {directions.Dequeue()}\n";
             }
             else if (this.way != null && this.way.Count != 0)
             {
