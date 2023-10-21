@@ -40,6 +40,7 @@ namespace LabirinthWinformsApp
             this.test2ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.генерироватьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.регенирироватьВходвыходToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ботToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.убратьботаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.standartSizeComboBox = new System.Windows.Forms.ToolStripComboBox();
             this.standartEmptySpaccceComboBox = new System.Windows.Forms.ToolStripComboBox();
@@ -79,6 +80,7 @@ namespace LabirinthWinformsApp
             this.enterComboBox = new System.Windows.Forms.ComboBox();
             this.backgroundWorker = new System.ComponentModel.BackgroundWorker();
             this.timer = new System.Windows.Forms.Timer(this.components);
+            this.пуститьБотаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.labirinthPictureBox)).BeginInit();
             this.menuStrip1.SuspendLayout();
@@ -179,7 +181,7 @@ namespace LabirinthWinformsApp
             this.test2ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.генерироватьToolStripMenuItem,
             this.регенирироватьВходвыходToolStripMenuItem,
-            this.убратьботаToolStripMenuItem});
+            this.ботToolStripMenuItem});
             this.test2ToolStripMenuItem.Name = "test2ToolStripMenuItem";
             this.test2ToolStripMenuItem.Size = new System.Drawing.Size(100, 28);
             this.test2ToolStripMenuItem.Text = "Интерфейс";
@@ -198,13 +200,21 @@ namespace LabirinthWinformsApp
             this.регенирироватьВходвыходToolStripMenuItem.Text = "Регенирировать вход/выход";
             this.регенирироватьВходвыходToolStripMenuItem.Click += new System.EventHandler(this.exitAndEnterButton_Click);
             // 
+            // ботToolStripMenuItem
+            // 
+            this.ботToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.убратьботаToolStripMenuItem,
+            this.пуститьБотаToolStripMenuItem});
+            this.ботToolStripMenuItem.Name = "ботToolStripMenuItem";
+            this.ботToolStripMenuItem.Size = new System.Drawing.Size(291, 26);
+            this.ботToolStripMenuItem.Text = "Бот";
+            // 
             // убратьботаToolStripMenuItem
             // 
             this.убратьботаToolStripMenuItem.CheckOnClick = true;
             this.убратьботаToolStripMenuItem.Name = "убратьботаToolStripMenuItem";
-            this.убратьботаToolStripMenuItem.Size = new System.Drawing.Size(291, 26);
+            this.убратьботаToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.убратьботаToolStripMenuItem.Text = "Убрать бота";
-            this.убратьботаToolStripMenuItem.Click += new System.EventHandler(this.убратьботаToolStripMenuItem_Click);
             // 
             // standartSizeComboBox
             // 
@@ -712,6 +722,13 @@ namespace LabirinthWinformsApp
             // 
             this.timer.Tick += new System.EventHandler(this.timer_Tick);
             // 
+            // пуститьБотаToolStripMenuItem
+            // 
+            this.пуститьБотаToolStripMenuItem.Name = "пуститьБотаToolStripMenuItem";
+            this.пуститьБотаToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.пуститьБотаToolStripMenuItem.Text = "Пустить бота";
+            this.пуститьБотаToolStripMenuItem.Click += new System.EventHandler(this.botButton_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -773,7 +790,6 @@ namespace LabirinthWinformsApp
         private System.Windows.Forms.ToolStripStatusLabel emptySpaceLabel;
         private System.Windows.Forms.TableLayoutPanel mainTableLayout;
         private System.Windows.Forms.TableLayoutPanel labirinthTableLayout;
-        private System.Windows.Forms.ToolStripMenuItem убратьботаToolStripMenuItem;
         private System.Windows.Forms.TableLayoutPanel toolsTableLayout;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.Panel panel4;
@@ -812,6 +828,9 @@ namespace LabirinthWinformsApp
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox enterComboBox;
+        private System.Windows.Forms.ToolStripMenuItem убратьботаToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ботToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem пуститьБотаToolStripMenuItem;
     }
 }
 
