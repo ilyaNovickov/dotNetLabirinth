@@ -103,8 +103,8 @@ namespace LabirinthLib
                 if (avaibleDirs.Count() == 1)
                 {
                     //visitedPoints.Add(walker);
-                    wayToExit.Add(walker);
                     walker.OffsetPoint(avaibleDirs.ElementAt(0));
+                    wayToExit.Add(walker);
                     way.Add(walker);
                 }
                 //Если нет доступных путей (т. е. тупик)
@@ -124,8 +124,8 @@ namespace LabirinthLib
                         //if (DeadEndFintEvent != null)
                         //    DeadEndFintEvent(this, new DeadEndFindEventArgs(deadEndWay));
                         
-                        wayToExit.RemoveSinceUnique(way.IndexOf(walker) + 1);
-
+                        wayToExit.RemoveSinceUnique(wayToExit.IndexOf(walker) + 1);
+                        //wayToExit.RemoveRange(wayToExit.IndexOf(walker + 1), );
                         List<Point> deadEndWay = way.CopyList(way.IndexOf(walker));
                         deadEndWay.Reverse();
                         way.AddRange(deadEndWay);
@@ -139,11 +139,14 @@ namespace LabirinthLib
                     //visitedPoints.Add(walker);
                     //Переместиться в рандомное направление
                     walker.OffsetPoint(lab.GetRandomDirectionFromList(avaibleDirs));
+                    wayToExit.Add(walker);
                     way.Add(walker);
                 }
             }
+            way.Add(walker);
+            wayToExit.Add(walker);
             this.way = new Queue<Point>(way);
-
+            this.wayToExit = new Queue<Point>(wayToExit);
             return true;
         }
     }
