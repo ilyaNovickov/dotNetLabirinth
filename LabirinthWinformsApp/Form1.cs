@@ -44,6 +44,8 @@ namespace LabirinthWinformsApp
             this.botSpeedTrackBar.Maximum = 20;
             this.botSpeedNumericUpDown.Maximum = 20;
             botSpeed = 1 * 100;
+
+            RedrawLabirinth();
         }
 
         private void RedrawLabirinth()
