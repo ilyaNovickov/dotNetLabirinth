@@ -74,11 +74,11 @@ namespace LabirinthWinformsApp
             this.botSpeedNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.botSpeedTrackBar = new System.Windows.Forms.TrackBar();
             this.botLogRichTextBox = new System.Windows.Forms.RichTextBox();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.enterComboBox = new System.Windows.Forms.ComboBox();
             this.backgroundWorker = new System.ComponentModel.BackgroundWorker();
             this.timer = new System.Windows.Forms.Timer(this.components);
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.enterComboBox = new System.Windows.Forms.ComboBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.labirinthPictureBox)).BeginInit();
             this.menuStrip1.SuspendLayout();
@@ -601,7 +601,7 @@ namespace LabirinthWinformsApp
             this.groupBox4.Size = new System.Drawing.Size(250, 147);
             this.groupBox4.TabIndex = 13;
             this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "Скорость бота";
+            this.groupBox4.Text = "Скорость бота, мс/100";
             // 
             // tableLayoutPanel2
             // 
@@ -625,19 +625,37 @@ namespace LabirinthWinformsApp
             this.botSpeedNumericUpDown.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.botSpeedNumericUpDown.AutoSize = true;
             this.botSpeedNumericUpDown.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.botSpeedNumericUpDown.Location = new System.Drawing.Point(176, 48);
+            this.botSpeedNumericUpDown.Location = new System.Drawing.Point(187, 48);
+            this.botSpeedNumericUpDown.Maximum = new decimal(new int[] {
+            30,
+            0,
+            0,
+            0});
+            this.botSpeedNumericUpDown.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.botSpeedNumericUpDown.Name = "botSpeedNumericUpDown";
-            this.botSpeedNumericUpDown.Size = new System.Drawing.Size(65, 30);
+            this.botSpeedNumericUpDown.Size = new System.Drawing.Size(54, 30);
             this.botSpeedNumericUpDown.TabIndex = 0;
+            this.botSpeedNumericUpDown.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.botSpeedNumericUpDown.ValueChanged += new System.EventHandler(this.numericUpDown_ValueChanged);
             // 
             // botSpeedTrackBar
             // 
             this.botSpeedTrackBar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.botSpeedTrackBar.Location = new System.Drawing.Point(3, 35);
+            this.botSpeedTrackBar.Maximum = 30;
+            this.botSpeedTrackBar.Minimum = 1;
             this.botSpeedTrackBar.Name = "botSpeedTrackBar";
-            this.botSpeedTrackBar.Size = new System.Drawing.Size(167, 56);
+            this.botSpeedTrackBar.Size = new System.Drawing.Size(178, 56);
             this.botSpeedTrackBar.TabIndex = 1;
+            this.botSpeedTrackBar.Value = 3;
             this.botSpeedTrackBar.Scroll += new System.EventHandler(this.trackBar_Scroll);
             // 
             // botLogRichTextBox
@@ -651,15 +669,6 @@ namespace LabirinthWinformsApp
             this.botLogRichTextBox.TabIndex = 14;
             this.botLogRichTextBox.Text = "";
             // 
-            // backgroundWorker
-            // 
-            this.backgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker_DoWork);
-            this.backgroundWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker_RunWorkerCompleted);
-            // 
-            // timer
-            // 
-            this.timer.Tick += new System.EventHandler(this.timer_Tick);
-            // 
             // panel3
             // 
             this.panel3.AutoScroll = true;
@@ -671,6 +680,16 @@ namespace LabirinthWinformsApp
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(250, 39);
             this.panel3.TabIndex = 16;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label1.Location = new System.Drawing.Point(19, 11);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(51, 20);
+            this.label1.TabIndex = 13;
+            this.label1.Text = "Вход";
             // 
             // enterComboBox
             // 
@@ -684,15 +703,14 @@ namespace LabirinthWinformsApp
             this.enterComboBox.Size = new System.Drawing.Size(97, 24);
             this.enterComboBox.TabIndex = 0;
             // 
-            // label1
+            // backgroundWorker
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label1.Location = new System.Drawing.Point(19, 11);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(51, 20);
-            this.label1.TabIndex = 13;
-            this.label1.Text = "Вход";
+            this.backgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker_DoWork);
+            this.backgroundWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker_RunWorkerCompleted);
+            // 
+            // timer
+            // 
+            this.timer.Tick += new System.EventHandler(this.timer_Tick);
             // 
             // MainForm
             // 

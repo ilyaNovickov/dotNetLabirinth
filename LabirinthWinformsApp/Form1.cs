@@ -29,6 +29,7 @@ namespace LabirinthWinformsApp
         private Queue<LabirinthLib.Structs.Point> allWay= new Queue<LabirinthLib.Structs.Point>();
         private Queue<Direction> directions = new Queue<Direction>();
         private LabirinthLib.Structs.Point prevPoint;
+        private int botSpeed;
 
         public MainForm()
         {
@@ -46,19 +47,18 @@ namespace LabirinthWinformsApp
             this.zoomNumericUpDown.Maximum = 100;
             this.zoomTrackBar.Maximum = 100;
 
-            this.botSpeedNumericUpDown.Minimum = 0;
-            this.botSpeedTrackBar.Minimum = 0;
+            this.botSpeedNumericUpDown.Minimum = 1;
+            this.botSpeedTrackBar.Minimum = 1;
 
-            this.botSpeedTrackBar.Maximum = 100;
-            this.botSpeedNumericUpDown.Maximum = 100;
+            this.botSpeedTrackBar.Maximum = 30;
+            this.botSpeedNumericUpDown.Maximum = 30;
+            botSpeed = 1 * 100;
         }
 
         private void DrawLabirinth()
         {
             Bitmap bitmap = new Bitmap((int)(lab.Width * zoom), (int)(lab.Height * zoom));
             Graphics g = Graphics.FromImage(bitmap);
-            //g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.None;
-            //g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
             Matrix matrix = new Matrix();
             matrix.Scale(zoom, zoom);
             g.Transform = matrix;
@@ -88,7 +88,7 @@ namespace LabirinthWinformsApp
                 if (this.botSpeedTrackBar.Value != ((int)this.botSpeedNumericUpDown.Value))
                     this.botSpeedTrackBar.Value = ((int)this.botSpeedNumericUpDown.Value);
 
-                //zoom = zoomTrackBar.Value;
+                botSpeed = botSpeedTrackBar.Value * 100;
             }
             if (!backgroundWorker.IsBusy)
                 DrawLabirinth();
@@ -413,7 +413,7 @@ namespace LabirinthWinformsApp
 
             this.timerAction = this.ReportBotProgress;
 
-            timer.Interval = 100;
+            timer.Interval = botSpeed;
             timer.Start();
 
         }
