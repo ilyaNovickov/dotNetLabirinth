@@ -80,8 +80,14 @@ namespace LabirinthWinformsApp
             this.panel3 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.enterComboBox = new System.Windows.Forms.ComboBox();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.goBotButton = new System.Windows.Forms.Button();
+            this.stopBotButton = new System.Windows.Forms.Button();
             this.backgroundWorker = new System.ComponentModel.BackgroundWorker();
             this.timer = new System.Windows.Forms.Timer(this.components);
+            this.остановитьБотаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.продолжитьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.botSpeedComboBoxMenu = new System.Windows.Forms.ToolStripComboBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.labirinthPictureBox)).BeginInit();
             this.menuStrip1.SuspendLayout();
@@ -106,6 +112,7 @@ namespace LabirinthWinformsApp
             ((System.ComponentModel.ISupportInitialize)(this.botSpeedNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.botSpeedTrackBar)).BeginInit();
             this.panel3.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -206,7 +213,10 @@ namespace LabirinthWinformsApp
             this.ботToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.убратьботаToolStripMenuItem,
             this.пуститьБотаToolStripMenuItem,
-            this.enterComboBocMenu});
+            this.enterComboBocMenu,
+            this.остановитьБотаToolStripMenuItem,
+            this.продолжитьToolStripMenuItem,
+            this.botSpeedComboBoxMenu});
             this.ботToolStripMenuItem.Name = "ботToolStripMenuItem";
             this.ботToolStripMenuItem.Size = new System.Drawing.Size(291, 26);
             this.ботToolStripMenuItem.Text = "Бот";
@@ -227,6 +237,7 @@ namespace LabirinthWinformsApp
             // 
             // enterComboBocMenu
             // 
+            this.enterComboBocMenu.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.enterComboBocMenu.Items.AddRange(new object[] {
             "",
             "№1",
@@ -592,17 +603,19 @@ namespace LabirinthWinformsApp
             this.botTableLayout.ColumnCount = 1;
             this.botTableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.botTableLayout.Controls.Add(this.botButton, 0, 1);
-            this.botTableLayout.Controls.Add(this.groupBox4, 0, 2);
-            this.botTableLayout.Controls.Add(this.botLogRichTextBox, 0, 3);
+            this.botTableLayout.Controls.Add(this.groupBox4, 0, 3);
+            this.botTableLayout.Controls.Add(this.botLogRichTextBox, 0, 4);
             this.botTableLayout.Controls.Add(this.panel3, 0, 0);
+            this.botTableLayout.Controls.Add(this.tableLayoutPanel1, 0, 2);
             this.botTableLayout.Dock = System.Windows.Forms.DockStyle.Fill;
             this.botTableLayout.Location = new System.Drawing.Point(787, 4);
             this.botTableLayout.Name = "botTableLayout";
-            this.botTableLayout.RowCount = 4;
+            this.botTableLayout.RowCount = 5;
             this.botTableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.botTableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.botTableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.botTableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.botTableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.botTableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.botTableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.botTableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.botTableLayout.Size = new System.Drawing.Size(256, 504);
             this.botTableLayout.TabIndex = 10;
             // 
@@ -615,7 +628,7 @@ namespace LabirinthWinformsApp
             this.botButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.botButton.Location = new System.Drawing.Point(3, 48);
             this.botButton.Name = "botButton";
-            this.botButton.Size = new System.Drawing.Size(250, 147);
+            this.botButton.Size = new System.Drawing.Size(250, 108);
             this.botButton.TabIndex = 15;
             this.botButton.Text = "Пустить бота";
             this.botButton.UseVisualStyleBackColor = true;
@@ -625,9 +638,9 @@ namespace LabirinthWinformsApp
             // 
             this.groupBox4.Controls.Add(this.tableLayoutPanel2);
             this.groupBox4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox4.Location = new System.Drawing.Point(3, 201);
+            this.groupBox4.Location = new System.Drawing.Point(3, 276);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(250, 147);
+            this.groupBox4.Size = new System.Drawing.Size(250, 108);
             this.groupBox4.TabIndex = 13;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Скорость бота, мс/100";
@@ -646,7 +659,7 @@ namespace LabirinthWinformsApp
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(244, 126);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(244, 87);
             this.tableLayoutPanel2.TabIndex = 3;
             // 
             // botSpeedNumericUpDown
@@ -654,7 +667,7 @@ namespace LabirinthWinformsApp
             this.botSpeedNumericUpDown.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.botSpeedNumericUpDown.AutoSize = true;
             this.botSpeedNumericUpDown.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.botSpeedNumericUpDown.Location = new System.Drawing.Point(187, 48);
+            this.botSpeedNumericUpDown.Location = new System.Drawing.Point(187, 28);
             this.botSpeedNumericUpDown.Maximum = new decimal(new int[] {
             30,
             0,
@@ -678,7 +691,7 @@ namespace LabirinthWinformsApp
             // botSpeedTrackBar
             // 
             this.botSpeedTrackBar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.botSpeedTrackBar.Location = new System.Drawing.Point(3, 35);
+            this.botSpeedTrackBar.Location = new System.Drawing.Point(3, 15);
             this.botSpeedTrackBar.Maximum = 30;
             this.botSpeedTrackBar.Minimum = 1;
             this.botSpeedTrackBar.Name = "botSpeedTrackBar";
@@ -691,10 +704,10 @@ namespace LabirinthWinformsApp
             // 
             this.botLogRichTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.botLogRichTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.botLogRichTextBox.Location = new System.Drawing.Point(3, 354);
+            this.botLogRichTextBox.Location = new System.Drawing.Point(3, 390);
             this.botLogRichTextBox.Name = "botLogRichTextBox";
             this.botLogRichTextBox.ReadOnly = true;
-            this.botLogRichTextBox.Size = new System.Drawing.Size(250, 147);
+            this.botLogRichTextBox.Size = new System.Drawing.Size(250, 111);
             this.botLogRichTextBox.TabIndex = 14;
             this.botLogRichTextBox.Text = "";
             this.botLogRichTextBox.WordWrap = false;
@@ -733,6 +746,51 @@ namespace LabirinthWinformsApp
             this.enterComboBox.Size = new System.Drawing.Size(97, 24);
             this.enterComboBox.TabIndex = 0;
             // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.ColumnCount = 2;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.Controls.Add(this.goBotButton, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.stopBotButton, 0, 0);
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 162);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 1;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(250, 108);
+            this.tableLayoutPanel1.TabIndex = 17;
+            // 
+            // goBotButton
+            // 
+            this.goBotButton.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.goBotButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.goBotButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.goBotButton.Location = new System.Drawing.Point(128, 3);
+            this.goBotButton.Name = "goBotButton";
+            this.goBotButton.Size = new System.Drawing.Size(119, 102);
+            this.goBotButton.TabIndex = 17;
+            this.goBotButton.Text = "Продолжить";
+            this.goBotButton.UseVisualStyleBackColor = true;
+            this.goBotButton.Click += new System.EventHandler(this.doingSomethingBotButton_Click);
+            // 
+            // stopBotButton
+            // 
+            this.stopBotButton.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.stopBotButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.stopBotButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.stopBotButton.Location = new System.Drawing.Point(3, 3);
+            this.stopBotButton.Name = "stopBotButton";
+            this.stopBotButton.Size = new System.Drawing.Size(119, 102);
+            this.stopBotButton.TabIndex = 16;
+            this.stopBotButton.Text = "Остановить бота";
+            this.stopBotButton.UseVisualStyleBackColor = true;
+            this.stopBotButton.Click += new System.EventHandler(this.doingSomethingBotButton_Click);
+            // 
             // backgroundWorker
             // 
             this.backgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker_DoWork);
@@ -741,6 +799,34 @@ namespace LabirinthWinformsApp
             // timer
             // 
             this.timer.Tick += new System.EventHandler(this.timer_Tick);
+            // 
+            // остановитьБотаToolStripMenuItem
+            // 
+            this.остановитьБотаToolStripMenuItem.Name = "остановитьБотаToolStripMenuItem";
+            this.остановитьБотаToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.остановитьБотаToolStripMenuItem.Text = "Остановить бота";
+            this.остановитьБотаToolStripMenuItem.Click += new System.EventHandler(this.doingSomethingBotButton_Click);
+            // 
+            // продолжитьToolStripMenuItem
+            // 
+            this.продолжитьToolStripMenuItem.Name = "продолжитьToolStripMenuItem";
+            this.продолжитьToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.продолжитьToolStripMenuItem.Text = "Продолжить";
+            this.продолжитьToolStripMenuItem.Click += new System.EventHandler(this.doingSomethingBotButton_Click);
+            // 
+            // botSpeedComboBoxMenu
+            // 
+            this.botSpeedComboBoxMenu.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.botSpeedComboBoxMenu.Items.AddRange(new object[] {
+            "",
+            "1",
+            "3",
+            "10",
+            "15",
+            "20"});
+            this.botSpeedComboBoxMenu.Name = "botSpeedComboBoxMenu";
+            this.botSpeedComboBoxMenu.Size = new System.Drawing.Size(121, 28);
+            this.botSpeedComboBoxMenu.SelectedIndexChanged += new System.EventHandler(this.botSpeedComboBoxMenu_SelectedIndexChanged);
             // 
             // MainForm
             // 
@@ -787,6 +873,7 @@ namespace LabirinthWinformsApp
             ((System.ComponentModel.ISupportInitialize)(this.botSpeedTrackBar)).EndInit();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
+            this.tableLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -845,6 +932,12 @@ namespace LabirinthWinformsApp
         private System.Windows.Forms.ToolStripMenuItem ботToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem пуститьБотаToolStripMenuItem;
         private System.Windows.Forms.ToolStripComboBox enterComboBocMenu;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.Button goBotButton;
+        private System.Windows.Forms.Button stopBotButton;
+        private System.Windows.Forms.ToolStripMenuItem остановитьБотаToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem продолжитьToolStripMenuItem;
+        private System.Windows.Forms.ToolStripComboBox botSpeedComboBoxMenu;
     }
 }
 

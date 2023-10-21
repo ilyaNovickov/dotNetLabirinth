@@ -471,5 +471,30 @@ namespace LabirinthWinformsApp
         {
             this.enterComboBox.SelectedIndex = enterComboBocMenu.SelectedIndex;
         }
+
+        private void doingSomethingBotButton_Click(object sender, EventArgs e)
+        {
+            if (timerAction == ReportBotProgress)
+            {
+                if (sender == stopBotButton || sender == остановитьБотаToolStripMenuItem)
+                {
+                    botLogRichTextBox.Text += "Остановка\n";
+                    timer.Stop();
+                }
+                else if (sender == goBotButton || sender == продолжитьToolStripMenuItem)
+                {
+                    botLogRichTextBox.Text += "Продолжение\n";
+                    timer.Start();
+                }
+            }
+        }
+
+        private void botSpeedComboBoxMenu_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (int.TryParse(botSpeedComboBoxMenu.Text, out int res))
+            {
+                botSpeedNumericUpDown.Value = res;
+            }
+        }
     }
 }
