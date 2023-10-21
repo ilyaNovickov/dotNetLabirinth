@@ -697,6 +697,7 @@ namespace LabirinthWinformsApp
             this.botLogRichTextBox.Size = new System.Drawing.Size(250, 147);
             this.botLogRichTextBox.TabIndex = 14;
             this.botLogRichTextBox.Text = "";
+            this.botLogRichTextBox.WordWrap = false;
             // 
             // panel3
             // 
