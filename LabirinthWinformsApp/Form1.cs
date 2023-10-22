@@ -114,6 +114,8 @@ namespace LabirinthWinformsApp
             timer.Interval = 1000;
             timer.Start();
 
+            botLogRichTextBox.Clear();
+
             backgroundWorker.RunWorkerAsync(lab);
         }
 
@@ -121,7 +123,8 @@ namespace LabirinthWinformsApp
         {
             if (timer.Enabled)
                 timer.Stop();
-            lab.GenerateInsAndExit();
+			botLogRichTextBox.Clear();
+			lab.GenerateInsAndExit();
             RedrawLabirinth();
         }
 
