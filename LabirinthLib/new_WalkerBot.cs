@@ -107,17 +107,25 @@ namespace LabirinthLib
             if (walker.IsZero())
                 return false;
 
-            List<Point> way = new List<Point>();
-            way.Add(walker);
+            List<Point> way = new List<Point>
+            {
+                walker
+            };
             //Стэк развилок
             Stack<Point> fork = new Stack<Point>();
             ////Список посещённых точек
-            List<Point> visitedPoints = new List<Point>();
-            visitedPoints.AddUnique(walker);
-            List<Point> wayToExit = new List<Point>();
-            wayToExit.Add(walker);
-            List<Direction> directions = new List<Direction>();
-            directions.Add(Direction.None);
+            //List<Point> visitedPoints = new List<Point>()
+            //{
+            //    walker
+            //};
+            List<Point> wayToExit = new List<Point>
+            {
+                walker
+            };
+            List<Direction> directions = new List<Direction>
+            {
+                Direction.None
+            };
 
             Point prevFork = new Point();
             List<Point> visitedDeadEnds = new List<Point>();
@@ -125,13 +133,14 @@ namespace LabirinthLib
             //Пока бот не достиг выхода
             while (walker != lab.Exit)
             {
-                IEnumerable<Direction> avaibleDirs = GetAvaibleDirectionsToMove(walker, visitedPoints);
+				//IEnumerable<Direction> avaibleDirs = GetAvaibleDirectionsToMove(walker, visitedPoints);
+                IEnumerable<Direction> avaibleDirs = GetAvaibleDirectionsToMove(walker, way);
 
-                if (avaibleDirs.Count() == 1)
+				if (avaibleDirs.Count() == 1)
                 {
                     directions.Add(avaibleDirs.First());
                     BotOffsetPoint(avaibleDirs.First());
-                    visitedPoints.AddUnique(walker);
+                    //visitedPoints.AddUnique(walker);
                     way.Add(walker);
                     wayToExit.Add(walker);
                 }
@@ -143,7 +152,7 @@ namespace LabirinthLib
 
                     directions.Add(dir);
                     BotOffsetPoint(dir);
-                    visitedPoints.AddUnique(walker);
+                    //visitedPoints.AddUnique(walker);
                     way.Add(walker);
                     wayToExit.Add(walker);
                 }
@@ -153,12 +162,9 @@ namespace LabirinthLib
 
 					wayToExit.RemoveSinceUnique(wayToExit.IndexOf(walker) + 1);
 
-
-
 					List<Point> deadEndWay = new List<Point>();
 
 					List<Direction> deadEndDirection = new List<Direction>();
-
 
 					int indexofFork = way.IndexOf(walker);
 
@@ -187,8 +193,6 @@ namespace LabirinthLib
 				}
 
 			}
-            //way.Add(walker);
-            //wayToExit.Add(walker);
             this.directions = new Queue<Direction>(directions);
             this.way = new Queue<Point>(way);
             this.wayToExit = new Queue<Point>(wayToExit);
