@@ -186,7 +186,7 @@ namespace LabirinthWinformsApp
 
         private void UpdateLabirinthData()
         {
-            this.sizeLabel.Text = $"Размер : {lab.Size.ToString()}";
+            this.sizeLabel.Text = $"Размер : {lab.Size}";
             this.emptySpaceLabel.Text = $"Пустое пространство : {lab.EmptySpace * 100} %";
 
             RedrawLabirinth();
@@ -296,8 +296,7 @@ namespace LabirinthWinformsApp
 
         private void timer_Tick(object sender, EventArgs e)
         {
-            if (timerAction != null)
-                timerAction();
+            timerAction?.Invoke();
         }
 
         private void ReportThatWorking()

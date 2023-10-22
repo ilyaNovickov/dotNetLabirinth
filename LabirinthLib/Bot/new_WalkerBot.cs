@@ -41,12 +41,9 @@ namespace LabirinthLib.Bot
             {
                 lab = value;
 
-                if (way != null)
-                    way.Clear();
-                if (wayToExit != null)
-                    wayToExit.Clear();
-                if (directions != null)
-                    directions.Clear();
+                way?.Clear();
+                wayToExit?.Clear();
+                directions?.Clear();
             }
         }
 
@@ -134,7 +131,7 @@ namespace LabirinthLib.Bot
             //Метод перемещения бота по лабиринту
             void BotOffsetPoint(Direction direction)
             {
-                Point prevPoint = walker;
+                //Point prevPoint = walker;
                 walker.OffsetPoint(direction);
                 //if (BotMoveEvent != null)
                 //    BotMoveEvent(this, new BotMoveEventArgs(walker, prevPoint, direction));
@@ -221,14 +218,10 @@ namespace LabirinthLib.Bot
                     //var test = wayToExit.CutList(wayToExit.IndexOf(walker) + 1);
 					wayToExit.RemoveSinceUnique(wayToExit.IndexOf(walker) + 1);
 
-					List<Point> deadEndWay = new List<Point>();
-
-					List<Direction> deadEndDirection = new List<Direction>();
-
 					int indexofFork = way.IndexOf(walker);
 
-					deadEndWay = way.CopyList(indexofFork);
-					deadEndDirection = directions.CopyList(indexofFork);
+                    List<Point> deadEndWay = way.CopyList(indexofFork);
+                    List<Direction> deadEndDirection = directions.CopyList(indexofFork);
 
 					if (!prevFork.IsZero() && deadEndWay.Contains(prevFork))
 					{

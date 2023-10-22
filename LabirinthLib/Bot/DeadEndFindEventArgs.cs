@@ -8,18 +8,18 @@ using LabirinthLib.Structs;
 namespace LabirinthLib
 {
     //Неиспользуется
-    public class DeadEndFindEventArgs : EventArgs
-    {
-        private IEnumerable<Point> deadEndFromLastFork;
-        public DeadEndFindEventArgs(IEnumerable<Point> deadEndFromLastFork) 
-        { 
-            this.deadEndFromLastFork = deadEndFromLastFork;
-        }
+    //public class DeadEndFindEventArgs : EventArgs
+    //{
+    //    private IEnumerable<Point> deadEndFromLastFork;
+    //    public DeadEndFindEventArgs(IEnumerable<Point> deadEndFromLastFork) 
+    //    { 
+    //        this.deadEndFromLastFork = deadEndFromLastFork;
+    //    }
 
-        public Point LastFork => deadEndFromLastFork.First();
+    //    public Point LastFork => deadEndFromLastFork.First();
 
-        public Point DeadEnd => deadEndFromLastFork.Last();
+    //    public Point DeadEnd => deadEndFromLastFork.Last();
 
-        public IEnumerable<Point> WayFromForkToDeadEnd => deadEndFromLastFork;
-    }
+    //    public IEnumerable<Point> WayFromForkToDeadEnd => deadEndFromLastFork;
+    //}
 }
