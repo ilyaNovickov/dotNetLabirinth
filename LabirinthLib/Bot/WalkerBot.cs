@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using LabirinthLib.Structs;
 
-namespace LabirinthLib
+namespace LabirinthLib.Bot
 {
     public static class WalkerBot
     {

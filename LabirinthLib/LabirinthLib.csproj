@@ -42,11 +42,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="new_WalkerBot.cs" />
-    <Compile Include="BotMoveEventArgs.cs" />
-    <Compile Include="DeadEndFindEventArgs.cs" />
+    <Compile Include="Bot\new_WalkerBot.cs" />
+    <Compile Include="Bot\BotMoveEventArgs.cs" />
+    <Compile Include="Bot\DeadEndFindEventArgs.cs" />
     <Compile Include="Printers\StringPrinter.cs" />
-    <Compile Include="WalkerBot.cs" />
+    <Compile Include="Bot\WalkerBot.cs" />
     <Compile Include="ListUnique.cs" />
     <Compile Include="Printers\ConsolePrinter.cs" />
     <Compile Include="Direction.cs" />

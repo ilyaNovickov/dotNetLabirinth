@@ -1,4 +1,5 @@
 ﻿using LabirinthLib;
+using LabirinthLib.Bot;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -22,13 +23,15 @@ namespace LabirinthWinformsApp
         private LabirinthLib.Structs.Point prevPoint;
         private int botSpeed;
 
+        List<LabirinthLib.Structs.Point> deadEnds;
+
         public MainForm()
         {
             InitializeComponent();
 
             lab = new Labirinth();
 
-            this.standartEmptySpaccceComboBox.SelectedIndex = 0;
+			this.standartEmptySpaccceComboBox.SelectedIndex = 0;
             this.standartSizeComboBox.SelectedIndex = 0;
 
             this.zoomNumericUpDown.Minimum = 10;
@@ -65,7 +68,19 @@ namespace LabirinthWinformsApp
             Rectangle rect = new Rectangle(0, 0, bitmap.Width, bitmap.Height);
             g.DrawImage(labirinthPictureBox.Image, rect);
             labirinthPictureBox.Image = bitmap;
-        }
+
+            //if (показыватьТупикиtoolStripMenuItem.Checked && deadEnds != null)
+            //{
+            //    g = GetCustomizedGraphicsFromImage(labirinthPictureBox.Image);
+            //    //g = labirinthPictureBox.CreateGraphics();
+            //    //g.ScaleTransform(zoom, zoom);
+            //    foreach (LabirinthLib.Structs.Point point in this.deadEnds)
+            //    {
+            //        using (SolidBrush brush = new SolidBrush(Color.DarkOliveGreen))
+            //            g.FillRectangle(brush, point.X + 0.25f, point.Y + 0.25f, 0.5f, 0.5f);
+            //    }
+            //}
+		}
 
         private void trackBar_Scroll(object sender, EventArgs e)
         {
@@ -123,7 +138,10 @@ namespace LabirinthWinformsApp
         {
             if (timer.Enabled)
                 timer.Stop();
-			botLogRichTextBox.Clear();
+            way.Clear();
+            allWay.Clear();
+            directions.Clear();
+            botLogRichTextBox.Clear();
 			lab.GenerateInsAndExit();
             RedrawLabirinth();
         }
@@ -168,7 +186,7 @@ namespace LabirinthWinformsApp
 
         private void UpdateLabirinthData()
         {
-            this.sizeLabel.Text = $"Размер : {lab.Size.ToString()}";
+            this.sizeLabel.Text = $"Размер : {lab.Size}";
             this.emptySpaceLabel.Text = $"Пустое пространство : {lab.EmptySpace * 100} %";
 
             RedrawLabirinth();
@@ -278,8 +296,7 @@ namespace LabirinthWinformsApp
 
         private void timer_Tick(object sender, EventArgs e)
         {
-            if (timerAction != null)
-                timerAction();
+            timerAction?.Invoke();
         }
 
         private void ReportThatWorking()
@@ -288,8 +305,6 @@ namespace LabirinthWinformsApp
             Random random = new Random();
             this.Text = ".Net Labirinth | Думаем " + vars[random.Next(0, vars.Length)];
         }
-
-        
 
         private void botButton_Click(object sender, EventArgs e)
         {
@@ -312,6 +327,8 @@ namespace LabirinthWinformsApp
             this.directions = bot.DirectionsQueue;
 
             this.timerAction = this.ReportBotProgress;
+
+            this.deadEnds = bot.DeadEndsList;
 
             botLogRichTextBox.Clear();
             botLogRichTextBox.Text += "Запущен бот\n";
@@ -351,6 +368,7 @@ namespace LabirinthWinformsApp
 
             if (allWay.Count == 0 && (this.way != null && this.way.Count == 0))
             {
+                UpdateLabirinth();
                 prevPoint = LabirinthLib.Structs.Point.Empty;
                 timer.Stop();
             }
@@ -532,18 +550,18 @@ namespace LabirinthWinformsApp
 			{
                 //Bitmap bitmap = new Bitmap(lab.Width, lab.Height);
                 //Graphics g = Graphics.FromImage(bitmap);
-                //            Rectangle rectangle = new Rectangle(0, 0, bitmap.Width, bitmap.Height);
+                //Rectangle rectangle = new Rectangle(0, 0, bitmap.Width, bitmap.Height);
 
-                //            g.DrawImage(labirinthPictureBox.Image, 0, 0);
+                //g.DrawImage(labirinthPictureBox.Image, 0, 0);
 
                 //bitmap.Save(path);
 
                 //bitmap.Dispose();
 
                 labirinthPictureBox.Image.Save(path);
-			}
+            }
 
-			using (SaveFileDialog sfd = new SaveFileDialog())
+            using (SaveFileDialog sfd = new SaveFileDialog())
 			{
 				sfd.Filter = "PNG (*.png)|*.png|JPEG (*.jpeg)|*.jpeg;*.jpg|BMP (*.bmp)|*.bmp;";
 
@@ -569,5 +587,10 @@ namespace LabirinthWinformsApp
 				}
 			}
 		}
+
+        //private void показыватьТупикиtoolStripMenuItem_Click(object sender, EventArgs e)
+        //{
+        //    UpdateLabirinth();
+        //}
     }
 }
