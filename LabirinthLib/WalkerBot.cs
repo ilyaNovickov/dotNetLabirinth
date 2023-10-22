@@ -37,7 +37,7 @@ namespace LabirinthLib
         /// <returns>Очередь точек, ведущий из входа на выход</returns>
         public static Queue<Point> GetWayFromLaborinth(this Labirinth labirinth, int numofIn)
         {
-            return new Queue<Point>(WalkerBot.CreateWay(labirinth, numofIn, false));
+            return new Queue<Point>(WalkerBot.CreateWay(labirinth, numofIn, false)["Way"]);
         }
         /// <summary>
         /// Получения пути, пройденного ботом по лабиринту
@@ -56,17 +56,25 @@ namespace LabirinthLib
         /// <returns>Список точек, пройденный ботом</returns>
         public static List<Point> GetAllWayFromLaborinth(this Labirinth labirinth, int numofIn)
         {
-            return WalkerBot.CreateWay(labirinth, numofIn, true).ToList();
+            return WalkerBot.CreateWay(labirinth, numofIn, true)["Way"].ToList();
         }
 
+        public static Dictionary<string, IEnumerable<Point>> GetAllWays(this Labirinth lab, int numofIn)
+        {
+            return CreateWay(lab, numofIn, false);
+        }
+        /*
+         * Возможно доп переменная visitedPoints не понадобится, но это не точно
+         */
         /// <summary>
         /// Метод создания пути из лабиринта
         /// </summary>
         /// <param name="labirinth">Лабиринт</param>
         /// <param name="numofIn">Номер входа</param>
         /// <param name="wayWithDeadEnds">Путь должен содержать тупики?</param>
-        /// <returns>Коллекция точек пути из лабиринта</returns>
-        private static IEnumerable<Point> CreateWay(Labirinth labirinth, int numofIn, bool wayWithDeadEnds = false)
+        /// <returns>Список "Way" - выход из лабиринта
+        /// Список "VisitedPoints" - список всех посещённых точек</returns>
+        private static Dictionary<string, IEnumerable<Point>> CreateWay(Labirinth labirinth, int numofIn, bool wayWithDeadEnds = false)
         {
             //Метод получения доступных направлений для перемещения точек, исключая указанные
             IEnumerable<Direction> GetAvaibleDirectionsToMove(Point checkingPoint, IEnumerable<Point> exceptionPoints = null)
@@ -104,7 +112,7 @@ namespace LabirinthLib
             }
             //Если нет входа (т. е. точка входа равна (0, 0) )
             if (walker.IsZero())
-                return new List<Point>();
+                return new Dictionary<string, IEnumerable<Point>>();
 
             List<Point> way = new List<Point>()
             {
@@ -153,7 +161,11 @@ namespace LabirinthLib
                     way.Add(walker);
                 }
             }
-            return way;
+            return new Dictionary<string, IEnumerable<Point>>
+            {
+                { "Way", way },
+                { "VisitedPoints", visitedPoints }
+            };
         }
     }
 }

@@ -1,21 +1,13 @@
-﻿using System;
+﻿using LabirinthLib;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.Drawing.Drawing2D;
-using LabirinthLib;
-using LabirinthLib.Structs;
-using LabirinthLib.Printers;
-using System.Reflection;
 using System.Diagnostics;
+using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
-using System.Xml.Serialization;
+using System.Windows.Forms;
 
 namespace LabirinthWinformsApp
 {
@@ -24,6 +16,11 @@ namespace LabirinthWinformsApp
         private float zoom;
         private Labirinth lab;
         private Action timerAction;
+        private Queue<LabirinthLib.Structs.Point> way = new Queue<LabirinthLib.Structs.Point>();
+        private Queue<LabirinthLib.Structs.Point> allWay= new Queue<LabirinthLib.Structs.Point>();
+        private Queue<Direction> directions = new Queue<Direction>();
+        private LabirinthLib.Structs.Point prevPoint;
+        private int botSpeed;
 
         public MainForm()
         {
@@ -41,23 +38,32 @@ namespace LabirinthWinformsApp
             this.zoomNumericUpDown.Maximum = 100;
             this.zoomTrackBar.Maximum = 100;
 
-            this.botSpeedNumericUpDown.Minimum = 0;
-            this.botSpeedTrackBar.Minimum = 0;
+            this.botSpeedNumericUpDown.Minimum = 1;
+            this.botSpeedTrackBar.Minimum = 1;
 
-            this.botSpeedTrackBar.Maximum = 100;
-            this.botSpeedNumericUpDown.Maximum = 100;
+            this.botSpeedTrackBar.Maximum = 20;
+            this.botSpeedNumericUpDown.Maximum = 20;
+            botSpeed = 1 * 100;
+
+            RedrawLabirinth();
         }
 
-        private void DrawLabirinth()
+        private void RedrawLabirinth()
+        {
+            Bitmap bitmap = new Bitmap((int)(lab.Width * zoom), (int)(lab.Height * zoom));
+            Graphics g = GetCustomizedGraphicsFromImage(bitmap);
+            lab.DrawLabirinth(g);
+            labirinthPictureBox.Image = bitmap;
+        }
+
+        private void UpdateLabirinth()
         {
             Bitmap bitmap = new Bitmap((int)(lab.Width * zoom), (int)(lab.Height * zoom));
             Graphics g = Graphics.FromImage(bitmap);
-            //g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.None;
-            //g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
-            Matrix matrix = new Matrix();
-            matrix.Scale(zoom, zoom);
-            g.Transform = matrix;
-            lab.DrawLabirinth(g);
+            g.SmoothingMode = SmoothingMode.HighSpeed;
+            g.InterpolationMode = InterpolationMode.NearestNeighbor;
+            Rectangle rect = new Rectangle(0, 0, bitmap.Width, bitmap.Height);
+            g.DrawImage(labirinthPictureBox.Image, rect);
             labirinthPictureBox.Image = bitmap;
         }
 
@@ -83,10 +89,11 @@ namespace LabirinthWinformsApp
                 if (this.botSpeedTrackBar.Value != ((int)this.botSpeedNumericUpDown.Value))
                     this.botSpeedTrackBar.Value = ((int)this.botSpeedNumericUpDown.Value);
 
-                //zoom = zoomTrackBar.Value;
+                botSpeed = botSpeedTrackBar.Value * 100;
             }
             if (!backgroundWorker.IsBusy)
-                DrawLabirinth();
+                UpdateLabirinth();
+                //RedrawLabirinth();
         }
 
         private void generateButton_Click(object sender, EventArgs e)
@@ -100,17 +107,25 @@ namespace LabirinthWinformsApp
                 ((int)heightNumericUpDowm.Value));
             lab.EmptySpace = ((float)emptySpaceNumericUpDown.Value) / 100f;
 
+            if (timer.Enabled)
+                timer.Stop();
+
             timerAction = this.ReportThatWorking;
             timer.Interval = 1000;
             timer.Start();
+
+            botLogRichTextBox.Clear();
 
             backgroundWorker.RunWorkerAsync(lab);
         }
 
         private void exitAndEnterButton_Click(object sender, EventArgs e)
         {
-            lab.GenerateInsAndExit();
-            DrawLabirinth();
+            if (timer.Enabled)
+                timer.Stop();
+			botLogRichTextBox.Clear();
+			lab.GenerateInsAndExit();
+            RedrawLabirinth();
         }
 
         private void backgroundWorker_DoWork(object sender, DoWorkEventArgs e)
@@ -156,7 +171,7 @@ namespace LabirinthWinformsApp
             this.sizeLabel.Text = $"Размер : {lab.Size.ToString()}";
             this.emptySpaceLabel.Text = $"Пустое пространство : {lab.EmptySpace * 100} %";
 
-            DrawLabirinth();
+            RedrawLabirinth();
         }
 
         private void standartSizeComboBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -256,8 +271,8 @@ namespace LabirinthWinformsApp
         private void убратьботаToolStripMenuItem_Click(object sender, EventArgs e)
         {
             bool value = убратьботаToolStripMenuItem.Checked;
-            botTableLayout.Enabled = value;
-            botTableLayout.Visible = value;
+            botTableLayout.Enabled = !value;
+            botTableLayout.Visible = !value;
             mainTableLayout.ColumnStyles[2].Width = value ? 0 : 25;
         }
 
@@ -274,107 +289,285 @@ namespace LabirinthWinformsApp
             this.Text = ".Net Labirinth | Думаем " + vars[random.Next(0, vars.Length)];
         }
 
-        private void экспортToolStripMenuItem_Click(object sender, EventArgs e)
+        
+
+        private void botButton_Click(object sender, EventArgs e)
         {
-            bool withScale = sender == экспортСМаштабомToolStripMenuItem;
+            this.RedrawLabirinth();
 
-            void SaveImageFile(string path)
+            int numofEnter = 1;
+            if (enterComboBox.Text == "№2")
+                numofEnter = 2;
+
+            prevPoint = LabirinthLib.Structs.Point.Empty;
+
+            new_WalkerBot bot = new new_WalkerBot(lab);
+
+            bot.FindExit(numofEnter);
+
+            this.way = bot.WayToExitQueue;
+
+            this.allWay = bot.WayQueue;
+
+            this.directions = bot.DirectionsQueue;
+
+            this.timerAction = this.ReportBotProgress;
+
+            botLogRichTextBox.Clear();
+            botLogRichTextBox.Text += "Запущен бот\n";
+
+            timer.Interval = botSpeed;
+            timer.Start();
+
+        }
+
+        private void ReportBotProgress()
+        {
+            if (labirinthPictureBox.Image == null)
+                return;
+
+            Graphics g = GetCustomizedGraphicsFromImage(labirinthPictureBox.Image);
+
+            if (!prevPoint.IsZero())
             {
-                Bitmap bitmap;
-                Graphics g;
-                if (!withScale)
-                {
-                    bitmap = new Bitmap(lab.Width, lab.Height);
-
-                    g = Graphics.FromImage(bitmap);
-                }
-                else
-                {
-                    bitmap = new Bitmap((int)(lab.Width * zoom), (int)(lab.Height * zoom));
-
-                    g = Graphics.FromImage(bitmap);
-
-                    Matrix matrix = new Matrix();
-
-                    matrix.Scale(zoom, zoom);
-
-                    g.Transform = matrix;
-                }
-
-                lab.DrawLabirinth(g);
-
-                bitmap.Save(path);
-
-                bitmap.Dispose();
+                using (SolidBrush way = new SolidBrush(Color.Chartreuse))
+                    g.FillRectangle(way, prevPoint.X, prevPoint.Y, 1, 1);
             }
-            void SaveImageSerializeBin(string path)
+            if (allWay.Count != 0)
             {
-                BinaryFormatter formatter = new BinaryFormatter();
-                using (FileStream stream = new FileStream(path, FileMode.Create))
-                    formatter.Serialize(stream, lab);
+                prevPoint = allWay.Dequeue();
+                using (SolidBrush way = new SolidBrush(Color.DarkGreen))
+                    g.FillRectangle(way, prevPoint.X, prevPoint.Y, 1, 1);
+                botLogRichTextBox.Text += $"Бот пеермещён в точку : {prevPoint} | Направление : {directions.Dequeue()}\n";
             }
-
-            using (SaveFileDialog sfd = new SaveFileDialog())
+            else if (this.way != null && this.way.Count != 0)
             {
-                sfd.Filter = "PNG (*.png)|*.png|JPEG (*.jpeg)|*.jpeg;*.jpg|BMP (*.bmp)|*.bmp;";
+                Point point = way.Dequeue();
+                using (SolidBrush way = new SolidBrush(Color.Green))
+                    g.FillRectangle(way, point.X, point.Y, 1, 1);
+            }
+            labirinthPictureBox.Invalidate();
 
-                if (!withScale)
-                    sfd.Filter += "|BIN (*.bin)|*.bin";
 
-                if (sfd.ShowDialog() == DialogResult.OK)
+            if (allWay.Count == 0 && (this.way != null && this.way.Count == 0))
+            {
+                prevPoint = LabirinthLib.Structs.Point.Empty;
+                timer.Stop();
+            }
+        }
+
+        private Graphics GetCustomizedGraphicsFromImage(Image image)
+        {
+            Graphics gLocal = Graphics.FromImage(image);
+
+            Matrix matrix = new Matrix();
+
+            matrix.Scale(zoom, zoom);
+
+            gLocal.Transform = matrix;
+
+            return gLocal;
+        }
+
+        private void enterComboBoxMenu_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            this.enterComboBox.SelectedIndex = enterComboBocMenu.SelectedIndex;
+        }
+
+        private void doingSomethingBotButton_Click(object sender, EventArgs e)
+        {
+            if (timerAction == ReportBotProgress)
+            {
+                if (sender == stopBotButton || sender == остановитьБотаToolStripMenuItem)
                 {
-                    string path = sfd.FileName;
-
-                    if (path == "" || path == null)
-                        return;
-
-                    switch (Path.GetExtension(path))
-                    {
-                        case ".png":
-                        case ".jpeg":
-                        case ".jpg":
-                        case ".bmp":
-                            SaveImageFile(path);
-                            break;
-                        case ".bin":
-                            SaveImageSerializeBin(path);
-                            break;
-                        default:
-                            break;
-                    }
+                    botLogRichTextBox.Text += "Остановка\n";
+                    timer.Stop();
+                }
+                else if (sender == goBotButton || sender == продолжитьToolStripMenuItem)
+                {
+                    botLogRichTextBox.Text += "Продолжение\n";
+                    timer.Start();
                 }
             }
         }
 
-        private void импортToolStripMenuItem_Click(object sender, EventArgs e)
+        private void botSpeedComboBoxMenu_SelectedIndexChanged(object sender, EventArgs e)
         {
-            using (OpenFileDialog ofd = new OpenFileDialog())
+            if (int.TryParse(botSpeedComboBoxMenu.Text, out int res))
             {
-                ofd.Filter = "BIN (*.bin)|*.bin";
-
-                if (ofd.ShowDialog() == DialogResult.OK)
-                {
-                    string path = ofd.FileName;
-
-                    if (path == null || path == "")
-                        return;
-
-                    BinaryFormatter formatter = new BinaryFormatter();
-
-                    object result = null;
-
-                    using (FileStream stream = new FileStream(path, FileMode.Open))
-                    {
-                        result = formatter.Deserialize(stream);
-                    }
-
-                    if (result is Labirinth lab)
-                    {
-                        this.lab = lab;
-                        UpdateLabirinthData();
-                    }
-                }
+                botSpeedNumericUpDown.Value = res;
             }
         }
+
+		private void экспортToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			bool withScale = sender == экспортСМаштабомToolStripMenuItem;
+
+			void SaveImageFile(string path)
+			{
+				Bitmap bitmap;
+				Graphics g;
+				if (!withScale)
+				{
+					bitmap = new Bitmap(lab.Width, lab.Height);
+
+					g = Graphics.FromImage(bitmap);
+				}
+				else
+				{
+					bitmap = new Bitmap((int)(lab.Width * zoom), (int)(lab.Height * zoom));
+
+					g = Graphics.FromImage(bitmap);
+
+					Matrix matrix = new Matrix();
+
+					matrix.Scale(zoom, zoom);
+
+					g.Transform = matrix;
+				}
+
+				lab.DrawLabirinth(g);
+
+				bitmap.Save(path);
+
+				bitmap.Dispose();
+			}
+
+			void SaveImageSerializeBin(string path)
+			{
+				BinaryFormatter formatter = new BinaryFormatter();
+				using (FileStream stream = new FileStream(path, FileMode.Create))
+					formatter.Serialize(stream, lab);
+			}
+
+			using (SaveFileDialog sfd = new SaveFileDialog())
+			{
+				sfd.Filter = "PNG (*.png)|*.png|JPEG (*.jpeg)|*.jpeg;*.jpg|BMP (*.bmp)|*.bmp;";
+
+				if (!withScale)
+					sfd.Filter += "|BIN (*.bin)|*.bin";
+
+				if (sfd.ShowDialog() == DialogResult.OK)
+				{
+					string path = sfd.FileName;
+
+					if (path == "" || path == null)
+						return;
+
+					switch (Path.GetExtension(path))
+					{
+						case ".png":
+						case ".jpeg":
+						case ".jpg":
+						case ".bmp":
+							SaveImageFile(path);
+							break;
+						case ".bin":
+							SaveImageSerializeBin(path);
+							break;
+						default:
+							break;
+					}
+				}
+			}
+		}
+
+		private void импортToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			using (OpenFileDialog ofd = new OpenFileDialog())
+			{
+				ofd.Filter = "BIN (*.bin)|*.bin";
+
+				if (ofd.ShowDialog() == DialogResult.OK)
+				{
+					string path = ofd.FileName;
+
+					if (path == null || path == "")
+						return;
+
+					BinaryFormatter formatter = new BinaryFormatter();
+
+					object result = null;
+
+					using (FileStream stream = new FileStream(path, FileMode.Open))
+					{
+						result = formatter.Deserialize(stream);
+					}
+
+					if (result is Labirinth lab)
+					{
+						this.lab = lab;
+						UpdateLabirinthData();
+					}
+				}
+			}
+		}
+
+		private void созранитьЛогБотаToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+			using (SaveFileDialog sfd = new SaveFileDialog())
+			{
+				sfd.Filter = "TXT (*.txt)|*.txt";
+
+				if (sfd.ShowDialog() == DialogResult.OK)
+				{
+					string path = sfd.FileName;
+
+					if (path == "" || path == null)
+						return;
+
+                    using (StreamWriter sw = new StreamWriter(path))
+                    {
+                        sw.Write(botLogRichTextBox.Text);
+                    }
+				}
+			}
+		}
+
+        private void экспортЛабиринтаСToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+			void SaveImageFile(string path)
+			{
+                //Bitmap bitmap = new Bitmap(lab.Width, lab.Height);
+                //Graphics g = Graphics.FromImage(bitmap);
+                //            Rectangle rectangle = new Rectangle(0, 0, bitmap.Width, bitmap.Height);
+
+                //            g.DrawImage(labirinthPictureBox.Image, 0, 0);
+
+                //bitmap.Save(path);
+
+                //bitmap.Dispose();
+
+                labirinthPictureBox.Image.Save(path);
+			}
+
+			using (SaveFileDialog sfd = new SaveFileDialog())
+			{
+				sfd.Filter = "PNG (*.png)|*.png|JPEG (*.jpeg)|*.jpeg;*.jpg|BMP (*.bmp)|*.bmp;";
+
+
+				if (sfd.ShowDialog() == DialogResult.OK)
+				{
+					string path = sfd.FileName;
+
+					if (path == "" || path == null)
+						return;
+
+					switch (Path.GetExtension(path))
+					{
+						case ".png":
+						case ".jpeg":
+						case ".jpg":
+						case ".bmp":
+							SaveImageFile(path);
+							break;
+						default:
+							break;
+					}
+				}
+			}
+		}
     }
 }
