@@ -535,16 +535,7 @@ namespace LabirinthWinformsApp
 
                     using (StreamWriter sw = new StreamWriter(path))
                     {
-                        //sw.Write(botLogRichTextBox.Text);
-
-                        for (int x = 0; x < lab.Width; x++)
-                        {
-                            for (int y = 0; y < lab.Height; y++)
-                            {
-                                if (lab[x, y] == 0)
-									sw.WriteLine($"new Point({x}, {y}),");
-							}
-                        }
+                        sw.Write(botLogRichTextBox.Text);
                     }
 				}
 			}
@@ -557,18 +548,18 @@ namespace LabirinthWinformsApp
 			{
                 //Bitmap bitmap = new Bitmap(lab.Width, lab.Height);
                 //Graphics g = Graphics.FromImage(bitmap);
-                //            Rectangle rectangle = new Rectangle(0, 0, bitmap.Width, bitmap.Height);
+                //Rectangle rectangle = new Rectangle(0, 0, bitmap.Width, bitmap.Height);
 
-                //            g.DrawImage(labirinthPictureBox.Image, 0, 0);
+                //g.DrawImage(labirinthPictureBox.Image, 0, 0);
 
                 //bitmap.Save(path);
 
                 //bitmap.Dispose();
 
                 labirinthPictureBox.Image.Save(path);
-			}
+            }
 
-			using (SaveFileDialog sfd = new SaveFileDialog())
+            using (SaveFileDialog sfd = new SaveFileDialog())
 			{
 				sfd.Filter = "PNG (*.png)|*.png|JPEG (*.jpeg)|*.jpeg;*.jpg|BMP (*.bmp)|*.bmp;";
 
