@@ -7,21 +7,33 @@ using LabirinthLib.Structs;
 
 namespace LabirinthLib
 {
+    /// <summary>
+    /// Класс бота, который ищет выход из лабиринта
+    /// </summary>
     public class new_WalkerBot
     {
         private Labirinth lab;
 
-        private Queue<Point> way;
+        private List<Point> way;
 
-        private Queue<Point> wayToExit;
+        private List<Point> wayToExit;
 
-        private Queue<Direction> directions;
+        private List<Direction> directions;
 
+        private List<Point> deadEnds;
+
+        /// <summary>
+        /// Инцилизирует экземпляр бота
+        /// </summary>
+        /// <param name="lab">Лабиринт, где будет находиться бот</param>
         public new_WalkerBot(Labirinth lab)
         {
             this.lab = lab;
         }
 
+        /// <summary>
+        /// Лабиринт с ботом
+        /// </summary>
         public Labirinth Labirinth
         {
             get => lab;
@@ -38,24 +50,49 @@ namespace LabirinthLib
             }
         }
 
-        public Queue<Point> WayQueue => way;
+        /// <summary>
+        /// Очередь всего пройденного ботом пути
+        /// </summary>
+        public Queue<Point> WayQueue => new Queue<Point>(way);
 
-        public List<Point> WayList => way.ToList();
+        /// <summary>
+        /// Список всего пройденнго ботом пути
+        /// </summary>
+        public List<Point> WayList => new List<Point>(way);
 
-        public Queue<Point> WayToExitQueue => wayToExit;
+        /// <summary>
+        /// Очередь выхода из лабиринта
+        /// </summary>
+        public Queue<Point> WayToExitQueue => wayToExit != null ? new Queue<Point>(wayToExit) : null;
 
-        public List<Point> WayToExitList => wayToExit != null ? wayToExit.ToList() : null;
+        /// <summary>
+        /// Список выхода из лабиринта
+        /// </summary>
+        public List<Point> WayToExitList => wayToExit != null ? new List<Point>(wayToExit) : null;
 
-        public Queue<Direction> DirectionsQueue => directions;
+        /// <summary>
+        /// Очередь направленний, по кторым шёл бот
+        /// </summary>
+        public Queue<Direction> DirectionsQueue => new Queue<Direction>(directions);
 
-        public List<Direction> DirectionsList => directions != null ? directions.ToList() : null;
+        /// <summary>
+        /// Список направленний, по кторым шёл бот
+        /// </summary>
+        public List<Direction> DirectionsList => directions != null ? new List<Direction>(directions) : null;
 
-        public event EventHandler<DeadEndFindEventArgs> DeadEndFintEvent;
+        /// <summary>
+        /// Список точек-тупиков, в которые шёл бот 
+        /// </summary>
+        public List<Point> DeadEndsList => deadEnds;
 
-        public event EventHandler<BotMoveEventArgs> BotMoveEvent;
 
-        public List<Point> asd { get; set; }
 
+        /// <summary>
+        /// Находит выход из лабиринта по указанному входу
+        /// </summary>
+        /// <param name="numofEnter">Номер входа в лабиринт</param>
+        /// <returns>Возвращает true если выход из лабиринта был найден, иначе false</returns>
+        /// <exception cref="Exception">Нет таково входа в лабиринт</exception>
         public bool FindExit(int numofEnter = 1)
         {
             //Метод получения доступных направлений для перемещения точек, исключая указанные
@@ -82,7 +119,7 @@ namespace LabirinthLib
                 }
                 return result;
             }
-
+            //Метод инверсирует направление из списка
             void ReverseDirections(ref List<Direction> directions1)
             {
                 for (int i = 0; i < directions1.Count(); i++)
@@ -94,12 +131,13 @@ namespace LabirinthLib
 
             Point walker;
 
+            //Метод перемещения бота по лабиринту
             void BotOffsetPoint(Direction direction)
             {
                 Point prevPoint = walker;
                 walker.OffsetPoint(direction);
-                if (BotMoveEvent != null)
-                    BotMoveEvent(this, new BotMoveEventArgs(walker, prevPoint, direction));
+                //if (BotMoveEvent != null)
+                //    BotMoveEvent(this, new BotMoveEventArgs(walker, prevPoint, direction));
             }
 
             switch (numofEnter)
@@ -172,8 +210,9 @@ namespace LabirinthLib
 				{
                     if (fork.Count == 0)
                     {
-						this.directions = new Queue<Direction>(directions);
-						this.way = new Queue<Point>(way);
+						this.directions = directions;
+						this.way = way;
+                        this.deadEnds = visitedDeadEnds;
 						return false;
                     }
 
@@ -240,12 +279,10 @@ namespace LabirinthLib
 				}
 
 			}
-            this.directions = new Queue<Direction>(directions);
-            this.way = new Queue<Point>(way);
-            this.wayToExit = new Queue<Point>(wayToExit);
-
-            asd = visitedDeadEnds;
-
+            this.wayToExit = wayToExit;
+            this.directions = directions;
+            this.way = way;
+            this.deadEnds = visitedDeadEnds;
             return true;
         }
     }
