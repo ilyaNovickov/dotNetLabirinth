@@ -45,6 +45,7 @@
     <Compile Include="Bot\new_WalkerBot.cs" />
     <Compile Include="Bot\BotMoveEventArgs.cs" />
     <Compile Include="Bot\DeadEndFindEventArgs.cs" />
+    <Compile Include="Printers\LabirinthDrawer.cs" />
     <Compile Include="Printers\StringPrinter.cs" />
     <Compile Include="Bot\WalkerBot.cs" />
     <Compile Include="ListUnique.cs" />
