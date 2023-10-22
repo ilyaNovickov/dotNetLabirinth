@@ -69,17 +69,17 @@ namespace LabirinthWinformsApp
             g.DrawImage(labirinthPictureBox.Image, rect);
             labirinthPictureBox.Image = bitmap;
 
-            if (показыватьТупикиtoolStripMenuItem.Checked && deadEnds != null)
-            {
-                g = GetCustomizedGraphicsFromImage(labirinthPictureBox.Image);
-                //g = labirinthPictureBox.CreateGraphics();
-                //g.ScaleTransform(zoom, zoom);
-                foreach (LabirinthLib.Structs.Point point in this.deadEnds)
-                {
-                    using (SolidBrush brush = new SolidBrush(Color.DarkOliveGreen))
-                        g.FillRectangle(brush, point.X + 0.25f, point.Y + 0.25f, 0.5f, 0.5f);
-                }
-            }
+            //if (показыватьТупикиtoolStripMenuItem.Checked && deadEnds != null)
+            //{
+            //    g = GetCustomizedGraphicsFromImage(labirinthPictureBox.Image);
+            //    //g = labirinthPictureBox.CreateGraphics();
+            //    //g.ScaleTransform(zoom, zoom);
+            //    foreach (LabirinthLib.Structs.Point point in this.deadEnds)
+            //    {
+            //        using (SolidBrush brush = new SolidBrush(Color.DarkOliveGreen))
+            //            g.FillRectangle(brush, point.X + 0.25f, point.Y + 0.25f, 0.5f, 0.5f);
+            //    }
+            //}
 		}
 
         private void trackBar_Scroll(object sender, EventArgs e)
