@@ -1,4 +1,5 @@
 ﻿using LabirinthLib;
+using LabirinthLib.Bot;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -22,7 +23,7 @@ namespace LabirinthWinformsApp
         private LabirinthLib.Structs.Point prevPoint;
         private int botSpeed;
 
-        List<LabirinthLib.Structs.Point> dead;
+        List<LabirinthLib.Structs.Point> deadEnds;
 
         public MainForm()
         {
@@ -70,8 +71,8 @@ namespace LabirinthWinformsApp
             g.DrawImage(labirinthPictureBox.Image, rect);
             labirinthPictureBox.Image = bitmap;
 
-            if (dead != null)
-			foreach (var i in dead)
+            if (deadEnds != null)
+			foreach (var i in deadEnds)
             {
                     g = GetCustomizedGraphicsFromImage(labirinthPictureBox.Image);
                 g.FillRectangle(new SolidBrush(Color.DarkRed), i.X, i.Y, 0.5f, 0.5f);
@@ -326,7 +327,7 @@ namespace LabirinthWinformsApp
 
             this.timerAction = this.ReportBotProgress;
 
-            this.dead = bot.asd;
+            this.deadEnds = bot.DeadEndsList;
 
             botLogRichTextBox.Clear();
             botLogRichTextBox.Text += "Запущен бот\n";
