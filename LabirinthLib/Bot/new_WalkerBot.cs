@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using LabirinthLib.Structs;
 
-namespace LabirinthLib
+namespace LabirinthLib.Bot
 {
     /// <summary>
     /// Класс бота, который ищет выход из лабиринта
