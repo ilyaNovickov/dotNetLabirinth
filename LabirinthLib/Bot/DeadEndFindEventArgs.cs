@@ -7,6 +7,7 @@ using LabirinthLib.Structs;
 
 namespace LabirinthLib
 {
+    //Неиспользуется
     public class DeadEndFindEventArgs : EventArgs
     {
         private IEnumerable<Point> deadEndFromLastFork;

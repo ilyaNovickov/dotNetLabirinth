@@ -7,6 +7,7 @@ using LabirinthLib.Structs;
 
 namespace LabirinthLib
 {
+    //Неиспользуется
     public class BotMoveEventArgs : EventArgs
     {
         private Point prevPoint;
