@@ -68,6 +68,18 @@ namespace LabirinthWinformsApp
             Rectangle rect = new Rectangle(0, 0, bitmap.Width, bitmap.Height);
             g.DrawImage(labirinthPictureBox.Image, rect);
             labirinthPictureBox.Image = bitmap;
+
+            if (показыватьТупикиtoolStripMenuItem.Checked && deadEnds != null)
+            {
+                g = GetCustomizedGraphicsFromImage(labirinthPictureBox.Image);
+                //g = labirinthPictureBox.CreateGraphics();
+                //g.ScaleTransform(zoom, zoom);
+                foreach (LabirinthLib.Structs.Point point in this.deadEnds)
+                {
+                    using (SolidBrush brush = new SolidBrush(Color.DarkOliveGreen))
+                        g.FillRectangle(brush, point.X + 0.25f, point.Y + 0.25f, 0.5f, 0.5f);
+                }
+            }
 		}
 
         private void trackBar_Scroll(object sender, EventArgs e)
@@ -357,6 +369,7 @@ namespace LabirinthWinformsApp
 
             if (allWay.Count == 0 && (this.way != null && this.way.Count == 0))
             {
+                UpdateLabirinth();
                 prevPoint = LabirinthLib.Structs.Point.Empty;
                 timer.Stop();
             }
@@ -575,5 +588,10 @@ namespace LabirinthWinformsApp
 				}
 			}
 		}
+
+        private void показыватьТупикиtoolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            UpdateLabirinth();
+        }
     }
 }
