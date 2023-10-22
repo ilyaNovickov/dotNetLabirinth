@@ -1,5 +1,6 @@
 ﻿using LabirinthLib;
 using LabirinthLib.Bot;
+using LabirinthLib.Printers;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -50,13 +51,25 @@ namespace LabirinthWinformsApp
 
             RedrawLabirinth();
         }
+        private void ReplaceImage(Bitmap bitmap)
+        {
+            if (labirinthPictureBox.Image != null)
+            {
+                Bitmap oldBitmap = (Bitmap)labirinthPictureBox.Image;
+                labirinthPictureBox.Image = bitmap;
+                oldBitmap.Dispose();
+            }
+            else
+                labirinthPictureBox.Image = bitmap;
+        }
 
         private void RedrawLabirinth()
         {
             Bitmap bitmap = new Bitmap((int)(lab.Width * zoom), (int)(lab.Height * zoom));
             Graphics g = GetCustomizedGraphicsFromImage(bitmap);
             lab.DrawLabirinth(g);
-            labirinthPictureBox.Image = bitmap;
+            ReplaceImage(bitmap);
+            g.Dispose();
         }
 
         private void UpdateLabirinth()
@@ -67,8 +80,8 @@ namespace LabirinthWinformsApp
             g.InterpolationMode = InterpolationMode.NearestNeighbor;
             Rectangle rect = new Rectangle(0, 0, bitmap.Width, bitmap.Height);
             g.DrawImage(labirinthPictureBox.Image, rect);
-            labirinthPictureBox.Image = bitmap;
-
+            ReplaceImage(bitmap);
+            g.Dispose();
             //if (показыватьТупикиtoolStripMenuItem.Checked && deadEnds != null)
             //{
             //    g = GetCustomizedGraphicsFromImage(labirinthPictureBox.Image);
@@ -365,6 +378,7 @@ namespace LabirinthWinformsApp
             }
             labirinthPictureBox.Invalidate();
 
+            g.Dispose();
 
             if (allWay.Count == 0 && (this.way != null && this.way.Count == 0))
             {
@@ -449,6 +463,8 @@ namespace LabirinthWinformsApp
 				bitmap.Save(path);
 
 				bitmap.Dispose();
+
+                g.Dispose();
 			}
 
 			void SaveImageSerializeBin(string path)

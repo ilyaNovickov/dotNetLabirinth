@@ -14,27 +14,31 @@ namespace LabirinthWinformsApp
     {
         public static void DrawLabirinth(this Labirinth lab, Graphics g)
         {
-            SolidBrush wall = new SolidBrush(Color.Black);
-            SolidBrush empty = new SolidBrush(Color.White);
-            SolidBrush enter = new SolidBrush(Color.Red);
-            SolidBrush exit = new SolidBrush(Color.Blue);
-            SolidBrush exitAndEnter = new SolidBrush(Color.Yellow);
+            Color wall = Color.Black;
+            Color empty = Color.White;
+            Color enter = Color.Red;
+            Color exit = Color.Blue;
+            Color exitAndEnter = Color.Yellow;
 
             for (int y = 0; y < lab.Height; y++)
             {
                 for (int x = 0; x < lab.Width; x++)
                 {
+                    Color color = Color.Black;
                     LabirinthLib.Structs.Point point = new LabirinthLib.Structs.Point(x, y);
                     if ((point == lab.FirstIn || point == lab.SecondIn) && point == lab.Exit)
-                        g.FillRectangle(exitAndEnter, point.X, point.Y, 1, 1);
+                        color = exitAndEnter;
                     else if (point == lab.FirstIn || point == lab.SecondIn)
-                        g.FillRectangle(enter, point.X, point.Y, 1, 1);
+                        color = enter;
                     else if (point == lab.Exit)
-                        g.FillRectangle(exit, point.X, point.Y, 1, 1);
+                        color = exit;
                     else if (lab[point] == 1)
-                        g.FillRectangle(wall, point.X, point.Y, 1, 1);
+                        color = wall;
                     else if (lab[point] == 0)
-                        g.FillRectangle(empty, point.X, point.Y, 1, 1);
+                        color = empty;
+
+                    using (SolidBrush brush = new SolidBrush(color))
+                        g.FillRectangle(brush, point.X, point.Y, 1, 1);
                 }
             }
         }
