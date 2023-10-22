@@ -30,8 +30,6 @@ namespace LabirinthWinformsApp
             InitializeComponent();
 
             lab = new Labirinth();
-            lab.DoDebugLab();
-
 
 			this.standartEmptySpaccceComboBox.SelectedIndex = 0;
             this.standartSizeComboBox.SelectedIndex = 0;
@@ -70,15 +68,6 @@ namespace LabirinthWinformsApp
             Rectangle rect = new Rectangle(0, 0, bitmap.Width, bitmap.Height);
             g.DrawImage(labirinthPictureBox.Image, rect);
             labirinthPictureBox.Image = bitmap;
-
-            if (deadEnds != null)
-			foreach (var i in deadEnds)
-            {
-                    g = GetCustomizedGraphicsFromImage(labirinthPictureBox.Image);
-                g.FillRectangle(new SolidBrush(Color.DarkRed), i.X, i.Y, 0.5f, 0.5f);
-            }
-
-
 		}
 
         private void trackBar_Scroll(object sender, EventArgs e)
@@ -137,7 +126,10 @@ namespace LabirinthWinformsApp
         {
             if (timer.Enabled)
                 timer.Stop();
-			botLogRichTextBox.Clear();
+            way.Clear();
+            allWay.Clear();
+            directions.Clear();
+            botLogRichTextBox.Clear();
 			lab.GenerateInsAndExit();
             RedrawLabirinth();
         }
@@ -302,8 +294,6 @@ namespace LabirinthWinformsApp
             Random random = new Random();
             this.Text = ".Net Labirinth | Думаем " + vars[random.Next(0, vars.Length)];
         }
-
-        
 
         private void botButton_Click(object sender, EventArgs e)
         {
