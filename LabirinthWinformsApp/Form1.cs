@@ -588,9 +588,9 @@ namespace LabirinthWinformsApp
 			}
 		}
 
-        private void показыватьТупикиtoolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            UpdateLabirinth();
-        }
+        //private void показыватьТупикиtoolStripMenuItem_Click(object sender, EventArgs e)
+        //{
+        //    UpdateLabirinth();
+        //}
     }
 }
