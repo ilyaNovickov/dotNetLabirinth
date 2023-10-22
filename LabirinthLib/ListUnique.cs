@@ -118,6 +118,18 @@ namespace LabirinthLib
         }
 
 
+        public static void AddUniqueRange<T>(this List<T> list, IEnumerable<T> values)
+        {
+            foreach (T item in values)
+            {
+                if (!list.Contains(item))
+                    list.Add(item);
+            }
+        }
+
+
+
+
         public static List<T> CutListByCount<T>(this List<T> list, int startIndex, int count)
         {
             List<T> result = new List<T>();

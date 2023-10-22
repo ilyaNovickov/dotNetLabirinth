@@ -22,13 +22,17 @@ namespace LabirinthWinformsApp
         private LabirinthLib.Structs.Point prevPoint;
         private int botSpeed;
 
+        List<LabirinthLib.Structs.Point> dead;
+
         public MainForm()
         {
             InitializeComponent();
 
             lab = new Labirinth();
+            lab.DoDebugLab();
 
-            this.standartEmptySpaccceComboBox.SelectedIndex = 0;
+
+			this.standartEmptySpaccceComboBox.SelectedIndex = 0;
             this.standartSizeComboBox.SelectedIndex = 0;
 
             this.zoomNumericUpDown.Minimum = 10;
@@ -65,7 +69,16 @@ namespace LabirinthWinformsApp
             Rectangle rect = new Rectangle(0, 0, bitmap.Width, bitmap.Height);
             g.DrawImage(labirinthPictureBox.Image, rect);
             labirinthPictureBox.Image = bitmap;
-        }
+
+            if (dead != null)
+			foreach (var i in dead)
+            {
+                    g = GetCustomizedGraphicsFromImage(labirinthPictureBox.Image);
+                g.FillRectangle(new SolidBrush(Color.DarkRed), i.X, i.Y, 0.5f, 0.5f);
+            }
+
+
+		}
 
         private void trackBar_Scroll(object sender, EventArgs e)
         {
@@ -313,6 +326,8 @@ namespace LabirinthWinformsApp
 
             this.timerAction = this.ReportBotProgress;
 
+            this.dead = bot.asd;
+
             botLogRichTextBox.Clear();
             botLogRichTextBox.Text += "Запущен бот\n";
 
@@ -519,7 +534,16 @@ namespace LabirinthWinformsApp
 
                     using (StreamWriter sw = new StreamWriter(path))
                     {
-                        sw.Write(botLogRichTextBox.Text);
+                        //sw.Write(botLogRichTextBox.Text);
+
+                        for (int x = 0; x < lab.Width; x++)
+                        {
+                            for (int y = 0; y < lab.Height; y++)
+                            {
+                                if (lab[x, y] == 0)
+									sw.WriteLine($"new Point({x}, {y}),");
+							}
+                        }
                     }
 				}
 			}

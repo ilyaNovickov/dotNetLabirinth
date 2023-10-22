@@ -54,6 +54,8 @@ namespace LabirinthLib
 
         public event EventHandler<BotMoveEventArgs> BotMoveEvent;
 
+        public List<Point> asd { get; set; }
+
         public bool FindExit(int numofEnter = 1)
         {
             //Метод получения доступных направлений для перемещения точек, исключая указанные
@@ -137,10 +139,11 @@ namespace LabirinthLib
 
             Point prevFork = new Point();
 
-            List<List<Point>> visitedDeadEnds = new List<List<Point>>();
+			//List<List<Point>> visitedDeadEnds = new List<List<Point>>();
+			List<Point> visitedDeadEnds = new List<Point>();
 
-            //Пока бот не достиг выхода
-            while (walker != lab.Exit)
+			//Пока бот не достиг выхода
+			while (walker != lab.Exit)
             {
 				//IEnumerable<Direction> avaibleDirs = GetAvaibleDirectionsToMove(walker, visitedPoints);
                 IEnumerable<Direction> avaibleDirs = GetAvaibleDirectionsToMove(walker, way);
@@ -176,6 +179,7 @@ namespace LabirinthLib
 
 					walker = fork.Pop();
 
+                    //var test = wayToExit.CutList(wayToExit.IndexOf(walker) + 1);
 					wayToExit.RemoveSinceUnique(wayToExit.IndexOf(walker) + 1);
 
 					List<Point> deadEndWay = new List<Point>();
@@ -197,8 +201,26 @@ namespace LabirinthLib
                         //deadEndDirection.RemoveSinceUnique(indexofFirstPreviousFork - indexofFork + 1, indexofLastPreviousFork - indexofFirstPreviousFork);
                         deadEndWay.CutListByCount(indexofFirstPreviousFork - indexofFork + 1, indexofLastPreviousFork - indexofFirstPreviousFork);
 						deadEndDirection.CutListByCount(indexofFirstPreviousFork - indexofFork + 1, indexofLastPreviousFork - indexofFirstPreviousFork);
+
+                        deadEndWay.Reverse();
+						deadEndDirection.Reverse();
+						//foreach (Point p in visitedDeadEnds)
+      //                      deadEndWay.Remove(p);
+                        for (int i = 0; i < visitedDeadEnds.Count; i++)
+                        {
+                            int index = deadEndWay.IndexOf(visitedDeadEnds[i]);
+
+                            if (deadEndWay.Remove(visitedDeadEnds[i]))
+                            {
+                                i--;
+								deadEndDirection.RemoveAt(index);
+                            }
+						}
+						deadEndDirection.Reverse();
+						deadEndWay.Reverse();
 					}
 					deadEndWay.Reverse();
+					   visitedDeadEnds.Add(deadEndWay.ElementAt(0));
 					deadEndWay.RemoveAt(0);
 					deadEndDirection.RemoveAt(0);
 					deadEndDirection.Reverse();
@@ -208,6 +230,12 @@ namespace LabirinthLib
 					way.AddRange(deadEndWay);
 
 					prevFork = walker;
+
+                    deadEndWay.Reverse();
+					deadEndWay.RemoveAt(0);
+
+					visitedDeadEnds.AddUniqueRange(deadEndWay);
+
 					continue;
 				}
 
@@ -215,6 +243,9 @@ namespace LabirinthLib
             this.directions = new Queue<Direction>(directions);
             this.way = new Queue<Point>(way);
             this.wayToExit = new Queue<Point>(wayToExit);
+
+            asd = visitedDeadEnds;
+
             return true;
         }
     }
