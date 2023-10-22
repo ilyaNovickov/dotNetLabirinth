@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace LabirinthLib
 {
@@ -115,5 +116,37 @@ namespace LabirinthLib
 
             return first.Count == minSize ? first : second;
         }
+
+
+        public static List<T> CutListByCount<T>(this List<T> list, int startIndex, int count)
+        {
+            List<T> result = new List<T>();
+
+            for (int i = startIndex; result.Count != count; i++)
+            {
+                result.Add(list[i]);
+            }
+
+            list.RemoveRange(startIndex, count);
+
+            return result;
+        }
+   //     public static void DeleteRange<T>(this List<T> list, IEnumerable<T> values)
+   //     {
+   //         Queue<T> queueToDelete = new Queue<T>();
+
+   //         int index = list.IndexOf(values.First());
+
+   //         if (index == -1)
+   //             throw new Exception("Нет такого диапазона");
+
+			//for (int i = index; i < list.Count; i++)
+   //         {
+   //             if (list[i].Equals(values.ElementAt(i - index)))
+			//	    queueToDelete.Enqueue(list[i]);
+   //             else
+
+			//}
+   //     }
     }
 }
