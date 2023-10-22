@@ -147,90 +147,46 @@ namespace LabirinthLib
                     way.Add(walker);
                     wayToExit.Add(walker);
                 }
-                else
-                {
-                    if (fork.Count == 0)
-                    {
-                        this.directions = new Queue<Direction>(directions);
-                        this.way = new Queue<Point>(way);
-                        return false;
-                    }
-                    else
-                    {
-                        walker = fork.Pop();
+				else
+				{
+					walker = fork.Pop();
 
-                        wayToExit.RemoveSinceUnique(wayToExit.IndexOf(walker) + 1);
+					wayToExit.RemoveSinceUnique(wayToExit.IndexOf(walker) + 1);
 
 
 
-                        List<Point> deadEndWay = new List<Point>();
+					List<Point> deadEndWay = new List<Point>();
 
-						List<Direction> deadEndDirection = new List<Direction>();
+					List<Direction> deadEndDirection = new List<Direction>();
 
-                        if (prevFork.IsZero())
-                        {
-                            way.Reverse();
-                            int i = way.Count - 1 - way.IndexOf(walker);
-                            way.Reverse();
-                            deadEndWay = way.CopyList(i);
-                            deadEndWay.Reverse();
-                            deadEndWay.RemoveAt(0);
-                            deadEndDirection = directions.CopyList(i);
-                            deadEndDirection.Reverse();
-                            deadEndDirection.RemoveAt(0);
-                        }
-                        else
-                        {
-                            int i = way.IndexOf(walker);
-                            int i2 = way.IndexOf(prevFork);
-                            way.Reverse();
-                            int i3 = way.Count - 1 - way.IndexOf(prevFork);
-                            way.Reverse();
 
-                            deadEndWay = way.CopyList(i);
-                            if (deadEndWay.Contains(prevFork))
-                            {
-                                deadEndWay.RemoveSinceUnique(i2 - i + 1, i3 - i2);
-                                deadEndWay.Reverse();
-                                deadEndWay.RemoveAt(0);
-                                deadEndDirection = directions.CopyList(i);
-                                deadEndDirection.RemoveSinceUnique(i2 - i + 1, i3 - i2);
-                                deadEndDirection.Reverse();
-                                deadEndDirection.RemoveAt(0);
-                            }
-                            else
-                            {
-								deadEndWay = way.CopyList(i);
-								deadEndWay.Reverse();
-								deadEndWay.RemoveAt(0);
-								deadEndDirection = directions.CopyList(i);
-								deadEndDirection.Reverse();
-								deadEndDirection.RemoveAt(0);
-							}
-						}
-					
-                        //way.Reverse();
-                        //int i = way.Count - 1 - way.IndexOf(prevFork.IsZero() ? walker : prevFork);
-                        ////int i = way.Count - 1 - way.IndexOf(walker);
-                        //way.Reverse();
+					int indexofFork = way.IndexOf(walker);
 
-                        //List<Point> deadEndWay = way.CopyList(i);
-                        //deadEndWay.Reverse();
-                        //deadEndWay.RemoveAt(0);
+					deadEndWay = way.CopyList(indexofFork);
+					deadEndDirection = directions.CopyList(indexofFork);
 
-                        //List<Direction> deadEndDirection = directions.CopyList(i);
-                        //deadEndDirection.Reverse();
-                        //deadEndDirection.RemoveAt(0);
+					if (!prevFork.IsZero() && deadEndWay.Contains(prevFork))
+					{
+						int indexofFirstPreviousFork = way.IndexOf(prevFork);
+						way.Reverse();
+						int indexofLastPreviousFork = way.Count - 1 - way.IndexOf(prevFork);
+						way.Reverse();
+						deadEndWay.RemoveSinceUnique(indexofFirstPreviousFork - indexofFork + 1, indexofLastPreviousFork - indexofFirstPreviousFork);
+						deadEndDirection.RemoveSinceUnique(indexofFirstPreviousFork - indexofFork + 1, indexofLastPreviousFork - indexofFirstPreviousFork);
+					}
+					deadEndWay.Reverse();
+					deadEndWay.RemoveAt(0);
+					deadEndDirection.Reverse();
+					deadEndDirection.RemoveAt(0);
 
-                        directions.AddRange(deadEndDirection);
-                        way.AddRange(deadEndWay);
+					directions.AddRange(deadEndDirection);
+					way.AddRange(deadEndWay);
 
-                        prevFork = walker;
-                        continue;
-                    }
-                }
+					prevFork = walker;
+					continue;
+				}
 
-            }
+			}
             //way.Add(walker);
             //wayToExit.Add(walker);
             this.directions = new Queue<Direction>(directions);
