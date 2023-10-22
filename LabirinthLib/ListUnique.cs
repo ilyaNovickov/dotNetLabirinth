@@ -131,6 +131,38 @@ namespace LabirinthLib
 
             return result;
         }
+
+        public static int[] IndexesofRange<T>(this List<T> list, IEnumerable<T> values)
+        {
+         
+            int index = list.IndexOf(values.First());
+
+			List<int> indexesToDelete = new List<int>()
+            {
+                index
+            };
+
+            for (int i = index + 1; i < list.Count && (i - index) < values.Count(); i++)
+            {
+
+                if (indexesToDelete.Count == values.Count())
+                    return indexesToDelete.ToArray();
+
+
+
+                if (list[i].Equals(values.ElementAt(i - index)))
+                    indexesToDelete.Add(i);
+                else
+                {
+                    index = list.IndexOf(values.First(), index + 1);
+                    indexesToDelete.Clear();
+                    indexesToDelete.Add(index);
+                    i = index;
+				}
+            }
+
+            return indexesToDelete.ToArray();
+        }
    //     public static void DeleteRange<T>(this List<T> list, IEnumerable<T> values)
    //     {
    //         Queue<T> queueToDelete = new Queue<T>();
