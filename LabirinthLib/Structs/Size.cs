@@ -11,6 +11,7 @@ namespace LabirinthLib.Structs
     /// <summary>
     /// Структура размера
     /// </summary>
+    [Serializable]
     public struct Size
     {
         #region Vars
@@ -86,6 +87,21 @@ namespace LabirinthLib.Structs
             }
             return false;
         }
+        public override string ToString()
+        {
+            return this.width + "x" + this.height;
+        }
+        #region Convertion operation
+        public static implicit operator System.Drawing.Size(Size size)
+        {
+            return new System.Drawing.Size(size.Width, size.Height);
+        }
+
+        public static explicit operator Size(System.Drawing.Size size)
+        {
+            return new Size(size.Width, size.Height);
+        }
+        #endregion
         #region Operators
         //Переопределения операторов проверки на равенства и мат операторы
         public static bool operator ==(Size size1, Size size2)

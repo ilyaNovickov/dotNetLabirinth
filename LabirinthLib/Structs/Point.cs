@@ -10,6 +10,7 @@ namespace LabirinthLib.Structs
     /// <summary>
     /// Структура координат в 2D пространстве
     /// </summary>
+    [Serializable]
     public struct Point
     {
         #region Vars
@@ -47,6 +48,10 @@ namespace LabirinthLib.Structs
         public static Point Empty => new Point(0, 0);
         #endregion
         #region Methods
+        public override string ToString()
+        {
+            return $"({this.x}, {this.y})";
+        }
         /// <summary>
         /// Смещение координаты на определённое значение
         /// </summary>
@@ -91,6 +96,27 @@ namespace LabirinthLib.Structs
             }
             return false;
         }
+        #region Convertion operation
+        public static implicit operator System.Drawing.Point(Point point)
+        {
+            return new System.Drawing.Point(point.X, point.Y);
+        }
+
+        public static explicit operator Point(System.Drawing.Point point)
+        {
+            return new Point(point.X, point.Y);
+        }
+
+        public static implicit operator System.Drawing.PointF(Point point)
+        {
+            return new System.Drawing.PointF(point.X, point.Y);
+        }
+
+        public static explicit operator Point(System.Drawing.PointF point)
+        {
+            return new Point((int)point.X, (int)point.Y);
+        }
+        #endregion
         #region Operators
         //Переопределения операторов проверки на равенство и мат операторы
         public static bool operator ==(Point point1, Point point2)

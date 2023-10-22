@@ -33,6 +33,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -41,9 +42,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="WalkerBot.cs" />
+    <Compile Include="Bot\new_WalkerBot.cs" />
+    <Compile Include="Bot\BotMoveEventArgs.cs" />
+    <Compile Include="Bot\DeadEndFindEventArgs.cs" />
+    <Compile Include="Printers\StringPrinter.cs" />
+    <Compile Include="Bot\WalkerBot.cs" />
     <Compile Include="ListUnique.cs" />
-    <Compile Include="ConsolePrinter.cs" />
+    <Compile Include="Printers\ConsolePrinter.cs" />
     <Compile Include="Direction.cs" />
     <Compile Include="Structs\Size.cs" />
     <Compile Include="Structs\Point.cs" />

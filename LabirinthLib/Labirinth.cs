@@ -12,6 +12,7 @@ namespace LabirinthLib
     /// <summary>
     /// Класс лабиринта
     /// </summary>
+    [Serializable]
     public class Labirinth
     {
         /*
@@ -19,7 +20,7 @@ namespace LabirinthLib
          * 1 - wall
          */
         #region Vars
-        Random random = new Random();//Экземпляр класса рандомайзера
+        //Random random = new Random();//Экземпляр класса рандомайзера
         float percentofEmptySpace = 0.4f;//Кол-во пустого пространства в процентах
         Size size;//Размер лабиринта
         //Координаты входов №1 и №2 и выхода
@@ -32,7 +33,7 @@ namespace LabirinthLib
         #endregion
         #region Constr
         /// <summary>
-        /// Инициализирует лабиринт
+        /// Инициализирует заполненный лабиринт
         /// </summary>
         public Labirinth() : this(new Size(10, 10))
         {
@@ -46,7 +47,7 @@ namespace LabirinthLib
 
         }
         /// <summary>
-        /// Инициализирует лабиринт
+        /// Инициализирует заполненный лабиринт
         /// </summary>
         /// <param name="width">Ширина лабиринта</param>
         /// <param name="height">Высота лабиринта</param>
@@ -55,7 +56,7 @@ namespace LabirinthLib
 
         }
         /// <summary>
-        /// Инициализирует лабиринт
+        /// Инициализирует заполненный лабиринт
         /// </summary>
         /// <param name="size">Размер лабиринта</param>
         public Labirinth(Size size)
@@ -264,6 +265,7 @@ namespace LabirinthLib
         /// <returns>Случайная точка</returns>
         internal Point GetRandomPointFromList(IEnumerable<Point> list)
         {
+            Random random = new Random();
             if (list.Count() == 0)
                 return Point.Empty;
             return list.ElementAt(random.Next(0, list.Count()));
@@ -275,6 +277,7 @@ namespace LabirinthLib
         /// <returns>Случайный путь</returns>
         internal Direction GetRandomDirectionFromList(IEnumerable<Direction> avaibleDirs)
         {
+            Random random = new Random();
             if (avaibleDirs.Count() == 0)
                 return Direction.None;
             return avaibleDirs.ElementAt(random.Next(0, avaibleDirs.Count<Direction>()));
@@ -299,14 +302,21 @@ namespace LabirinthLib
         }
         #endregion
         /// <summary>
+        /// Сбросить точки входа и выходов
+        /// </summary>
+        private void ResetExitAndEnters()
+        {
+            exit = Point.Empty;
+            firstIn = Point.Empty;
+            secIn = Point.Empty;
+        }
+        /// <summary>
         /// Заполнения лабиринта пустым пространством
         /// </summary>
         private void FillLabirinth()
         {
             //Обнуление входов/выходов
-            exit = Point.Empty;
-            firstIn = Point.Empty;
-            secIn = Point.Empty;
+            ResetExitAndEnters();
             //Очистка списков путей
             firstWay.Clear();
             secondWay.Clear();
@@ -319,6 +329,7 @@ namespace LabirinthLib
         /// <exception cref="Exception">В лабиринте нет столько слоёв</exception>
         private Point GetRandomLayoutPoint(int numofLayout = 0)
         {
+            Random random = new Random();
 
             if (numofLayout < 0 || numofLayout >= CountofLayouts)
                 throw new Exception("В прямоугольнике нет столько слоёв");
@@ -491,6 +502,8 @@ namespace LabirinthLib
                 }
             }
 
+            Random random = new Random();
+
             int countofEmptySpace = ((int)(percentofEmptySpace * new Size(size.Width - 2, size.Height - 2).Square));
 
             List<Point> firstWay = new List<Point>(1);
@@ -589,19 +602,28 @@ namespace LabirinthLib
             this.firstWay.AddRange(firstWay);
             this.secondWay.AddRange(secondWay);
             //Генерация входов и выходов
-            GenerateInsAndExit();
+            GenerationInsAndExit();
+        }
+        /// <summary>
+        /// Асинхронная генерация входов/выходов
+        /// </summary>
+        public async void GenerateInsAndExitAsync()
+        {
+            ResetExitAndEnters();
+            await Task.Run(() => GenerationInsAndExit());
         }
         /// <summary>
         /// Перегенирация входов и выходов
         /// </summary>
-        public void RegenerateInsAndExit()
+        public void GenerateInsAndExit()
         {
-            GenerateInsAndExit();
+            ResetExitAndEnters();
+            GenerationInsAndExit();
         }
         /// <summary>
         /// Генерация входов и выходов (около границы)
         /// </summary>
-        private void GenerateInsAndExit()
+        private void GenerationInsAndExit()
         {
             List<Point> preborderPoints = GetEmptyCellsInLayout(1).ToList();
 
@@ -805,5 +827,35 @@ namespace LabirinthLib
         */
         #endregion
         #endregion
+
+#if DEBUG
+        public void DoDebugLab()
+        {
+            this.firstIn = new Point(7, 0);
+            this.secIn = Point.Empty;
+            this.exit = new Point(0, 2);
+
+            this.firstWay.Clear();
+            this.secondWay.Clear();
+
+            firstWay = new List<Point>()
+            {
+
+                new Point(0, 2),
+                new Point(1, 1),new Point(1, 2),new Point(1, 3),new Point(1, 4),
+                new Point(1, 6),new Point(1, 7),
+                new Point(1, 8),new Point(2, 1),new Point(2, 4),new Point(2, 6),
+                new Point(2, 8),new Point(3, 1),
+                new Point(3, 3),new Point(3, 4),new Point(3, 6),new Point(3, 8),
+                new Point(4, 3),new Point(4, 6),
+                new Point(5, 1),new Point(5, 2),new Point(5, 3),new Point(5, 4),
+                new Point(5, 5),new Point(5, 6),new Point(5, 8),new Point(6, 1),new Point(6, 6),new Point(6, 8),new Point(7, 0),new Point(7, 1),
+                new Point(7, 2),new Point(7, 6),new Point(7, 8),
+                new Point(8, 2),
+                new Point(8, 4),new Point(8, 5),new Point(8, 6),new Point(8, 8),
+                new Point(9, 8),new Point(5, 7),new Point(7, 9)
+			};
+        }
+#endif
     }
 }

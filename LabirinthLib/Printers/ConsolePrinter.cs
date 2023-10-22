@@ -4,8 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using LabirinthLib.Structs;
+using LabirinthLib.Bot;
 
-namespace LabirinthLib
+namespace LabirinthLib.Printers
 {
     public static class ConsolePrinter
     {
