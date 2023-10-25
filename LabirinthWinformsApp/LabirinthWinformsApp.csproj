@@ -48,11 +48,11 @@
     <Reference Include="System.Xml.Serialization" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CustomControl1.cs">
+    <Compile Include="LabirinthControl.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="CustomControl1.Designer.cs">
-      <DependentUpon>CustomControl1.cs</DependentUpon>
+    <Compile Include="LabirinthControl.Designer.cs">
+      <DependentUpon>LabirinthControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
