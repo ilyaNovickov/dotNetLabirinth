@@ -13,6 +13,14 @@ using LabirinthLib.Printers;
 
 namespace LabirinthWinformsApp
 {
+    /*
+     * 
+     * 
+     * Создание компонента брошено 
+     * по причине мерцания при отрисовки
+     *  
+     * 
+     */
     public enum LabirinthStyle : byte
     {
         None,
@@ -22,7 +30,7 @@ namespace LabirinthWinformsApp
 
     public partial class LabirinthControl : Control
     {
-        private float zoom;
+        private float zoom = 1f;
         private Labirinth lab;
         private LabirinthStyle style;
 
@@ -31,12 +39,18 @@ namespace LabirinthWinformsApp
             InitializeComponent();
         }
 
+        [DefaultValue("1")]
         public float Zoom
         {
             get => zoom;
             set
             {
-                zoom = value;
+                if (0.002f <= value && value <= 100f)
+                    zoom = value;
+                else
+                    zoom = 1f;
+                //this.Invalidate();
+                this.Refresh();
             }
         }
 
@@ -107,6 +121,8 @@ namespace LabirinthWinformsApp
 
         private void DrawLabirinthAutoSizeStyle(Graphics g)
         {
+            this.Size = new Size((int)(lab.Width*zoom), (int)(lab.Height * zoom));
+
             g.ScaleTransform(zoom, zoom);
 
             lab.DrawLabirinth(g);

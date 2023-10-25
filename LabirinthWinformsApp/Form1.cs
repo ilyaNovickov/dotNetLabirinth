@@ -114,6 +114,8 @@ namespace LabirinthWinformsApp
                     this.zoomTrackBar.Value = ((int)this.zoomNumericUpDown.Value);
 
                 zoom = zoomTrackBar.Value;
+
+                labirinthControl1.Zoom = zoom;
             }
             else if (sender == botSpeedNumericUpDown)
             {

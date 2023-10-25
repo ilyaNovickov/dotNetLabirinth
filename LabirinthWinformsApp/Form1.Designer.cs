@@ -868,7 +868,7 @@ namespace LabirinthWinformsApp
             // 
             this.labirinthControl1.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.labirinthControl1.Labirinth = null;
-            this.labirinthControl1.LabirinthStyle = LabirinthWinformsApp.LabirinthStyle.None;
+            this.labirinthControl1.LabirinthStyle = LabirinthWinformsApp.LabirinthStyle.AutoSize;
             this.labirinthControl1.Location = new System.Drawing.Point(207, 131);
             this.labirinthControl1.Name = "labirinthControl1";
             this.labirinthControl1.Size = new System.Drawing.Size(242, 214);
@@ -884,6 +884,7 @@ namespace LabirinthWinformsApp
             this.Controls.Add(this.mainTableLayout);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.menuStrip1);
+            this.DoubleBuffered = true;
             this.MainMenuStrip = this.menuStrip1;
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "MainForm";
