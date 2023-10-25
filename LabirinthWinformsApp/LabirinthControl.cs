@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Security.Permissions;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,9 +24,33 @@ namespace LabirinthWinformsApp
 
     public partial class LabirinthControl : Control
     {
+        private class WaysCollection
+        {
+            private Dictionary<string, List<Point>> ways = new Dictionary<string, List<Point>>();
+
+            public List<Point> this[string key]
+            {
+                get => ways[key];
+                set => ways[key] = value;
+            }
+
+            public List<Point> this[int index]
+            {
+                get => ways.Values.ElementAt(index);
+            }
+
+            public Dictionary<string, List<Point>> GetWays() => ways;
+        }
+
         private float zoom = 1f;
         private Labirinth lab;
         private LabirinthStyle style;
+        private WaysCollection ways;
+
+        private Dictionary<string, List<Point>> asd = new Dictionary<string, List<Point>>()
+        {
+            { "1", new List<Point>() { new Point(0, 0), new Point(1, 1) } }
+        };
 
         public LabirinthControl()
         {
@@ -43,8 +69,8 @@ namespace LabirinthWinformsApp
                     zoom = value;
                 else
                     zoom = 1f;
-                //this.Invalidate();
-                this.Refresh();
+                this.Invalidate();
+                //this.Refresh();
             }
         }
 
@@ -76,6 +102,11 @@ namespace LabirinthWinformsApp
             }
         }
 
+        public Dictionary<string, List<Point>> Ways
+        {
+            get => ways.GetWays();
+        }
+
         private void this_UpdateLabirinth(object sender, EventArgs e)
         {
             this.Invalidate();
@@ -102,6 +133,12 @@ namespace LabirinthWinformsApp
                 case LabirinthStyle.Stretch:
                     DrawLabirinthStretchStyle(e.Graphics);
                     break;
+            }
+
+            foreach (Point point in asd["1"])
+            {
+                using (SolidBrush brush = new SolidBrush(Color.Pink))
+                    e.Graphics.FillRectangle(brush, point.X, point.Y, 1, 1);
             }
 
             END:
