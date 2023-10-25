@@ -50,6 +50,9 @@ namespace LabirinthWinformsApp
             botSpeed = 1 * 100;
 
             RedrawLabirinth();
+
+
+            labirinthControl1.Labirinth = lab;
         }
         private void ReplaceImage(Bitmap bitmap)
         {

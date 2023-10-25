@@ -866,6 +866,7 @@ namespace LabirinthWinformsApp
             // 
             // labirinthControl1
             // 
+            this.labirinthControl1.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.labirinthControl1.Labirinth = null;
             this.labirinthControl1.LabirinthStyle = LabirinthWinformsApp.LabirinthStyle.None;
             this.labirinthControl1.Location = new System.Drawing.Point(207, 131);

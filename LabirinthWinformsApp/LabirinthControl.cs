@@ -49,6 +49,7 @@ namespace LabirinthWinformsApp
             }
         }
 
+        [Browsable(false)]
         public Labirinth Labirinth
         {
             get => lab;
