@@ -64,6 +64,7 @@ namespace LabirinthWinformsApp
             {
                 using (SolidBrush brush = new SolidBrush(this.BackColor))
                     e.Graphics.FillRectangle(brush, this.ClientRectangle);
+                goto END;
             }
 
             switch (style)
@@ -80,6 +81,7 @@ namespace LabirinthWinformsApp
                     break;
             }
 
+            END:
             base.OnPaint(e);
         }
 

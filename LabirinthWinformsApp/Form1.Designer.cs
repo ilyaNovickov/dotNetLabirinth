@@ -92,6 +92,7 @@ namespace LabirinthWinformsApp
             this.stopBotButton = new System.Windows.Forms.Button();
             this.backgroundWorker = new System.ComponentModel.BackgroundWorker();
             this.timer = new System.Windows.Forms.Timer(this.components);
+            this.labirinthControl1 = new LabirinthWinformsApp.LabirinthControl();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.labirinthPictureBox)).BeginInit();
             this.menuStrip1.SuspendLayout();
@@ -123,6 +124,7 @@ namespace LabirinthWinformsApp
             // 
             this.panel1.AutoScroll = true;
             this.panel1.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.panel1.Controls.Add(this.labirinthControl1);
             this.panel1.Controls.Add(this.labirinthPictureBox);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(6, 6);
@@ -862,6 +864,17 @@ namespace LabirinthWinformsApp
             // 
             this.timer.Tick += new System.EventHandler(this.timer_Tick);
             // 
+            // labirinthControl1
+            // 
+            this.labirinthControl1.Labirinth = null;
+            this.labirinthControl1.LabirinthStyle = LabirinthWinformsApp.LabirinthStyle.None;
+            this.labirinthControl1.Location = new System.Drawing.Point(207, 131);
+            this.labirinthControl1.Name = "labirinthControl1";
+            this.labirinthControl1.Size = new System.Drawing.Size(242, 214);
+            this.labirinthControl1.TabIndex = 1;
+            this.labirinthControl1.Text = "labirinthControl1";
+            this.labirinthControl1.Zoom = 0F;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -976,6 +989,7 @@ namespace LabirinthWinformsApp
         private System.Windows.Forms.ToolStripMenuItem экспортЛабиринтаСToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private LabirinthControl labirinthControl1;
     }
 }
 
