@@ -55,8 +55,22 @@ namespace LabirinthWinformsApp
             get => lab;
             set
             {
-                lab = value;
+                if (lab != null)
+                    lab.UpdateLabirinthEvent -= this_UpdateLabirinth;
+
+                if (value == null)
+                    lab = value;
+                else
+                {
+                    lab = value;
+                    lab.UpdateLabirinthEvent += this_UpdateLabirinth;
+                }  
             }
+        }
+
+        private void this_UpdateLabirinth(object sender, EventArgs e)
+        {
+            this.Invalidate();
         }
 
         protected override void OnPaint(PaintEventArgs e)
