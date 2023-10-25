@@ -255,6 +255,9 @@ namespace LabirinthLib
             }
         }
         #endregion
+        #region Events
+        public event EventHandler UpdateLabirinthEvent;
+        #endregion
         #region Methods
         #region ExtraMethods
         #region Internal Methods
@@ -688,6 +691,8 @@ namespace LabirinthLib
             if (secondWay.Count != 0)
                 secIn = GetNearBorderPoint(secIn);
             exit = GetNearBorderPoint(exit);
+
+            UpdateLabirinthEvent?.Invoke(this, EventArgs.Empty);
         }
         #endregion
         #region GetWays
