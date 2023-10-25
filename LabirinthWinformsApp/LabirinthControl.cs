@@ -13,14 +13,6 @@ using LabirinthLib.Printers;
 
 namespace LabirinthWinformsApp
 {
-    /*
-     * 
-     * 
-     * Создание компонента брошено 
-     * по причине мерцания при отрисовки
-     *  
-     * 
-     */
     public enum LabirinthStyle : byte
     {
         None,
@@ -37,6 +29,8 @@ namespace LabirinthWinformsApp
         public LabirinthControl()
         {
             InitializeComponent();
+
+            this.DoubleBuffered = true;
         }
 
         [DefaultValue("1")]
