@@ -4,6 +4,8 @@ using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
+using System.Drawing.Drawing2D;
+using System.Drawing.Text;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Security.Permissions;
@@ -120,6 +122,13 @@ namespace LabirinthWinformsApp
                     e.Graphics.FillRectangle(brush, this.ClientRectangle);
                 goto END;
             }
+
+            //Просто так, вдруг пригодиться
+            //e.Graphics.PageUnit = GraphicsUnit.Pixel;
+            //e.Graphics.CompositingQuality = CompositingQuality.GammaCorrected;
+            //e.Graphics.TextRenderingHint = TextRenderingHint.ClearTypeGridFit;
+            //e.Graphics.PixelOffsetMode = PixelOffsetMode.HighQuality;
+            //e.Graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
 
             switch (style)
             {
