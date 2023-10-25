@@ -47,6 +47,7 @@ namespace LabirinthWinformsApp
             this.убратьботаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.пуститьБотаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.enterComboBocMenu = new System.Windows.Forms.ToolStripComboBox();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.остановитьБотаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.продолжитьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.botSpeedComboBoxMenu = new System.Windows.Forms.ToolStripComboBox();
@@ -91,7 +92,6 @@ namespace LabirinthWinformsApp
             this.stopBotButton = new System.Windows.Forms.Button();
             this.backgroundWorker = new System.ComponentModel.BackgroundWorker();
             this.timer = new System.Windows.Forms.Timer(this.components);
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.labirinthPictureBox)).BeginInit();
             this.menuStrip1.SuspendLayout();
@@ -252,14 +252,14 @@ namespace LabirinthWinformsApp
             // 
             this.убратьботаToolStripMenuItem.CheckOnClick = true;
             this.убратьботаToolStripMenuItem.Name = "убратьботаToolStripMenuItem";
-            this.убратьботаToolStripMenuItem.Size = new System.Drawing.Size(226, 26);
+            this.убратьботаToolStripMenuItem.Size = new System.Drawing.Size(209, 26);
             this.убратьботаToolStripMenuItem.Text = "Убрать бота";
             this.убратьботаToolStripMenuItem.Click += new System.EventHandler(this.убратьботаToolStripMenuItem_Click);
             // 
             // пуститьБотаToolStripMenuItem
             // 
             this.пуститьБотаToolStripMenuItem.Name = "пуститьБотаToolStripMenuItem";
-            this.пуститьБотаToolStripMenuItem.Size = new System.Drawing.Size(226, 26);
+            this.пуститьБотаToolStripMenuItem.Size = new System.Drawing.Size(209, 26);
             this.пуститьБотаToolStripMenuItem.Text = "Пустить бота";
             this.пуститьБотаToolStripMenuItem.Click += new System.EventHandler(this.botButton_Click);
             // 
@@ -274,17 +274,22 @@ namespace LabirinthWinformsApp
             this.enterComboBocMenu.Size = new System.Drawing.Size(121, 28);
             this.enterComboBocMenu.SelectedIndexChanged += new System.EventHandler(this.enterComboBoxMenu_SelectedIndexChanged);
             // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(206, 6);
+            // 
             // остановитьБотаToolStripMenuItem
             // 
             this.остановитьБотаToolStripMenuItem.Name = "остановитьБотаToolStripMenuItem";
-            this.остановитьБотаToolStripMenuItem.Size = new System.Drawing.Size(226, 26);
+            this.остановитьБотаToolStripMenuItem.Size = new System.Drawing.Size(209, 26);
             this.остановитьБотаToolStripMenuItem.Text = "Остановить бота";
             this.остановитьБотаToolStripMenuItem.Click += new System.EventHandler(this.doingSomethingBotButton_Click);
             // 
             // продолжитьToolStripMenuItem
             // 
             this.продолжитьToolStripMenuItem.Name = "продолжитьToolStripMenuItem";
-            this.продолжитьToolStripMenuItem.Size = new System.Drawing.Size(226, 26);
+            this.продолжитьToolStripMenuItem.Size = new System.Drawing.Size(209, 26);
             this.продолжитьToolStripMenuItem.Text = "Продолжить";
             this.продолжитьToolStripMenuItem.Click += new System.EventHandler(this.doingSomethingBotButton_Click);
             // 
@@ -856,11 +861,6 @@ namespace LabirinthWinformsApp
             // timer
             // 
             this.timer.Tick += new System.EventHandler(this.timer_Tick);
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(223, 6);
             // 
             // MainForm
             // 

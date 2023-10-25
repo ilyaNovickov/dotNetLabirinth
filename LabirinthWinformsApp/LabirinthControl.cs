@@ -66,7 +66,45 @@ namespace LabirinthWinformsApp
                     e.Graphics.FillRectangle(brush, this.ClientRectangle);
             }
 
+            switch (style)
+            {
+                default:
+                case LabirinthStyle.None:
+                    DrawLabirinthNoneStyle(e.Graphics);
+                    break;
+                case LabirinthStyle.AutoSize:
+                    DrawLabirinthAutoSizeStyle(e.Graphics);
+                    break;
+                case LabirinthStyle.Stretch:
+                    DrawLabirinthStretchStyle(e.Graphics);
+                    break;
+            }
+
             base.OnPaint(e);
+        }
+
+        private void DrawLabirinthNoneStyle(Graphics g)
+        {
+            lab.DrawLabirinth(g);
+        }
+
+        private void DrawLabirinthAutoSizeStyle(Graphics g)
+        {
+            g.ScaleTransform(zoom, zoom);
+
+            lab.DrawLabirinth(g);
+        }
+
+        private void DrawLabirinthStretchStyle(Graphics g)
+        {
+            float widthScale, heightScale;
+
+            widthScale = this.Width / this.lab.Width;
+            heightScale = this.Height / this.lab.Height;
+
+            g.ScaleTransform(widthScale, heightScale);
+
+            lab.DrawLabirinth(g);
         }
     }
 }
