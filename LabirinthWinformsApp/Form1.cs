@@ -41,7 +41,7 @@ namespace LabirinthWinformsApp
 
             this.zoomNumericUpDown.Minimum = 10;
             this.zoomTrackBar.Minimum = 10;
-            labirinthControl1.Zoom = 10f;
+            labControl.Zoom = 10f;
 
             this.zoomNumericUpDown.Maximum = 100;
             this.zoomTrackBar.Maximum = 100;
@@ -53,14 +53,14 @@ namespace LabirinthWinformsApp
             this.botSpeedNumericUpDown.Maximum = 20;
             botSpeed = 1 * 100;
 
-            labirinthControl1.Labirinth = lab;
+            labControl.Labirinth = lab;
 
-            labirinthControl1.WaysToMiss.Add("EndWays");
+            labControl.WaysToMiss.Add("EndWays");
 
-            labirinthControl1.Ways.AddWay("WalkedWay", Color.LightGreen);
-            labirinthControl1.Ways.AddWay("Bot", Color.DarkGreen);
-            labirinthControl1.Ways.AddWay("FinalWay", Color.FromArgb(0, 255, 0));
-            LabirinthControl.ColorfulList list = labirinthControl1.Ways.AddWay("EndWays", Color.FromArgb(179, 27, 27));
+            labControl.Ways.AddWay("WalkedWay", Color.LightGreen);
+            labControl.Ways.AddWay("Bot", Color.DarkGreen);
+            labControl.Ways.AddWay("FinalWay", Color.FromArgb(0, 255, 0));
+            LabirinthControl.ColorfulList list = labControl.Ways.AddWay("EndWays", Color.FromArgb(179, 27, 27));
             list.PerCentsofSize = 0.5f;
         }
         #endregion
@@ -81,7 +81,7 @@ namespace LabirinthWinformsApp
                 if (this.zoomTrackBar.Value != ((int)this.zoomNumericUpDown.Value))
                     this.zoomTrackBar.Value = ((int)this.zoomNumericUpDown.Value);
 
-                labirinthControl1.Zoom = zoomTrackBar.Value;
+                labControl.Zoom = zoomTrackBar.Value;
             }
             else if (sender == botSpeedNumericUpDown)
             {
@@ -103,7 +103,7 @@ namespace LabirinthWinformsApp
 
         private void ClearLabirinthPoints()
         {
-            foreach (KeyValuePair<string, LabirinthControl.ColorfulList> list in labirinthControl1.Ways)
+            foreach (KeyValuePair<string, LabirinthControl.ColorfulList> list in labControl.Ways)
             {
                 list.Value.ListofPoints.Clear();
             }
@@ -211,24 +211,24 @@ namespace LabirinthWinformsApp
 
         private void ReportBotProgress()
         {
-            if (labirinthControl1.Labirinth == null)
+            if (labControl.Labirinth == null)
                 return;
 
             if (allWay.Count != 0)
             {
                 Point point = allWay.Dequeue();
-                labirinthControl1.Ways["WalkedWay"].ListofPoints.Add(point);
-                labirinthControl1.Ways["Bot"].ListofPoints.Clear();
-                labirinthControl1.Ways["Bot"].ListofPoints.Add(point);
+                labControl.Ways["WalkedWay"].ListofPoints.Add(point);
+                labControl.Ways["Bot"].ListofPoints.Clear();
+                labControl.Ways["Bot"].ListofPoints.Add(point);
                 botLogRichTextBox.Text += $"Бот пеермещён в точку : {point} | Направление : {directions.Dequeue()}\n";
             }
             else if (way != null && way.Count != 0)
             {
                 Point point = way.Dequeue();
-                labirinthControl1.Ways["FinalWay"].ListofPoints.Add(point);
+                labControl.Ways["FinalWay"].ListofPoints.Add(point);
             }
 
-            labirinthControl1.Invalidate();
+            labControl.Invalidate();
 
             if ((allWay.Count == 0 && way?.Count == 0) || (allWay.Count == 0 && way == null))
             {
@@ -242,9 +242,9 @@ namespace LabirinthWinformsApp
                 //    }
                 //}
 
-                labirinthControl1.Ways["Bot"].ListofPoints.Clear();
+                labControl.Ways["Bot"].ListofPoints.Clear();
 
-                labirinthControl1.Ways["EndWays"].ListofPoints = deadEnds;
+                labControl.Ways["EndWays"].ListofPoints = deadEnds;
 
                 timer.Stop();
             }
@@ -402,10 +402,10 @@ namespace LabirinthWinformsApp
         private void показыватьТупикиToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (показыватьТупикиToolStripMenuItem.Checked)
-                labirinthControl1.WaysToMiss.Remove("EndWays");
+                labControl.WaysToMiss.Remove("EndWays");
             else
-                labirinthControl1.WaysToMiss.Add("EndWays");
-            labirinthControl1.Invalidate();
+                labControl.WaysToMiss.Add("EndWays");
+            labControl.Invalidate();
         }
 
         private void botSpeedComboBoxMenu_SelectedIndexChanged(object sender, EventArgs e)
@@ -425,7 +425,7 @@ namespace LabirinthWinformsApp
                 Bitmap bitmap;
                 Graphics g;
 
-                float zoom = labirinthControl1.Zoom;
+                float zoom = labControl.Zoom;
 
                 if (!withScale)
                 {
@@ -552,13 +552,13 @@ namespace LabirinthWinformsApp
 
             void SaveImageFile(string path)
             {
-                float zoom = labirinthControl1.Zoom;
+                float zoom = labControl.Zoom;
                 Bitmap bitmap = new Bitmap((int)(lab.Width * zoom), (int)(lab.Height * zoom));
                 Graphics g = Graphics.FromImage(bitmap);
                 lab.DrawLabirinth(g);
-                foreach (KeyValuePair<string, LabirinthControl.ColorfulList> pair in labirinthControl1.Ways)
+                foreach (KeyValuePair<string, LabirinthControl.ColorfulList> pair in labControl.Ways)
                 {
-                    if (labirinthControl1.WaysToMiss.Contains(pair.Key))
+                    if (labControl.WaysToMiss.Contains(pair.Key))
                         continue;
 
                     using (SolidBrush brush = new SolidBrush(pair.Value.Color))
@@ -595,11 +595,19 @@ namespace LabirinthWinformsApp
                 }
             }
         }
-        #endregion
 
         private void цветToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            ColorForm colorForm = new ColorForm(labControl.Ways);
+            if (colorForm.ShowDialog() == DialogResult.OK)
+            {
+                foreach (KeyValuePair<string, Color> pair in colorForm.NewWaysColors)
+                {
+                    labControl.Ways[pair.Key].Color = pair.Value;
+                }
+                labControl.Invalidate();
+            }
+            colorForm.Dispose();
         }
 
         private void оПрограммеToolStripMenuItem_Click(object sender, EventArgs e)
@@ -608,5 +616,8 @@ namespace LabirinthWinformsApp
             aboutBox.ShowDialog();
             aboutBox.Dispose();
         }
+        #endregion
+
+
     }
 }
