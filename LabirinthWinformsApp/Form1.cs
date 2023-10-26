@@ -363,7 +363,8 @@ namespace LabirinthWinformsApp
 
             this.timerAction = this.ReportBotProgress;
 
-            labirinthControl1.WaysToMiss.Add("EndWays");
+            //if (!labirinthControl1.WaysToMiss.Contains("EndWays"))
+                labirinthControl1.WaysToMiss.Add("EndWays");
             показыватьТупикиToolStripMenuItem.Enabled = false;
 
             labirinthControl1.Ways["EndWays"].ListofPoints = bot.DeadEndsList.ToDrawingPointList();
@@ -429,7 +430,8 @@ namespace LabirinthWinformsApp
                 //UpdateLabirinth();
                 //prevPoint = LabirinthLib.Structs.Point.Empty;
                 labirinthControl1.Ways["Bot"].ListofPoints.Clear();
-                labirinthControl1.WaysToMiss.Remove("EndWays");
+                if (labirinthControl1.WaysToMiss.Count == 2)
+                    labirinthControl1.WaysToMiss.Remove("EndWays");
                 показыватьТупикиToolStripMenuItem.Enabled = true;
                 timer.Stop();
             }
