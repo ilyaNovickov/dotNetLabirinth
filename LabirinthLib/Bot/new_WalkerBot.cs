@@ -209,7 +209,7 @@ namespace LabirinthLib.Bot
                     {
 						this.directions = directions;
 						this.way = way;
-                        this.deadEnds = visitedDeadEnds;
+                        this.deadEnds = way;//visitedDeadEnds;
 						return false;
                     }
 
