@@ -595,5 +595,10 @@ namespace LabirinthWinformsApp
             }
         }
         #endregion
+
+        private void цветToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
