@@ -15,16 +15,16 @@ namespace LabirinthWinformsApp
 {
     public partial class MainForm : Form
     {
-        //private float zoom;
         private Labirinth lab;
         private Action timerAction;
         private Queue<LabirinthLib.Structs.Point> way = new Queue<LabirinthLib.Structs.Point>();
         private Queue<LabirinthLib.Structs.Point> allWay= new Queue<LabirinthLib.Structs.Point>();
         private Queue<Direction> directions = new Queue<Direction>();
-        //private LabirinthLib.Structs.Point prevPoint;
         private int botSpeed;
 
-        List<LabirinthLib.Structs.Point> deadEnds;
+        List<Point> deadEnds;
+
+        bool exitWasFind = false;
 
         public MainForm()
         {
@@ -300,7 +300,7 @@ namespace LabirinthWinformsApp
 
             new_WalkerBot bot = new new_WalkerBot(lab);
 
-            bot.FindExit(numofEnter);
+            exitWasFind = bot.FindExit(numofEnter);
 
             this.way = bot.WayToExitQueue;
 
@@ -310,11 +310,7 @@ namespace LabirinthWinformsApp
 
             this.timerAction = this.ReportBotProgress;
 
-            //if (!labirinthControl1.WaysToMiss.Contains("EndWays"))
-                labirinthControl1.WaysToMiss.Add("EndWays");
-            показыватьТупикиToolStripMenuItem.Enabled = false;
-
-            labirinthControl1.Ways["EndWays"].ListofPoints = bot.DeadEndsList.ToDrawingPointList();
+            this.deadEnds = bot.DeadEndsList.ToDrawingPointList();
 
 
             botLogRichTextBox.Clear();
@@ -348,10 +344,20 @@ namespace LabirinthWinformsApp
 
             if (allWay.Count == 0 && (this.way != null && this.way.Count == 0))
             {
+                botLogRichTextBox.Text += $"Выход {(exitWasFind ? "был" : "не был" )} найден\n";
+                //if (exitWasFind)
+                //{
+                //    botLogRichTextBox.Text += "Путь к выходу:\n";
+                //    foreach (Point point in labirinthControl1.Ways["FinalWay"].ListofPoints)
+                //    {
+                //        botLogRichTextBox.Text += "Путь к выходу:\n";
+                //    }
+                //}
+
                 labirinthControl1.Ways["Bot"].ListofPoints.Clear();
-                if (labirinthControl1.WaysToMiss.Count == 2)
-                    labirinthControl1.WaysToMiss.Remove("EndWays");
-                показыватьТупикиToolStripMenuItem.Enabled = true;
+
+                labirinthControl1.Ways["EndWays"].ListofPoints = deadEnds;
+
                 timer.Stop();
             }
         }
