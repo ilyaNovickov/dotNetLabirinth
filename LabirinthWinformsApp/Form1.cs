@@ -58,8 +58,9 @@ namespace LabirinthWinformsApp
 
             labirinthControl1.Ways.AddWay("WalkedWay", Color.LightGreen);
             labirinthControl1.Ways.AddWay("Bot", Color.DarkGreen);
-            labirinthControl1.Ways.AddWay("FinalWay", Color.Green);
-            labirinthControl1.Ways.AddWay("EndWays", Color.GreenYellow);
+            labirinthControl1.Ways.AddWay("FinalWay", Color.FromArgb(0, 255, 0));
+            LabirinthControl.ColorfulList list = labirinthControl1.Ways.AddWay("EndWays", Color.FromArgb(179, 27, 27));
+            list.PerCentsofSize = 0.5f;
         }
         #endregion
 
@@ -228,7 +229,7 @@ namespace LabirinthWinformsApp
 
             labirinthControl1.Invalidate();
 
-            if (allWay.Count == 0 && (this.way != null && this.way.Count == 0))
+            if ((allWay.Count == 0 && way?.Count == 0) || (allWay.Count == 0 && way == null))
             {
                 botLogRichTextBox.Text += $"Выход {(exitWasFind ? "был" : "не был")} найден\n";
                 //if (exitWasFind)
