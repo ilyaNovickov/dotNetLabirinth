@@ -114,8 +114,9 @@
       <Name>LabirinthLib</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="ExtraForms\Image\" />
+    <Content Include="ExtraForms\Image\dotNetLabLogo.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
