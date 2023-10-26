@@ -77,6 +77,18 @@ namespace LabirinthWinformsApp
 
             //public Dictionary<string, List<Point>> GetWays() => ways;
 
+            public ColorfulList AddWay(string name, Color color)
+            {
+                ColorfulList points = new ColorfulList()
+                {
+                    Color = color
+                };
+
+                this.ways.Add(name, points);
+
+                return points;
+            }
+
             public ColorfulList AddWay(string name)
             {
                 ColorfulList wayPoints = new ColorfulList();
@@ -123,9 +135,9 @@ namespace LabirinthWinformsApp
         }
 
         private float zoom = 1f;
-        private Labirinth lab;
-        private LabirinthStyle style;
-        private WaysCollection ways;
+        private Labirinth lab = null;
+        private LabirinthStyle style = LabirinthStyle.None;
+        private WaysCollection ways = new WaysCollection();
 
         //private Dictionary<string, List<Point>> asd = new Dictionary<string, List<Point>>()
         //{
