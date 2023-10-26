@@ -30,6 +30,7 @@ namespace LabirinthWinformsApp
         {
             private List<Point> list;
             private Color color;
+            private float percentofSize;
 
             public ColorfulList() : this(new List<Point>(), Color.Black)
             {
@@ -45,6 +46,7 @@ namespace LabirinthWinformsApp
             {
                 this.list = values;
                 this.color = color;
+                percentofSize = 1f;
             }
 
             public Color Color
@@ -58,7 +60,20 @@ namespace LabirinthWinformsApp
                 get => list;
                 set => list = value;
             }
+
+            public float PerCentsofSize
+            {
+                get => percentofSize;
+                set
+                {
+                    if (0.5f <= value && value <= 100f)
+                        percentofSize = value;
+                    else
+                        percentofSize = 1f;
+                }
+            }
         }
+
         public class WaysCollection //: IEnumerable<KeyValuePair<string, ColorfulList>>
         {
             
@@ -254,8 +269,12 @@ namespace LabirinthWinformsApp
 
                 foreach (Point point in list.Value.ListofPoints)
                 {
+                    PointF pointF = new PointF(point.X + (1f - list.Value.PerCentsofSize) / 2,
+                        point.Y + (1f - list.Value.PerCentsofSize) / 2);
+                    SizeF sizef = new SizeF(list.Value.PerCentsofSize, list.Value.PerCentsofSize);
+
                     using (SolidBrush brush = new SolidBrush(list.Value.Color))
-                        e.Graphics.FillRectangle(brush, point.X, point.Y, 1, 1);
+                        e.Graphics.FillRectangle(brush, new RectangleF(pointF, sizef));//point.X, point.Y, 1, 1);
                 }
             }
 
