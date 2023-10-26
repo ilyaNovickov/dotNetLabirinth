@@ -97,6 +97,8 @@ namespace LabirinthWinformsApp
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.цветToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.labirinthControl1 = new LabirinthWinformsApp.LabirinthControl();
+            this.справкаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.оПрограммеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -144,7 +146,8 @@ namespace LabirinthWinformsApp
             this.standartSizeComboBox,
             this.standartEmptySpaccceComboBox,
             this.standartZoomComboBox,
-            this.toolStripMenuItem1});
+            this.toolStripMenuItem1,
+            this.справкаToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1047, 32);
@@ -899,6 +902,21 @@ namespace LabirinthWinformsApp
             this.labirinthControl1.WaysToMiss = ((System.Collections.Generic.List<string>)(resources.GetObject("labirinthControl1.WaysToMiss")));
             this.labirinthControl1.Zoom = 1F;
             // 
+            // справкаToolStripMenuItem
+            // 
+            this.справкаToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.оПрограммеToolStripMenuItem});
+            this.справкаToolStripMenuItem.Name = "справкаToolStripMenuItem";
+            this.справкаToolStripMenuItem.Size = new System.Drawing.Size(81, 28);
+            this.справкаToolStripMenuItem.Text = "Справка";
+            // 
+            // оПрограммеToolStripMenuItem
+            // 
+            this.оПрограммеToolStripMenuItem.Name = "оПрограммеToolStripMenuItem";
+            this.оПрограммеToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.оПрограммеToolStripMenuItem.Text = "О программе";
+            this.оПрограммеToolStripMenuItem.Click += new System.EventHandler(this.оПрограммеToolStripMenuItem_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -1016,6 +1034,8 @@ namespace LabirinthWinformsApp
         private System.Windows.Forms.ToolStripMenuItem показыватьТупикиToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem цветToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem справкаToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem оПрограммеToolStripMenuItem;
     }
 }
 

@@ -10,6 +10,7 @@ using System.Drawing.Drawing2D;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Windows.Forms;
+using LabirinthWinformsApp.ExtraForms;
 
 namespace LabirinthWinformsApp
 {
@@ -599,6 +600,13 @@ namespace LabirinthWinformsApp
         private void цветToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void оПрограммеToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AboutBox1 aboutBox = new AboutBox1();
+            aboutBox.ShowDialog();
+            aboutBox.Dispose();
         }
     }
 }
