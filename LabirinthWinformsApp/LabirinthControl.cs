@@ -168,7 +168,10 @@ namespace LabirinthWinformsApp
             this.DoubleBuffered = true;
         }
 
+        [DisplayName("Маштаб лабиринта")]
+        [Category("UsersProperties")]
         [DefaultValue("1")]
+        [Description("Маштаб лабиринта в %")]
         public float Zoom
         {
             get => zoom;
@@ -179,10 +182,15 @@ namespace LabirinthWinformsApp
                 else
                     zoom = 1f;
                 this.Invalidate();
-                //this.Refresh();
             }
         }
 
+        [DisplayName("Способ отрисовки лабиринта")]
+        [Description("Способ отрисовки лабиринта" +
+            " None - лабиринт рисуется с исходным размером" +
+            " Stretch - лабиринт растягивается под размер элемента управления" +
+            " AutoSize - элемент управления подстраивается под лабиринт")]
+        [Category("UsersProperties")]
         public LabirinthStyle LabirinthStyle
         {
             get => style;
@@ -211,17 +219,14 @@ namespace LabirinthWinformsApp
             }
         }
 
+        [Browsable(false)]
         public List<string> WaysToMiss
         {
             get => waysToMiss;
             set =>  waysToMiss = value;
         }
 
-        //public Dictionary<string, List<Point>> Ways
-        //{
-        //    get => ways.GetWays();
-        //}
-
+        [Browsable(false)]
         public WaysCollection Ways
         {
             get => ways;
