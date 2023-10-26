@@ -26,22 +26,100 @@ namespace LabirinthWinformsApp
 
     public partial class LabirinthControl : Control
     {
-        private class WaysCollection
+        public class ColorfulList
         {
-            private Dictionary<string, List<Point>> ways = new Dictionary<string, List<Point>>();
+            private List<Point> list;
+            private Color color;
 
-            public List<Point> this[string key]
+            public ColorfulList() : this(new List<Point>(), Color.Black)
+            {
+
+            }
+
+            public ColorfulList(List<Point> values) : this(values, Color.Black)
+            {
+
+            }
+
+            public ColorfulList(List<Point> values, Color color)
+            {
+                this.list = values;
+                this.color = color;
+            }
+
+            public Color Color
+            {
+                get => color;
+                set => color = value;
+            }
+
+            public List<Point> ListofPoints
+            {
+                get => list;
+                set => list = value;
+            }
+        }
+        public class WaysCollection //: IEnumerable<KeyValuePair<string, ColorfulList>>
+        {
+            
+            private Dictionary<string, ColorfulList> ways = new Dictionary<string, ColorfulList>();
+
+            public ColorfulList this[string key]
             {
                 get => ways[key];
                 set => ways[key] = value;
             }
 
-            public List<Point> this[int index]
+            public ColorfulList this[int index]
             {
                 get => ways.Values.ElementAt(index);
             }
 
-            public Dictionary<string, List<Point>> GetWays() => ways;
+            //public Dictionary<string, List<Point>> GetWays() => ways;
+
+            public ColorfulList AddWay(string name)
+            {
+                ColorfulList wayPoints = new ColorfulList();
+
+                this.ways.Add(name, wayPoints);
+
+                return wayPoints;
+            }
+
+            public ColorfulList AddWay()
+            {
+                ColorfulList points = new ColorfulList();
+
+                this.ways.Add(ways.Count.ToString(), points);
+
+                return points;
+            }
+
+            public bool RemoveWay(string key)
+            {
+                return ways.Remove(key);
+            }
+
+            public void RemoveLast()
+            {
+                ways.Remove(ways.Keys.Last());
+            }
+
+            public List<string> GetKeys()
+            {
+                return ways.Keys.ToList();
+            }
+
+            public bool ContainseKey(string key)
+            {
+                return ways.ContainsKey(key);
+            }
+
+            public IEnumerator<KeyValuePair<string, ColorfulList>> GetEnumerator()
+            {
+                return this.ways.GetEnumerator();
+            }
+
         }
 
         private float zoom = 1f;
@@ -49,10 +127,10 @@ namespace LabirinthWinformsApp
         private LabirinthStyle style;
         private WaysCollection ways;
 
-        private Dictionary<string, List<Point>> asd = new Dictionary<string, List<Point>>()
-        {
-            { "1", new List<Point>() { new Point(0, 0), new Point(1, 1) } }
-        };
+        //private Dictionary<string, List<Point>> asd = new Dictionary<string, List<Point>>()
+        //{
+        //    { "1", new List<Point>() { new Point(0, 0), new Point(1, 1) } }
+        //};
 
         public LabirinthControl()
         {
@@ -104,9 +182,14 @@ namespace LabirinthWinformsApp
             }
         }
 
-        public Dictionary<string, List<Point>> Ways
+        //public Dictionary<string, List<Point>> Ways
+        //{
+        //    get => ways.GetWays();
+        //}
+
+        public WaysCollection Ways
         {
-            get => ways.GetWays();
+            get => ways;
         }
 
         private void this_UpdateLabirinth(object sender, EventArgs e)
@@ -144,10 +227,13 @@ namespace LabirinthWinformsApp
                     break;
             }
 
-            foreach (Point point in asd["1"])
+            foreach (KeyValuePair<string, ColorfulList> list in ways)
             {
-                using (SolidBrush brush = new SolidBrush(Color.Pink))
-                    e.Graphics.FillRectangle(brush, point.X, point.Y, 1, 1);
+                foreach (Point point in list.Value.ListofPoints)
+                {
+                    using (SolidBrush brush = new SolidBrush(list.Value.Color))
+                        e.Graphics.FillRectangle(brush, point.X, point.Y, 1, 1);
+                }
             }
 
             END:
