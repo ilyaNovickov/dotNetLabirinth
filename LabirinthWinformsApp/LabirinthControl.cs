@@ -232,6 +232,10 @@ namespace LabirinthWinformsApp
             get => ways;
         }
 
+        public event EventHandler<ScaledMouseEventArgs> MouseScaledClick;
+
+        public event EventHandler<ScaledMouseEventArgs> MouseScaledMove;
+
         protected void this_UpdateLabirinth(object sender, EventArgs e)
         {
             this.Invalidate();
@@ -312,5 +316,49 @@ namespace LabirinthWinformsApp
 
             lab.DrawLabirinth(g);
         }
+
+        protected override void OnMouseClick(MouseEventArgs e)
+        {
+            base.OnMouseClick(e);
+            MouseScaledClick?.Invoke(this, new ScaledMouseEventArgs(e, Zoom));
+        }
+
+        protected override void OnMouseMove(MouseEventArgs e)
+        {
+            base.OnMouseMove(e);
+            MouseScaledMove?.Invoke(this, new ScaledMouseEventArgs(e, Zoom));
+        }
+
+        public Graphics CreateScaledGraphics()
+        {
+            Graphics g = CreateGraphics();
+
+            g.ScaleTransform(zoom, zoom);
+
+            return g;
+        }
+    }
+
+    public class ScaledMouseEventArgs : MouseEventArgs
+    {
+       
+
+        public ScaledMouseEventArgs(MouseEventArgs e, float zoom) : base(e.Button, e.Clicks, e.X, e.Y, e.Delta)
+        {
+            Zoom = zoom;
+        }
+
+        public float Zoom { get; private set; }
+
+        public float XTransformed
+        {
+            get => this.X / Zoom;
+        }
+
+        public float YTransformed
+        {
+            get => this.Y / Zoom;
+        }
+
     }
 }

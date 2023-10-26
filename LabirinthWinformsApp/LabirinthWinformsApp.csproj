@@ -48,6 +48,7 @@
     <Reference Include="System.Xml.Serialization" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ColorExtanceMethods.cs" />
     <Compile Include="ExtraForms\AboutBox1.cs">
       <SubType>Form</SubType>
     </Compile>
