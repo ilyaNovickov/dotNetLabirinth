@@ -621,7 +621,11 @@ namespace LabirinthWinformsApp
 
         private void labControl_MouseTransformedClick(object sender, ScaledMouseEventArgs e)
         {
-            
+            if (e.Button == MouseButtons.Right)
+            {
+                labControl.Invalidate();
+                return;
+            }
             labControl.Refresh();
             Graphics g = labControl.CreateScaledGraphics();
             using (SolidBrush brush = new SolidBrush(Color.FromArgb(100, Color.Fuchsia)))
