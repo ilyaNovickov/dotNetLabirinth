@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
+using LabirinthLib.Structs;
 
 namespace LabirinthLib
 {
@@ -175,6 +177,19 @@ namespace LabirinthLib
 
             return indexesToDelete.ToArray();
         }
+
+        public static List<System.Drawing.Point> ToDrawingPointList(this List<Point> list)
+        {
+            List<System.Drawing.Point> result = new List<System.Drawing.Point>();
+
+            foreach (Point labPoint in list)
+            {
+                result.Add(labPoint);
+            }
+
+            return result;
+        }
+
    //     public static void DeleteRange<T>(this List<T> list, IEnumerable<T> values)
    //     {
    //         Queue<T> queueToDelete = new Queue<T>();

@@ -43,6 +43,7 @@ namespace LabirinthWinformsApp
             }
         }
 
+        [Obsolete]
         public static void DrawLabirinthOLD(this Labirinth lab, Graphics g)
         {
             Pen wall = new Pen(Color.Black, 1);
