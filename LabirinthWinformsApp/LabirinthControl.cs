@@ -139,6 +139,8 @@ namespace LabirinthWinformsApp
         private LabirinthStyle style = LabirinthStyle.None;
         private WaysCollection ways = new WaysCollection();
 
+        private List<string> waysToMiss = new List<string>(); 
+
         //private Dictionary<string, List<Point>> asd = new Dictionary<string, List<Point>>()
         //{
         //    { "1", new List<Point>() { new Point(0, 0), new Point(1, 1) } }
@@ -194,6 +196,12 @@ namespace LabirinthWinformsApp
             }
         }
 
+        public List<string> WaysToMiss
+        {
+            get => waysToMiss;
+            set =>  waysToMiss = value;
+        }
+
         //public Dictionary<string, List<Point>> Ways
         //{
         //    get => ways.GetWays();
@@ -204,7 +212,7 @@ namespace LabirinthWinformsApp
             get => ways;
         }
 
-        private void this_UpdateLabirinth(object sender, EventArgs e)
+        protected void this_UpdateLabirinth(object sender, EventArgs e)
         {
             this.Invalidate();
         }
@@ -241,6 +249,9 @@ namespace LabirinthWinformsApp
 
             foreach (KeyValuePair<string, ColorfulList> list in ways)
             {
+                if (waysToMiss.Contains(list.Key))
+                    continue;
+
                 foreach (Point point in list.Value.ListofPoints)
                 {
                     using (SolidBrush brush = new SolidBrush(list.Value.Color))
@@ -252,12 +263,12 @@ namespace LabirinthWinformsApp
             base.OnPaint(e);
         }
 
-        private void DrawLabirinthNoneStyle(Graphics g)
+        protected void DrawLabirinthNoneStyle(Graphics g)
         {
             lab.DrawLabirinth(g);
         }
 
-        private void DrawLabirinthAutoSizeStyle(Graphics g)
+        protected void DrawLabirinthAutoSizeStyle(Graphics g)
         {
             this.Size = new Size((int)(lab.Width*zoom), (int)(lab.Height * zoom));
 
@@ -266,7 +277,7 @@ namespace LabirinthWinformsApp
             lab.DrawLabirinth(g);
         }
 
-        private void DrawLabirinthStretchStyle(Graphics g)
+        protected void DrawLabirinthStretchStyle(Graphics g)
         {
             float widthScale, heightScale;
 
