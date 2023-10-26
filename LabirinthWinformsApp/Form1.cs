@@ -37,7 +37,6 @@ namespace LabirinthWinformsApp
 
             this.zoomNumericUpDown.Minimum = 10;
             this.zoomTrackBar.Minimum = 10;
-            //zoom = 10f;
             labirinthControl1.Zoom = 10f;
 
             this.zoomNumericUpDown.Maximum = 100;
@@ -50,9 +49,6 @@ namespace LabirinthWinformsApp
             this.botSpeedNumericUpDown.Maximum = 20;
             botSpeed = 1 * 100;
 
-            //RedrawLabirinth();
-
-
             labirinthControl1.Labirinth = lab;
 
             labirinthControl1.WaysToMiss.Add("EndWays");
@@ -62,17 +58,7 @@ namespace LabirinthWinformsApp
             labirinthControl1.Ways.AddWay("FinalWay", Color.Green);
             labirinthControl1.Ways.AddWay("EndWays", Color.GreenYellow);
         }
-        private void ReplaceImage(Bitmap bitmap)
-        {
-            if (labirinthPictureBox.Image != null)
-            {
-                Bitmap oldBitmap = (Bitmap)labirinthPictureBox.Image;
-                labirinthPictureBox.Image = bitmap;
-                oldBitmap.Dispose();
-            }
-            else
-                labirinthPictureBox.Image = bitmap;
-        }
+        
 
         private void ClearLabirinthPoints()
         {
@@ -81,38 +67,6 @@ namespace LabirinthWinformsApp
                 list.Value.ListofPoints.Clear();
             }
         }
-
-  //      private void RedrawLabirinth()
-  //      {
-  //          Bitmap bitmap = new Bitmap((int)(lab.Width * zoom), (int)(lab.Height * zoom));
-  //          Graphics g = GetCustomizedGraphicsFromImage(bitmap);
-  //          lab.DrawLabirinth(g);
-  //          ReplaceImage(bitmap);
-  //          g.Dispose();
-  //      }
-
-  //      private void UpdateLabirinth()
-  //      {
-  //          Bitmap bitmap = new Bitmap((int)(lab.Width * zoom), (int)(lab.Height * zoom));
-  //          Graphics g = Graphics.FromImage(bitmap);
-  //          g.SmoothingMode = SmoothingMode.HighSpeed;
-  //          g.InterpolationMode = InterpolationMode.NearestNeighbor;
-  //          Rectangle rect = new Rectangle(0, 0, bitmap.Width, bitmap.Height);
-  //          g.DrawImage(labirinthPictureBox.Image, rect);
-  //          ReplaceImage(bitmap);
-  //          g.Dispose();
-  //          //if (показыватьТупикиtoolStripMenuItem.Checked && deadEnds != null)
-  //          //{
-  //          //    g = GetCustomizedGraphicsFromImage(labirinthPictureBox.Image);
-  //          //    //g = labirinthPictureBox.CreateGraphics();
-  //          //    //g.ScaleTransform(zoom, zoom);
-  //          //    foreach (LabirinthLib.Structs.Point point in this.deadEnds)
-  //          //    {
-  //          //        using (SolidBrush brush = new SolidBrush(Color.DarkOliveGreen))
-  //          //            g.FillRectangle(brush, point.X + 0.25f, point.Y + 0.25f, 0.5f, 0.5f);
-  //          //    }
-  //          //}
-		//}
 
         private void trackBar_Scroll(object sender, EventArgs e)
         {
@@ -128,8 +82,6 @@ namespace LabirinthWinformsApp
             {
                 if (this.zoomTrackBar.Value != ((int)this.zoomNumericUpDown.Value))
                     this.zoomTrackBar.Value = ((int)this.zoomNumericUpDown.Value);
-
-                //zoom = zoomTrackBar.Value;
 
                 labirinthControl1.Zoom = zoomTrackBar.Value;
             }
@@ -177,7 +129,6 @@ namespace LabirinthWinformsApp
             botLogRichTextBox.Clear();
 			lab.GenerateInsAndExit();
             ClearLabirinthPoints();
-            //RedrawLabirinth();
         }
 
         private void backgroundWorker_DoWork(object sender, DoWorkEventArgs e)
@@ -223,7 +174,6 @@ namespace LabirinthWinformsApp
             this.sizeLabel.Text = $"Размер : {lab.Size}";
             this.emptySpaceLabel.Text = $"Пустое пространство : {lab.EmptySpace * 100} %";
             ClearLabirinthPoints();
-            //RedrawLabirinth();
         }
 
         private void standartSizeComboBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -342,14 +292,11 @@ namespace LabirinthWinformsApp
 
         private void botButton_Click(object sender, EventArgs e)
         {
-            //this.RedrawLabirinth();
             ClearLabirinthPoints();
 
             int numofEnter = 1;
             if (enterComboBox.Text == "№2")
                 numofEnter = 2;
-
-            //prevPoint = LabirinthLib.Structs.Point.Empty;
 
             new_WalkerBot bot = new new_WalkerBot(lab);
 
@@ -381,7 +328,6 @@ namespace LabirinthWinformsApp
         private void ReportBotProgress()
         {
             if (labirinthControl1.Labirinth == null)
-            //if (labirinthPictureBox.Image == null)
                 return;
             
             if (allWay.Count != 0)
@@ -400,56 +346,14 @@ namespace LabirinthWinformsApp
 
             labirinthControl1.Invalidate();
 
-            /*
-            Graphics g = GetCustomizedGraphicsFromImage(labirinthPictureBox.Image);
-
-            if (!prevPoint.IsZero())
-            {
-                using (SolidBrush way = new SolidBrush(Color.Chartreuse))
-                    g.FillRectangle(way, prevPoint.X, prevPoint.Y, 1, 1);
-            }
-            if (allWay.Count != 0)
-            {
-                prevPoint = allWay.Dequeue();
-                using (SolidBrush way = new SolidBrush(Color.DarkGreen))
-                    g.FillRectangle(way, prevPoint.X, prevPoint.Y, 1, 1);
-                botLogRichTextBox.Text += $"Бот пеермещён в точку : {prevPoint} | Направление : {directions.Dequeue()}\n";
-            }
-            else if (this.way != null && this.way.Count != 0)
-            {
-                Point point = way.Dequeue();
-                using (SolidBrush way = new SolidBrush(Color.Green))
-                    g.FillRectangle(way, point.X, point.Y, 1, 1);
-            }
-            labirinthPictureBox.Invalidate();
-
-            g.Dispose();
-            */
             if (allWay.Count == 0 && (this.way != null && this.way.Count == 0))
             {
-                //UpdateLabirinth();
-                //prevPoint = LabirinthLib.Structs.Point.Empty;
                 labirinthControl1.Ways["Bot"].ListofPoints.Clear();
                 if (labirinthControl1.WaysToMiss.Count == 2)
                     labirinthControl1.WaysToMiss.Remove("EndWays");
                 показыватьТупикиToolStripMenuItem.Enabled = true;
                 timer.Stop();
             }
-        }
-
-        private Graphics GetCustomizedGraphicsFromImage(Image image)
-        {
-            Graphics gLocal = Graphics.FromImage(image);
-
-            Matrix matrix = new Matrix();
-
-            float zoom = labirinthControl1.Zoom;
-
-            matrix.Scale(zoom, zoom);
-
-            gLocal.Transform = matrix;
-
-            return gLocal;
         }
 
         private void enterComboBoxMenu_SelectedIndexChanged(object sender, EventArgs e)
@@ -619,17 +523,6 @@ namespace LabirinthWinformsApp
 
 			void SaveImageFile(string path)
 			{
-                //Bitmap bitmap = new Bitmap(lab.Width, lab.Height);
-                //Graphics g = Graphics.FromImage(bitmap);
-                //Rectangle rectangle = new Rectangle(0, 0, bitmap.Width, bitmap.Height);
-
-                //g.DrawImage(labirinthPictureBox.Image, 0, 0);
-
-                //bitmap.Save(path);
-
-                //bitmap.Dispose();
-
-                //labirinthPictureBox.Image.Save(path);
                 float zoom = labirinthControl1.Zoom;
                 Bitmap bitmap = new Bitmap((int)(lab.Width*zoom), (int)(lab.Height*zoom));
                 Graphics g = Graphics.FromImage(bitmap);
@@ -638,11 +531,12 @@ namespace LabirinthWinformsApp
                 {
                     if (labirinthControl1.WaysToMiss.Contains(pair.Key))
                         continue;
-                    foreach (Point point in pair.Value.ListofPoints)
-                    {
-                        using (SolidBrush brush = new SolidBrush(pair.Value.Color))
+
+                    using (SolidBrush brush = new SolidBrush(pair.Value.Color))
+                        foreach (Point point in pair.Value.ListofPoints)
+                        {
                             g.FillRectangle(brush, point.X, point.Y, 1, 1);
-                    }
+                        }
                 }
             }
 
@@ -682,9 +576,5 @@ namespace LabirinthWinformsApp
             labirinthControl1.Invalidate();
         }
 
-        //private void показыватьТупикиtoolStripMenuItem_Click(object sender, EventArgs e)
-        //{
-        //    UpdateLabirinth();
-        //}
     }
 }

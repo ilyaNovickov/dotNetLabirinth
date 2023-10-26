@@ -30,9 +30,8 @@ namespace LabirinthWinformsApp
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.panel1 = new System.Windows.Forms.Panel();
-            this.labirinthControl1 = new LabirinthWinformsApp.LabirinthControl();
-            this.labirinthPictureBox = new System.Windows.Forms.PictureBox();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.test1ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.экспортToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -95,8 +94,8 @@ namespace LabirinthWinformsApp
             this.timer = new System.Windows.Forms.Timer(this.components);
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.показыватьТупикиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.labirinthControl1 = new LabirinthWinformsApp.LabirinthControl();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.labirinthPictureBox)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.mainTableLayout.SuspendLayout();
@@ -127,36 +126,12 @@ namespace LabirinthWinformsApp
             this.panel1.AutoScroll = true;
             this.panel1.BackColor = System.Drawing.SystemColors.ControlDark;
             this.panel1.Controls.Add(this.labirinthControl1);
-            this.panel1.Controls.Add(this.labirinthPictureBox);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(6, 6);
             this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(555, 492);
             this.panel1.TabIndex = 2;
-            // 
-            // labirinthControl1
-            // 
-            this.labirinthControl1.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.labirinthControl1.Labirinth = null;
-            this.labirinthControl1.LabirinthStyle = LabirinthWinformsApp.LabirinthStyle.AutoSize;
-            this.labirinthControl1.Location = new System.Drawing.Point(207, 131);
-            this.labirinthControl1.Name = "labirinthControl1";
-            this.labirinthControl1.Size = new System.Drawing.Size(242, 214);
-            this.labirinthControl1.TabIndex = 1;
-            this.labirinthControl1.Text = "labirinthControl1";
-            this.labirinthControl1.Zoom = 1F;
-            // 
-            // labirinthPictureBox
-            // 
-            this.labirinthPictureBox.BackColor = System.Drawing.SystemColors.Control;
-            this.labirinthPictureBox.Location = new System.Drawing.Point(0, 0);
-            this.labirinthPictureBox.Margin = new System.Windows.Forms.Padding(4);
-            this.labirinthPictureBox.Name = "labirinthPictureBox";
-            this.labirinthPictureBox.Size = new System.Drawing.Size(136, 148);
-            this.labirinthPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
-            this.labirinthPictureBox.TabIndex = 0;
-            this.labirinthPictureBox.TabStop = false;
             // 
             // menuStrip1
             // 
@@ -893,6 +868,19 @@ namespace LabirinthWinformsApp
             this.показыватьТупикиToolStripMenuItem.Text = "Показывать тупики";
             this.показыватьТупикиToolStripMenuItem.Click += new System.EventHandler(this.показыватьТупикиToolStripMenuItem_Click);
             // 
+            // labirinthControl1
+            // 
+            this.labirinthControl1.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.labirinthControl1.Labirinth = null;
+            this.labirinthControl1.LabirinthStyle = LabirinthWinformsApp.LabirinthStyle.AutoSize;
+            this.labirinthControl1.Location = new System.Drawing.Point(0, 0);
+            this.labirinthControl1.Name = "labirinthControl1";
+            this.labirinthControl1.Size = new System.Drawing.Size(242, 214);
+            this.labirinthControl1.TabIndex = 1;
+            this.labirinthControl1.Text = "labControl";
+            this.labirinthControl1.WaysToMiss = ((System.Collections.Generic.List<string>)(resources.GetObject("labirinthControl1.WaysToMiss")));
+            this.labirinthControl1.Zoom = 1F;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -907,8 +895,6 @@ namespace LabirinthWinformsApp
             this.Name = "MainForm";
             this.Text = ".Net Labirinth";
             this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.labirinthPictureBox)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.statusStrip1.ResumeLayout(false);
@@ -947,7 +933,6 @@ namespace LabirinthWinformsApp
 
         #endregion
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.PictureBox labirinthPictureBox;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem test1ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem test2ToolStripMenuItem;
