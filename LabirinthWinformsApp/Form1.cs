@@ -115,6 +115,24 @@ namespace LabirinthWinformsApp
             Random random = new Random();
             this.Text = ".Net Labirinth | Думаем " + vars[random.Next(0, vars.Length)];
         }
+
+        private void labControl_MouseTransformedClick(object sender, ScaledMouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                labControl.Invalidate();
+                return;
+            }
+            labControl.Refresh();
+            Graphics g = labControl.CreateScaledGraphics();
+            using (SolidBrush brush = new SolidBrush(Color.FromArgb(100, Color.Fuchsia)))
+                g.FillRectangle(brush, (int)e.XTransformed, (int)e.YTransformed, 1, 1);
+        }
+
+        private void labControl_MouseScaledMove(object sender, ScaledMouseEventArgs e)
+        {
+            mousePositionLabel.Text = $"Курсор : {(int)e.XTransformed} | {(int)e.YTransformed}";
+        }
         #endregion
 
         #region LabirinthInterection
@@ -618,23 +636,5 @@ namespace LabirinthWinformsApp
         }
 
         #endregion
-
-        private void labControl_MouseTransformedClick(object sender, ScaledMouseEventArgs e)
-        {
-            if (e.Button == MouseButtons.Right)
-            {
-                labControl.Invalidate();
-                return;
-            }
-            labControl.Refresh();
-            Graphics g = labControl.CreateScaledGraphics();
-            using (SolidBrush brush = new SolidBrush(Color.FromArgb(100, Color.Fuchsia)))
-                g.FillRectangle(brush, (int)e.XTransformed, (int)e.YTransformed, 1, 1);
-        }
-
-        private void labControl_MouseScaledMove(object sender, ScaledMouseEventArgs e)
-        {
-            mousePositionLabel.Text = $"Курсор : {(int)e.XTransformed} | {(int)e.YTransformed}";
-        }
     }
 }
