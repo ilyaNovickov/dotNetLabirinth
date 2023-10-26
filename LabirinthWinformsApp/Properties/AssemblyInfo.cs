@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Лабиринтогенеинатор")]
-[assembly: AssemblyDescription("Программа для генерации лабиринтов (Создавалась как пратическое задание)")]
+[assembly: AssemblyDescription("Программа для генерации лабиринтов (Создавалась как пратическое задание). Пользуйдесь как хочите, что хочите и когда хотиче.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Самиздат")]
 [assembly: AssemblyProduct("dotNet Winform Лабиринтогенеинатор")]
