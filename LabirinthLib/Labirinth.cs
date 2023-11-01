@@ -704,7 +704,92 @@ namespace LabirinthLib
 
             }
 
+            void TryToSetExit(Point point)
+            {
+                if (preborderPoints.Intersect(firstWay).Count() != 1 && firstIn == point)
+                    return;
 
+                Point checkingPoint = firstIn;
+
+                List<Point> exceptionPoints = new List<Point>();
+
+                exceptionPoints.Add(checkingPoint);
+
+                Point pointToReturn = Point.Empty;
+
+                while (true)
+                {
+                    IEnumerable<Point> points = GetNeighorPointsFromCollectionEx(checkingPoint, preborderPoints, exceptionPoints);
+                    //exit = point;
+                    //return;
+                    if (exceptionPoints.Count == 5 || !exit.IsZero())
+                    {
+                        exit = point;
+                        return;
+                    }
+                    else if (exceptionPoints.Count == 3 && !pointToReturn.IsZero())
+                    {
+                        checkingPoint = pointToReturn;
+                        exceptionPoints.Add(checkingPoint);
+                        pointToReturn = Point.Empty;
+                        continue;
+                    }
+
+                    if (preborderPoints.Intersect(firstWay).All(pointEx => exceptionPoints.Contains(pointEx)))
+                    {
+                        exit = point;
+                        return;
+                    }
+
+                    if (points.Contains(point))
+                    {
+                        exceptionPoints.Add(point);
+                        if (preborderPoints.Intersect(firstWay).All(pointEx => exceptionPoints.Contains(pointEx)))
+                        {
+                            exit = point;
+                        }
+
+                        return;
+                    }
+                    else
+                    {
+                        if (points.Count() == 1)
+                        {
+                            checkingPoint = points.First();
+
+                            exceptionPoints.Add(checkingPoint);
+
+                            if (checkingPoint != firstIn)
+                                continue;
+                        }
+                        else if (points.Count() == 2)
+                        {
+                            checkingPoint = points.First();
+
+                            pointToReturn = points.Last();
+
+                            exceptionPoints.Add(checkingPoint);
+
+                            if (checkingPoint != firstIn)
+                                continue;
+                        }
+                        else if (points.Count() == 0)
+                        {
+                            if (!pointToReturn.IsZero())
+                            {
+                                checkingPoint = pointToReturn;
+                                exceptionPoints.Add(checkingPoint);
+                                pointToReturn = Point.Empty;
+                                continue;
+                            }
+                            exit = point;
+                            return;
+                        }
+                    }
+                }
+
+
+            }
 
             do
             {
@@ -715,11 +800,12 @@ namespace LabirinthLib
                     if (firstIn.IsZero())
                         firstIn = point;
                     else if (exit.IsZero())
-                        exit = point;
+                        TryToSetExit(point);
                 }
                 else if (secondWay.Contains(point))
                 {
-                    secIn = point;
+                    if (secIn.IsZero())
+                        secIn = point;
                 }
 
             }
