@@ -143,6 +143,8 @@ namespace LabirinthWinformsApp
 
             botTableLayout.Enabled = false;
 
+            ClearLabirinthPoints();
+
             lab.Size = new LabirinthLib.Structs.Size(((int)widthNumericUpDown.Value), 
                 ((int)heightNumericUpDowm.Value));
             lab.EmptySpace = ((float)emptySpaceNumericUpDown.Value) / 100f;
@@ -163,7 +165,7 @@ namespace LabirinthWinformsApp
         {
             if (timer.Enabled)
                 timer.Stop();
-            way.Clear();
+            way?.Clear();
             allWay.Clear();
             directions.Clear();
             botLogRichTextBox.Clear();
