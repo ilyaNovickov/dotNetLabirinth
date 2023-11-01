@@ -677,6 +677,53 @@ namespace LabirinthLib
                 }
             }
 
+            //...
+
+            firstIn = GetNearBorderPoint(firstIn);
+            if (secondWay.Count != 0)
+                secIn = GetNearBorderPoint(secIn);
+            exit = GetNearBorderPoint(exit);
+
+            UpdateLabirinthEvent?.Invoke(this, EventArgs.Empty);
+        }
+        /// <summary>
+        /// Генерация входов и выходов (около границы)
+        /// </summary>
+        [Obsolete]
+        private void OLD_GenerationInsAndExit()
+        {
+            List<Point> preborderPoints = GetEmptyCellsInLayout(1).ToList();
+
+            Point GetNearBorderPoint(Point checkingPoint)
+            {
+                if (!preborderPoints.Contains(checkingPoint) || checkingPoint.IsZero())
+                    return Point.Empty;
+                else
+                {
+                    Point[] borderPoints = new Point[2];
+                    int currentIndex = 0;
+                    foreach (Direction direction in new Direction[4] { Direction.Down, Direction.Left, Direction.Right, Direction.Up })
+                    {
+                        Point extraPoint = checkingPoint;
+                        extraPoint.OffsetPoint(direction);
+                        if (this.IsBorder(extraPoint))
+                        {
+                            borderPoints[currentIndex] = extraPoint;
+                            currentIndex++;
+                        }
+                    }
+
+                    if (currentIndex == 1)
+                        return borderPoints[0];
+                    else if (currentIndex == 2)
+                    {
+                        return GetRandomPointFromList(borderPoints);
+                    }
+                    else
+                        return Point.Empty;
+                }
+            }
+
             do
             {
                 Point exitPointOne = GetRandomPointFromList(preborderPoints);
