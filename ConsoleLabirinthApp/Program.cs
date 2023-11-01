@@ -14,7 +14,7 @@ namespace ConsoleLabirinthApp
         static void Main(string[] args)
         {
             Labirinth lab = new Labirinth();
-
+            bool sw = true;
             lab.DoDebugLab2();
 
             lab.Print();
@@ -25,6 +25,21 @@ namespace ConsoleLabirinthApp
             string str = "1 6";
             do
             {
+                if (str == "switch")
+                {
+                    if (sw)
+                    {
+                        sw = false;
+                        lab.DoDebugLab1();
+                    }
+                    else
+                    {
+                        sw = true;
+                        lab.DoDebugLab2();
+                    }
+                    str = "1 5";
+                    continue;
+                }
                 var asd = str.Split(' ');
                 if (asd.All(value => int.TryParse(value, out int num)))
                 {
