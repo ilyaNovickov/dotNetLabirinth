@@ -709,86 +709,93 @@ namespace LabirinthLib
                 if (preborderPoints.Intersect(firstWay).Count() != 1 && firstIn == point)
                     return;
 
-                Point checkingPoint = firstIn;
-
-                List<Point> exceptionPoints = new List<Point>();
-
-                exceptionPoints.Add(checkingPoint);
-
-                Point pointToReturn = Point.Empty;
-
-                while (true)
+                bool GoodPoint(Point point1)
                 {
-                    IEnumerable<Point> points = GetNeighorPointsFromCollectionEx(checkingPoint, preborderPoints, exceptionPoints);
-                    //exit = point;
-                    //return;
-                    if (exceptionPoints.Count == 5 || !exit.IsZero())
-                    {
-                        exit = point;
-                        return;
-                    }
-                    else if (exceptionPoints.Count == 3 && !pointToReturn.IsZero())
-                    {
-                        checkingPoint = pointToReturn;
-                        exceptionPoints.Add(checkingPoint);
-                        pointToReturn = Point.Empty;
-                        continue;
-                    }
+                    Point checkingPoint = point1;
 
-                    if (preborderPoints.Intersect(firstWay).All(pointEx => exceptionPoints.Contains(pointEx)))
-                    {
-                        exit = point;
-                        return;
-                    }
+                    List<Point> exceptionPoints = new List<Point>();
 
-                    if (points.Contains(point))
+                    exceptionPoints.Add(checkingPoint);
+
+                    Point pointToReturn = Point.Empty;
+
+                    while (true)
                     {
-                        exceptionPoints.Add(point);
+                        IEnumerable<Point> points = GetNeighorPointsFromCollectionEx(checkingPoint, preborderPoints, exceptionPoints);
+                        //exit = point;
+                        //return;
+                        if (exceptionPoints.Count == 5 || !exit.IsZero())
+                        {
+                            //exit = point;
+                            return true;
+                        }
+                        else if (exceptionPoints.Count == 3 && !pointToReturn.IsZero())
+                        {
+                            checkingPoint = pointToReturn;
+                            exceptionPoints.Add(checkingPoint);
+                            pointToReturn = Point.Empty;
+                            continue;
+                        }
+
                         if (preborderPoints.Intersect(firstWay).All(pointEx => exceptionPoints.Contains(pointEx)))
                         {
-                            exit = point;
+                            //exit = point;
+                            return true;
                         }
 
-                        return;
-                    }
-                    else
-                    {
-                        if (points.Count() == 1)
+                        if (points.Contains(point))
                         {
-                            checkingPoint = points.First();
-
-                            exceptionPoints.Add(checkingPoint);
-
-                            if (checkingPoint != firstIn)
-                                continue;
-                        }
-                        else if (points.Count() == 2)
-                        {
-                            checkingPoint = points.First();
-
-                            pointToReturn = points.Last();
-
-                            exceptionPoints.Add(checkingPoint);
-
-                            if (checkingPoint != firstIn)
-                                continue;
-                        }
-                        else if (points.Count() == 0)
-                        {
-                            if (!pointToReturn.IsZero())
+                            exceptionPoints.Add(point);
+                            if (preborderPoints.Intersect(firstWay).All(pointEx => exceptionPoints.Contains(pointEx)))
                             {
-                                checkingPoint = pointToReturn;
-                                exceptionPoints.Add(checkingPoint);
-                                pointToReturn = Point.Empty;
-                                continue;
+                                exit = point;
+                                return true;
                             }
-                            exit = point;
-                            return;
+
+                            return false;
+                        }
+                        else
+                        {
+                            if (points.Count() == 1)
+                            {
+                                checkingPoint = points.First();
+
+                                exceptionPoints.Add(checkingPoint);
+
+                                if (checkingPoint != firstIn)
+                                    continue;
+                            }
+                            else if (points.Count() == 2)
+                            {
+                                checkingPoint = points.First();
+
+                                pointToReturn = points.Last();
+
+                                exceptionPoints.Add(checkingPoint);
+
+                                if (checkingPoint != firstIn)
+                                    continue;
+                            }
+                            else if (points.Count() == 0)
+                            {
+                                if (!pointToReturn.IsZero())
+                                {
+                                    checkingPoint = pointToReturn;
+                                    exceptionPoints.Add(checkingPoint);
+                                    pointToReturn = Point.Empty;
+                                    continue;
+                                }
+                                //exit = point;
+                                return true;
+                            }
                         }
                     }
                 }
 
 
+                GoodPoint(firstIn);
+                if (secondWay.Count != 0 && !secIn.IsZero())
+                    GoodPoint(secIn);
             }
 
             do
