@@ -1125,6 +1125,11 @@ namespace LabirinthLib
             this.exit = Point.Empty;
         }
 
+        public (List<Point>, List<Point>) GetWays()
+        {
+            return (firstWay, secondWay);
+        }
+
         public void DoDebugLab()
         {
             this.firstIn = new Point(7, 0);
