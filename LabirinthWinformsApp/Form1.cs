@@ -62,6 +62,10 @@ namespace LabirinthWinformsApp
             labControl.Ways.AddWay("FinalWay", Color.FromArgb(0, 255, 0));
             LabirinthControl.ColorfulList list = labControl.Ways.AddWay("EndWays", Color.FromArgb(179, 27, 27));
             list.PerCentsofSize = 0.5f;
+            var list1 = labControl.Ways.AddWay("First", Color.Red);
+            var list2 = labControl.Ways.AddWay("Sec", Color.Aqua);
+            list1.PerCentsofSize = 0.5f;
+            list2.PerCentsofSize = 0.5f;
         }
         #endregion
 
@@ -99,6 +103,7 @@ namespace LabirinthWinformsApp
             this.sizeLabel.Text = $"Размер : {lab.Size}";
             this.emptySpaceLabel.Text = $"Пустое пространство : {lab.EmptySpace * 100} %";
             ClearLabirinthPoints();
+            
         }
 
         private void ClearLabirinthPoints()
@@ -107,6 +112,8 @@ namespace LabirinthWinformsApp
             {
                 list.Value.ListofPoints.Clear();
             }
+            labControl.Ways["First"].ListofPoints = lab.GetWays().Item1.ToDrawingPointList();
+            labControl.Ways["Sec"].ListofPoints = lab.GetWays().Item2.ToDrawingPointList();
         }
 
         private void ReportThatWorking()
