@@ -305,6 +305,23 @@ namespace LabirinthLib
         }
         #endregion
         /// <summary>
+        /// Метод проверяет, содержатся ли у точки соседи в 4-х направлениях в коллекции
+        /// </summary>
+        /// <param name="point">Проверяемая точка</param>
+        /// <param name="checkingCollection">Проверяемая коллекция</param>
+        /// <returns>Коллекция соседних точек из проверяемой коллекции</returns>
+        internal IEnumerable<Point> GetNeighorPointsFromCollection(Point point, IEnumerable<Point> checkingCollection)
+        {
+            foreach (Direction direction in new Direction[] { Direction.Down, Direction.Left, Direction.Right, Direction.Up })
+            {
+                Point extra = point;
+                extra.OffsetPoint(direction);
+                if (checkingCollection.Contains(extra))
+                    yield return extra;
+            }
+
+        }
+        /// <summary>
         /// Сбросить точки входа и выходов
         /// </summary>
         private void ResetExitAndEnters()
