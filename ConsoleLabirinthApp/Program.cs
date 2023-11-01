@@ -13,22 +13,55 @@ namespace ConsoleLabirinthApp
     {
         static void Main(string[] args)
         {
-            List<int> ints = new List<int>()
-            {
-                50, 30, 20, 30, 50
-            };
-            List<int> intsToDelete = new List<int>()
-            {
-                30, 50
-            };
+            Labirinth lab = new Labirinth();
 
-            foreach (int i in ints.IndexesofRange(intsToDelete))
+            lab.DoDebugLab2();
+
+            lab.Print();
+
+            Console.WriteLine(lab.FirstIn);
+            Console.WriteLine(lab.Exit + "\n");
+
+            string str = "1 6";
+            do
             {
-                Console.WriteLine(i);
+                var asd = str.Split(' ');
+                if (asd.All(value => int.TryParse(value, out int num)))
+                {
+                    lab.ResetExit();
+                    lab.SetExit(new Point(int.Parse(asd.First()), int.Parse(asd.Last())));
+                    lab.Print();
+                    Console.WriteLine(lab.FirstIn);
+                    Console.WriteLine(lab.Exit + "\n");
+                }
+                else
+                {
+                    break;
+                }
+
+                str = Console.ReadLine();
             }
-
-            Console.ReadLine();
+            while (true);     
         }
+
+        //static void Main(string[] args)
+        //{
+        //    List<int> ints = new List<int>()
+        //    {
+        //        50, 30, 20, 30, 50
+        //    };
+        //    List<int> intsToDelete = new List<int>()
+        //    {
+        //        30, 50
+        //    };
+
+        //    foreach (int i in ints.IndexesofRange(intsToDelete))
+        //    {
+        //        Console.WriteLine(i);
+        //    }
+
+        //    Console.ReadLine();
+        //}
 
         //static void Main(string[] args)
         //{

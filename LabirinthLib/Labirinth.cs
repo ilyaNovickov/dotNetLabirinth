@@ -77,8 +77,8 @@ namespace LabirinthLib
             {
                 if (!IsExistInLab(point))
                     throw new Exception("Координаты не существует в лабиринте");
-                return (firstWay.Contains(point) || secondWay.Contains(point)) || (point == FirstIn 
-                    || point == SecondIn || point == Exit)  ? 0 : 1;
+                return (firstWay.Contains(point) || secondWay.Contains(point)) || (point == FirstIn
+                    || point == SecondIn || point == Exit) ? 0 : 1;
             }
         }
         /// <summary>
@@ -371,7 +371,7 @@ namespace LabirinthLib
 
             return new Point(x, y);
         }
-        
+
         /// <summary>
         /// Получение пустых ячеек лабиринта в определённом слое
         /// </summary>
@@ -394,7 +394,7 @@ namespace LabirinthLib
                 }
             }
         }
-        
+
         #endregion
         #region Generation
         /// <summary>
@@ -479,7 +479,7 @@ namespace LabirinthLib
 
                 List<Direction> result = new List<Direction>();
 
-                foreach (Direction dir in new Direction[] { Direction.Left, Direction.Right, Direction.Up, Direction.Down})
+                foreach (Direction dir in new Direction[] { Direction.Left, Direction.Right, Direction.Up, Direction.Down })
                 {
                     Point extraPoint = checkingPoint;//points.Last();
                     extraPoint.OffsetPoint(dir);
@@ -489,7 +489,7 @@ namespace LabirinthLib
                         continue;
                     else if (points.Contains(extraPoint))
                         continue;
-                    else if (HasVisitedNeighboors(extraPoint, checkingPoint) )
+                    else if (HasVisitedNeighboors(extraPoint, checkingPoint))
                         continue;
                     else if (HasDiagonalNeighboor(extraPoint, dir))
                         continue;
@@ -508,7 +508,7 @@ namespace LabirinthLib
                     if (GetAvaibleDirections(point, checkingPoints).Count() != 0)
                         yield return point;
                 }
-            }  
+            }
             //Получение списка стен относительно списка пустого пространства
             IEnumerable<Point> GetWallsCells(IEnumerable<Point> emptySpace)
             {
@@ -572,7 +572,7 @@ namespace LabirinthLib
                     }
                 }
 
-                if (secondWay.Count == 0 && workingList.Count < countofEmptySpace / 2 && workingList.Count > countofEmptySpace  / 3 && countofEmptySpace >= 4)
+                if (secondWay.Count == 0 && workingList.Count < countofEmptySpace / 2 && workingList.Count > countofEmptySpace / 3 && countofEmptySpace >= 4)
                 {
                     int doSecWay = random.Next(0, 101);
                     if (doSecWay > 75)
@@ -581,7 +581,7 @@ namespace LabirinthLib
                         do
                         {
                             movingPoint = GetRandomLayoutPoint(1);
-                        } 
+                        }
                         while (firstWay.Contains(movingPoint) || GetAvaiblePointsToMove(firstWay).Contains(movingPoint));
                         workingList = secondWay;
                         workingList.AddUnique(movingPoint);
@@ -589,7 +589,7 @@ namespace LabirinthLib
                     }
                 }
 
-                Direction dir = GetRandomDirectionFromList(GetAvaibleDirections(movingPoint, ListUnique.UniteUnique(firstWay, secondWay)));  
+                Direction dir = GetRandomDirectionFromList(GetAvaibleDirections(movingPoint, ListUnique.UniteUnique(firstWay, secondWay)));
 
                 movingPoint.OffsetPoint(dir);
 
@@ -608,7 +608,7 @@ namespace LabirinthLib
                             workingList = firstWay;
                         else if (secondWay.Contains(movingPoint))
                             workingList = secondWay;
-                        
+
                         continue;
                     }
                     movingPoint = oldPoint;
@@ -677,7 +677,53 @@ namespace LabirinthLib
                 }
             }
 
-            //...
+            Point GetRandomPointFromListEx(IEnumerable<Point> points, params Point[] exceptionPoints)
+            {
+                if (points.All(Point => exceptionPoints.Contains(Point)))
+                    return Point.Empty;
+
+                while (true)
+                {
+                    Point result = GetRandomPointFromListEx(points);
+                    if (exceptionPoints.Contains(result))
+                        continue;
+                    else
+                        return result;
+                }
+            }
+
+            IEnumerable<Point> GetNeighorPointsFromCollectionEx(Point point, IEnumerable<Point> collection, IEnumerable<Point> exceptaionPoints)
+            {
+                IEnumerable<Point> values = this.GetNeighorPointsFromCollection(point, collection);
+
+                foreach (Point resultPoints in values)
+                {
+                    if (!exceptaionPoints.Contains(resultPoints))
+                        yield return resultPoints;
+                }
+
+            }
+
+
+
+            do
+            {
+                Point point = GetRandomPointFromList(preborderPoints);
+
+                if (firstWay.Contains(point))
+                {
+                    if (firstIn.IsZero())
+                        firstIn = point;
+                    else if (exit.IsZero())
+                        exit = point;
+                }
+                else if (secondWay.Contains(point))
+                {
+                    secIn = point;
+                }
+
+            }
+            while (firstIn.IsZero() || (secIn.IsZero() && secondWay.Count != 0) || exit.IsZero());
 
             firstIn = GetNearBorderPoint(firstIn);
             if (secondWay.Count != 0)
@@ -898,6 +944,101 @@ namespace LabirinthLib
         #endregion
 
 #if DEBUG
+        IEnumerable<Point> GetNeighorPointsFromCollectionEx(Point point, IEnumerable<Point> collection, IEnumerable<Point> exceptaionPoints)
+        {
+            IEnumerable<Point> values = this.GetNeighorPointsFromCollection(point, collection);
+
+            foreach (Point resultPoints in values)
+            {
+                if (!exceptaionPoints.Contains(resultPoints))
+                    yield return resultPoints;
+            }
+
+        }
+        void TryToSetExit(Point point, IEnumerable<Point> preborderPoints)
+        {
+            if (preborderPoints.Intersect(firstWay).Count() != 1 && firstIn == point)
+                return;
+
+            int distance = 0;
+
+            Point checkingPoint = firstIn;
+
+            List<Point> exceptionPoints = new List<Point>();
+
+            exceptionPoints.Add(checkingPoint);
+
+            Point pointToReturn = Point.Empty;
+
+            while (true)
+            {
+                IEnumerable<Point> points = GetNeighorPointsFromCollectionEx(checkingPoint, preborderPoints, exceptionPoints);
+
+                //if (distance == 4 || !exit.IsZero())
+                if (exceptionPoints.Count == 5 || !exit.IsZero())
+                {
+                    exit = point;
+                    return;
+                }
+                //else if (distance == 3 && !pointToReturn.IsZero())
+                else if (exceptionPoints.Count == 3 && !pointToReturn.IsZero())
+                {
+                    //distance--;
+                    checkingPoint = pointToReturn;
+                    exceptionPoints.Add(checkingPoint);
+                    pointToReturn = Point.Empty;
+                    continue;
+                }
+
+                if (points.Contains(point))
+                    return;
+                else
+                {
+                    if (points.Count() == 1)
+                    {
+                        distance++;
+
+                        checkingPoint = points.First();
+
+                        exceptionPoints.Add(checkingPoint);
+
+                        if (checkingPoint != firstIn)
+                            continue;
+                    }
+                    else if (points.Count() == 2)
+                    {
+                        distance++;
+
+                        checkingPoint = points.First();
+
+                        pointToReturn = points.Last();
+
+                        exceptionPoints.Add(checkingPoint);
+
+                        if (checkingPoint != firstIn)
+                            continue;
+                    }
+                    else if (points.Count() == 0)
+                    {
+                        return;
+                    }
+                }
+            }
+
+
+        }
+
+
+        public void SetExit(Point point)
+        {
+            TryToSetExit(point, GetEmptyCellsInLayout(1).ToList());
+        }
+
+        public void ResetExit()
+        {
+            this.exit = Point.Empty;
+        }
+
         public void DoDebugLab()
         {
             this.firstIn = new Point(7, 0);
@@ -924,6 +1065,51 @@ namespace LabirinthLib
                 new Point(8, 4),new Point(8, 5),new Point(8, 6),new Point(8, 8),
                 new Point(9, 8),new Point(5, 7),new Point(7, 9)
 			};
+        }
+
+        public void DoDebugLab1()
+        {
+            this.Size = new Size(10);
+
+            firstWay = new List<Point>()
+            {
+                new Point(1, 1),
+                new Point(1, 2),
+                new Point(1, 3),
+                new Point(1, 4),
+                new Point(1, 5),
+                new Point(1, 6),
+                new Point(1, 7),
+                new Point(1, 8),
+            };
+
+            firstIn = new Point(1, 1);
+        }
+
+        public void DoDebugLab2()
+        {
+            this.Size = new Size(10);
+
+            firstWay = new List<Point>()
+            {
+                new Point(1, 1),
+                new Point(1, 2),
+                new Point(1, 3),
+                new Point(1, 4),
+                new Point(1, 5),
+                new Point(1, 6),
+                new Point(1, 7),
+                new Point(1, 8),
+                new Point(2, 1),
+                new Point(3, 1),
+                new Point(4, 1),
+                new Point(5, 1),
+                new Point(6, 1),
+                new Point(7, 1),
+                new Point(8, 1),
+            };
+
+            firstIn = new Point(1, 1);
         }
 #endif
     }
