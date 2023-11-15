@@ -1,11 +1,8 @@
-﻿using System;
+﻿using LabirinthLib.Structs;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
-using System.Net;
-using System.Text;
 using System.Threading.Tasks;
-using LabirinthLib.Structs;
 
 namespace LabirinthLib
 {
@@ -1150,7 +1147,7 @@ namespace LabirinthLib
                 new Point(8, 2),
                 new Point(8, 4),new Point(8, 5),new Point(8, 6),new Point(8, 8),
                 new Point(9, 8),new Point(5, 7),new Point(7, 9)
-			};
+            };
         }
 
         public void DoDebugLab1()

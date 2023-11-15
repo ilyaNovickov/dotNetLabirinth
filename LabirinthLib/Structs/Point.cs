@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LabirinthLib.Structs
 {
@@ -37,7 +32,7 @@ namespace LabirinthLib.Structs
         /// <summary>
         /// Значение X
         /// </summary>
-        public int X { get { return x; } set {  x = value; } }
+        public int X { get { return x; } set { x = value; } }
         /// <summary>
         /// Значение Y
         /// </summary>
@@ -139,7 +134,7 @@ namespace LabirinthLib.Structs
             return new Point(point1.X + value, point1.Y + value);
         }
 
-        public static Point operator - (Point point1, Point point2)
+        public static Point operator -(Point point1, Point point2)
         {
             return new Point(point1.X - point2.X, point1.Y - point2.Y);
         }
@@ -149,22 +144,22 @@ namespace LabirinthLib.Structs
             return new Point(point1.X - value, point1.Y - value);
         }
 
-        public static Point operator * (Point point1, Point point2)
+        public static Point operator *(Point point1, Point point2)
         {
             return new Point(point1.X * point2.X, point1.Y * point2.Y);
         }
 
-        public static Point operator * (Point point1, int value)
+        public static Point operator *(Point point1, int value)
         {
             return new Point(point1.X * value, point1.Y * value);
         }
 
-        public static Point operator / (Point point1, Point point2)
+        public static Point operator /(Point point1, Point point2)
         {
             return new Point(point1.X / point2.X, point1.Y / point2.Y);
         }
 
-        public static Point operator / (Point point1, int value)
+        public static Point operator /(Point point1, int value)
         {
             return new Point(point1.X / value, point1.Y / value);
         }

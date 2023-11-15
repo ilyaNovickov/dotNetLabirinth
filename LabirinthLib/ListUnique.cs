@@ -1,8 +1,7 @@
-﻿using System;
+﻿using LabirinthLib.Structs;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using LabirinthLib.Structs;
 
 namespace LabirinthLib
 {
@@ -129,9 +128,6 @@ namespace LabirinthLib
             }
         }
 
-
-
-
         public static List<T> CutListByCount<T>(this List<T> list, int startIndex, int count)
         {
             List<T> result = new List<T>();
@@ -148,10 +144,10 @@ namespace LabirinthLib
 
         public static int[] IndexesofRange<T>(this List<T> list, IEnumerable<T> values)
         {
-         
+
             int index = list.IndexOf(values.First());
 
-			List<int> indexesToDelete = new List<int>()
+            List<int> indexesToDelete = new List<int>()
             {
                 index
             };
@@ -172,7 +168,7 @@ namespace LabirinthLib
                     indexesToDelete.Clear();
                     indexesToDelete.Add(index);
                     i = index;
-				}
+                }
             }
 
             return indexesToDelete.ToArray();
@@ -190,22 +186,22 @@ namespace LabirinthLib
             return result;
         }
 
-   //     public static void DeleteRange<T>(this List<T> list, IEnumerable<T> values)
-   //     {
-   //         Queue<T> queueToDelete = new Queue<T>();
+        //     public static void DeleteRange<T>(this List<T> list, IEnumerable<T> values)
+        //     {
+        //         Queue<T> queueToDelete = new Queue<T>();
 
-   //         int index = list.IndexOf(values.First());
+        //         int index = list.IndexOf(values.First());
 
-   //         if (index == -1)
-   //             throw new Exception("Нет такого диапазона");
+        //         if (index == -1)
+        //             throw new Exception("Нет такого диапазона");
 
-			//for (int i = index; i < list.Count; i++)
-   //         {
-   //             if (list[i].Equals(values.ElementAt(i - index)))
-			//	    queueToDelete.Enqueue(list[i]);
-   //             else
+        //for (int i = index; i < list.Count; i++)
+        //         {
+        //             if (list[i].Equals(values.ElementAt(i - index)))
+        //	    queueToDelete.Enqueue(list[i]);
+        //             else
 
-			//}
-   //     }
+        //}
+        //     }
     }
 }

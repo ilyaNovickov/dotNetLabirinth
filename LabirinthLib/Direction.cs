@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using LabirinthLib.Structs;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using LabirinthLib.Structs;
 
 namespace LabirinthLib
 {
@@ -55,5 +50,5 @@ namespace LabirinthLib
             }
             point.Offset(dx, dy);
         }
-    }    
+    }
 }
