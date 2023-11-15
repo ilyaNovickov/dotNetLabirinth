@@ -1,19 +1,10 @@
-﻿using System;
+﻿using LabirinthLib;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Diagnostics;
 using System.Drawing;
-using System.Drawing.Drawing2D;
-using System.Drawing.Text;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Security.Permissions;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using LabirinthLib;
-using LabirinthLib.Printers;
 
 namespace LabirinthWinformsApp
 {
@@ -76,7 +67,7 @@ namespace LabirinthWinformsApp
 
         public class WaysCollection //: IEnumerable<KeyValuePair<string, ColorfulList>>
         {
-            
+
             private Dictionary<string, ColorfulList> ways = new Dictionary<string, ColorfulList>();
 
             public ColorfulList this[string key]
@@ -154,7 +145,7 @@ namespace LabirinthWinformsApp
         private LabirinthStyle style = LabirinthStyle.None;
         private WaysCollection ways = new WaysCollection();
 
-        private List<string> waysToMiss = new List<string>(); 
+        private List<string> waysToMiss = new List<string>();
 
         //private Dictionary<string, List<Point>> asd = new Dictionary<string, List<Point>>()
         //{
@@ -215,7 +206,7 @@ namespace LabirinthWinformsApp
                 {
                     lab = value;
                     lab.UpdateLabirinthEvent += this_UpdateLabirinth;
-                }  
+                }
             }
         }
 
@@ -223,7 +214,7 @@ namespace LabirinthWinformsApp
         public List<string> WaysToMiss
         {
             get => waysToMiss;
-            set =>  waysToMiss = value;
+            set => waysToMiss = value;
         }
 
         [Browsable(false)]
@@ -287,7 +278,7 @@ namespace LabirinthWinformsApp
                 }
             }
 
-            END:
+END:
             base.OnPaint(e);
         }
 
@@ -298,7 +289,7 @@ namespace LabirinthWinformsApp
 
         protected void DrawLabirinthAutoSizeStyle(Graphics g)
         {
-            this.Size = new Size((int)(lab.Width*zoom), (int)(lab.Height * zoom));
+            this.Size = new Size((int)(lab.Width * zoom), (int)(lab.Height * zoom));
 
             g.ScaleTransform(zoom, zoom);
 
@@ -341,7 +332,7 @@ namespace LabirinthWinformsApp
 
     public class ScaledMouseEventArgs : MouseEventArgs
     {
-       
+
 
         public ScaledMouseEventArgs(MouseEventArgs e, float zoom) : base(e.Button, e.Clicks, e.X, e.Y, e.Delta)
         {

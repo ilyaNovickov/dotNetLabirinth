@@ -1,6 +1,6 @@
 ﻿using LabirinthLib;
 using LabirinthLib.Bot;
-using LabirinthLib.Printers;
+using LabirinthWinformsApp.ExtraForms;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -10,7 +10,6 @@ using System.Drawing.Drawing2D;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Windows.Forms;
-using LabirinthWinformsApp.ExtraForms;
 
 namespace LabirinthWinformsApp
 {
@@ -20,7 +19,7 @@ namespace LabirinthWinformsApp
         private Labirinth lab;
         private Action timerAction;
         private Queue<LabirinthLib.Structs.Point> way = new Queue<LabirinthLib.Structs.Point>();
-        private Queue<LabirinthLib.Structs.Point> allWay= new Queue<LabirinthLib.Structs.Point>();
+        private Queue<LabirinthLib.Structs.Point> allWay = new Queue<LabirinthLib.Structs.Point>();
         private Queue<Direction> directions = new Queue<Direction>();
         private int botSpeed;
 
@@ -36,7 +35,7 @@ namespace LabirinthWinformsApp
 
             lab = new Labirinth();
 
-			this.standartEmptySpaccceComboBox.SelectedIndex = 0;
+            this.standartEmptySpaccceComboBox.SelectedIndex = 0;
             this.standartSizeComboBox.SelectedIndex = 0;
 
             this.zoomNumericUpDown.Minimum = 10;
@@ -145,7 +144,7 @@ namespace LabirinthWinformsApp
 
             ClearLabirinthPoints();
 
-            lab.Size = new LabirinthLib.Structs.Size(((int)widthNumericUpDown.Value), 
+            lab.Size = new LabirinthLib.Structs.Size(((int)widthNumericUpDown.Value),
                 ((int)heightNumericUpDowm.Value));
             lab.EmptySpace = ((float)emptySpaceNumericUpDown.Value) / 100f;
 
@@ -169,7 +168,7 @@ namespace LabirinthWinformsApp
             allWay.Clear();
             directions.Clear();
             botLogRichTextBox.Clear();
-			lab.GenerateInsAndExit();
+            lab.GenerateInsAndExit();
             ClearLabirinthPoints();
         }
         #endregion
